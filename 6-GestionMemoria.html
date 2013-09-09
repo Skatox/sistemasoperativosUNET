@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sistemas Operativos | UNET</title>
+
+		<meta name="description" content="L&aacute;minas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del T&aacute;chira">
+		<meta name="author" content="Miguel Angel Useche Castro">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+		<link rel="stylesheet" href="css/theme/unet.css" id="theme">
+
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div class="unet">
+						<div class="left">
+							<img class="noborder" src="img/class1/UNET.png" alt="UNET Logo">
+						</div>
+						<div class="left">
+							<p id="definition-header">
+								Universidad Nacional Experimental Del T&aacute;chira<br />
+								Decanato De Docencia<br />
+								Dpto. Ingenier&iacute;a Inform&aacute;tica
+							</p>
+						</div>
+					</div>
+
+					<h1 class="clear">
+						Sistemas Operativos
+					</h1>
+					<h2 id="subject-code">
+						C&oacute;digo 0435607T
+					</h2>
+					<div class="professor-info">
+						<p>
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche<a> -
+							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+						</p>
+					</div>
+				</section>
+
+		<section id="contenido" class="slide">
+			<h2>Contenido</h2>
+			<ul>
+				<li>Repaso de la Arquitectura Von Neuman.</li>
+				<li>Gesti&oacute;n de Memoria:
+					<ul>
+						<li>Introducci&oacute;n.</li>
+						<li>Objetivos.</li>
+						<li>Direcciones de memoria.</li>
+						<li>MMU.</li>
+						<li>&Aacute;rea de intercambio.</li>
+					</ul>
+				</li>
+				<li>Multiprogramaci&oacute;n.</li>
+				<li>Asignaci&oacute;n de memoria y sus respectivos algoritmos.</li>
+			</ul>
+		</section>
+
+		<section id="arquitectura-von-neuman">
+			<section>
+				<h2>Arquitectura Von Neuman</h2>
+				<div class="half left">
+					<p>
+						Fue creada por John Von Neumann en 1949, para solucionar
+						<strong>el problema de recableado</strong> cada vez 
+						que era necesario ejecutar una nueva tarea de 
+						una computadora.
+					</p>
+					<p>
+						Actualmente todas las computadoras utilizan esta arquitectura.
+					</p>
+				</div>
+				<div class="half left">
+					<img src="img/class6/vonneuman.jpg" alt="John Von Neuman" />
+				</div>
+			</section>
+			<section>
+				<h2>Arquitectura Von Neuman</h2>
+				<div class="half left">
+					<p>En esta arquitectura una computadora consta de:</p>
+					<ul>
+						<li>La unidad aritm&eacute;tico-l&oacute;gica o ALU.</li>
+						<li>La unidad de control.</li>
+						<li>La memoria principal.</li>
+						<li>Un dispositivo de entrada/salida.</li>  
+						<li>El bus de datos.</li>
+					</ul>
+				</div>
+				<div class="half left">
+					<img src="img/class1/arquitectura_neuman.jpg" alt="Arquitectura Von Neuman" />
+					<p class="nota">Basada en la imagen de 
+						<a href="http://es.wikipedia.org/wiki/Arquitectura_de_von_Neumann" target="_blank">
+							wikipedia.org
+						</a>
+					</p>
+				</div>
+			</section>
+			<section>
+				<h2>Fundamentos</h2>
+				<h3>
+					Pasos para ejecutar un programa <br />
+					Arquitectura Von Neuman
+				</h3>
+				<ol>
+					<li>
+						Se prende la computadora y se lee la siguiente instrucci&oacute;n 
+						desde la memoria en la direcci&oacute;n indicada por el contador de 
+						programa y se la guarda en el registro de instrucci&oacute;n.
+					</li>
+					<li>
+						Se aumenta el contador de programa en la longitud de la
+						instrucci&oacute;n para apuntar a la siguiente
+					</li>
+					<li>
+						Decodifica la instrucci&oacute;n mediante la unidad de control y
+						coordina los demas componentes para ejecutarla.
+					</li>
+					<li>Se ejecuta la instrucci&oacute;n. (Cuando se realizan ciclos se 
+						modifica el contador del programa para repetir
+						instrucciones)
+					</li>
+				</ol>
+			</section>
+			<section>
+				<h2>Hardware comercial<br />disponible actualmente</h2>
+				<div class="left half">
+					<ul>
+						<li>
+							Todos los CPUs estan conectados por el 
+							mismo canal al puente norte.
+						</li>
+						<li>
+							Todos los dispositivos de E/S estan conectados
+							al puente sur.
+						</li>
+					</ul>
+				</div>
+				<div class="left half">
+					<img src="img/class6/cpumemory.png" alt="" />
+				</div>
+					<ul>
+						<li>
+							Toda la comunicaci&oacute;n viaja en el mismo bus usado
+							para comunicarse con el puente norte.
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								Toda comunicaci&oacute;n con la memoria RAM se hace a trav&eacute;s
+								del puente norte.
+							</li>
+							<li>
+								La comunicaci&oacute;n entre el CPU y los dispositivos de E/S
+								se enrutan a trav&eacute;s del puente norte.
+							</li>
+						</ul>
+					</aside>
+			</section>
+
+			<section id="tarjeta-madre" class="slide">
+				<h2>Puente Norte y Sur</h2>
+				<div class="half left">
+					<img src="img/class6/tarjetamadre.jpg" alt="Ejemplo de tarjeta madre">
+				</div>
+				<div class="half left slide" style="height: 40%">
+					<a href="img/class6/logicatarjetamadre.png" rel="shadowbox">
+						<img src="img/class6/logicatarjetamadre.png" alt="Logica de la tarjeta madre">
+					</a>
+				</div>
+			</section>
+		</section>
+
+		<section>
+			<h2>Afirmaciones sobre la memoria</h2>
+			<ul>
+				<li>
+					Un programa debe cargarse en memoria desde disco y 
+					colocarse dentro de un proceso para que se ejecute.
+				</li>
+				<li>
+					La memoria principal y los registros son los &uacute;nicos 
+					dispositivos de almacenamiento a los que puede acceder
+					la CPU directamente.
+				</li>
+				<li>
+					El acceso a registro es <strong>muy r&aacute;pido</strong>, consume
+					un ciclo de CPU (o menos),
+				</li>
+				<li>
+					El acceso a memoria principal <strong>es muy lento</strong> y
+					puede durar varios ciclos.
+				</li>
+				<li>
+					Las memorias cach&eacute; se colocan entre la memoria principal
+					y la CPU para acelerar el acceso a la informaci&oacute;n.
+				</li>
+			</ul>
+		</section>
+
+
+		<section  id="objetivos-gestion-memoria">
+			<h2>Objetivos del <br />Sistema de Gesti&oacute;n de Memoria</h2>
+			<ol>
+				<li>Compartimiento de Memoria</li>
+				<li>Espacios L&oacute;gicos Independientes.</li>
+				<li>Protecci&oacute;n.</li>
+				<li>Soporte de las regiones del proceso.</li>
+				<li>Maximizar el rendimiento.</li>
+				<li>Proporcionar mapas de memoria grandes.</li>
+			</ol>
+		</section>
+
+		<section>
+			<section>
+				<h2>Reasignaci&oacute;n de direcciones</h2>
+					<h3>Etapas en el procesamiento de un<br />programa de usuario</h3>
+					<div class="left half">
+						<ul>
+							<li><strong>Tiempo compilaci&oacute;n:</strong> si se conoce donde 
+								va a residir el proceso en memoria, se genera <strong>
+								c&oacute;digo absoluto</strong>, si cambia de posici&oacute;n
+								se debe recompilar.
+							</li>
+							<li><strong>Tiempo de carga:</strong> si no se conoce la ubicaci&oacute;n 
+								del proceso en memor&iacute;a, se genera <strong>c&oacute;digo
+								reubicable</strong>. 
+							</li>
+						</ul>
+					</div>
+					<div class="half left">
+						<img style="width: 50%" src="img/class6/procesamiento_programa.png"  alt="" />
+					</div>
+				</section>
+				<section>
+					<h2>Reasignaci&oacute;n de direcciones</h2>
+						<h3>Etapas en el procesamiento de un<br />programa de usuario</h3>
+						<div class="left half">
+							<ul>
+								<li>
+									<strong>Tiempo de ejecuci&oacute;n:</strong> si el proceso puede 
+									cambiar de posici&oacute;n durante su ejecuci&oacute;n, la 
+									vinculaci&oacute;n se realiza en el momento de ejecuci&oacute;n. 
+									Necesita soporte hardware para el mapeo de direcciones (
+									registros base y l&iacute;mite)
+								</li>
+							</ul>
+						</div>
+					<div class="half left">
+						<img style="width: 50%" src="img/class6/procesamiento_programa.png"  alt="" />
+					</div>
+				</section>
+		</section>
+
+		<section>
+			<section  id="espacio-direcciones-fisicas-logicas">
+				<h2>Espacio de Direcciones<br />F&iacute;sicas y L&oacute;gicas</h2>
+				<p>
+					Separar las direcciones de memorias en dos tipos, es
+					necesario para obtener una buena gesti&oacute;n de memoria. Los
+					dos tipos de direcciones existentes son:
+				</p>
+				<ul>
+					<li>
+						<h4>Direcci&oacute;n L&oacute;gica:</h4> 
+						Es la direcci&oacute;n generada por el CPU u proceso, tambi&eacute;n
+						se le conoce como <strong>direcci&oacute;n virtual</strong>.
+					</li>
+					<li>
+						<h4>Direcci&oacute;n F&iacute;sica:</h4> 
+						Es la direcci&oacute;n cargada en el <strong>registro de direcciones 
+						de memoria</strong> de la memoria. Es decir, la direcci&oacute;n
+						vista por la unidad de memoria.
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Espacio de Direcciones<br />F&iacute;sicas y L&oacute;gicas</h2>
+				<p>
+					El conjunto de todas las direcciones l&oacute;gicas de un programa
+					se le conoce como <strong>espacio de direcciones l&oacute;gicas</strong> y
+					para las f&iacute;sicas como <strong>espacio de direcciones f&iacute;sicas</strong>.
+				</p>
+			</section>			
+		</section>
+
+		<section  id="espacio-direcciones-fisicas-logicas-2">
+			<h2>Registro base y l&iacute;mite</h2>
+			<table class="memoria">
+				<tr>
+					<th>0</th>
+					<th>1549</th>
+					<th>2489</th>
+					<th>3698</th>
+					<th>4978</th>
+					<th>5324</th>
+					<th>6132</th>
+					<th>7210</th>
+				</tr>
+				<tr>
+					<td colspan="2" class="center">Sistema Operativo</td>
+					<td colspan="2" class="center">Proceso 2</td>
+					<td colspan="2" class="center">Proceso 3</td>
+					<td colspan="2" class="center">Proceso 4</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+					<th>Base: 2489</th>
+					<th>L&iacute;mite: 1209</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+				</tr>
+			</table>
+			<br />
+			<p>
+				Para conocer el espacio asignado a un proceso, se suma:
+				<strong>Base + L&iacute;mite</strong>
+			</p>
+		</section>
+
+		<section>
+			<section>
+				<h2>Unidad de Gesti&oacute;n de Memoria (MMU)</h2>
+				<ul>
+					<li>
+						La MMU (Memory Management Unit) es un dispositivo
+						para transformar de direcciones virtuales en f&iacute;sicas, 
+						utilizando una circuiter&iacute;a de hardware llamada
+						<strong>Unidad de segmentaci&oacute;n</strong>.
+					</li>
+					<li>
+						Cada vez que un proceso genera una direcci&oacute;n de memoria, el MMU
+						adiciona a cada una de &eacute;stas el registro base (tambi&eacute;n conocido como
+						registro de ubicaci&oacute;n) en el momento que es enviada a memoria.
+					</li>
+					<li>
+						El programa de usuario trabaja con <em><strong>direcciones 
+						l&oacute;gicas</strong></em>; 
+						nunca ve las <em><strong>direcciones f&iacute;sicas</strong></em> reales.
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Unidad de Gesti&oacute;n de Memoria (MMU)</h2>
+				<p class="center">
+					<img src="img/class6/mmu.png" alt="MMU" />
+				</p>
+			</section>
+		</section>
+
+
+		<section  id="intercambio">
+			<section>
+				<h2>Intercambio</h2>
+				<ul>
+					<li>
+						Es importante recordar que <strong>todo proceso
+					 	debe estar en memoria</strong> para ser ejecutado.
+					 </li>
+					 <li>
+					 	A veces, los procesos pueden ser intercambiados temporalmente,
+					 	sac&aacute;ndolos de la memoria y almacen&aacute;ndolos en <strong>
+					 	un almac&eacute;n de respaldo</strong>. Y luego vicerversa.
+					 </li>
+					 <li>
+					 	El <strong> un almac&eacute;n de respaldo</strong> o <strong>
+					 	un almac&eacute;n auxiliar</strong> es un disco con capacidad
+					 	suficiente para albergar copias de im&aacute;genes de memoria para
+					 	todos los usuarios.
+					 </li>
+					 <li>
+					 	Una vez guardado en disco el proceso, pasa
+					 	a la cola de preparados para volver a cargarse en memoria.
+					 </li>
+				</ul>
+			</section>
+			<section>
+				<h2>Intercambio</h2>
+				<ul>
+					 <li>
+					 	El algoritmo para el intercambio, se llama <strong>Roll out, 
+					 	roll in</strong> y es una variante del algoritmos de 
+					 	planificaci&oacute;n basados en prioridad; un proceso de baja 
+					 	prioridad se retira de memoria para cargar y ejecutar 
+					 	otro con mayor prioridad.
+				 	 </li>
+				 	 <li>La mayor parte del tiempo de intercambio es tiempo 
+				 	 	de transferencia; el cual es directamente proporcional
+				 	 	a la cantidad de memoria intercambiada.
+				 	 </li>
+				</ul>
+			</section>
+			<section  id="intercambio-2">
+				<h2>Intercambio</h2>
+				<p class="center">
+					<img src="img/class6/intercambio.png" alt="" />
+				</p>
+			</section>
+		</section>
+
+
+		<section>
+			<section  id="multiprogramacion">
+				<h2>Modelo de Multiprogramaci&oacute;n</h2>
+				<ul>
+					<li>
+						Se facilita la programaci&oacute;n al dividirla en
+					 	dos o m&aacute;s procesos.
+				 	</li>
+					<li>
+						Capacidad de proporcionar un servicio interactivo a varios 
+						usuarios (varios procesos en memoria).
+					</li>
+					<li>
+						Desperdicio de tiempo por parte de los procesos limitados 
+						por E/S en la monoprogramaci&oacute;n.
+					</li>
+				</ul>
+			</section>
+			<section  id="uso-cpu">
+				<h2>Modelo de Multiprogramaci&oacute;n</h2>
+				<h3>Uso del CPU</h3>
+				<div class="center">
+					<img src="img/class6/proceso-limitado-es.png" alt="" />
+					<br />
+				</div>
+				<p class="slide center">
+					Este proceso utiliza el CPU <strong>20%</strong>
+					de su tiempo y el <strong>80%</strong> restante para acceso
+					a E/S.
+				</p>
+			</section>
+			<section>
+				<h2>Modelo de Multiprogramaci&oacute;n</h2>
+				<div class="slide">
+					<h4 >F&oacute;rmula del uso de CPU</h4>
+					<p>
+						Para conocer el tiempo de uso del procesador, se puede
+						obtener un valor aproximado a trav&eacute;s de la siguiente 
+						f&oacute;rmula:
+					</p>
+					<p class="center">
+						<strong>Utilizaci&oacute;n de la CPU</strong> = 1 – p<sup>n</sup>
+					</p>
+					<p class="center">
+						<strong>n</strong>: grado de multiprogramaci&oacute;n <br />
+					 	<strong>p</strong>: fracci&oacute;n de tiempo de espera de E/S
+				 	</p>
+				 </div> 
+			</section>
+			<section  id="uso-cpu">
+				<h2>Modelo de Multiprogramaci&oacute;n</h2>
+				<h3>Uso del CPU</h3>
+				<h4>Ejemplo de una PC</h4>
+				<p>
+					Se cuenta con una computadora de 32MB de memoria RAM,
+					donde:
+				</p>
+				<ul>
+					<li>16MB est&aacute;n ocupados por el Sistema Operativo.</li>
+					<li>Cada proceso de usuario ocupa 4MB.</li>
+					<li>El uso aproximado de E/S es de 80%.</li>
+				</ul>
+				<p class="clear">
+					Calcular el uso aproximado de CPU para 4 procesos de usuario.
+				</p>
+				<p class="slide"><strong>Total: 60%</strong></p>
+				<p class="slide">
+						Si se a&ntilde;aden otros 16MB, calcular el uso aproximado de CPU.
+				</p>
+				<p class="slide"><strong>Total: 83%</strong></p>
+			</section>
+			<section>
+				<h2>Modelo de Multiprogramaci&oacute;n</h2>
+				<h3>Uso del CPU</h3>
+				<h4>Punto de equilibrio</h4>
+				<div class="center">
+					<img src="img/class6/equilibrio.png" alt=""/>
+				</div>
+			</section>
+			<!-- 
+				Cada proceso de usuario 4Mb => n = 4; si p=0.8, CPU = 60%
+				Si compramos 16Mb => n = 8; si p=0.8, CPU = 83%; ganancia: 38%
+				Si compramos otros 16Mb CPU=93%; ganancia: 12%
+			-->
+		</section>
+
+		<section>
+			<section id="asignacion-memoria-contigua">
+				<h2>Asignaci&oacute;n de memoria contigua</h2>
+				<p class="center">
+					<img src="img/class6/asignacion-continua.png" alt="" />
+				</p>
+				<ul>
+					<li>
+						El sistema operativo se almacena en la parte baja o alta
+						de la memoria. Generalmente es en la parte baja junto al
+						vector de interrupciones.
+					</li>
+					<li>
+						Cuando se utiliza multiprogramaci&oacute;n, se crean 
+						<strong>particiones de tama&ntilde;o fijo</strong> para cada 
+						proceso.
+					</li>
+					<li>
+						El S.O. mantiene una tabla de particiones para conocer
+						cu&aacute;les estan libres u ocupadas.
+					</li>
+				</ul>
+				<aside class="notes">
+					La memoria principal alberga tanto el sistema operativo
+					como los procesos de los usuarios. Por ello, la memoria
+					se divide en una partici&oacute;n para el S.O. y otro para las
+					tareas del usuario.
+				</aside>
+			</section>
+			<section id="memoria-dinamica">
+				<h2>
+					Distribuci&oacute;n de la memoria (x86)
+				</h2>
+				<div class="center-text">
+					<p>
+						<a href="img/class6/distribucion-memoria.png" rel="shadowbox">
+							<img src="img/class6/distribucion-memoria.png" alt="Distribuciond de memoria" />
+						</a>
+					</p>
+					<p class="nota">
+						Fuente: 
+						<a href="http://www.codinghorror.com/blog/2007/03/dude-wheres-my-4-gigabytes-of-ram.html">
+							Coding Horror</a> 
+						(Blog de Jeff Atwood)
+					</p>
+				</div>
+			</section>
+			<section  id="asignacion-memoria-contigua-2">
+				<h2>Asignaci&oacute;n de memoria contigua</h2>
+				<p>
+					La zona para procesos de usuarios se encuentra dividida a su 
+					vez en varias particiones que se asignar&aacute;n a los procesos:
+				</p>
+				<ul>
+					<li>
+						<h3>Particionamiento est&aacute;tico:</h3>
+						las particiones se establecen en el arranque del sistema
+						operativo y permanecen fijas todo el tiempo.
+					</li>
+					<li>
+						<h3>Particionamiento din&aacute;mico:</h3>
+						las particiones cambian de acuerdo a los requisitos de los
+						procesos.
+					</li>
+				</ul>
+			</section>
+		</section>
+		<section>
+			<section  id="asignaci&oacute;n-estatica-de-memoria-particionada">
+				<h2>Asignaci&oacute;n Est&aacute;tica <br />de Memoria Particionada</h2>
+				<h3>Asignaci&oacute;n est&aacute;tica con múltiples particiones</h3>
+
+				<ul>
+					<li>
+						Se le conoce como <strong>Hueco</strong> a un bloque de 
+						memoria disponible. A lo largo del tiempo existir&aacute;n
+						huecos de diversos tama&ntilde;os distribuidos a lo largo de la
+						memoria.
+					</li>
+					<li>
+						Cuando un proceso llega, se le asigna un hueco lo 
+						suficientemente grande para caber en &eacute;l.
+					</li>
+					<li>
+						Se debe recordar que el S.O. guarda informaci&oacute;n sobre
+						las particiones <strong>asignadas</strong> y
+						<strong>libres (huecos)</strong>.
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Asignaci&oacute;n est&aacute;tica con múltiples particiones</h3>
+				<h2>Asignaci&oacute;n Est&aacute;tica <br />de Memoria Particionada</h2>
+				<p class="center">
+					<img src="img/class6/asignacion-fija.png" alt="asignacion-fija" />
+				</p>
+			</section>
+			<section  id="formas-de-asignar-particiones-estatica">
+				<h2>Asignaci&oacute;n Est&aacute;tica <br />de Memoria Particionada</h2>
+				<p>
+					Existen varias formas para satisfacer las solicitudes
+					de tama&ntilde;o <em>n</em> partiendo de una lista 
+					de huecos.
+				</p>
+				<ul>
+					<li>
+						<h3>Primer ajuste (First-Fit)</h3>
+						Se asigna el primer hueco suficientemente grande
+						que se encuentre.
+					</li>
+					<li>
+						<h3>Mejor ajuste (Best-fit)</h3>
+						Asigna el hueco m&aacute;s peque&ntilde;o que es lo suficientemente
+						grande. 
+					</li>
+				</ul>
+				<aside class="notes">
+					En este caso, se busca en toda la lista el menor huecos 
+					(al menos que est&eacute; ordenada por tama&ntilde;o) para desperdiciar
+					el menor espacio posible.
+				</aside>
+			</section>
+		</section>
+<section>
+			<section>
+				<h2>Asignaci&oacute;n Din&aacute;mica <br />de Memoria Particionada</h2>
+				<ul>
+					<li>
+						El tamaño y ubicaci&oacute;n de las particiones no es fijo,
+						cambia a lo largo del tiempo.
+					</li>
+					
+					<li>
+						Cuando un proceso sale de la memoria, se libera su
+						espacio creando una nueva partici&oacute;n libre (hueco).
+					</li>
+					<li>
+						Se conservan las consideraciones de proteccion de la
+						asignaci&oacute;n est&aacute;tica.
+					</li>
+				</ul>
+				<aside class="notes">
+					<ul>
+						<li>
+							Cuando llega un proceso se le asigna memoria de un 
+							hueco lo suficientemente grande para ocuparlo.
+						</li>
+						<li>
+							Se puede compartir espacios de memoria mediante el
+							solapamiento de particiones.
+						</li>
+					</ul>
+				</aside>
+			</section>
+			<section>
+				<h2>Asignaci&oacute;n Din&aacute;mica <br />de Memoria Particionada</h2>
+				<!--
+					Existen varias maneras de satisfacer una solicitud de 
+					tama&ntilde;o <em>n</em> partiendo de una lista de huecos.
+				-->
+				<ul>
+					<li>
+						<h3>Primer ajuste (First-fit)</h3>
+						Se <strong>asigna el primer hueco</strong> lo 
+						suficientemente grande.
+					</li>
+					<li>
+						<h3>Mejor ajuste (Best-fit)</h3>
+						Se <strong>asigna el hueco m&aacute;s pequeño</strong> 
+						que es lo suficientemente grande.
+					</li>
+					<li>
+						<h3>Peor ajuste (Worst-fit)</h3>
+						Se <strong>asigna el hueco m&aacute;s grande</strong>.
+					</li>
+				</ul>
+				<aside class="notes">
+					<p>
+						Para el mejor ajuste,se
+					debe buscar en toda la lista de huecos 
+					(salvo si est&aacute; ordenada por tamaño).
+					</p>
+					<p>
+						Para el peor ajuste,  hay
+						que buscar en la lista completa de huecos 
+						(salvo si est&aacute; ordenada por tamaño).
+					</p>
+					<p>
+						Los dos primeros m&eacute;todos, son los mejores 
+						para aprovechar el espacio en memoria.
+					</p>
+				</aside>
+			</section>
+	
+</section>
+
+
+
+
+
+			<section  id="fragmentacion">
+				<h2>Fragmentaci&oacute;n</h2>
+				<ul>
+					<li>
+						<h3>Fragmentaci&oacute;n Interna</h3>
+						la memoria asignada puede ser ligeramente mayor de la 
+						solicitada; esta diferencia de tamaño se encuentra en
+						la partici&oacute;n pero no es usada.
+					</li>
+					<li>
+						<h3>Fragmentaci&oacute;n Externa</h3>
+						en total existe suficiente memoria libre para satisfacer
+						una petici&oacute;n, pero no se puede realizar debido a
+						que no se encuentra contigua.<br /><br />
+						<div class="center-text">
+							<strong>Fragmentaci&oacute;n</strong>
+							 = 
+							 1 - (<strong>Tama&ntilde;o del mayor Hueco</strong> / <strong>Total de Memoria</strong>)
+						</div>
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<section>
+					<h2>Formas para llevar el registro de la memoria</h2>
+					<ul>
+						<li>Mapa de bits</li>
+						<li>Listas enlazadas</li>
+						<li>Sistemas asociados</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Mapa de bits</h2>
+					<div class="center">
+						<img src="img/class6/mapa-bits.png" alt="mapa de bits" />
+					</div>
+					<div>
+						<ul>
+							<li>Se divide la memoria en segmentos del mismo tamaño.</li>
+							<li>
+								Se crea un mapa de bits, donde cada bit representa
+								un segmento y su valor indica si est&aacute; o no ocupado.
+							</li>
+						</ul>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>
+								El tamaño del mapa de bits, es inversamente proporcial
+								al tamaño de la unidad de asignaci&oacute;n.
+							</li>
+							<li>
+								Este m&eacute;todo es muy lento pues para asignar
+								memoria a un proceso, se debe buscar en el mapa
+								un lugar donde exista una cadena de ceros contigua
+								que corresponda a un número de unidades de asignaci&oacute;n
+								que satisfaga el tamaño del proceso.
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Listas enlazadas</h2>
+					<div class="center">
+						<img src="img/class6/lista-enlazada.png" alt="lista enlazadas" />
+					</div>
+					<br />
+					<ul>
+						<li>Se ordenan por direcci&oacute;n para 
+							aumentar la velocidad lectura.
+						</li>
+						<li>
+							Se pueden tener 2 listas: una para los espacios
+							ocupados y otra para los huecos. Sin embargo, la 
+							liberaci&oacute;n es lenta.
+						</li>
+					</ul>
+				</section>
+
+				<section  id="sistemas-asociados">
+					<h2>Sistema de los Asociados</h2>
+					<div class="center">
+						<img src="img/class6/sistema-asociados.png" alt="Sistema de asociados" />
+					</div>
+					<br />
+					<ul>
+						<li>
+							Se tiene la memoria inicialmente como un gran
+							espacio, el cual se va dividiendo en múltiplos
+							de potencia de 2 cada vez que un proceso hace solicitud
+							de memoria.
+						</li>
+						<li>
+							El problema es que crea fragmentaci&oacute;n interna.
+						</li>
+					</ul>
+				</section>
+			</section>
+
+
+
+		<section>
+					<h1>&iquest;Dudas y preguntas?</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				center: true,
+
+				theme: 'unet',
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

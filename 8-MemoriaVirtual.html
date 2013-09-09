@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sistemas Operativos | UNET</title>
+
+		<meta name="description" content="L&aacute;minas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del T&aacute;chira">
+		<meta name="author" content="Miguel Angel Useche Castro">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+		<link rel="stylesheet" href="css/theme/unet.css" id="theme">
+
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div class="unet">
+						<div class="left">
+							<img class="noborder" src="img/class1/UNET.png" alt="UNET Logo">
+						</div>
+						<div class="left">
+							<p id="definition-header">
+								Universidad Nacional Experimental Del T&aacute;chira<br />
+								Decanato De Docencia<br />
+								Dpto. Ingenier&iacute;a Inform&aacute;tica
+							</p>
+						</div>
+					</div>
+
+					<h1 class="clear">
+						Sistemas Operativos
+					</h1>
+					<h2 id="subject-code">
+						C&oacute;digo 0435607T
+					</h2>
+					<div class="professor-info">
+						<p>
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche<a> -
+							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+						</p>
+					</div>
+				</section>
+		
+		<section id="contenido">
+			<h2>Contenido</h2>
+			<ul>
+				<li>Memoria virtual.</li>
+				<li>Fallo de p&aacute;gina.</li>
+				<li>Algoritmos de sustituci&oacute;n de p&aacute;ginas.
+					<ul>
+						<li>FIFO.</li>
+						<li>Segunda oportunidad.</li>
+						<li>NRU (Not Recently Used)</li>
+						<li>LRU (Less Recently Used)</li>
+						<li>Del Reloj.</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+
+<section>
+	<section>
+		<h2>Memoria Virtual</h2>
+		<p>
+			Es un mecanismo para permitir la ejecución de procesos
+			que no se encuentren completamente en memoria.
+		</p>
+		<div class="left half">
+			<ul>
+				<li>
+					Ejecutar procesos que requieren mas memoria
+					de la disponible físicamente.
+				</li>
+				<li>
+					Ayuda a los programadores a no preocuparse
+					de las límitaciones de memoria y permite enfocarse
+					en la funcionalidad de la aplicación.
+				</li>
+			</ul>
+		</div>
+		<div class="left half">
+			<img src="img/class8/virtual-memory.jpg" alt="memoria virtual" />
+			<p class="nota">
+				Parte de la memoria estar&aacute; en la memoria física y otra
+				en el disco de almacenamiento.
+			</p>
+		</div>
+		<aside class="notes">
+			<ul class="clear">
+				<li>
+					Permite al sistema operativo ejecutar mas procesos
+					al mismo tiempo. Pues cada programa podría
+					ocupar menos espacio en la memoria física.
+				</li>
+			</ul>
+		</aside>
+	</section>
+</section>
+
+<section>
+	<section>
+		<h2>Fallo de p&aacute;gina e<br  />Intercambio de p&aacute;gina</h2>
+		<ul>
+			<li>
+				Cuando se usa la paginación, el S.O. conoce cuales p&aacute;ginas se
+				encuentran en la memoria principal y cuales no, a través
+				de la tabla de p&aacute;ginas.
+			</li>
+			<li>
+				Si al solicitar el acceso a una p&aacute;gina marcada como no 
+				disponible, significa que no est&aacute; en la memoria principal.
+				Entonces se invoca a un proceso llamado <strong>intercambio
+				de p&aacute;gina</strong>.
+			</li>
+		</ul>
+	</section>
+	<section>
+		<h2>Fallo de p&aacute;gina e<br  />Intercambio de p&aacute;gina</h2>
+		<ul>
+			<li>
+				Se selecciona una p&aacute;gina en memoria (usando un algoritmo
+				de sustitución de p&aacute;ginas), si esta tuvo modificaciones
+				se escribe en el area de intercambio y se procesde a leer la
+				p&aacute;gina solicitada para realizar el intercambio de p&aacute;ginas.
+			</li>
+			<li>
+				En caso de no existir la p&aacute;gina en el area de intercambio
+				se carga desde el disco duro.
+			</li>
+		</ul>
+	</section>
+	<section>
+		<h2>Fallo de p&aacute;gina e<br />Intercambio de p&aacute;gina</h2>
+		<div class="left half">
+			<ol>
+				<li>Referencia.</li>
+				<li>Trampa.</li>
+				<li>La p&aacute;gina est&aacute; en el almacen de respaldo.</li>
+				<li>Carga la p&aacute;gina que falta.</li>
+				<li>Reestablece la Tabla de p&aacute;ginas.</li>
+				<li>Reinicia la instrucción.</li>
+			</ol>
+		</div>
+		<div class="center right half">
+			<a href="img/class8/fallo_pagina.png" rel="shadowbox">
+				<img src="img/class8/fallo_pagina.png" alt="Fallo de pagina" />
+			</a>
+			<p class="nota">
+				Proceso para realizar un intercambio 
+				luego de un fallo de p&aacute;gina.
+			</p>
+		</div>
+	</section>
+</section>
+
+
+	<section>
+		<section>
+			<h2>Algoritmos de sustitución de p&aacute;ginas</h2>
+			<ul>
+				<li>
+					<h4>
+						Primero en entrar, Primero en Salir 
+						(FIFO: First in - First out)
+					</h4>
+				</li>
+				<li>
+					<h4>Segunda oportunidad</h4>
+				</li>
+				<li>
+					<h4>
+						No usadas recientemente
+						(NRU: Not Recently Used)
+					</h4>
+				</li>
+				<li>
+					<h4>Menos usada recientemente
+					(LRU: Less Recently Used)</h4>
+				</li>
+				<li><h4>Del Reloj</h4></li>
+			</ul>
+		</section>
+		
+		<section >
+			<h2>Algoritmos de sustitución de p&aacute;ginas</h2>
+			<h3>Primero en entrar, primero en salir (FIFO)</h3>
+			<ul>
+				<li>
+					Consiste en guardar el orden en que son
+					cargadas las p&aacute;ginas, al momento de 
+					<strong>no existir marcos de p&aacute;gina 
+					libres</strong>, retira de memoria la 
+					p&aacute;gina mas antigua 
+					<em>(la que llegó primero a memoria)</em>.
+				</li>
+				<li>
+					Emplea una cola para almacenar la información
+					previamente mencionada.
+				</li>
+				<li>
+					Un <strong>problema</strong> de este algoritmo
+					es que se puede quitar de memoria una p&aacute;gina
+					muy utilizada solo porque es la mas antigua en
+					memoria.
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Algoritmos de sustitución de p&aacute;ginas</h2>
+			<h3>Segunda oportunidad</h3>
+			<ul>
+				<li>
+					Es una módificacion del algoritmo anterior,
+					literalmente le da una segunda oportunidad
+					a las p&aacute;ginas antes de moverlas de la 
+					memoria principal.
+				</li>
+				<li>
+					El hardware necesita tener soporte del bit 
+					de referencia para implementar este algoritmo.
+				</li>
+				<li>
+					Sigue el mismo principio de FIFO, pero antes
+					de sacar la p&aacute;gina de memoria comprueba el bit
+					de refencia, si esta en 001 (fijado) se cambia
+					a 099 como si estuviese entrando de nuevo (dando
+					una segunda oportunidad), en
+					caso contrario, lo libera.
+				</li>
+				<li>
+					Con este ligero cambio, se incrementa el 
+					rendimiento respecto al algoritmo anterior.
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Algoritmos de sustitución de p&aacute;ginas</h2>
+			<h3>No usadas recientemente (NRU)</h3>
+			<ul>
+				<li>Utiliza los 2 siguientes bits 
+					(Se encienden por hardware y son apagados 
+					por software):
+					<ul>
+						<li>
+							<strong>M:</strong> 
+							Se enciende al modificar el contenido
+							de la p&aacute;gina.
+						</li>
+						<li>
+							<strong>R:</strong> 
+							Se enciende cuando se accede a la p&aacute;gina.
+						</li>
+					</ul>
+				</li>
+				<li>
+					Con la combinación de estos bits se crean
+					las siguientes clase:
+					<ul>
+						<li><strong>Clase 0:</strong> No solicitada, no modificada.</li>
+						<li><strong>Clase 1:</strong> No solicitada, modificada.</li>
+						<li><strong>Clase 2:</strong> Solicitada, no modificada.</li>
+						<li><strong>Clase 3:</strong> Solicitada, Modificada.</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		<section>
+			<div class="break"></div>
+			<h3>No usadas recientemente (NRU)</h3>
+			<ul>
+				<li>
+					Cada cierto tiempo, el S.O. coloca en 0 los bits de
+					solicitud. Para actualizar el valor de solicitudes,
+					y garantizar que cuando este encendido fue por un
+					acceso reciente.
+				</li>
+				<li>
+					El algoritmo desaloja, una p&aacute;gina al azar de 
+					la clase mas inferior. Da prioridad a las p&aacute;ginas
+					pocos referenciadas en lugar de las solicitadas
+					frecuentemente con modificaciones.
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Algoritmos de sustitución de p&aacute;ginas</h2>
+			<h3>Menos usada recientemente (LRU)</h3>
+			<ul>
+				<li>
+					Es una variación del algoritmo anterior, pero lleva
+					la cuenta de cuanto tiempo ha transcurrido desde
+					que se modificó el bit de referencia.
+				</li>
+				<li>
+					Al ocurrir un fallo de memoria, revisa cu&aacute;l p&aacute;gina
+					ha sido usada recientemente y realiza el intercambio.
+				</li>
+				<li>
+					Se puede implementar con listas din&aacute;micas o contadores,
+					pero ambos son métodos muy costosos y con muchas 
+					limitaciones de hardware (no se pueden implementar 
+					contadores tan grandes).
+				</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Algoritmos de sustitución de p&aacute;ginas</h2>
+			<h3>Del Reloj</h3>
+			<div class="left half">
+				<ul>
+					<li>
+						Utiliza una lista circular y un puntero que 
+						realiza la función de manecilla.
+					</li>
+					<li>
+						Cada vez que ocurre un fallo de p&aacute;gina, se
+						chequea el valor del bit de referencia en la
+						posición del puntero.
+					</li>
+				</ul>
+			</div>
+			<div class="left half">
+				<img src="img/class8/reloj.png" alt="algoritmo de reloj" />
+			</div>	
+			<p>
+				Si <strong>R = 0</strong> se desaloja esa 
+				p&aacute;gina. Si es <strong>R = 1</strong> 
+				se incrementa la manecilla una posici&oacute;n.
+			</p>
+			<aside class="notes">
+				Si <strong>R = 0</strong>, se desaloja
+				esa p&aacute;gina, se introduce la nueva en esa
+				posición, se incrementa la manecilla
+				(puntero) una posición.
+				Si <strong>R = 1</strong> se incrementa 
+				la manecilla (puntero) una posición.
+			</aside>
+		</section>
+	</section>
+
+
+			<section>
+				<h1>&iquest;Dudas y preguntas?</h1>
+			</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				center: true,
+
+				theme: 'unet',
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

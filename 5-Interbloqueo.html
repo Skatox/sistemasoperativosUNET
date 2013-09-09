@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sistemas Operativos | UNET</title>
+
+		<meta name="description" content="L&aacute;minas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del T&aacute;chira">
+		<meta name="author" content="Miguel Angel Useche Castro">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+		<link rel="stylesheet" href="css/theme/unet.css" id="theme">
+
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div class="unet">
+						<div class="left">
+							<img class="noborder" src="img/class1/UNET.png" alt="UNET Logo">
+						</div>
+						<div class="left">
+							<p id="definition-header">
+								Universidad Nacional Experimental Del T&aacute;chira<br />
+								Decanato De Docencia<br />
+								Dpto. Ingenier&iacute;a Inform&aacute;tica
+							</p>
+						</div>
+					</div>
+
+					<h1 class="clear">
+						Sistemas Operativos
+					</h1>
+					<h2 id="subject-code">
+						C&oacute;digo 0435607T
+					</h2>
+					<div class="professor-info">
+						<p>
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche<a> -
+							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h2>Contenido</h2>
+					<ul>
+						<li>Interbloqueo</li>
+						<li>Interacci&oacute;n entre los procesos y recursos.</li>
+						<li>Representaci&oacute;n mediante grafos.</li>
+						<li>Condiciones del interbloqueo.</li>
+						<li>
+							Estrategias para evitar interbloqueo: 
+							<ul>
+								<li>M&eacute;todos directos.</li>
+								<li>M&eacute;todos indirectos.</li>
+							</ul>
+						</li>
+						<li>Estrategias para enfretar interbloqueos.</li>
+					</ul>
+				</section>
+
+				<section id="interbloqueo">
+			<h2>Interbloqueo</h2>
+			<div class="left half">
+				<p>
+					Ocurre cuando dos o mas procesos permanentemente se bloquean 
+					mutuamente, donde cada proceso tiene bloqueado un recurso que
+					otros procesos intentan bloquear. 
+				</p>
+				<p>
+					A diferencia de la gesti&oacute;n de procesos no existe una soluci&oacute;n general para los interbloqueos.
+				</p>
+				<!--Ejemplo de arco y flecha, puente de un solo canal -->
+			</div>
+			<div class="slide half right">
+				<img src="img/class4/deadlock.jpg" alt="deadlock" />
+			</div>
+		</section>
+
+		<section id="empleo-de-recurso">
+			<h2>Interacci&oacute;n de procesos y recursos</h2>
+			<p>
+				En modo de operaci&oacute;n normal, un proceso puede obtener un recurso
+				solo a través de la siguiente secuencia:
+			</p>
+			<ul>
+				<li class="slide">
+					<strong>Solicitud: </strong> mediante una llamada al sistema, 
+					el proceso pide acceder a un recurso, si esta libre se le 
+					concede inmediamente, de lo contrario, espera hasta poder
+					adquirirlo.
+				</li class="slide">
+				<li class="slide">
+					<strong>Uso: </strong> el proceso opera sobre el recurso, 
+					por ejemplo, si solicit&oacute; acceder a un pendrive escribe o 
+					lee archivos en él.
+				</li class="slide">
+				<li class="slide">
+					<strong>Liberaci&oacute;n: </strong> mediante una llamada al sistema, 
+					el proceso pide libera el recurso cuando ya no lo necesita usar.
+				</li>
+			</ul>
+		</section>
+
+		<section id="representacion-grafos">
+			<section>
+				<h2>Representaci&oacute;n a través de grafos</h2>
+				<div class="half left">
+					<p>Se pueden representar a través de grafos dirigidos:</p>
+					<ul>
+						<li>El proceso es representado por un <strong>c&iacute;rculo</strong>.</li>
+						<li>El recurso se representa con un <strong>cuadrado</strong>.</li>
+						<li>En caso de existir mas de una instacia de un recurso, dentro
+						del cuadrado se observar&aacute;n cada una de ellas.</li>
+					</ul>
+				</div>
+				<div class="right half">
+					<img src="img/class5/grafico-interbloqueo.png" alt="grafo" />
+					<p class="nota">Ejemplo de interbloqueo en grafos de alocaci&oacute;n de recursos.
+					- Fuente: <a href="http://es.wikipedia.org/wiki/Bloqueo_mutuo" target="_blank">Wikipedia</a></p>
+				</div>
+			</section>
+			<section>
+				<h2>Representaci&oacute;n a través de grafos</h2>
+				<div class="half left">
+					<p>Se pueden representar a través de grafos dirigidos:</p>
+					<ul>
+						<li>
+							Si el recurso est&aacute; asignado a un proceso, la flecha se dirige
+							desde el recurso al proceso <em>(del cuadrado al c&iacute;rculo).</em>
+						</li>
+						<li>
+							Si el proceso est&aacute; solicitando un recurso, la flecha se dirige
+							desde el proceso al recurso<em>(del c&iacute;rculo al cuadrado).</em>
+						</li>
+					</ul>
+				</div>
+				<div class="right half">
+					<img src="img/class5/grafico-interbloqueo.png" alt="grafo" />
+					<p class="nota">Ejemplo de interbloqueo en grafos de alocaci&oacute;n de recursos.
+					- Fuente: <a href="http://es.wikipedia.org/wiki/Bloqueo_mutuo" target="_blank">Wikipedia</a></p>
+				</div>
+			</section>
+		</section>
+				
+
+		<section id="representacion-grafos-2">
+			<h2>Representaci&oacute;n a través de grafos</h2>
+			<h3>Ejemplo</h3>
+			<div class="half left">
+				<ul>
+					<li>P = { P1, P2, P3, P4 }</li>
+					<li>R = { R1, R2, R3 }</li>
+					<li>
+						F = { <br />
+						&nbsp;&nbsp;&nbsp;P1R1, P2R2, P4R3,<br /> 
+						&nbsp;&nbsp;&nbsp;R1P2, R2P4, R3P1, R3P2 <br />}
+					</li>
+				</ul>
+				<p>Instancias: 1 de R1 y R2, 2 de R3. </p>
+			</div>
+			<div class="right half">
+				<img src="img/class5/ejemplo-interbloqueo.png" alt="grafo" />
+			</div>
+		</section>
+
+		<section id="ejemplo-interbloqueo">
+			<h2>Ejemplo de un interbloqueo</h2>
+			<div class="center">
+				<img src="img/class5/ejemplo-interbloqueo2.png" alt="grafo" />
+			</div>
+		</section>
+
+		<section id="condiciones-interbloqueo">
+			<section>
+				<h2>Condiciones de interbloqueo</h2>
+				<ul>
+					<li><h3>Exclusi&oacute;n mutua:</h3> 
+						Solo un proceso puede usar un
+						recurso cada vez, si otro proceso lo solicita, debe esperar
+						a que sea liberado.
+					</li>
+					<li><h3>Retenci&oacute;n y espera:</h3> 
+						Un proceso est&aacute; reteniendo
+						un recurso y espera para por otro recurso adicional pero
+						retenido por otro proceso.
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Condiciones de interbloqueo</h2>
+				<ul>
+					<li><h3>Sin desalojo:</h3> l
+						Los recursos no pueden ser desalojados,
+						pues solo el proceso es capaz de liberar dicho recurso.
+					</li>
+					<li><h3>Espera circular:</h3> 
+						Existe una cadena cerrada de 
+						procesos <strong>{P0, P1, ..., Pn}</strong>, cada uno 
+						de los cuales retiene, al menos, un recurso necesitado por
+						el siguiente proceso de la cadena <strong>(P0 espera por P1, 
+						P1 por P2, P2 por P3, ..., Pn por P0)</strong>.
+					</li>
+				</ul>
+			</section>
+		</section>
+
+		<section id="estrategias-evitar-interbloqueo">
+			<section>
+				<h2>Estrategias para evitar<br />el interbloqueo</h2>
+				<p>
+					Existe maneras de evitar el interbloqueo si se conoce cierta
+					informaci&oacute;n de los procesos antes de asignarle recursos.
+					</p>
+					<p> Si 
+					se comprueba que no se producir&aacute; un interbloqueo (estado inseguro)
+					se le asigna el recurso, de lo contrario lo hace esperar.
+				</p>
+			</section>
+			<section>
+				<h2>Estrategias para evitar<br />el interbloqueo</h2>
+				<p>Estos métodos son de dos tipos:</p>
+				<ul>
+					<li>
+						<h3>Métodos indirectos</h3> consisten en impedir la aparici&oacute;n 
+						de alguna de las tres condiciones necesarias para que se dé el interbloqueo.
+					</li>
+					<li>
+						<h3>Métodos directos</h3> consisten en evitar la aparici&oacute;n del 
+						circulo vicioso de espera.
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Exclusi&oacute;n mutua</h3>
+				<p>
+					Se aplica a los recursos que no pueden ser compartidos como la
+					impresora. Pues varios procesos no pueden acceder a ella para
+					imprimir simult&aacute;neamente. A diferencia de un archivo de solo
+					lectura, donde varias tareas pueden leer el archivo
+					al mismo tiempo.
+				</p>
+			</section>
+			<section>
+				<h3>Prevenci&oacute;n del Interbloqueo - Retenci&oacute;n y espera</h3>
+				<p>
+					Consiste en evitar la retenci&oacute;n de recursos mientras 
+					espera que se le asignen otros. Esto se puede lograr:
+				</p>
+				<ul>
+					<li>
+						Exigir al proceso que pida <strong>todos los 
+						recursos de una vez</strong> antes de ejecutarse.
+						Pero se retendr&iacute;an muchos recursos no utilizados 
+						retrasando la ejecuci&oacute;n de otros procesos.
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Prevenci&oacute;n del Interbloqueo - Retenci&oacute;n y espera</h3>
+				<ul>
+					<li>
+						Un proceso <strong>s&oacute;lo puede solicitar recursos cuando
+						no tiene ninguno asignado</strong>. Pero puede ocurrir 
+						que  se libera un recurso y mas tarde se debe volver 
+						a pedirlo para solicitar otros recursos.
+					</li>
+				</ul>
+				<p class="nota"><strong>Nota:</strong> En ambos casos se puede 
+					dar una inanici&oacute;n (un proceso nunca se termina de ejecutar).</p>
+			</section>
+		</section>
+
+<section>
+		<section>
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Prevenci&oacute;n del Interbloqueo - No expropiaci&oacute;n</h3>
+			<p>
+				Utilizado en recursos cuyo estado se puede almacenar y 
+				restaurarse posteriormente. En esta estrategia se permite
+				al S.O. la expropiaci&oacute;n de recursos a un proceso bloqueado.
+			</p>
+			<ul>
+				<li>
+					Si un proceso solicita un recurso que no se le pueden asignar
+					por los momentos, <strong>se liberan todos los recursos 
+					retenidos por él</strong> y quedan a disposici&oacute;n de los 
+					procesos activos.
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Prevenci&oacute;n del Interbloqueo - No expropiaci&oacute;n</h3>
+			<ul>
+				<li>Un proceso bloqueado debe esperar por todos los recursos.</li>
+				<li>Penaliza a procesos con muchas solicitudes de recursos.</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Prevenci&oacute;n del Interbloqueo - Espera circular</h3>
+			<p>
+				A cada recurso se le asigna un orden, y el proceso solo puede solicitar
+				recursos con un orden superior al recurso actual. Ademas debe liberar
+				el recurso retenido para obtener el solicitado.
+			</p>
+			<p>
+				Sin embargo, no es recomendable porque limita al desarrollador en la forma
+				en que puede escribir sus aplicaciones y se induce a la mala utilizaci&oacute;n
+				de recursos.
+			</p>
+		</section>
+		<section>
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Predicci&oacute;n del Interbloqueo</h3>
+			<p>
+				Consiste en asignar los recursos solamente cuando <strong>no presentan
+				un posible riesgo de interbloqueo</strong>. Para ello, es necesario
+				<strong>conocer las futuras peticiones</strong> de los recursos: cada 
+				proceso ha de declarar por anticipado la cantidad m&aacute;xima de recursos 
+				a utilizar a lo largo de su ejecuci&oacute;n.
+			</p>
+		</section>
+		<section>
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Predicci&oacute;n del Interbloqueo</h3>
+			<p>
+				Existen dos enfoques para la predicci&oacute;n de interbloqueo:
+			</p>
+			<ul>
+				<li>
+					No iniciar un proceso si sus demandas 
+					presentan condiciones que pueden llevar al interbloqueo.
+				</li>
+				<li>
+					No conceder solicitudes de incremento de recursos a un proceso
+					si la asignaci&oacute;n puede llevar a un interbloqueo.
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Concepto de estado seguro</h3>
+			<p>
+				El estado del sistema viene dado por la asignaci&oacute;n actual de los
+				recursos a los procesos. Existen 2 tipos de estados:
+			</p>
+
+			<ul>
+				<li>
+					<strong>Estado seguro:</strong> es cuando existe una secuencia de
+					asignaci&oacute;n de recursos donde <strong>no se va</strong> a producir 
+					un interbloqueo.
+				</li>
+				<li>
+					<strong>Estado inseguro:</strong> cuando en la una secuencia de
+					asignaci&oacute;n <strong>se va a producir un interbloqueo</strong>.
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Algoritmo del banquero</h3>
+			<div class="left twothird">
+				Propuesto por Dijkstra basado en la <strong>negativa 
+				asignaci&oacute;n de recursos</strong>, su nombre es inspirado 
+				en la similitud del manejo de dinero y/o capital del banco cuando
+				sus clientes van a realizar préstamos respecto a la asignaci&oacute;n
+				de recursos a procesos.
+			</div>
+			<div class="left third">
+				<img src="img/class5/banquero.jpg" alt="Banquero" />
+			</div>
+		</section>
+		<section>
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Funcionamiento del algoritmo del banquero</h3>
+			<ul>
+				<li>
+					Dada una secuencia de procesos <strong>P = {P1, P2, ..., Pn}</strong>,
+					se considera como <strong>estado seguro</strong>, si los recursos
+					que pide Pi, en el peor de los casos se pueden antender
+					con los recursos disponibles m&aacute;s los recursos pose&iacute;dos por todos
+					los procesos <strong>Pj, j < i</strong> (procesos anteriores).
+				</li>
+				<li>
+					El peor caso: que todos los procesos soliciten a la vez el 
+					m&aacute;ximo de recursos necesarios.
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Algoritmo del banquero</h3>
+			<ul>
+				<li>
+					El primer proceso de la secuencia podr&iacute;a finalizar con los 
+					recursos disponibles en el sistema.
+				</li>
+				<li>
+					El segundo finalizar&iacute;a con los disponibles m&aacute;s los
+					liberados en el proceso 1 y as&iacute; sucesivamente.
+				</li>
+				<li>
+					Si se pueden atender todas las peticiones de los procesos 
+					<strong> no existir&aacute; interbloqueo</strong>.
+				</li>
+			</ul>
+		</section>
+					
+		<section id="algoritmo-banquero-ejemplo">
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Algoritmo del banquero</h3>
+			<br />
+			<div class="half left center">
+				<p>
+					E = { 6 , 3 , 4 , 2 }
+				</p>
+				<div>
+					<table class="banquero">
+						<tr>
+							<th>A</th>
+							<td>3</td>
+							<td>0</td>
+							<td>1</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<th>B</th>
+							<td>0</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<th>C</th>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<th>D</th>
+							<td>1</td>
+							<td>1</td>
+							<td>0</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<th>E</th>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+					</table>
+					<h3>Recursos asignados</h3>
+				</div>
+			</div>
+			<div class="half left center">
+				<p>
+					A = { 1 , 0 , 2 , 0 }
+				</p>
+				<div>
+					<table class="banquero">
+						<tr>
+							<th>A</th>
+							<td>1</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<th>B</th>
+							<td>0</td>
+							<td>1</td>
+							<td>1</td>
+							<td>2</td>
+						</tr>
+						<tr>
+							<th>C</th>
+							<td>3</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<th>D</th>
+							<td>0</td>
+							<td>0</td>
+							<td>1</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<th>E</th>
+							<td>2</td>
+							<td>1</td>
+							<td>1</td>
+							<td>0</td>
+						</tr>
+					</table>
+					<h3>Recursos necesarios</h3>
+				</div>
+			</div>
+		</section>
+		<section id="algoritmo-banquero-ejemplo-2">
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Algoritmo del banquero</h3>
+			<br />
+			<div class="half left center">
+				<p>
+					Existencia = { 10 , 5 , 7 }
+				</p>
+				<div>
+					<table class="banquero">
+						<tr>
+							<th>&nbsp;</th>
+							<th>A</th>
+							<th>B</th>
+							<th>C</th>
+						</tr>
+						<tr>
+							<th>P1</th>
+							<td>0</td>
+							<td>1</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<th>P2</th>
+							<td>2</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<th>P3</th>
+							<td>3</td>
+							<td>0</td>
+							<td>2</td>
+						</tr>
+						<tr>
+							<th>P4</th>
+							<td>2</td>
+							<td>1</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<th>P5</th>
+							<td>0</td>
+							<td>0</td>
+							<td>2</td>
+						</tr>
+					</table>
+					<h3>Recursos asignados</h3>
+				</div>
+			</div>
+			<div class="half left center">
+				<p>
+					Disponibles = { 3, 3, 2 }
+				</p>
+				<div>
+					<table class="banquero">
+						<tr>
+							<th>&nbsp;</th>
+							<th>A</th>
+							<th>B</th>
+							<th>C</th>
+						</tr>
+						<tr>
+							<th>P1</th>
+							<td>7</td>
+							<td>5</td>
+							<td>3</td>
+						</tr>
+						<tr>
+							<th>P2</th>
+							<td>3</td>
+							<td>2</td>
+							<td>2</td>
+						</tr>
+						<tr>
+							<th>P3</th>
+							<td>9</td>
+							<td>0</td>
+							<td>2</td>
+						</tr>
+						<tr>
+							<th>P4</th>
+							<td>2</td>
+							<td>2</td>
+							<td>2</td>
+						</tr>
+						<tr>
+							<th>P5</th>
+							<td>4</td>
+							<td>3</td>
+							<td>3</td>
+						</tr>
+					</table>
+					<h3>Necesidades m&aacute;ximas</h3>
+				</div>
+			</div>
+			<p class="nota">P2 necesita 1 instacia del recurso A y 2 instancias del recurso C</p>
+		</section>
+		<section id="deteccion-recuperacion">
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Detecci&oacute;n y recuperaci&oacute;n de Interbloqueo</h3>
+			<h4>Detecci&oacute;n</h4>
+			<ul>
+				<li>Una sola instacia de recurso para cada tipo.</li>
+				<li>Varias instacias de cada tipo de recursos.</li>
+			</ul>
+			<h4>Recuperaci&oacute;n</h4>
+			<ul>
+				<li>Mediante apropiaci&oacute;n.</li>
+				<li>Mediante Rollback.</li>
+				<li>Mediante eliminaci&oacute;n de procesos.</li>
+			</ul>
+		</section>
+
+		<section id="deteccion-recuperacion-2">
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Una sola instancia de recurso para cada tipo</h3>
+			<br />
+			<div class="half left">
+				<p>
+					Consiste en usar una variante del grafo de asignaci&oacute;n
+					de recursos denominada <strong>grafo de espera</strong>. 
+				</p>
+				<p>
+					Para obtener ese grafo, se deben eliminar los nodos 
+					de recursos y redirigiendo las correspondientes aristas.
+				</p>
+			</div>
+			<div class="half right">
+				<img src="img/class5/unica_instacia.png" alt="" />
+			</div>
+		</section>
+
+		<section>
+			<h2>Estrategias para <br />enfrentar los bloqueos</h2>
+			<h3>Varias instancias de cada tipo de recursos</h3>
+			<p>
+				Se aplica el algoritmo del banquero, pero se utilizan
+				los términos similares como:
+			</p>
+			<ul>
+				<li>
+					<strong>Available:</strong> un vector de longitud <em>m</em>
+					que indica el número de recursos disponibles de cada tipo.
+				</li>
+				<li>
+					<strong>Allocation:</strong> una matriz de <em>m</em> x <em>n</em>
+					que define el número de recursos de cada tipo que est&aacute;n asignados
+					actualmente a cada proceso.
+				</li>
+				<li>
+					<strong>Request: </strong> una matriz <em>n</em>x<em>m</em> que 
+					especifica la solicitud actual efectuada por cada proceso.
+				</li>
+			</ul>
+		</section>
+	</section>
+
+
+
+		<section id="recuperacion-interbloqueo">
+			<section>
+				<h2>Detecci&oacute;n y recuperaci&oacute;n<br /> de los interbloqueos</h2>
+				<h3>Recuperaci&oacute;n de los interbloqueo</h3>
+				<p>
+					Para recuperarse, el sistema debe llamar a un algoritmo de
+					detecci&oacute;n y realizar una de las siguientes opciones para romper
+					un interbloqueo.
+				</p>
+				<ul>
+					<li>
+						Interrumpir uno o mas procesos para romper la cadena 
+						de espera circular.
+					</li>
+					<li>
+						Desalojar algunos recursos de uno o mas procesos bloqueados.
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Detecci&oacute;n y recuperaci&oacute;n<br /> de los interbloqueos</h2>
+				<h3>Recuperaci&oacute;n de los interbloqueo</h3>
+				<h4>Terminaci&oacute;n de procesos</h4>
+				<ul>
+					<li>
+						Un proceso muy dr&aacute;stico consiste en <strong>interrumpir todos
+						los procesos implicados en el interbloqueo</strong>, pero se 
+						pierde todo el tiempo de cpu invertido hasta el momento.
+					</li>
+					<li>
+						Otro es <strong>abortar a uno de los procesos</strong>, la
+						elecci&oacute;n se puede basar en algunos aspectos como aquel que
+						lleve menos tiempo de CPU o el que libere mas recursos.
+					</li>
+					<li>
+						También se puede implementar el <strong>retrocedimiento de 
+						al algún proceso</strong>, sin embargo, es muy complicado 
+						de implementar y es necesario que el programa este diseñado
+						para retroceder.
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Detecci&oacute;n y recuperaci&oacute;n de los interbloqueos</h2>
+				<h3>Recuperaci&oacute;n de los interbloqueo</h3>
+				<h4>Expropiaci&oacute;n de recursos</h4>
+				<ul>
+					<li>
+						<strong>Selecci&oacute;n de una v&iacute;ctima: </strong>
+						se escoge un proceso para expropiar un recurso bas&aacute;ndose
+						en decisiones que garantizen que se evita el interbloqueo.
+					</li>
+					<li>
+						<strong>Anulaci&oacute;n: </strong> debido a que no se puede
+						reanudar la ejecuci&oacute;n de un proceso si se le quita un recurso.
+						Lo que se hace es anular proceso y reiniciarlo.
+					</li>
+					<li>
+						<strong>Inanici&oacute;n: </strong> consiste en tomar recursos
+						evitando <strong>con sumo cuidado</strong> que un proceso
+						nunca se llegue a ejecutar.
+					</li>
+				</ul>
+			</section>
+		</section>
+
+
+				<section>
+					<h1>&iquest;Dudas y preguntas?</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				center: true,
+
+				theme: 'unet',
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

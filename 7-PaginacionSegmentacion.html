@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sistemas Operativos | UNET</title>
+
+		<meta name="description" content="L&aacute;minas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del T&aacute;chira">
+		<meta name="author" content="Miguel Angel Useche Castro">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="css/theme/unet.css" id="theme">
+
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div class="unet">
+						<div class="left">
+							<img class="noborder" src="img/class1/UNET.png" alt="UNET Logo">
+						</div>
+						<div class="left">
+							<p id="definition-header">
+								Universidad Nacional Experimental Del T&aacute;chira<br />
+								Decanato De Docencia<br />
+								Dpto. Ingenier&iacute;a Inform&aacute;tica
+							</p>
+						</div>
+					</div>
+
+					<h1 class="clear">
+						Sistemas Operativos
+					</h1>
+					<h2 id="subject-code">
+						C&oacute;digo 0435607T
+					</h2>
+					<div class="professor-info">
+						<p>
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche<a> -
+							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+						</p>
+					</div>
+				</section>
+
+		<section>
+			<h2>Contenido</h2>
+			<ul>
+				<li>Paginaci&oacute;n</li>
+				<li>Tabla de p&aacute;ginas.</li>
+				<li>Memoria asociativa.</li>
+				<li>P&aacute;ginas compartidas.</li>
+				<li>P&aacute;ginas multinivel.</li>
+				<li>Segmentaci&oacute;n.</li>
+				<li>Segmentaci&oacute;n con paginaci&oacute;n.</li>
+			</ul>
+		</section>
+<section>
+	<section>
+		<h2>Paginaci&oacute;n</h2>
+		<ul>
+			<li>
+				El sistema operativo divide la memoria en segmentos
+				del mismo tama&ntilde;o llamados <strong>marcos de p&aacute;gina</strong>.
+			</li>
+			<li>
+				El espacio de direcciones l&oacute;gicas de un programa es 
+				divido en segmentos llamados <strong>p&aacute;ginas</strong>.
+			</li>
+			
+			<li>
+				Para ejecutar un programa de <strong>N</strong> tama&ntilde;o de
+				p&aacute;ginas, es necesario contar con <strong>N</strong>
+				marcos de p&aacute;ginas disponibles y proceder a cargar el programa
+				en memoria.
+			</li>
+			<li>
+				Se utiliza una <strong>tabla de p&aacute;gina</strong> para transformar
+				las direcciones l&oacute;gicas a f&iacute;sicas.
+			</li>
+			<li>
+				Desaparece la fragmentaci&oacute;n externa gracias al uso de los marcos
+				de p&aacute;gina, pero aparece <strong>fragmentaci&oacute;n interna</strong>.
+			</li>
+		</ul>
+		<aside class="notes">
+			<ul>
+				<li>
+					Es un esquema de administraci&oacute;n de memoria, creado para
+					permitir espacios no contiguos de memoria de procesos.
+				</li>
+				<li>
+					Se lleva el control de los marcos ocupados y/o libres.
+				</li>
+			</ul>
+		</aside>
+	</section>
+
+	<section id="paginacion-2">
+		<h2>Paginaci&oacute;n</h2>
+		<div class="center">
+			<div class="third left">
+				<h4>Memoria l&oacute;gica</h4>
+				<table class="memoria">
+					<tr><td>P&aacute;gina 0</td></tr>
+					<tr><td>P&aacute;gina 1</td></tr>
+					<tr><td>P&aacute;gina 2</td></tr>
+				</table>
+			</div>
+			<div class="third left">
+				<h4>Tabla de p&aacute;ginas</h4>
+				<table class="memoria">
+					<tr><th>0</th><td class="libre">1</td></tr>
+					<tr><th>1</th><td class="libre">4</td></tr>
+					<tr><th>2</th><td class="libre">3</td></tr>
+				</table>
+			</div>
+			<div class="third left">
+				<h4>Memoria f&iacute;sica</h4>
+				<table class="memoria">
+					<tr><th>0</th><td class="libre"></td></tr>
+					<tr><th>1</th><td>p&aacute;gina 0</td></tr>
+					<tr><th>2</th><td class="libre"></td></tr>
+					<tr><th>3</th><td>p&aacute;gina 2</td></tr>
+					<tr><th>4</th><td>p&aacute;gina 1</td></tr>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<h2>Paginaci&oacute;n</h2>
+		<h3>Direcci&oacute;n l&oacute;gica</h3>
+		<p>
+			Una direcci&oacute;n de un proceso, consta de dos partes:
+		</p>
+		<ul>
+			<li>
+				<strong>N&uacute;mero de p&aacute;gina ( p ): </strong> 
+				usado como &iacute;ndice en la tabla de p&aacute;ginas para conocer
+				la direcci&oacute;n base de la p&aacute;gina en memoria f&iacute;sica.
+			</li>
+			<li>
+				<strong>Desplazamiento ( d ): </strong>
+				se combina con la direcci&oacute;n base para definir 
+				la direcci&oacute;n de memoria f&iacute;sica enviada a la 
+				unidad de memoria.
+			</li>
+		</ul>
+		<div class="center">
+			<p class="nota">
+				Memoria de 2KB con tama&ntilde;o de p&aacute;ginas 256B.<br />
+				Direcci&oacute;n:  <strong>0x75B</strong> = 11101011011
+			</p>
+			<div class="slide">
+				<table >
+					<tr>
+						<th>P&aacute;gina</th>
+						<th>Desplazamiento</th>
+					</tr>
+					<tr>
+						<td class="center">111 = 7</td>
+						<td class="center">01011011 = 91</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<h2>Paginaci&oacute;n</h2>
+		<div class="center">
+			<img src="img/class7/paginacion.png" />
+			<p class="nota">
+				Modelo de paginaci&oacute;n de la memoria l&oacute;gica y
+				f&iacute;sica
+			</p>
+		</div>
+	</section>
+	<section>
+		<h2>Ejemplo de paginaci&oacute;n</h2>
+		<h3>Memoria de 32B y p&aacute;gina de 4B</h3>
+		<div class="half left">
+			<h4>Memoria l&oacute;gica</h4>
+			<table class="memoria">
+				<tr>
+					<th>0 - 3</th><th>4 - 7</th>
+					<th>8 - 11</th><th>12 - 15</th>
+				</tr>
+				<tr>
+					<td class="center">a b c d</td><td class="center">e f g h</td>
+					<td class="center">i j k l</td><td class="center">m n o p</td>
+				</tr>
+			</table>
+		</div>
+		<div class="left half">
+			<h4>Tabla de p&aacute;ginas</h4>
+			<table class="memoria">
+				<tr>
+					<th>0</th><th>1</th><th>2</th><th>3</th>
+				</tr>
+				<tr>
+					<td class="libre center">5</td>
+					<td class="libre center">6</td>
+					<td class="libre center">1</td>
+					<td class="libre center">2</td>
+				</tr>
+			</table>
+		</div>
+		<h4>Memoria f&iacute;sica</h4>
+		<table class="memoria">
+			<tr>
+				<th>0</th><th>4</th><th>8</th><th>12</th>
+				<th>16</th><th>20</th><th>24</th><th>28</th>
+			</tr>
+			<tr>
+				<td class="libre">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td class="center">i j k l</td>
+				<td class="center">m n o p</td>
+				<td class="libre">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td class="libre">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td class="center">a b c d</td>
+				<td class="center">e f g h</td>
+				<td class="libre">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+		</table>
+	</section>
+</section>
+
+<section>
+	<section id="tabla-paginas">
+		<h2>Tabla de p&aacute;ginas</h2>
+		<div class="center">
+			<img src="img/class7/tabla_memoria.png" alt="tabla de paginas" />
+		</div>
+	</section>
+	
+	<section id="vista-tabla-paginas">
+		<h2>Vista a tabla de p&aacute;ginas</h2>
+		<div class="center">
+			<table class="memoria">
+				<tr>
+					<td>&nbsp;</td>
+					<td>Accedido</td>
+					<td>Modificado</td>
+					<td>Presente / Ausente</td>
+					<td>Protecci&oacute;n</td>
+					<td>N&uacute;mero Marco de p&aacute;gina</td>
+				</tr>
+			</table>
+		</div>
+		<ul>
+			<li class="slide"><strong>Accedido:</strong> indica si se ha le&iacute;do 
+				informaci&oacute;n de esa p&aacute;gina, &uacute;til para algoritmos
+				como LRU (Less Recently Used).
+			</li>
+			<li class="slide"><strong>Modificado:</strong> advierte sobre cambios
+				en los datos de la p&aacute;gina desde que fue cargada del
+				disco, para guardarlos al momento de salir de la 
+				memoria.
+			</li>
+			<li class="slide"><strong>Presente / Ausente: </strong> permite conocer
+				si la p&aacute;gina se encuentra cargada en memoria o 
+				en el disco.
+			</li>
+			<li class="slide"><strong>Protecci&oacute;n:</strong> muestra el tipo de acceso
+				permitido para el contenido de la p&aacute;gina (lectura o 
+				escritura).
+			</li>
+			<li class="slide"><strong>N&uacute;mero del marco:</strong> guarda el valor
+				del marco de p&aacute;gina donde se encuentra ubicada la 
+				informaci&oacute;n.
+			</li>
+		</ul>
+	</section>
+	<section>
+		<h2>Implementaci&oacute;n de la tabla de p&aacute;gina</h2>
+		<ul>
+			<li>La tabla de p&aacute;ginas se mantiene en memoria principal.</li>
+			<li>
+				El <strong>registro base de la tabla de p&aacute;ginas (PTBR)</strong> 
+				apunta al inicio de la tabla de p&aacute;ginas.
+			</li>
+			<li>
+				El <strong>registro longitud de la tabla de p&aacute;ginas (PRLR)
+				</strong> indica el tama&ntilde;o de la tabla de p&aacute;ginas.
+			</li>
+			<li>
+				En este esquema cada acceso a dato o instrucci&oacute;n requiere
+				dos accesos a memoria. Uno para la tabla de p&aacute;ginas y otro
+				para obtener el dato o instrucci&oacute;n.
+			</li>
+			<li>Este proceso puede agilizarse usando una peque&ntilde;a memoria 
+				asociativa o <strong>TLB (translation look-aside buffer)</strong>.
+			</li>
+		</ul>
+	</section>
+</section>
+
+
+
+<section>
+	<section>
+		<h2>Memoria asociativa</h2>
+		<div class="center">
+			<img src="img/class7/tlb.png" alt="TLB" />
+		</div>
+	</section>
+
+	<section>
+		<h2>Memoria asociativa</h2>
+		<div class="center">
+			<img src="img/class7/tlb_detalle.png" alt="TLB" />
+		</div>
+		<br />
+		<p class="nota">
+			Si la p&aacute;gina esta en un registro asociativo
+			<strong>se obtiene el n&uacute;mero de marco</strong>, 
+			de lo contrario, se debe buscar en la tabla de p&aacute;ginas.
+		</p>
+	</section>
+
+	<section>
+		<h2>Memoria asociativa</h2>
+		<div class="text-left">
+			<ul>
+				<li>Tasa de aciertos: <strong>80%</strong>.</li>
+				<li>Tiempo accesso a TLB: <strong>20 ns</strong>.</li>
+				<li>Tiempo accesso a memoria: <strong>100 ns</strong>.</li>
+				
+			</ul>
+		</div>
+		<p>
+			Si encuentra el n&uacute;mero de marco en el TLB:<br /> 
+			<strong>20ns + 100ns = 120 ns</strong>
+		</p>
+		<p>
+			Si no encuentra el n&uacute;mero de marco en el TLB:<br /> 
+			<strong>20ns + 100ns + 100ns = 220 ns</strong>
+		</p>
+		<p>
+			Tiempo efectivo de acceso:<br />
+			<strong>0,8x120 + 0,20x220 = 140ns</strong>
+		</p>
+
+		<p>
+			Tiempo efectivo de acceso para 90% de aciertos:<br />
+			<strong>0,9x120 + 0,10x220 = 130ns</strong>
+		</p>
+
+		<p class="nota">
+			<strong>Tasa de acierto:</strong> es el porcentaje
+			de veces que se encuentra un n&uacute;mero de p&aacute;gina en el
+			TLB.
+		</p>		
+	</section>
+
+	<section id="tasa-acceso">
+		<h2>Memoria asociativa</h2>
+		<h3>Tasa de acceso</h3>
+		<div class="center">
+			<img src="img/class7/tasa_acceso.png" alt="tasa de acceso" />
+		</div>
+		<p class="nota">
+			A mayor porcentaje de acierto, menor es el tiempo de acceso 
+			a los datos en memoria.
+		</p>
+	</section>
+</section>
+
+<section>
+	<section>
+		<h2>P&aacute;ginas compartidas</h2>
+		<div class="half left">
+			<img src="img/class7/pagina_compartida.png" 
+				alt="ejemplo de pagina compartida" />
+		</div>
+		<div class="half left">
+			<ul>
+				<li>
+					Gracias al uso de tabla de p&aacute;ginas, se puede
+					compartir c&oacute;digo com&uacute;n entre procesos.
+				</li>
+				<li class="slide">
+					Esto es implementado a trav&eacute;s de la compartici&oacute;n
+					de un marco de memoria, para ello, el marco
+					debe estar asociado en la tabla de proceso.
+				</li>
+				<li class="slide">
+					El n&uacute;mero de p&aacute;gina asociado al marco, puede
+					ser diferente en cada proceso.
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section id="paginas-compartidas">
+		<h2>P&aacute;ginas multinivel</h2>
+		<div class="left third">
+			<div class="center">
+				<img src="img/class7/multinivel.png" alt="TP multinivel">
+			</div>
+		</div>
+		<div class="left twothird">
+			<ul>
+				<li>
+					Debido a que las tablas de p&aacute;gina pueden ocupar mucho espacio,
+					&eacute;stas se someten a una paginaci&oacute;n, creando una organizaci&oacute;n
+					p&aacute;ginada de m&uacute;ltiples niveles.
+				</li>
+				<li>Un ejemplo de este tipo es la p&aacute;ginacion en dos niveles.</li>
+				<li>
+					Las direcciones l&oacute;gicas ahora possen la siguiente estructura:
+				</li>
+			</ul>
+		</div>
+		<table class="banquero">
+			<tr>
+				<td colspan="3" class="center">
+					<strong>0x1AA76F</strong> = 0110101010011101101111
+				</td>
+			</tr>
+			<tr>
+				<th>P&aacute;gina externa</th>
+				<th>P&aacute;gina interna</th>
+				<th>Desplazamiento</th>
+			</tr>
+			<tr>
+				<td class="center">01101</td>
+				<td class="center">01010</td>
+				<td class="center">111 0110 1111</td>
+			</tr>
+		</table>
+	</section>	
+</section>
+
+
+<section>
+	<section>
+		<h2>Segmentaci&oacute;n</h2>
+		<div class="left half">
+			<ul>
+				<li>
+					Un programa es una colecci&oacute;n de segmentos. 
+				</li>
+				<li>
+					Por ello, una direcci&oacute;n l&oacute;gica consiste en un par
+					de valores:<br />
+						<div class="center">
+							<strong>n&uacute;mero de segmento, desplazamiento</strong>
+						</div>
+				</li>
+				<li>
+					Existe una tabla de segmentos donde guarda:<br />
+						<div class="center">
+							<strong>limite, base</strong>
+						</div>
+					de cada segmento en memoria.
+				</li>
+			</ul>
+		</div>
+		<div class="left half">
+			<img src="img/class7/segmentos.png" alt="segmentos" class="noborder" />
+		</div>
+		<aside class="notes">
+			<ul>
+				<li>
+					Un segmento es una unidad l&oacute;gica tal como:
+					<em>
+						programa principal, procedimiento, funci&oacute;n, 
+						m&eacute;todo, variables, bloque com&uacute;n, pila, etc.
+					</em>
+				</li>
+				<li>
+					Cada segmento tiene un n&uacute;mero y una longitud.
+				</li>
+				<li>
+					Es un esquema de gesti&oacute;n de memoria apoyado
+					en la visi&oacute;n del usuario respecto a la memoria.
+				</li>	
+			</ul>
+		</aside>
+	</section>
+
+	<section id="segmentacion-ejemplo">
+		<h2>Segmentaci&oacute;n</h2>
+		<div class="center">
+			<img src="img/class7/ejemplo_segmentacion.png" alt="" />
+		</div>
+	</section>
+
+	<section id="segmentacion-paginacion">
+		<h2>Segmentaci&oacute;n con paginaci&oacute;n</h2>
+		<ul>
+			<li>
+				La paginaci&oacute;n y la segmentaci&oacute;n se pueden combinar en 
+				la segmentaci&oacute;n con paginaci&oacute;n.
+			</li>
+			<li>
+				En este esquema de gesti&oacute;n de memoria los segmentos 
+				se paginan.
+			</li>
+			<li>
+				Se apoya la visi&oacute;n de la memoria que tiene el usuario.
+			</li>
+			<li>
+				Se resuelve el problema de la asignaci&oacute;n din&aacute;mica.
+			</li>
+			<li>
+				Es necesario una tabla de segmentos y una tabla de p&aacute;ginas 
+				por cada segmento
+			</li>
+			<li>
+				La traducci&oacute;n de direcciones es m&aacute;s compleja y puede 
+				requerir un mayor n&uacute;mero de accesos a memoria en el peor caso.
+			</li>
+		</ul>
+	</section>
+</section>
+
+	<section>
+					<h1>&iquest;Dudas y preguntas?</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				center: true,
+
+				theme: 'unet',
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
