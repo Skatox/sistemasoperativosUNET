@@ -256,10 +256,11 @@ table th {
 p.nota {
   color: #fff;
   font-style: italic;
-  font-size: smaller;
+  font-size: 0.5em;
   padding: 20px;
   text-align: center;
-  text-shadow: 0 0 10px #000000; }
+  text-shadow: 0 0 10px #000000; 
+}
 
 table.banquero th, table.banquero td {
   padding: 10px; }
@@ -269,3 +270,11 @@ table#bloque-archivo {
   table#bloque-archivo td {
     padding: 15px;
     border: 2px solid #dd8000; }
+
+  table.comparacion {
+      padding: 0;
+      font-size: 0.7em;
+    }
+
+.reveal section pre { box-shadow: none; width: 100%; }
+.reveal section pre code { box-shadow: 0 0 6px #000010;}
