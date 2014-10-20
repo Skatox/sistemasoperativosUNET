@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sistemas Operativos | UNET</title>
+
+		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
+		<meta name="author" content="Miguel Angel Useche Castro">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/unet.css">
+		<link rel="stylesheet" href="css/lightbox.css">
+
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div class="unet">
+						<div class="logo-wrapper left">
+							<img  src="img/intro/UNET.png" alt="UNET Logo">
+						</div>
+						<p id="definition-header" class="left">
+							Universidad Nacional Experimental Del Táchira<br />
+							Decanato De Docencia<br />
+							Dpto. Ingeniería Informática
+						</p>
+					</div>
+
+					<h1 class="clear">
+						Sistemas Operativos
+					</h1>
+					<h2 id="subject-code">
+						Código 0435607T
+					</h2>
+					<div class="professor-info">
+						<p>
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
+							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+						</p>
+					</div>
+				</section>
+				<section id="contenido">
+					<h2>Contenido</h2>
+					<ul>
+						<li>Introducción</li>
+						<li>Gestión de procesos:
+							<ul>
+								<li>Por lotes</li>
+								<li>Interactivos</li>
+								<li>Tiempo real</li>
+								<li>Multiprocesador</li>
+							</ul>
+						</li>
+						<li>Planificador y despachador de procesos.</li>
+					</ul>
+				</section>
+
+				<section id="introduccion">
+					<h2>Introducción</h2>
+					<ul>
+						<li>
+							<strong>Planificador de procesos:</strong> 
+							es la sección del sistema operativo encargado de
+							ordenar la secuencia en que los procesos del serán
+							ejecutados, con el fin de optimizar el uso de los
+							recursos del sistema.
+						</li>
+						<li>
+							<strong>Algoritmo de planificación:</strong>
+							es el método como el planificador organiza los
+							procesos para ser ejecutados. 
+						</li>
+					</ul>
+				</section>
+				<section id="introduccion-2">
+					<h2>Introducción</h2>
+					<ul>
+						<li>
+							En sistemas de un solo proceso el planificador
+							sólo tenía que ejecutar la siguiente instrucción.
+						</li>
+						<li>
+							En los sistemas multiproceso es necesario aprovechar el 
+							hardware al máximo.
+						</li>
+						<li>
+							La ejecución de un proceso consiste en una alternancia entre 
+							ráfagas de CPU y ráfagas de E/S. Optimizar esto, es responsabilidad
+							 del planificador.
+						</li>
+					</ul>
+				</section>
+				<section id="introduccion-3">
+					<h2>Introducción</h2>
+					<ul>
+						<li>
+							¿Los procesos interactivos de usuario deberían tener prioridad 
+							sobre los procesos de segundo plano del sistema? Depende de la situación.
+						</li>
+						<li>
+							El planificador debe hacer uso eficiente de la CPU. 
+							La conmutación de procesos también tiene un costo computacional.
+						</li>
+					</ul>
+					<aside class="notes">
+						Un planificador de procesos es un módulo del SO 
+						encargado de mover los procesos entre las distintas colas de planificación.	
+					</aside>
+				</section>
+
+				<section id="introduccion-4">
+					<h2>Introducción</h2>
+					<a href="img/class4/vida_proceso.jpg" data-lightbox="Comportamiento-proceso">
+						<img src="img/class4/vida_proceso.jpg"  alt="Comportamiento de un proceso">
+					</a>
+					<aside class="notes">
+						La ejecución de un proceso consiste en una alternancia entre,
+						ráfagas de CPU y ráfagas de E/S. Un proceso limitado por E/S
+						es aquél mayor tiempo accediendo a la E/S que usando el CPU 
+						(ráfagas de CPU cortas), un proceso limitado por CPU pasa 
+						más tiempo computando que accediendo a E/S (ráfagas de CPU largas).
+					</aside>
+				</section>
+
+				<section id="introduccion-5">
+					<h2>Introducción</h2>
+					<p class="text-left">Cuando planificar procesos:</p>
+					<ul>
+						<li>En la creación de procesos.</li>
+						<li>Cuando un proceso termina.</li>
+						<li>Durante el bloqueo de E/S de un proceso.</li>
+						<li>Cuando ocurre una interrupción de E/S.</li>
+					</ul>
+				</section>
+
+				<section id="categoria-planificadores">
+					<h2>Categoría de planificadores</h2>
+					<ul>
+						<li>
+							<strong>No apropiativo:</strong> Selecciona un proceso para
+							ejecutarlo. Permite su ejecución hasta que el mismo se bloquee 
+							(esperando E/S) o hasta que termine.
+						</li>
+						<li>
+							<strong>Apropiativo:</strong> Selecciona un proceso para ejecutarlo.
+							Permite su ejecución por un espacio de tiempo fijo
+							y luego lo saca del CPU para asignarlo a otro proceso.
+						</li>
+					</ul>
+				</section>
+				<section id="criterio-planificadores">
+					<h2>Criterios de un planificador</h2>
+					<ul>
+						<li>
+							<strong>Maximizar:</strong>
+							<ul>
+								<li>Uso del CPU.</li>
+								<li>Rendimiento.</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Minimizar:</strong>
+							<ul>
+								<li>Tiempos de ejecución.</li>
+								<li>Tiempo de respuesta.</li>
+								<li>Tiempo de espera. </li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+						Minimizar el tiempo desde que se presenta el proceso hasta su culminación.
+						y el tiempo que pasa el proceso esperando en la cola de procesos listos,
+						para ser ejecutado por el CPU.
+						Tiempo de respuesta el tiempo desde que se env&iacute; una 
+						solicitud hasta producir su respuesta, limitado por la velocidad de los 
+						dispositivos de E/S.
+					</aside>
+				</section>
+				<section id="despachador">
+					<h2>Desapachador</h2>
+					<ul>
+						<li>
+							Es el módulo que proporciona control al CPU de los procesos seleccionados por el 
+							planificador a corto plazo.
+						</li>
+						<li>
+							Esto impica:
+							<ul>
+								<li>Realiza un cambio de contexto.</li>
+								<li>Cambio al <strong>modo de usuario</strong> (sin privilegios).</li>
+								<li>Salto a la posición n correcta del programa para continuar su ejecución.</li>
+							</ul>
+						</li>
+						<li>El despachador debe ser muy rápido, pues se invoca cada que vez que se conmuta un proceso.</li>
+						<li>El tiempo perdido por este proceso se llama <strong>latencia de despacho</strong>.</li>
+					</ul>
+				</section>
+				<section id="tipos-planificadores">
+					<h2>Tipos de planificadores</h2>
+					<h3>Procesamiento por lotes</h3>
+					<ul>
+						<li>Primero en entrar, primero en ser atendido (FCFS)</li>
+						<li>Trabajo mas corto primero (SJF)</li>
+						<li>Menor tiempo restante a continuación (SRTN)</li>
+					</ul>
+				</section>
+				<section id="tipos-planificadores-2">
+					<h2>Tipos de planificadores</h2>
+					<p class="text-left">Sistemas interactivos:</p>
+					<ul>
+						<li>Turno circular (Round Robin).</li>
+						<li>Planificación por prioridad</li>
+						<li>Colas multinivel.</li>
+						<li>Colas multinivel con retroalimentación.</li>
+						<li>Planificación garantizada</li>
+					</ul>
+					<p class="text-left">Planificación en tiempo real.</p>
+					<p class="text-left">Planificación en sistemas multiprocesador.</p>
+				</section>
+				<section id="algoritmo-planificacion-fifo">
+					<h2>Procesamiento por lotes</h2>
+					<h3>FIFO  - FCFS</h3>
+					<ul>
+						<li>
+							Es el más simple de los algoritmos de planificación, simplemente ejecuta 
+							los procesos a medida que solicitan acceso al CPU. (mediante una FIFO).
+						</li>
+						<li>
+							Cuando se coloca un proceso en la cola de preparados su PCB se coloca al 
+							final de la cola, cuando el CPU está libre el planificador coloca el proceso
+							ubicado al principio de la cola, pasa a ejecutarse y es eliminado de la cola.
+						</li>
+					</ul>
+					<p class="nota">
+						Uno de los problemas de este algoritmo es el efecto <strong>Convoy</strong>,
+						el cual ocurre cuando un proceso espera mucho tiempo, debido a un proceso 
+						utilizando el CPU por mucho tiempo.
+					</p>
+				</section>
+				<section id="fcfs-ejemplo">
+					<h3>FIFO - FCFS</h3>
+					<div>
+						<div class="half left">
+							<table class="procesos center">
+								<tr>
+									<th>Procesos</th><th>Llegada</th><th>Tiempo CPU (ms)</th>
+								</tr>
+								<tr>
+									<td class="p1">P1</td><td>0</td><td>6</td>
+								</tr>
+								<tr>
+									<td class="p2">P2</td><td>4</td><td>3</td>
+								</tr>
+								<tr>
+									<td class="p3">P3</td><td>6</td><td>4</td>
+								</tr>
+								<tr>
+									<td class="p4">P4</td><td>7</td><td>1</td>
+								</tr>
+							</table>
+						</div>
+						<div class="half right fragment">
+							<table class="procesos center ">
+								<tr>
+									<th>Proceso</th><th>Operación</th><th>Total</th>
+								</tr>
+								<tr>
+									<td>P1</td><td>0</td><td>0</td>
+								</tr>
+								<tr>
+									<td>P2</td><td>6 - 4</td><td>2</td>
+								</tr>
+								<tr>
+									<td>P3</td><td>9 - 6</td><td>3</td>
+								</tr>
+								<tr>
+									<td >P4</td><td>13 - 7</td><td>6</td>
+								</tr>
+								<tr>
+								<td colspan="3">
+										Tiempo de espera promedio: <strong>2.75</strong>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="clear"><br /></div>
+						<div>
+							<table class="procesos timeline center ">
+								<tr>
+									<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td>
+									<td class="p1">3</td><td class="p1">4</td><td class="p1">5</td>
+									<td class="p2">6</td>
+								</tr>
+								<tr>
+									<td class="p2">7</td><td class="p2">8</td>
+									<td class="p3">9</td><td class="p3">10</td><td class="p3">11</td>
+									<td class="p3">12</td><td class="p4" >13</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</section>
+				<section id="algoritmo-planificacion-tiempo-corto">
+					<h2>Procesamiento por lotes</h2>
+					<h3>Primer Proceso mas corto (SJF)</h3>
+					<p>
+						Asigna a la CPU el siguiente proceso con menor tiempo trabajo, en caso de existir
+						varios procesos con el mismo valor aplica FCFS.
+						Sin embargo, es costoso realizar el calculo del tiempo restante para cada proceso 
+						y a veces es d&iacute;ficil de predecir/conocer el valor real.
+					</p>
+					<p>Solo funciona si TODOS los procesos llegan <strong>al mismo tiempo</strong></p>
+				</section>
+				<section id="algoritmo-planificacion-menor-tiempo">
+					<h2>Procesamiento por lotes</h2>
+					<h3>Menor tiempo restante (SPN)</h3>
+					<p>
+						Es una versión apropiativa de SJF. Selecciona el trabajo con el menor tiempo de
+						procesamiento restante. Es necesario conocer el tiempo de ejecución.
+					</p>
+				</section>
+				<section id="algoritmo-planificacion-tiempo-corto-ejemplo">
+					<h3>SJF/SPN</h3>
+					<div class="half left">
+						<table class="procesos center ">
+							<tr>
+								<th>Procesos</th><th>Llegada</th><th>Tiempo CPU (ms)</th>
+							</tr>
+							<tr>
+								<td class="p1">P1</td><td>0</td><td>7</td>
+							</tr>
+							<tr>
+								<td class="p2">P2</td><td>2</td><td>4</td>
+							</tr>
+							<tr>
+								<td class="p3">P3</td><td>4</td><td>1</td>
+							</tr>
+							<tr>
+								<td class="p4">P4</td><td>5</td><td>4</td>
+							</tr>
+						</table>
+					</div>
+					<div class="half right fragment">
+						<table class="procesos center ">
+							<tr>
+								<th>Proceso</th><th>Operación</th><th>Total</th>
+							</tr>
+							<tr>
+								<td>P1</td><td>7 - 7 - 0</td><td>0</td>
+							</tr>
+							<tr>
+								<td>P2</td><td>12 - 4 - 2</td><td>6</td>
+							</tr>
+							<tr>
+								<td>P3</td><td>8 - 4 - 1</td><td>3</td>
+							</tr>
+							<tr>
+								<td >P4</td><td>16 - 4 - 5</td><td>7</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									Tiempo de espera promedio: <strong>4</strong>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clear"><br /></div>
+					<div>
+						<table class="timeline procesos">
+							<tr>
+								<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td>
+								<td class="p1">3</td><td class="p1">4</td><td class="p1">5</td>
+								<td class="p1">6</td><td class="p3">7</td>
+							</tr>
+							<tr>
+								<td class="p2">8</td>
+								<td class="p2">9</td><td class="p2">10</td><td class="p2">11</td>
+								<td class="p4">12</td><td class="p4">13</td><td class="p4">14</td>
+								<td class="p4">15</td>
+							</tr>
+						</table>
+					</div>
+				</section>
+				<section id="algoritmo-planificacion-roundrobin">
+					<h2>Sistemas interactivos</h2>
+					<h3>Round Robin (Algoritmo por turnos)</h3>
+					<p>
+						Asigna un espacio de tiempo a cada proceso (<strong>cuanto o quantum</strong>)
+						para ejecutarse, si el proceso: termina, acaba el cuanto, se bloquea por acceso
+						a E/S. El S.O. hace un cambio de contexto y lo coloca (si aún debe seguir 
+						ejecútandose) al final de la cola.
+					</p>
+					<ul >
+						<li>El cuanto o quantum suele estar entre los 10ms y 100ms.</li>
+						<li>
+							Como el <strong>cambio de contexto</strong> es costosa, se debe evitar:
+							<ul>
+								<li>Cuanto muy bajo: sobrecarga del sistema.</li>
+								<li>Cuanto muy alto: se comporta como un FCFS/FIFO</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</section>
+				<section>
+					<h3>Round Robin (Algoritmo por turnos)</h3>
+					<p>Con un <strong>quantum</strong> de 3: </p>
+					<div class="half left">
+						<table class="procesos">
+							<tr>
+								<th>Procesos</th><th>Llegada</th><th>Tiempo CPU (ms)</th>
+							</tr>
+							<tr>
+								<td class="p1">P1</td><td>0</td><td>7</td>
+							</tr>
+							<tr>
+								<td class="p2">P2</td><td>2</td><td>4</td>
+							</tr>
+							<tr>
+								<td class="p3">P3</td><td>4</td><td>1</td>
+							</tr>
+							<tr>
+								<td class="p4">P4</td><td>5</td><td>4</td>
+							</tr>
+						</table>
+					</div>
+					<div class="half right fragment">
+						<table class="procesos">
+							<tr>
+								<th>Proceso</th><th>Operación</th><th>Total</th>
+							</tr>
+							<tr>
+								<td>P1</td><td>15 - 7 - 0</td><td>8</td>
+							</tr>
+							<tr>
+								<td>P2</td><td>14 - 4 - 2</td><td>8</td>
+							</tr>
+							<tr>
+								<td>P3</td><td>10 - 4 - 1</td><td>5</td>
+							</tr>
+							<tr>
+								<td >P4</td><td>16 - 4 - 5</td><td>7</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									Tiempo de espera promedio: <strong>7</strong>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clear"><br /></div>
+					<div>
+						<table class="timeline procesos">
+							<tr>
+								<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td>
+								<td class="p2">3</td><td class="p2">4</td><td class="p2">5</td>
+								<td class="p1">6</td><td class="p1">7</td>
+							</tr>
+							<tr>
+								<td class="p1">8</td>
+								<td class="p3">9</td><td class="p4">10</td><td class="p4">11</td>
+								<td class="p4">12</td><td class="p2">13</td><td class="p1">14</td>
+								<td class="p4">15</td>
+							</tr>
+						</table>
+					</div>
+				</section>
+				<section>
+					<h3>Round Robin (Algoritmo por turnos)</h3>
+					<img src="img/class4/roundRobin.jpg" alt="Algoritmo de Round Robin">
+				</section>
+				<section id="algoritmo-planificacion-prioridades">
+					<h2>Sistemas interactivos</h2>
+					<h3>Por prioridades</h3>
+					<p>
+						Cada proceso tiene asociado una prioridad, entonces al momento de quedar la CPU
+						libre, se le asigna el proceso con la prioridad mas alta. Sin embargo, hay que
+						tener cuidado, pues los procesos con baja prioridad pueden no ser ejecutados debido
+						a la llegada de procesos con prioridad superior, esto se resuelve aplicando
+						la técnica de <strong>envejecimiento.</strong>
+					</p>
+					<p>
+						Generalmente los números de menor valor son los de mayor prioridad, pero no existe
+						un estándar para declarar esto como una afirmación para todos los S.O.
+					</p>
+				</section>
+				<section>
+					<h3>Por prioridades</h3>
+					<div class="half left">
+						<table class="procesos">
+							<tr>
+								<th>Pro.</th><th>Lleg.</th><th>Tiempo CPU (ms)</th><th>Prioridad</th>
+							</tr>
+							<tr>
+								<td class="p1">P1</td><td>0</td><td>7</td><td>3</td>
+							</tr>
+							<tr>
+								<td class="p2">P2</td><td>2</td><td>4</td><td>1</td>
+							</tr>
+							<tr>
+								<td class="p3">P3</td><td>4</td><td>1</td><td>3</td>
+							</tr>
+							<tr>
+								<td class="p4">P4</td><td>5</td><td>4</td><td>2</td>
+							</tr>
+						</table>
+					</div>
+					<div class="half right fragment">
+						<table class="procesos">
+							<tr>
+								<th>Pro.</th><th>Operación</th><th>Total</th>
+							</tr>
+							<tr>
+								<td>P1</td><td>15 - 7 - 0</td><td>8</td>
+							</tr>
+							<tr>
+								<td>P2</td><td>6 - 4 - 2</td><td>0</td>
+							</tr>
+							<tr>
+								<td>P3</td><td>16 - 4 - 1</td><td>11</td>
+							</tr>
+							<tr>
+								<td >P4</td><td>10 - 4 - 5</td><td>1</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									Tiempo de espera promedio: <strong>5</strong>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clear"><br /></div>
+					<div>
+						<table class="timeline procesos">
+							<tr>
+								<td class="p1">0</td><td class="p1">1</td><td class="p2">2</td>
+								<td class="p2">3</td><td class="p2">4</td><td class="p2">5</td>
+								<td class="p4">6</td><td class="p4">7</td>
+							</tr>
+							<tr>
+								<td class="p4">8</td>
+								<td class="p4">9</td><td class="p1">10</td><td class="p1">11</td>
+								<td class="p1">12</td><td class="p1">13</td><td class="p1">14</td>
+								<td class="p3">15</td>
+							</tr>
+						</table>
+					</div>
+				</section>
+
+
+				<section id="algoritmo-planificacion-multinivel">
+					<h2>Sistemas interactivos</h2>
+					<h3>Colas multinivel</h3>
+					<div>
+						<ul>
+							<li>
+								Cada proceso es clasificado en grupos, por ejemplo: de primer o segundo 
+								plano,de usuario o del sistema, de usuarios locales o remotos,
+								tama&ntilde;o de memoria, prioridad, entre otros.
+							</li>
+							<li>
+								La cola de procesos preparados se divide en varias colas distintas, 
+								una para agrupación realizada. 
+							</li>
+							<li>
+								Cada una de las cola posee su propio algoritmo de planificación 
+								para cada proceso dentro de ella.
+							</li>
+							<li>
+								A nivel de colas, se planifican de acuerdo a una prioridad 
+								(pero puede existir inanición)
+								o se asigna cierta porción de tiempo a cada uno.
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<div class="center">
+						<h3>Ejemplo de cola multinivel</h3>
+						<div class="cola-multi center">
+							<div class="third left">
+								<img src="img/class4/flecha.png" alt="-->" />
+							</div>
+							<div class="third left p5">
+								Sistema
+							</div>
+							<div class="third left">
+								<img src="img/class4/flecha.png" alt="-->" />
+							</div>
+						</div>
+						<div class="cola-multi">
+							<div class="third left">
+								<img src="img/class4/flecha.png" alt="-->" />
+							</div>
+							<div class="third left p4">
+								Interactivos
+							</div>
+							<div class="third left">
+								<img src="img/class4/flecha.png" alt="-->" />
+							</div>
+						</div>
+						<div class="cola-multi">
+							<div class="third left">
+								<img src="img/class4/flecha.png" alt="-->" />
+							</div>
+							<div class="third left p2">
+								Por lotes
+							</div>
+							<div class="third left">
+								<img src="img/class4/flecha.png" alt="-->" />
+							</div>
+						</div>
+						<div class="cola-multi">
+							<div class="third left">
+								<img src="img/class4/flecha.png" alt="-->" />
+							</div>
+							<div class="third left p3">
+								Usuario
+							</div>
+							<div class="third left">
+								<img src="img/class4/flecha.png" alt="-->" />
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section id="algoritmo-planificacion-multinivel-retroalimentacion">
+					<h2>Colas multinivel con retroalimentación</h2>
+					<div>
+						<ul>
+							<li>
+								En este algoritmo un proceso <strong>puede moverse</strong> de una cola a otra.
+							</li>
+							<li>
+								Este algortimo está definido por los siguientes parámetros:
+								<ul>
+									<li>Número de colas.</li>
+									<li>Algoritmos de planificación para cada cola.</li>
+									<li>
+										Método para determinar cuando mover un 
+										proceso a una cola de mayor prioridad.
+									</li>
+									<li>
+										Método usado para ver cuando mover un proceso 
+										a una cola de menor prioridad.
+									</li>
+									<li>
+										Método usado para determinar en qué cola 
+										ingresará un proceso cuando necesite servicio.
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<h3>Ejemplo de cola multinivel con retroalimentación</h3>
+					<div class="cola-multi">
+						<div class="third left">
+							<img src="img/class4/flecha.png" alt="-->" />
+						</div>
+						<div class="third left p5">
+							quantum = 8
+						</div>
+						<div class="third left">
+							<img src="img/class4/flecha_abajo.png" alt="-->" />
+						</div>
+					</div>
+					<div class="cola-multi">
+						<div class="third left">
+							<img src="img/class4/flecha_abajo.png" alt="-->" />
+						</div>
+						<div class="third left p4">
+							quatum = 16
+						</div>
+						<div class="third left">
+							<img src="img/class4/flecha_izq.png" alt="-->" />
+						</div>
+					</div>
+					<div class="cola-multi">
+						<div class="third left">
+							<img src="img/class4/flecha.png" alt="-->" />
+						</div>
+						<div class="third left p2">
+							FCFS
+						</div>
+					</div>
+				</section>
+
+				<section id="planificacion-garantizada">
+					<h2>Sistemas interactivos</h2>
+					<h3>Planificación garantizada</h3>
+					<ul>
+						<li>Garantiza una porción igual de CPU a los usuarios del sistema.</li>
+						<li>
+							Si hay <strong>n</strong> usuarios, le corresponderá porción de 
+							<strong>1/n</strong> de CPU a cada uno de ellos.
+						</li>
+						<li>
+							Otra forma es agrupar los usuarios y asignarles a
+							cada uno de esos grupos una porción de CPU en
+							función de cierta prioridad. 
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Sistemas interactivos</h2>
+					<h3>Planificación garantizada</h3>
+					<ul>
+						<li>
+							<strong>Ventajas:</strong> equitativa para
+							cada usuario pero penaliza los usuarios que ejecutan
+							muchos procesos. El tiempo compartido del CPU
+							es asignado por el administrador.
+						</li>
+						<li>
+							<strong>Desventajas:</strong> Es equitativo para el 
+							usuario pero no para el CPU o los procesos. Un usuario puede
+							tener mucho CPU asignado y no lo usará nunca.
+							Un usuario puede necesitar mas CPU del asignado
+							y tampoco lo podrá conseguir. 
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Sistemas interactivos</h2>
+					<h3>Tiempo real</h3>
+					<ul>
+						<li>Son sistemas que deben reaccionar en instantes de tiempo muy corto.</li>
+						<li>
+							Se dividen en:
+							<ul>
+								<li>
+									<strong>Tiempo real duro:</strong> la respuesta debe ser en un
+									 tiempo estricto que se debe cumplir.
+								 </li>
+								<li>
+									<strong>Tiempo real suave:</strong> se tolera un poco de retraso
+									 en el tiempo de respuesta.
+								 </li>
+							</ul>
+						</li>
+						<li>Se dividen los programas en varios procesos con comportamiento predecible.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Sistemas interactivos</h2>
+					<h3>Tiempo real</h3>
+					<ul>
+						<li>
+							Se dice que un sistema de tiempo real es planificable si hay <em>m</em>
+							eventos periódicos y el evento <em>i</em> ocurre con el periodo <em>Pi</em>
+ 							y requiere <em>Ci</em> segundos de tiempo de la CPU para manejar
+							cada evento , tal que: 
+						</li>
+					</ul>
+					<img src="img/class4/formula.jpg" alt="Formula de tiempo real" class="third center">
+				</section>
+				<section id="planificador-multiprocesador">
+					<h2>Planificación en sistemas multiprocesador</h2>
+					<ul>
+						<li>
+							La idea es compartir la carga de todos los procesadores, para
+							que todos trabajen a un ritmo similar.
+						</li>
+						<li>
+							<strong>Multiprocesamiento asimetrico:</strong> un núcleo se suele 
+							encargar de realizar la planificación, procesamiento
+							de las E/S y actividades del sistema operativo.
+						</li>
+						<li>
+							<strong>Multiprocesamiento simetrico (SMP):</strong> cada procesador 
+							se autoplanifica: existe una cola de procesos preparados en común
+							o cada uno tiene su propia cola, existe seguridad para no tomar 
+							el mismo proceso al mismo tiempo.
+						</li>
+					</ul>
+				</section>
+				<section id="planificacion-multiprocesador">
+					<h2>Planificación en sistemas multiprocesador</h2>
+					<div class="half left">
+						<ul>
+							<li>
+								Existe un proceso que se encarga de chequear cada cierto tiempo
+								la carga de cada procesador y balancea la carga del mismo.
+							</li>
+							<li>
+								Hoy en d&iacute;a la mayor&iacute;a de los dispositivos son multiprocesador,
+								por ello vienen con sistemas operativos con 
+								este tipo de planificación.
+							</li>
+						</ul>
+					</div>
+					<div class="half left">
+						<div class="center">
+							<p>
+								<img src="img/class4/multicore.jpg" alt="procesador" />
+							</p>
+							<p>Ejemplo de procesador Quad Core</p>
+						</div>
+					</div>
+				</section>
+
+				<section id="preguntas">
+					<h1>¿Preguntas?</h1>
+				</section>
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				center: true,
+
+				theme: 'mozilla',
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+	</body>
+</html>

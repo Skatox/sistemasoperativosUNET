@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sistemas Operativos | UNET</title>
+
+		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
+		<meta name="author" content="Miguel Angel Useche Castro">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/unet.css">
+		<link rel="stylesheet" href="css/lightbox.css">
+
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div class="unet">
+						<div class="logo-wrapper left">
+							<img  src="img/intro/UNET.png" alt="UNET Logo">
+						</div>
+						<p id="definition-header" class="left">
+							Universidad Nacional Experimental Del Táchira<br />
+							Decanato De Docencia<br />
+							Dpto. Ingeniería Informática
+						</p>
+					</div>
+
+					<h1 class="clear">
+						Sistemas Operativos
+					</h1>
+					<h2 id="subject-code">
+						Código 0435607T
+					</h2>
+					<div class="professor-info">
+						<p>
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
+							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+						</p>
+					</div>
+				</section>
+				<section id="agenda">
+					<h2>Contenido</h2>
+					<ul>
+						<li>Introducción</li>
+						<li>Conceptos fundamentales</li>
+						<li>Condiciones de competencia</li>
+						<li>
+							Exclusión mutua:
+							<ul>
+								<li>Con Espera ocupada.</li>
+								<li>Sin Espera ocupada.</li>
+							</ul>
+						</li>
+						<li>Problemas de clásicos de sincronización</li>
+					</ul>
+				</section>
+				<section id="introduccion">
+					<h2>Introducción</h2>
+					<ul>
+						<li>
+							Los procesos en muchas ocasiones requieren
+							comunicación con otros procesos.
+						</li>	
+						<li>
+							Los procesos pueden compartir directamente un espacio 
+							de direcciones lógico o pueden comunicarse a través de
+							archivos o mensajes mensajes. Procesos cooperativos.
+						</li>	
+						<li>
+							El acceso concurrente y desordenado a los
+							datos compartidos puede dar lugar a incoherencia de los datos.
+						</li>
+					</ul>
+				</section>
+				<section id="introduccion-2">
+					<h2>Introducción</h2>
+					<p class="text-left">Surgen entonces tres preguntas:</p>
+					<ul>
+						<li>¿Cómo un proceso puede comunicarse con otro?</li>
+						<li>
+							¿Cómo hacer que dos o mas procesos no
+							interfieran entre si?
+						</li>
+						<li>
+							¿Cómo se puede obtener la secuencia de ejecución
+							apropiada cuando hay dependencias?	
+						</li>
+					</ul>
+				</section>
+		        <section id="condiciones-competencia">
+		            <h2>Condiciones de competencia</h2>
+		            <p>
+		                Es el fenómeno producido cuando varios procesos
+		                <strong> compiten por el acceso a uno o varios recursos </strong>
+		                produciendo el bloqueo en la ejecución de esos procesos, ocasionando
+		                el cuelge del sistema operativo. Para evitarlo se debe garantizar el acceso
+		                seguro a recursos compartidos,<strong>coordinando y sincronizando los
+		                procesos.</strong>
+		            </p>
+		            <div class="center">
+		                <img src="img/class5/competicion_recursos.png" alt="cond. de competencia"/>
+		            </div>
+		        </section>
+		        <section id="seccion-critica">
+		            <h2>Sección Crítica</h2>
+		            <p>
+		                Es el segmento del código del programa donde se accede a un recurso
+		                compartido (como una estructura en memoria o un dispositivo de E/S) que
+		                no debe ser accedido por otro hilo de ejecución para evitar conflictos
+		                o alteración del resultado esperado.
+		            </p>
+		            <p class="center">
+		                <img src="img/class5/seccion_critica.png" alt="Seccion critica" />
+		            </p>
+		        </section>
+		        <section id="condiciones-evitar-competencia">
+		            <h2>Condiciones para evitar la competencia</h2>
+		            <ul>
+		                <li class="fragment">
+		                    Dos o más procesos <strong> no pueden estar dentro de sus 
+		                    secciones críticas</strong> al mismo tiempo.
+		                </li>
+		                <li class="fragment">
+		                    <strong>Nunca se debe suponerse sobre la velocidad</strong>
+		                    u orden de ejecución de los procesos.
+		                </li>
+		                <li class="fragment">
+		                    <strong>Ningún proceso</strong> ejecutandose
+		                    fuera de su sección crítica <strong>puede bloquear otro procesos</strong>.
+		                </li>
+		                <li class="fragment">
+		                    <strong>Ningún proceso deberá tener que esperar 
+		                    indefinidamente</strong> para entrar a su región crítica.
+		                </li>
+		            </ul>
+	            </section>
+	            <section id="exclusion-mutua">
+	                <h2>Exclusión Mutua</h2>
+	                <p>
+	                    Es el método mas común para evitar el uso simultáneo
+	                    de los recursos del sistema como variables globales y dispositivos de E/S, por
+	                    dos (2) o mas procesos del sistema.
+	                </p>
+		        </section>
+		        <section id="exclusion-mutua-2">
+		            <h2>Exclusión Mutua</h2>
+		            <div class="half left">
+		                <h3>Con espera ocupada</h3>
+		                <ol>
+		                    <li>Desactivación de interrupciones (hardware).</li>
+		                    <li>Variables de Cerradura</li>
+		                    <li>Alternancia estricta</li>
+		                    <li>Solución de Peterson</li>
+		                    <li>La instrucción TSL</li>
+		                </ol>
+		            </div>
+		            <div class="slide half right">
+		                <h3>Sin espera ocupada (bloqueo)</h3>
+		                <ol>
+		                    <li>Dormir y despertar</li>
+		                    <li>Semáforos</li>
+		                    <li>Contadores de Eventos</li>
+		                    <li>Monitores</li>
+		                    <li>Transferencia de mensajes</li>
+		                </ol>
+		            </div>
+		        </section>
+		        <section id="exclusion-mutua-desactivacion-interrupciones">
+		            <h2>Exclusión Mutua <br> con espera ocupada</h2>
+		            <h3>Desactivación de Interrupciones (hardware)</h3>
+		            <p>
+		                Es el método mas simple, consiste en desactivar todas las interrupciones
+		                de hardware antes de entrar a la sección crítica. Sin embargo,
+		                en la práctica no es recomendable porque si el proceso falla en
+		                su sector crítico, el sistema operativo no puede recuperarse y se
+		                cuelga el sistema.
+		            </p>
+		            <div class="center">
+			            <div class="p1 center middle half">
+			                desactivar_interrupciones()
+			            </div>
+			            <div class="p2 center middle half">
+			                SECCIÓN CRITICA
+			            </div>
+			            <div class="p1 center middle half">
+			                activar_interrupciones()
+			            </div>
+		            </div>
+		        </section>
+		        <section id="exclusion-mutua-desactivacion-interrupciones-2">
+		            <h2>Exclusión Mutua <br> con espera ocupada</h2>
+		            <h3>Desactivación de Interrupciones (hardware)</h3>
+		            <ul>
+		                <li>No es correcto que procesos del usuario desactiven interrupciones.</li>
+		                <li>No funciona en sistemas de multiprocesamiento, ni distribuidos.</li>
+		                <li>Pueden ocurrir errores catastróficos.</li>
+		            </ul>
+		        </section>
+		        <section id="exclusion-mutua-cerrojo">
+		            <h2>Exclusión Mutua con Espera ocupada</h2>
+		            <h3>Variables de Cerradura</h3>
+		            <p>
+		                En éste caso se utiliza una variable binaria, donde 0 representa
+		                cuando no hay ningún proceso en su sección crítica
+		                y 1 cuando está ocupada. Entonces cada proceso antes de ingresar
+		                a la sección crítica verifica el estado de la <strong>variable de 
+		                cerradura</strong> y en caso de tener 0 como valor, cambia el 
+		                valor a 1 e ingresa a la misma, en caso de que la misma sea 1
+		                el proceso se queda en espera verificando hasta que el estado 
+		                cambie a 1.
+		            </p>
+	            </section>
+	            <section id="exclusion-mutua-cerrojo-2">
+		            <h2>Exclusión Mutua con Espera ocupada</h2>
+		            <h3>Variables de Cerradura</h3>
+		            <p>
+		                En sistemas con múltiples procesadores o distribuidos, se presente
+		                un problema: <strong> si dos procesos verifican al mismo tiempo </strong>
+		                el valor de la cerradura y está en 0, ambos ingresan a la región
+		                crítica.
+		            </p>
+	            </section>
+				<section id="exclusion-mutua-cerrojo-3">
+		            <h2>Exclusión Mutua con Espera ocupada</h2>
+		            <h3>Variables de Cerradura</h3>
+		            <h4>Ejemplo</h4>
+		            <pre>
+			            <code class="cpp">do {
+        if(!cerrojo) {
+            cerrojo = 1;
+            ejecutar_seccion_critica();
+            cerrojo = 0;
+        }
+        //Sigue con el resto del codigo
+} while (TRUE);
+		                </code>
+		            </pre>
+		        </section>
+		        <section id="exclusion-mutua-alternancia">
+		            <h2>Exclusión Mutua con Espera ocupada</h2>
+		            <h3>Alternancia estricta</h3>
+		            <p>
+		                 Conocido también como la primera versión del 
+		                 algoritmo de Dekker, obliga a cada proceso tener un turno
+		                 y <strong>existe un cambio de turno cada vez que un proceso
+		                 sale de la sección critica.</strong>
+		             </p>           
+		             <ul>
+		                <li class="fragment">
+		                    Bloquea el acceso al otro proceso cuando se está 
+		                    en una sección crítica.
+		                </li>
+		                <li class="fragment">
+		                    Si un proceso es mas lento que el otro, bloquea al otro 
+		                    por mucho tiempo. <strong>Viola la regla 3:</strong> 
+		                    ningún proceso debe bloquear a otro fuera de su sección crítica.
+		                </li>
+		                <li class="fragment">
+		                    Si uno de ellos se bloquea dentro o fuera de la 
+		                    sección crítica, puede bloquear al resto.
+		                </li>
+		            </ul>  
+	            </section>
+	            <section id="exclusion-mutua-alternancia-2">
+		            <h2>Exclusión Mutua con Espera ocupada</h2>
+		            <h3>Alternancia estricta</h3>
+		            <div class="center">
+		                <h4>Proceso A</h4>
+		                <pre>
+		                	<code class="cpp"> while (1) {
+    while (turno != 0); //espera
+    ejecutar_seccion_critica();
+    turno = 1;
+    seccion_no_critica();
+}</code>
+		                </pre>
+		            </div>
+		            <div class="center">
+		                <h4>Proceso B</h4>
+		                <pre>
+		                	<code class="cpp">while (1) {
+    while (turno != 1); //espera
+    ejecutar_seccion_critica();
+    turno = 0;
+    seccion_no_critica();
+}</code>
+		                </pre>
+		            </div>
+		        </section>
+		        <section id="exclusion-mutua-peterson">
+		            <h2>Exclusión Mutua con Espera ocupada</h2>
+		            <h3>Solución de Peterson</h3>
+		            <ul>
+			            <li>
+			                Es un algoritmo realizado por Peterson en 1981, para compartir recursos
+			                sin complicaciones a través del uso de memoria compartida para la
+			                sincronización.
+			            </li>
+			            <li>
+			                Antes de leer la variable compartida, cada proceso 
+			                <strong>llama a una función para entrar a su sección
+			                crítica</strong> pasando su respectivo número 
+			                como parámetro.
+			            </li>
+			            <li>
+			                Luego se provoca una espera (en caso necesario) hasta que 
+			                el proceso pueda entrar. Al finalizar, se <strong>llama a otra función
+			                para liberar su sección crítica</strong> e indicar que ha finalizado
+			                para permitir la entrada a otros procesos.
+			            </li>
+		            </ul>
+				</section>
+				<section id="exclusion-mutua-peterson-2">
+					<h2>Exclusión Mutua con Espera ocupada</h2>
+		            <h3>Solución de Peterson <br> (para 2 procesos)</h3>
+					<pre>
+						<code class="cpp">#define N 2
+int turno, interesado[N];
+
+void entrarSC(int proceso) {
+    int otro = 1 - proceso;
+    interesado[proceso] = 1; //El proceso actual esta interesado
+    turno = proceso;
+    while (turno == proceso && interesado[otro] == 1);
+}
+
+void salirSC(int proceso) {
+    interesado[proceso] = 0; //Ya no esta interesado
+}</code>
+					</pre>
+		        </section>
+		        <section id="exclusion-mutua-tsl">
+		            <h2>Exclusión Mutua con Espera ocupada</h2>
+	                <h3>Instrucción TSL (Test-and-set lock)</h3>
+		            <div class="twothird left">
+		            	<ul>
+			                <li>
+			                    Depende del hardware para utilizarse, las computadoras con más
+			                    de un procesador suelen tener una instrucción llamada
+			                    <strong>TSL</strong>.
+			                </li>
+			                <li>
+			                    Esta instrucción <strong>lee el valor de un registro en memoria
+			                    y guarda un valor (distinto a 0)</strong>. Al ser una instrucción
+			                    por hardware, el procesador garantiza que la instrucción TSL 
+			                    se realiza sin interrupciones de otros proceso.
+			                </li>
+		            	</ul>
+		            </div>
+		            <div class="third left">
+		            	<a href="img/class5/tsl.png" data-lightbox="TSL">
+		                	<img src="img/class5/tsl.png" alt="TSL" />
+		            	</a>
+		            </div>
+	            </section>
+                <section id="exclusion-mutua-tsl-2">
+                   <h2>Exclusión Mutua con Espera ocupada</h2>
+	                <h3>Instrucción TSL (Test-and-set lock)</h3>
+	                <p>
+	                    Además, en un sistema multiprocesador, ninguno de los otros procesadores
+	                    puede acceder a la variable antes de terminar de ejecutarse la instrucción.
+	                    <em>(al ejecutarse se cierra el bus de la memoria)</em>
+	                </p>
+		        </section>
+		        <section id="dormir-esperar">
+		            <h2>Exclusión Mutua <br>sin Espera ocupada</h2>
+		            <h3>Dormir y despertar</h3>
+		            <ul>
+		                <li>
+		                    Ahora se presentan soluciones donde no se desperdicia el tiempo del CPU.
+		                </li>
+		                <li class="fragment">
+		                    <strong>sleep: </strong> es una llamada al sistema que provoca 
+		                    a quien lo llamó se bloquee hasta que otro proceso lo despierte.
+		                </li>
+		                <li class="fragment">
+		                	<strong>wakeup:</strong> es una llamada al sistema para 
+		                	despertar un proceso bloqueado.
+		                </li>
+		            </ul>
+	            </section>
+	            <section id="productor-consumidor">
+	                <h3>Problema del Productor - Consumidor</h3>
+	                <ul>
+	                    <li>Es un problema donde se puede aplicar este algoritmo.</li>
+	                    <li>Dos procesos comparter un buffer de tama&ntilde;o fijo.</li>
+	                    <li>Un proceso es el productor y a&ntilde;ade información al buffer.</li>
+	                    <li>Otro es el consumidor y lee (o modifica) la información del buffer.</li>
+	                </ul>
+		        </section>
+		        <section id="productor-consumidor-2">
+		            <h2>El problema del <br>Productor - Consumidor</h2>
+		            <ul>
+		                <li>
+		                    El problema del productor es cuando vaya a poner un elemento en el buffer
+		                    y este esté lleno. (Se va a dormir y se despierta cuando se consuma
+		                    algún elemento)
+		                </li>
+		                <li>
+		                    El problema del consumidor es cuando va consumir un elemento del buffer
+		                    pero está vacío. (Se va a dormir y despierta cuando exista
+		                    un elemento)
+		                </li>
+		                <li>
+		                    Cada proceso debe <strong>chequear al otro para despertarlo 
+		                    antes de irse a dormir</strong>.
+		                </li>
+		            </ul>
+		        </section>
+		        <section id="productor-consumidor-3">
+		        	<h2>El problema del <br>Productor - Consumidor</h2>
+	                <img src="img/class5/producto-consumidor.png" alt="pc" />
+		        </section>
+		        <section id="productor-consumidor-4">
+		            <h2>El problema del Productor - Consumidor</h2>
+		            <div class="half center left">
+		                <h4>Productor</h4>
+		                <pre>
+		                	<code class="cpp">void productor() {
+ int item;
+ while (1) {
+  producir_item( &amp;item);
+   
+   if (contador == N) sleep();
+ 
+   insertar(item);
+   contador++;
+
+   if (contador == 1)
+    wakeup(consumidor);
+ }
+}</code>
+		                </pre>
+		            </div>
+		            <div class="half center left">
+		                <h4>Proceso B</h4>
+		                <pre>
+		                	<code class="cpp">void consumidor() {
+ int item;
+ while (1) {
+  if (contador == 0)
+    sleep();
+
+  contador--
+
+  if (contador == N-1) 
+    wakeup(productor);
+  
+  consumir_item(item);
+ }
+}</code>
+		                </pre>
+		            </div>
+		        </section>
+		        <section id="semaforos">
+		            <h2>Exclusión Mutua sin Espera ocupada</h2>
+		            <h3>Semáforos</h3>
+		            <ul>
+		                <li>Propuesto por Dijkstra en 1965.</li>
+		                <li>
+		                    Es una varible entera denominada
+		                    <em>S</em> donde (exceptuando su inicialización) 
+		                    se acceden mediante llamadas <strong>wait()</strong>
+		                    y <strong>signal()</strong>.
+		                </li>
+		                <li class="fragment">
+		                    Simboliza el numero de <em>wakeups</em>
+		                    pendientes, 0 indica que no hay alguno por despertar.
+		                </li>
+		                <li class="fragment">
+		                    <strong>wait() - DOWN</strong>
+		                    verifica si el valor del semaforo es mayor a cero. 
+		                    Si es así, lo decrementa y continúa sus 
+		                    operaciones; en caso contrario se va a dormir y espera
+		                    para continuar.
+		                </li>
+	                </ul>
+		        </section>
+		        <section id="semaforos-2">
+		            <h2>Exclusión Mutua sin Espera ocupada</h2>
+		            <h3>Semáforos</h3>
+		            <ul>
+		                <li>
+		                    <strong>signal() - UP</strong>
+		                    incrementa el valor del semáforo. Si existe uno o 
+		                    mas procesos dormidos y no pueden completar una operación
+		                    <em>wait()</em>, el semáforo elige uno al azar 
+		                    y le permite completar <em>wait()</em>.
+		                </li>
+		                <li>
+		                    Se debe garantizar que dos procesos no ejecuten
+		                    <em>wait()</em> y <em>signal()</em>
+		                    sobre el mismo semáforo al mismo tiempo.
+		                </li>
+		                <li>
+		                    Las aplicaciones pueden pasar mucho tiempo en secciones críticas
+		                    y por tanto, no es una buena solución (Se desaprovecha la CPU)
+		                </li>
+		            </ul>
+	            </section>
+				<section id="productor-consumidor-semaforos">
+		            <h3>Productor - Consumidor <br> con Semaforos</h3>
+		            <ol>
+		                <li><strong>FULL (LLeno):</strong>cuenta las ranuras ocupadas.</li>
+		                <li><strong>EMPTY (Vacío):</strong>cuenta las ranuras libres.</li>
+		                <li>
+		                    <strong>MUTEX:</strong>Controla que tanto el consumidor, 
+		                    como productor entre al mismo tiempo al buffer.
+		                </li>
+		            </ol>
+		        </section>
+		        <section id="productor-consumidor-semaforos-2">
+		            <h2>Productor - Consumidor <br> con Semaforos</h2>
+		            <div class="center">
+		                <pre>
+		                	<code class="cpp">#define N 100
+typedef int semaforo;
+semaforo mutex = 1, empty = N, full = 0;
+		                	</code>
+		                </pre>
+		            </div>
+		            <div class="half left">
+		                <pre>
+		                	<code class="cpp">void productor() {
+    int item;
+    while (1) {
+      prod_item( &amp;item);
+      down(empty);
+      down(mutex);
+      seccion_critica(item);
+      up(mutex);
+      up(full);
+    }
+}</code>
+		                </pre>
+		            </div>
+		            <div class="half left">
+		                <pre>
+		                	<code class="cpp">void consumidor() {
+    int item;
+    while (1) {
+      down(full);
+      down(mutex);
+      remover( &amp;item);
+      up(mutex);
+      up(empty);
+      consumer(item);
+    }
+}</code>
+		                </pre>
+		            </div>
+		        </section>
+		        <section id="monitores">
+		            <h2>Monitores</h2>
+		            <ul>
+			            <li>
+			                Es una herramienta básica (brindada por el compilador) utilizada
+			                para lograr la exclusión mutua: sólo un proceso puede estar
+			                activo en un monitor en un momento dado.
+			            </li>
+			            <li>
+			                Se encuentra en un nivel superior de los semáforos, ya que al usar
+			                estos últimos, si no estan programados correctamente pueden provocar
+			                <strong>bloqueos mutuos.</strong>
+			            </li>
+		            </ul>
+	           </section>
+	           <section id="bloqueos-mutuos">
+                    <h2>Bloqueos mutuos (deadlocks)</h2>
+	                <div class="third left">
+                        Ocurre cuando 2 o mas procesos esperan indefinidamente un evento que sólo
+                        puede ocurrir por uno de los otros procesos que estan esperando.
+	                </div>
+	                <div class="twothird left">
+	                    <a href="img/class5/deadlock.jpg" data-lightbox="deadlock">
+	                        <img src="img/class5/deadlock.jpg" alt="deadlock" />
+	                    </a>
+	                </div>
+		        </section>
+		        <section id="bloqueos-mutuos-2">
+		            <h2>Bloqueos mutuos (deadlocks)</h2>
+		            <p>
+		                Imaginemos 2 semáforos con un valor inicial de 1:
+		                <strong>S</strong> y <strong>Q</strong>.
+		            </p>
+		            <div class="half left">
+		            	<pre>
+		            		<code class="cpp">wait(S);
+wait(Q);
+seccion_critica();
+signal(S);
+signal(Q);</code>
+		            	</pre>
+		            </div>
+		            <div class="half left">
+		                <pre>
+		                	<code class="cpp">wait(Q);
+wait(S);
+seccion_critica();
+signal(Q);
+signal(S);</code>
+		                </pre>
+		            </div>
+	            </section>
+	            <section id="bloqueos-mutuos-3">
+		            <h2>Bloqueos mutuos (deadlocks)</h2>
+		            <ul>
+		                <li class="fragment">
+		                    En el primer <strong>wait()</strong>
+		                    el valor de los semáforos disminuye a 0.
+		                </li>
+		                <li class="fragment">
+		                    Ambos procesos se quedan dormidos al mismo tiempo.
+		                </li>
+		                <li class="fragment">
+		                    Ambos quedan esperando a que el otro despierte, modifique el semáforo
+		                    para continuar.
+		                </li>
+		            </ul>
+		            <div class="fragment">
+		                <h3>Inanición (Bloqueo indefinido)</h3>
+		                <p>
+		                    Un proceso siempre queda en espera y ocurren eventos que le impiden salir
+		                    de la cola de espera de un semáforo.
+		                </p>
+		            </div>
+		        </section>
+		        <section id="contadores-eventos">
+		            <h2>Contadores de eventos</h2>
+		            <p>
+		                Simplemente es una variable entera que lleva el conteo de los eventos
+		                sucedidos, se utiliza para evitar la exclusión mutua.
+		            </p>
+		            <h3>Operaciones</h3>
+		            <ul>
+		                <li>Read(contador)</li>
+		                <li>Advance(contador)</li>
+		                <li>Wait(contador, valor) - Espera a que el contador llegue al valor deseado</li>
+		            </ul>
+		        </section>
+		        <section id="productor-consumidor-contadores">
+		            <h2>Productor - Consumidor con contadores</h2>
+		            <p>
+		                En este caso se utilizan 2 contadores:
+		                <strong>IN</strong> para los items producidos y <strong>OUT</strong>
+		                para los items consumidos.
+		            </p>
+		            <pre>
+		            	<code class="cpp">#define N 100
+int IN, OUT;</code>
+		            </pre>
+		            <div class="half left">
+		                <pre>
+		                	<code class="cpp">productor() {
+	int item, secuencia = 0;
+	while (1) {
+	  producir_item( &amp;item);
+	  secuencia++;
+	  await(OUT, secuencia-N);
+	  enter_item(item);
+	  advance(IN);
+	}
+}</code>
+		                </pre>
+		            </div>
+		            <div class="half left">
+		                <pre>
+		                	<code class="cpp">consumidor() {
+   int item, secuencia = 0;
+   while (1) {
+			secuencia++;
+			await(IN, secuencia);
+			remove_item( &amp;item);
+			advance(OUT);
+			consumir_item(item);
+   }
+}</code>
+		                </pre>
+		            </div>
+		        </section>
+		        <section id="transferencia-mensajes">
+		            <h2>Transferencia de mensajes</h2>
+		            <p>
+		                Utiliza las primitivas <strong>Send</strong> y <strong>Receive</strong>
+		                , las cuales son llamadas al sistema. La primera llamada envía
+		                un mensaje a un destino dado y la segunda recibe el mensaje del destino
+		                especificado.
+		            </p>
+		            <div class="fragment">
+		                <h3>Problemas</h3>
+		                <ul>
+		                    <li>Son mas complejos de implementar.</li>
+		                    <li>Todos los mensajes son del mismo tama&ntilde;o.</li>
+		                    <li>
+		                        Para evitar la pérdida de mensajes se deben implementar acuses
+		                        de recibos, pero incrementan la complejidad.
+		                    </li>
+		                    <li>
+		                        Se debe verificar la autenticidad del emisor, de lo contrario se crean
+		                        agujeros de seguridad.
+		                    </li>
+		                </ul>
+		            </div>
+		        </section>
+		        <section id="lector-escritor">
+		            <h2>Problemas de clásicos de sincronización</h2>
+		            <div class="half left">
+		                <ul>
+		                    <li>
+		                        Una base de datos compartida con una serie de procesos,
+		                        algunos desean leerla <strong>(lectores)</strong> y otros
+		                        tanto leer como escribir <strong>(escritores)</strong>.
+		                    </li>
+		                    <li>
+		                        Si 2 procesos desean leer al mismo tiempo no hay problema, pero,
+		                        si un escritor y otro proceso (lector o escritor) usa la
+		                        BD al mismo tiempo ocurrirá un caos.
+		                    </li>
+		                </ul>
+		            </div>
+		            <div class="half right">
+	                	<h3>Lectores - escritores</h3>
+		                <img src="img/class5/lector-escritores.png" alt="lectores y escritores" />
+		            </div>
+		        </section>
+		        <section id="lector-escritor-2">
+		            <h2>Problemas de clásicos de sincronización</h2>
+	                <h3>Lectores - escritores</h3>
+	                <p class="text-left">La solución al problema utiliza:</p>
+	                <ul>
+	                    <li>Semáforo <strong>mutex</strong> inicializado a 1.</li>
+	                    <li>Semáforo <strong>writer</strong> inicializado a 1.</li>
+	                    <li>Entero <strong>readcount</strong> inicializado a 0.</li>
+	                </ul>
+                </section>
+		       <section id="lector-escritor-3">
+		            <h2>Lectores - Escritores</h2>
+		            <div class="half left">
+		                <h3>Escritor</h3>
+		                <pre>
+		                	<code class="cpp">while (true) {
+    wait(writer);
+    realizar_escritura(data);
+    signal(writer);
+}</code>
+		                </pre>
+		            </div>
+		            <div class="half right">
+		            	<h3>Lector</h3>
+		            <pre>
+		            	<code class="cpp">while (true) {
+	wait(mutex);
+	readcount++;
+	if (readcount == 1) wait(writer);
+	signal(mutex);
+	realizar_lectura();
+	wait(mutex);
+	readcount--;
+
+	if (readcount == 0) signal(writer);
+	signal(mutex);
+} </code>
+		            </pre>
+		        </section>
+		        <section id="problemas-filosofos">
+		            <h2>Problemas de clásicos de <br>sincronización</h2>
+		            <h3>Problema de los Filósofos</h3>
+		            <div class="half right">
+		                <img src="img/class5/filosofos.png" alt="filosfos" />
+		            </div>
+		            <ul class="half nomargin left">
+						<li>
+							5 filósofos se sientan alrededor de una mesa
+							y pasan su vida cenando y pensando. Cada uno tiene un 
+							plato de fideos y un tenedor a la izquierda de su plato.
+						</li>
+						<li>
+							Para comer, necesita 2 tenedores y  
+							sólo puede tomar los de sus lados.
+						</li>
+					</ul>
+					<ul class="nomargin">
+						<li>
+							Si cualquier filósofo coge un tenedor y el otro está ocupado, 
+							espera con el tenedor en la mano, hasta agarrar el otro tenedor, 
+							para luego comer.
+						</li>
+	            	</ul>
+	            </section>
+	            <section id="problemas-filosofos-2">
+		            <h2>Problemas de clásicos de <br>sincronización</h2>
+		            <h3>Problema de los Filósofos</h3>
+		            <div>
+		                <p>
+		                    Permitir máximo 4 filosofos en la mesa.
+		                </p>
+		                <pre>
+		                	<code class="cpp">#define N 4
+while (true) {
+    wait(chopstick[i]);
+    wait(chopstick[(i + 1) % (N - 1))]);
+    comer();
+
+    signal(chopstick[i]);
+    signal(chopstick[(i + 1) % (N - 1)]);
+    pensar();
+}</code>
+		                </pre>
+		            </div>
+		        </section>
+
+				<section id="preguntas">
+					<h1>¿Preguntas?</h1>
+				</section>
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				center: true,
+
+				theme: 'mozilla',
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+	</body>
+</html>

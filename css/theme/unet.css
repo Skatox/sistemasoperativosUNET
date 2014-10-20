@@ -3,7 +3,7 @@
 *********************************/
 .slides .half {
   width: 50%; }
-.slides .twothird { width: 66%;}
+.slides .twothird { width: 64%;}
 .slides .third { width: 30%; }
 .left { float: left }
 .right {float: right }
@@ -13,6 +13,7 @@
 
 strong { color: #552222;}
 
+.reveal .center { margin: 0 auto}
 .reveal .nomargin {margin: 0;}
 .reveal .slides section .text-left { text-align: left }
 .reveal blockquote { background: #EEE; padding: 25px;}
@@ -46,14 +47,18 @@ table.memoria {
   font-size: 20px;
   margin: 0 auto;
   padding:5px;
+  border-spacing: 0;
 }
-  table.memoria td {
-    border: 4px solid green;
-    padding: 5px;
-    background: #aaddaa; }
-    table.memoria td.libre {
-      background: #51722a;
-      color: #fff; }
+table.memoria td {
+  border: 4px solid green;
+  padding: 5px 15px;
+  background: #aaddaa; 
+}
+
+table.memoria td.libre {
+    background: #51722a;
+    color: #fff; 
+}
 table.comparacion {
   padding: 0; }
 table th {
@@ -85,6 +90,7 @@ table th {
     padding: 10px 25px; }
 
 /* Procesos */
+table.procesos  { font-size: 0.8em }
 .p1 {
   background: #ff9000; }
 
@@ -114,12 +120,12 @@ table th {
   margin: 10px; }
 
 p.nota {
-  color: #fff;
+  color: #333;
   font-style: italic;
   font-size: 0.5em;
   padding: 20px;
   text-align: center;
-  text-shadow: 0 0 10px #000000;
+  text-shadow: 0 0 2px #555;
 }
 
 table.banquero th, table.banquero td {

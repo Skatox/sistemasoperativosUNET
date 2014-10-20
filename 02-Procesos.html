@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sistemas Operativos | UNET</title>
+
+		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
+		<meta name="author" content="Miguel Angel Useche Castro">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/unet.css">
+		<link rel="stylesheet" href="css/lightbox.css">
+
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div class="unet">
+						<div class="logo-wrapper left">
+							<img  src="img/intro/UNET.png" alt="UNET Logo">
+						</div>
+						<p id="definition-header" class="left">
+							Universidad Nacional Experimental Del Táchira<br />
+							Decanato De Docencia<br />
+							Dpto. Ingeniería Informática
+						</p>
+					</div>
+
+					<h1 class="clear">
+						Sistemas Operativos
+					</h1>
+					<h2 id="subject-code">
+						Código 0435607T
+					</h2>
+					<div class="professor-info">
+						<p>
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
+							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+						</p>
+					</div>
+				</section>
+				
+				<section id="contenido">
+					<h2>Contenido</h2>
+					<ul>
+						<li>Sistemas mono-tarea y multi-tarea.</li>
+						<li>
+							Procesos:
+							<ul>
+								<li>Definición.</li>
+								<li>Estados.</li>
+								<li>Bloque de proceso.</li>
+							</ul>
+						</li>
+						<li>
+							Planificación de procesos:
+							<ul>
+								<li>Colas</li>
+								<li>Cambio de contexto</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section id="monotarea">
+					<h2>Sistemas monotarea</h2>
+					<ul> 
+						<li>Al principio las computadoras solo podían ejecutar 1 programa al mismo tiempo.</li>
+						<li>Todos los recursos del sistema estaban disponibles sólo para ese proceso.</li>
+						<li>
+							Si fallaba o el programa estaba mal escrito se alteraba el 
+							funcionamiento de todo el sistema.
+						</li>
+					</ul>
+				</section>
+				<section id="multitarea">
+					<h2>Sistemas multitarea</h2>
+					<ul>
+						<li>
+							Permite la ejecución de varias tareas al mismo tiempo, 
+							<strong>multiplexando</strong> el CPU e incrementando la productividad.
+						</li>
+						<li>
+							En estos sistemas estan formados por un conjunto de procesos: 
+							<ul>
+								<li>Procesos del sistema.</li>
+								<li>Procesos de usuario.</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+						Los procesos del sistema operativo que ejecutan código del sistema 
+						(tareas no incluidas en el núcleo) y los de usuario ejecutan
+						código del usuario.
+					</aside>
+				</section>
+
+				<section id="proceso-iso">
+					<h2>Proceso</h2>
+					<p>Según la norma internacional ISO-9001 un proceso es:</p>
+					<blockquote>
+						"Una actividad que utiliza recursos, y se gestiona con el fin 
+						de permitir que los elementos de entrada se transformen 
+						en resultados"		
+					</blockquote>
+				</section>
+				<section id="proceso-definicion">
+					<h2>Proceso</h2>
+					<ul>
+						<li>
+							Un proceso no es más que una instancia de un programa en ejecución,
+							incluyendo los valores actuales del contador de programa, los 
+							registros y las variables.
+						</li>
+						<li>Esta compuesto por:</li>
+					</ul>
+					<table class="memoria">
+						<tr>
+							<td>Código</td>
+							<td>Registros</td>
+							<td>Pila</td>
+							<td>Datos</td>
+						</tr>
+					</table>
+					<aside class="notes">
+						Código del programa, el contenido de los registros 
+						del procesador, la Pila del proceso es: variables 
+						remotas, parámetros de funciones, dirección a 
+						retornar, variables locales. Sección de datos son las 
+						variables globales.
+					</aside>
+				</section>
+				<section id="proceso-definicion-2">
+					<h2>Procesos</h2>
+					<ul>
+						<li>
+							Todo el software ejecutable del computador es organizado en 
+							varios procesos secuenciales.
+						</li>
+						<li>
+							Los procesos se conmutan rápidamente con la CPU, dando la 
+							impresión varios de ellos ejecutándose al mismo tiempo
+							(Multiprogramación). 
+						</li>
+					</ul>
+				</section>
+				<section id="procesos-aclaratorias">
+					<h2>Procesos</h2>
+					<ul>
+						<li>
+							La velocidad a la que un proceso ejecuta sus
+							cálculos no es uniforme. Intervienen muchos
+							factores.
+						</li>
+						<li>
+							No se pueden estimar eventos ni situaciones de
+							los procesos en función del tiempo de ejecución.
+						</li>
+						<li>
+							Hay situaciones donde el CPU no debería
+							conmutarse, por ejemplo, espera de datos de E/S.
+						</li>
+					</ul>
+				</section>
+				<section id="definicion-proceso">
+					<h2>Procesos</h2>
+					<ul>
+						<li >
+							Un proceso <strong>NO</strong> es un programa, es 
+							es un <em>programa en ejecución</em>
+						</li>
+						<li>
+							Un ejemplo es una receta de cocina y un
+							cocinero... en mitad de receta su hijo llega con
+							una picada de abeja... 
+						</li>
+						<li>
+							Iniciar dos veces un programa no quiere decir
+							que se tengan dos procesos iguales
+						</li>
+					</ul>
+				</section>
+
+				<section id="definicion-proceso-2">
+					<h2>Procesos</h2>
+					<blockquote>
+						"Los procesos son como un ser humano: son generados, tienen
+						mas o menos una vida significativa, opcionalmente generan
+						uno o mas procesos hijos, y eventualmente mueren. Una 
+						pequeña diferencia es el que la reproducción no es común
+						entre los procesos - cada proceso tienen un solo padre."
+						<cite>Understanding the Linux Kernel<br>(2nd edition)</cite>
+					</blockquote>
+				</section>
+
+				<section id="creacion-procesos">
+					<h2>Creación de procesos</h2>
+					<ul>
+						<li>El arranque del sistema.</li>
+						<li>Ejecución de una llamada al sistema para la creación de procesos.</li>
+						<li>Una petición de usuario para la creación de procesos.</li>
+						<li>El inicio de un trabajo por lotes.</li>
+					</ul>
+				</section>
+
+				<section id="terminacion-procesos">
+					<h2>Terminación de procesos</h2>
+					<ul>
+						<li>
+							<strong>Salida normal</strong>: Se ha terminado el de ejecutar o
+							sencillamente el usuario lo termina. Salida voluntaria.
+						</li>
+						<li>
+							<strong>Salida por error</strong>: El proceso no se completa
+							alguna situación excepcional. Ej: falta algún parámetro en 
+							el comando. Salida voluntaria.
+						</li>
+					</ul>
+				</section>
+
+				<section id="terminacion-procesos-2">
+					<h2>Terminación de procesos</h2>
+					<ul>
+						<li>
+							<strong>Error fatal</strong>: Producido por el proceso. Producido por un 
+							error en el programa. Salida Involuntaria.
+						</li>
+						<li>
+							<strong>Eliminado por otro proceso:</strong> Se ejecuta otro
+							proceso con suficientes privilegios para realizar otra llamada 
+							al sistema indicándole que debe eliminar el proceso. Salida 
+							involuntaria. Ej : En Linux el comando <em>kill</em>
+						</li>
+					</ul>
+				</section>
+
+				<section id="jerarquia-procesos">
+					<h2>Jerarquía de procesos</h2>
+					<ul class="twothird left">
+						<li>
+							Un proceso puede tener cero, uno o mas hijos, y estos
+							a su vez también podrían tenerlos.
+						</li>
+						<li>
+							Un grupo de procesos esta compuesto por un
+							proceso padre y sus procesos hijos.
+						</li>
+					</ul>
+					<div class="third right">
+						<img src="img/class2/jerarquia.jpg"  alt="Jerarquia de procesos en UNIX">
+					</div>
+					<ul>
+						<li>Un ejemplo fácil del ver es el inicio de un sistema Linux.</li>
+					</ul>
+				</section>
+
+				<section id="estados" > 
+					<h2>Estados del proceso</h2>
+					<ul>
+						<li>Durante el tiempo de vida en el sistema un proceso toma varios estados.</li>
+						<li>
+							Algunos de ellos son propios de la naturaleza
+							del proceso y otros son debido a otros factores
+							del sistema operativo y su planificador. 							
+						</li>
+					</ul>
+				</section>
+
+				<section id="estados-2" > 
+					<h2>Estados del proceso</h2>
+					<p>
+						<a href="img/class2/estados_proceso.gif" data-lightbox="estados">
+							<img src="img/class2/estados_proceso.gif" alt="" style="width: 90%">
+						</a>
+					</p>
+				</section>
+				<section id="estados-3" > 
+					<h2>Estados del proceso</h2>
+					<ul>
+						<li><strong>Nuevo: </strong> está siendo creado.</li>
+						<li><strong>Listo o Preparado:</strong> en espera por el CPU.</li>
+						<li>
+							<strong>Ejecución: </strong> se encuentra en el procesador
+							realizando sus operaciones.
+						 </li>
+						<li> 
+							<strong>Espera/Bloqueado: </strong> no está en el CPU y esta 
+							en espera de un evento (operación con un dispositivo de E/S
+							o por una señal).
+						</li> 
+						<li> <strong>Suspendido:</strong> pasa de la memoria al disco para liberar espacio.
+						</li>
+						<li><strong>Terminado:</strong> ha terminado su ejecución.</li>
+					</ul>
+				</section>
+
+				<section id="planificacion-procesos" >
+					<h2>Planificación de procesos</h2>
+					<ul>
+						<li>
+							El objetivo de la multiprogramación es ejecutar 
+							varios procesos al mismo tiempo con el fin de <strong>maximizar</strong>
+							el uso del CPU.
+						</li>
+						<li>
+							Para cumplir este objetivo, el <strong>planificador de procesos
+							</strong> selecciona un proceso disponible para ejecutarlo. 
+							En el caso de sistemas de un procesador, nunca habrá mas 
+							de un proceso en ejecución, por ello, desperar hasta
+							que el CPU quede libre y se asigne un nuevo proceso.
+						</li>
+					</ul>
+				</section>
+
+				<section id="cola-planificacion">
+					<h2>Colas de <br>Planificación de procesos</h2>
+					<p>
+						<a href="img/class2/colas.png" data-lightbox="colas-planificacion">
+							<img src="img/class2/colas.png" alt="colas de planificacion" />
+						</a>
+					</p>
+					<p class="nota">
+						A medida que se van creando y ejecutando procesos en el sistema, 
+						al cambiar de estado se coloca
+						en su respectiva cola para ser procesado de acuerdo al planificador.
+					</p>
+				</section>
+
+				<section id="cambio-programa">
+					<h2>Cambio de contexto</h2>
+					<div class="half right">
+						<a href="img/class2/cambioProceso.jpg" data-lightbox="Cambio-proceso">
+							<img src="img/class2/cambioProceso.jpg" alt="Cambio de Proceso" />
+						</a>
+						<a href="img/class2/cambio_contexto.gif" data-lightbox="Cambio-contexto">
+							<img src="img/class2/cambio_contexto.gif" alt="Cambio de contexto">
+						</a>
+					</div>
+					<div class="half">
+						<ul>
+							<li>Realizado por el planificador del S.O.</li>
+							<li>
+								Se origina con una interrupción del procesador, que puede ser por 
+								suceso externo (culminación de un proceso de E/S), por una excepción,
+								el proceso culminó, etc.
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section id="cambio-contexto">
+					<h2>Cambio de contexto</h2>
+						<ul>
+							<li>Se ejecuta una rutina llamada <strong>Cambio de contexto</strong>:
+								<ol>
+									<li>
+										Se salva el estado del programa en ejecución del 
+										microprocesador a la memoria principal.
+									</li>
+									<li>Selecciona otro programa a ejecutar según un algoritmo equitativo.</li>
+									<li>
+										Restaura el estado del programa seleccionado desde la memoria principal
+										a los registros del microprocesador.
+									</li>
+				    				<li>
+				    					Ejecuta el programa saltando a la instrucción que estaba 
+				    					pendiente de ejecutar.
+				    				</li>    
+				    			</ol>
+							</li>
+						</ul>
+						<p class="nota">
+							Este proceso consume tiempo extra de procesador,
+							que no se usa para otros procesos.
+						</p>
+				</section>
+
+				<section id="implementacion">
+					<h2>Implementación</h2>
+					<ul>
+						<li>
+							Para controlar todos los procesos, el sistema operativo requiere
+							de un registro para mantener la información de todos ellos. Tabla de
+							procesos o Bloques de control de procesos.
+						</li>
+						<li>
+							Mantiene elementos como: Estado, contador del programa, 
+							registros del CPU, información de planificación de la CPU, 
+							información contable, información de E/S.
+						</li>
+					</ul>
+				</section>
+
+				<section id="pcb" > 
+					<h2>Bloque de control de proceso (PCB)</h2>
+					<p>
+						Es una estructura de datos en el núcleo del S.O con 
+						información requerida para administrar un proceso en particular,
+						esta compuesto por:
+					</p>
+					<ul>
+						<li>
+							<strong>Estado: </strong> el estado actual del proceso.
+						</li>
+						<li><strong>Contador de programa:</strong> 
+							dirección de la siguiente instrucción a realizar.
+						</li>
+						<li><strong>Registros del CPU: </strong> depende de la arquitectura 
+							de la computadora, guarda punteros de pila, registros de 
+							propósito general, acumuladores, entre otros.
+						</li>
+						<li><strong>Información de planificación de la CPU: </strong> 
+							la prioridad del proceso y demás valores
+							para el algoritmo de planificación.
+						</li>
+					</ul>
+				</section>
+				<section id="pcb-2">
+					<h2>Bloque de control de proceso (PCB)</h2>
+					<div class="half left">
+						<ul>
+							<li>
+								<strong>Información contable:</strong> almacena la cantidad 
+								de tiempo en el CPU,  límite de tiempo asignado, 
+								numero de proceso, entre otros. 
+							</li>
+							<li><strong>Información de E/S:</strong> posee un 
+								listado de los archivos y dispositivos de E/S
+								asignados al proceso.</li>
+						</ul>
+					</div>
+					<div class="center">
+						<p>
+							<img src="img/class2/pcb2.jpg" alt="bloque de control de proceso" />
+						</p>
+					</div>
+				</section>
+				<section id="modelo-multiprogramacion">
+					<h2>Modelación de la <br>multi-programación</h2>
+					<ul>
+						<li>
+							Se supone que si un proceso consume 20% de CPU, entonces colocando 5,
+							el CPU siempre estará ocupado.
+						</li>
+						<li>
+							Sin embargo esto no es del todo cierto, todos los procesos
+							no esperan lo mismo por E/S.
+						</li>
+						<li>
+							Recordemos que estimar tiempos en un
+							sistema computacional es muy complicado
+						</li>
+					</ul>
+				</section>
+				<section id="modelo-multiprogramacion-2">
+					<h2>Modelación de la <br>multi-programación</h2>
+					<ul>
+						<li>Realmente es una función de probabilidad de la forma:</li>
+					</ul>
+					<p><strong>Uso de CPU = 1 - p<sup>n</sup></strong></p>
+					<ul>
+						<li>
+							El uso de memoria viene dado por la cantidad
+							necesaria para el sistema operativo y los procesos a ejecutar.
+							Ej : Un servidor Web.
+						</li>
+					</ul>
+				</section>
+				<section id="modelo-multiprogramacion-3">
+					<h2>Modelación de la <br>multi-programación</h2>
+					<img src="img/class2/multiprogramacion.png">
+				</section>
+				<section id="preguntas">
+					<h1>¿Preguntas?</h1>
+				</section>
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				center: true,
+
+				theme: 'mozilla',
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+	</body>
+</html>
