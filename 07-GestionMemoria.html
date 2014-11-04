@@ -6,7 +6,7 @@
 
 		<title>Sistemas Operativos | UNET</title>
 
-		<meta name="description" content="L&aacute;minas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del T&aacute;chira">
+		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
 		<meta name="author" content="Miguel Angel Useche Castro">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -16,16 +16,20 @@
 
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/unet.css">
+		<link rel="stylesheet" href="css/lightbox.css">
+
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-
-		<link rel="stylesheet" href="css/theme/unet.css" id="theme">
-
-
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
 		</script>
 
 		<!--[if lt IE 9]>
@@ -38,33 +42,30 @@
 			<div class="slides">
 				<section>
 					<div class="unet">
-						<div class="left">
-							<img class="noborder" src="img/class1/UNET.png" alt="UNET Logo">
+						<div class="logo-wrapper left">
+							<img  src="img/intro/UNET.png" alt="UNET Logo">
 						</div>
-						<div class="left">
-							<p id="definition-header">
-								Universidad Nacional Experimental Del T&aacute;chira<br />
-								Decanato De Docencia<br />
-								Dpto. Ingenier&iacute;a Inform&aacute;tica
-							</p>
-						</div>
+						<p id="definition-header" class="left">
+							Universidad Nacional Experimental Del Táchira<br />
+							Decanato De Docencia<br />
+							Dpto. Ingeniería Informática
+						</p>
 					</div>
 
 					<h1 class="clear">
 						Sistemas Operativos
 					</h1>
 					<h2 id="subject-code">
-						C&oacute;digo 0435607T
+						Código 0435607T
 					</h2>
 					<div class="professor-info">
 						<p>
-							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche<a> -
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
 							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
 							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
 						</p>
 					</div>
 				</section>
-
 		<section id="contenido" class="slide">
 			<h2>Contenido</h2>
 			<ul>
@@ -98,7 +99,7 @@
 					</p>
 				</div>
 				<div class="half left">
-					<img src="img/class6/vonneuman.jpg" alt="John Von Neuman" />
+					<img src="img/class7/vonneuman.jpg" alt="John Von Neuman" />
 				</div>
 			</section>
 			<section>
@@ -163,7 +164,7 @@
 					</ul>
 				</div>
 				<div class="left half">
-					<img src="img/class6/cpumemory.png" alt="" />
+					<img src="img/class7/cpumemory.png" alt="" />
 				</div>
 					<ul>
 						<li>
@@ -188,11 +189,11 @@
 			<section id="tarjeta-madre" class="slide">
 				<h2>Puente Norte y Sur</h2>
 				<div class="half left">
-					<img src="img/class6/tarjetamadre.jpg" alt="Ejemplo de tarjeta madre">
+					<img src="img/class7/tarjetamadre.jpg" alt="Ejemplo de tarjeta madre">
 				</div>
 				<div class="half left slide" style="height: 40%">
-					<a href="img/class6/logicatarjetamadre.png" rel="shadowbox">
-						<img src="img/class6/logicatarjetamadre.png" alt="Logica de la tarjeta madre">
+					<a href="img/class7/logicatarjetamadre.png" rel="shadowbox">
+						<img src="img/class7/logicatarjetamadre.png" alt="Logica de la tarjeta madre">
 					</a>
 				</div>
 			</section>
@@ -256,7 +257,7 @@
 						</ul>
 					</div>
 					<div class="half left">
-						<img style="width: 50%" src="img/class6/procesamiento_programa.png"  alt="" />
+						<img style="width: 50%" src="img/class7/procesamiento_programa.png"  alt="" />
 					</div>
 				</section>
 				<section>
@@ -274,7 +275,7 @@
 							</ul>
 						</div>
 					<div class="half left">
-						<img style="width: 50%" src="img/class6/procesamiento_programa.png"  alt="" />
+						<img style="width: 50%" src="img/class7/procesamiento_programa.png"  alt="" />
 					</div>
 				</section>
 		</section>
@@ -373,7 +374,7 @@
 			<section>
 				<h2>Unidad de Gesti&oacute;n de Memoria (MMU)</h2>
 				<p class="center">
-					<img src="img/class6/mmu.png" alt="MMU" />
+					<img src="img/class7/mmu.png" alt="MMU" />
 				</p>
 			</section>
 		</section>
@@ -423,7 +424,7 @@
 			<section  id="intercambio-2">
 				<h2>Intercambio</h2>
 				<p class="center">
-					<img src="img/class6/intercambio.png" alt="" />
+					<img src="img/class7/intercambio.png" alt="" />
 				</p>
 			</section>
 		</section>
@@ -451,7 +452,7 @@
 				<h2>Modelo de Multiprogramaci&oacute;n</h2>
 				<h3>Uso del CPU</h3>
 				<div class="center">
-					<img src="img/class6/proceso-limitado-es.png" alt="" />
+					<img src="img/class7/proceso-limitado-es.png" alt="" />
 					<br />
 				</div>
 				<p class="slide center">
@@ -505,7 +506,7 @@
 				<h3>Uso del CPU</h3>
 				<h4>Punto de equilibrio</h4>
 				<div class="center">
-					<img src="img/class6/equilibrio.png" alt=""/>
+					<img src="img/class7/equilibrio.png" alt=""/>
 				</div>
 			</section>
 			<!-- 
@@ -519,7 +520,7 @@
 			<section id="asignacion-memoria-contigua">
 				<h2>Asignaci&oacute;n de memoria contigua</h2>
 				<p class="center">
-					<img src="img/class6/asignacion-continua.png" alt="" />
+					<img src="img/class7/asignacion-continua.png" alt="" />
 				</p>
 				<ul>
 					<li>
@@ -550,8 +551,8 @@
 				</h2>
 				<div class="center-text">
 					<p>
-						<a href="img/class6/distribucion-memoria.png" rel="shadowbox">
-							<img src="img/class6/distribucion-memoria.png" alt="Distribuciond de memoria" />
+						<a href="img/class7/distribucion-memoria.png" rel="shadowbox">
+							<img src="img/class7/distribucion-memoria.png" alt="Distribuciond de memoria" />
 						</a>
 					</p>
 					<p class="nota">
@@ -609,7 +610,7 @@
 				<h3>Asignaci&oacute;n est&aacute;tica con múltiples particiones</h3>
 				<h2>Asignaci&oacute;n Est&aacute;tica <br />de Memoria Particionada</h2>
 				<p class="center">
-					<img src="img/class6/asignacion-fija.png" alt="asignacion-fija" />
+					<img src="img/class7/asignacion-fija.png" alt="asignacion-fija" />
 				</p>
 			</section>
 			<section  id="formas-de-asignar-particiones-estatica">
@@ -751,7 +752,7 @@
 				<section>
 					<h2>Mapa de bits</h2>
 					<div class="center">
-						<img src="img/class6/mapa-bits.png" alt="mapa de bits" />
+						<img src="img/class7/mapa-bits.png" alt="mapa de bits" />
 					</div>
 					<div>
 						<ul>
@@ -781,7 +782,7 @@
 				<section>
 					<h2>Listas enlazadas</h2>
 					<div class="center">
-						<img src="img/class6/lista-enlazada.png" alt="lista enlazadas" />
+						<img src="img/class7/lista-enlazada.png" alt="lista enlazadas" />
 					</div>
 					<br />
 					<ul>
@@ -799,7 +800,7 @@
 				<section  id="sistemas-asociados">
 					<h2>Sistema de los Asociados</h2>
 					<div class="center">
-						<img src="img/class6/sistema-asociados.png" alt="Sistema de asociados" />
+						<img src="img/class7/sistema-asociados.png" alt="Sistema de asociados" />
 					</div>
 					<br />
 					<ul>
@@ -818,17 +819,15 @@
 
 
 
-		<section>
-					<h1>&iquest;Dudas y preguntas?</h1>
-				</section>
-
+					<section id="preguntas">
+						<h1>¿Preguntas?</h1>
+					</section>
+				</div>
 			</div>
-
-		</div>
-
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
-
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
 		<script>
 
 			// Full list of configuration options available here:
@@ -839,7 +838,7 @@
 				history: true,
 				center: true,
 
-				theme: 'unet',
+				theme: 'mozilla',
 				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Optional libraries used to extend on reveal.js
@@ -852,8 +851,6 @@
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
-
 		</script>
-
 	</body>
 </html>
