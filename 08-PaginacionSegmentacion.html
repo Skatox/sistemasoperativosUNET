@@ -6,7 +6,7 @@
 
 		<title>Sistemas Operativos | UNET</title>
 
-		<meta name="description" content="L&aacute;minas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del T&aacute;chira">
+		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
 		<meta name="author" content="Miguel Angel Useche Castro">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -16,47 +16,50 @@
 
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/unet.css">
+		<link rel="stylesheet" href="css/lightbox.css">
+
 		<link rel="stylesheet" href="lib/css/zenburn.css">
-		<link rel="stylesheet" href="css/theme/unet.css" id="theme">
 
-
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
 		</script>
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
 	</head>
-
 	<body>
 		<div class="reveal">
 			<div class="slides">
 				<section>
 					<div class="unet">
-						<div class="left">
-							<img class="noborder" src="img/class1/UNET.png" alt="UNET Logo">
+						<div class="logo-wrapper left">
+							<img  src="img/intro/UNET.png" alt="UNET Logo">
 						</div>
-						<div class="left">
-							<p id="definition-header">
-								Universidad Nacional Experimental Del T&aacute;chira<br />
-								Decanato De Docencia<br />
-								Dpto. Ingenier&iacute;a Inform&aacute;tica
-							</p>
-						</div>
+						<p id="definition-header" class="left">
+							Universidad Nacional Experimental Del Táchira<br>
+							Decanato De Docencia<br>
+							Dpto. Ingeniería Informática
+						</p>
 					</div>
 
 					<h1 class="clear">
 						Sistemas Operativos
 					</h1>
 					<h2 id="subject-code">
-						C&oacute;digo 0435607T
+						Código 0435607T
 					</h2>
 					<div class="professor-info">
 						<p>
-							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche<a> -
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
 							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
 							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
 						</p>
@@ -190,7 +193,7 @@
 	<section>
 		<h2>Paginaci&oacute;n</h2>
 		<div class="center">
-			<img src="img/class7/paginacion.png" />
+			<img src="img/class8/paginacion.png" />
 			<p class="nota">
 				Modelo de paginaci&oacute;n de la memoria l&oacute;gica y
 				f&iacute;sica
@@ -263,7 +266,7 @@
 	<section id="tabla-paginas">
 		<h2>Tabla de p&aacute;ginas</h2>
 		<div class="center">
-			<img src="img/class7/tabla_memoria.png" alt="tabla de paginas" />
+			<img src="img/class8/tabla_memoria.png" alt="tabla de paginas" />
 		</div>
 	</section>
 	
@@ -335,14 +338,14 @@
 	<section>
 		<h2>Memoria asociativa</h2>
 		<div class="center">
-			<img src="img/class7/tlb.png" alt="TLB" />
+			<img src="img/class8/tlb.png" alt="TLB" />
 		</div>
 	</section>
 
 	<section>
 		<h2>Memoria asociativa</h2>
 		<div class="center">
-			<img src="img/class7/tlb_detalle.png" alt="TLB" />
+			<img src="img/class8/tlb_detalle.png" alt="TLB" />
 		</div>
 		<br />
 		<p class="nota">
@@ -391,7 +394,7 @@
 		<h2>Memoria asociativa</h2>
 		<h3>Tasa de acceso</h3>
 		<div class="center">
-			<img src="img/class7/tasa_acceso.png" alt="tasa de acceso" />
+			<img src="img/class8/tasa_acceso.png" alt="tasa de acceso" />
 		</div>
 		<p class="nota">
 			A mayor porcentaje de acierto, menor es el tiempo de acceso 
@@ -404,7 +407,7 @@
 	<section>
 		<h2>P&aacute;ginas compartidas</h2>
 		<div class="half left">
-			<img src="img/class7/pagina_compartida.png" 
+			<img src="img/class8/pagina_compartida.png" 
 				alt="ejemplo de pagina compartida" />
 		</div>
 		<div class="half left">
@@ -429,7 +432,7 @@
 		<h2>P&aacute;ginas multinivel</h2>
 		<div class="left third">
 			<div class="center">
-				<img src="img/class7/multinivel.png" alt="TP multinivel">
+				<img src="img/class8/multinivel.png" alt="TP multinivel">
 			</div>
 		</div>
 		<div class="left twothird">
@@ -491,7 +494,7 @@
 			</ul>
 		</div>
 		<div class="left half">
-			<img src="img/class7/segmentos.png" alt="segmentos" class="noborder" />
+			<img src="img/class8/segmentos.png" alt="segmentos" class="noborder" />
 		</div>
 		<aside class="notes">
 			<ul>
@@ -516,7 +519,7 @@
 	<section id="segmentacion-ejemplo">
 		<h2>Segmentaci&oacute;n</h2>
 		<div class="center">
-			<img src="img/class7/ejemplo_segmentacion.png" alt="" />
+			<img src="img/class8/ejemplo_segmentacion.png" alt="" />
 		</div>
 	</section>
 
@@ -559,7 +562,8 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
-
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
 		<script>
 
 			// Full list of configuration options available here:
@@ -570,7 +574,7 @@
 				history: true,
 				center: true,
 
-				theme: 'unet',
+				theme: 'mozilla',
 				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Optional libraries used to extend on reveal.js
@@ -583,7 +587,6 @@
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
-
 		</script>
 
 	</body>

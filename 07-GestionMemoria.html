@@ -6,7 +6,7 @@
 
 		<title>Sistemas Operativos | UNET</title>
 
-		<meta name="description" content="L&aacute;minas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del T&aacute;chira">
+		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
 		<meta name="author" content="Miguel Angel Useche Castro">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -16,16 +16,20 @@
 
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/unet.css">
+		<link rel="stylesheet" href="css/lightbox.css">
+
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-
-		<link rel="stylesheet" href="css/theme/unet.css" id="theme">
-
-
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
 		</script>
 
 		<!--[if lt IE 9]>
@@ -38,27 +42,25 @@
 			<div class="slides">
 				<section>
 					<div class="unet">
-						<div class="left">
-							<img class="noborder" src="img/class1/UNET.png" alt="UNET Logo">
+						<div class="logo-wrapper left">
+							<img  src="img/intro/UNET.png" alt="UNET Logo">
 						</div>
-						<div class="left">
-							<p id="definition-header">
-								Universidad Nacional Experimental Del T&aacute;chira<br />
-								Decanato De Docencia<br />
-								Dpto. Ingenier&iacute;a Inform&aacute;tica
-							</p>
-						</div>
+						<p id="definition-header" class="left">
+							Universidad Nacional Experimental Del Táchira<br>
+							Decanato De Docencia<br>
+							Dpto. Ingeniería Informática
+						</p>
 					</div>
 
 					<h1 class="clear">
 						Sistemas Operativos
 					</h1>
 					<h2 id="subject-code">
-						C&oacute;digo 0435607T
+						Código 0435607T
 					</h2>
 					<div class="professor-info">
 						<p>
-							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche<a> -
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
 							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
 							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
 						</p>
