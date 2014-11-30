@@ -6,7 +6,7 @@
 
 		<title>Sistemas Operativos | UNET</title>
 
-		<meta name="description" content="L&aacute;minas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del T&aacute;chira">
+		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
 		<meta name="author" content="Miguel Angel Useche Castro">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -43,9 +43,9 @@
 						</div>
 						<div class="left">
 							<p id="definition-header">
-								Universidad Nacional Experimental Del T&aacute;chira<br />
+								Universidad Nacional Experimental Del Táchira<br />
 								Decanato De Docencia<br />
-								Dpto. Ingenier&iacute;a Inform&aacute;tica
+								Dpto. Ingeniería Informática
 							</p>
 						</div>
 					</div>
@@ -54,7 +54,7 @@
 						Sistemas Operativos
 					</h1>
 					<h2 id="subject-code">
-						C&oacute;digo 0435607T
+						Código 0435607T
 					</h2>
 					<div class="professor-info">
 						<p>
@@ -71,9 +71,9 @@
 						<li>Estructura de un archivo.</li>
 						<li>Bloque de control de un archivo.</li>
 						<li>Estructuras del SA en memoria</li>
-						<li>M&eacute;todos de asignaci&oacute;n</li>
-						<li>Gesti&oacute;n de almacenamiento.</li>
-						<li>Estructura f&iacute;sica de los discos.</li>
+						<li>Métodos de asignación</li>
+						<li>Gestión de almacenamiento.</li>
+						<li>Estructura física de los discos.</li>
 						<li>Planificadores del disco.</li>
 					</ul>
 				</section>
@@ -83,10 +83,10 @@
 					<h2>Sistemas de archivos</h2>
 					<ul>
 						<li>
-							Son unidades l&oacute;gicas para estructurar la informaci&oacute;n
+							Son unidades lógicas para estructurar la información
 							guardada en un dispositivo de almacenamiento, 
 							para posteriormente ser representada 
-							textualmente o gr&aacute;ficamente utilizando un gestor de archivos.
+							textualmente o gráficamente utilizando un gestor de archivos.
 						</li>
 						<li>
 							Se almacenan en el disco y se dise&ntilde;an mediante capas.
@@ -94,7 +94,7 @@
 						<li>Cada Sistema Operativo suele soportar sus propios sistemas de archivos.</li>
 						<li>
 							Algunos estan dise&ntilde;ados para velocidad, otro para grandes archivos, para peque&ntilde;os, 
-							para base de datos, lectura r&aacute;pida, etc.
+							para base de datos, lectura rápida, etc.
 						</li>
 					</ul>
 				</section>
@@ -109,14 +109,14 @@
 					<h2>Bloque de control de archivo</h2>
 					<p>
 						Es una estructura de almacenamiento que contiene 
-						informaci&oacute;n de un archivo.
+						información de un archivo.
 					</p>
 					<table id="bloque-archivo" >
 						<tr>
 							<td class="p1 center">Permisos de archivo</td>
 						</tr>
 						<tr>
-							<td class="p1 center">Fecha de creaci&oacute;n (creado, acceso, modificado)</td>
+							<td class="p1 center">Fecha de creación (creado, acceso, modificado)</td>
 						</tr>
 						<tr>
 							<td class="p1 center">Due&ntilde;o del archivo, grupo, ACL</td>
@@ -135,7 +135,7 @@
 					<div class="center">
 						<img src="img/class10/samemoria.jpg" alt="Sistemas de archivos en memoria" />
 						<p class="nota">
-							Proceso de lectura y escritura a trav&eacute;s del sistema de archivo
+							Proceso de lectura y escritura a través del sistema de archivo
 							cargado en memoria
 						</p>
 					</div>
@@ -144,54 +144,54 @@
 
 			<section>
 				<section id="gestion-espacio-ocupado">
-					<h2>Gesti&oacute;n de espacio ocupado</h2>
+					<h2>Gestión de espacio ocupado</h2>
 					<p>	
-						A medida que se va almacenando informaci&oacute;n en el disco,
+						A medida que se va almacenando información en el disco,
 						es necesario administrar el espacio libre restante
 						para permitir almacenar la mayor cantidad posible de bloques 
 						de archivos.
 					</p>
 					<ul>
-						<li>Asignaci&oacute;n contigua.</li>
-						<li>Asignaci&oacute;n ligada.</li>
-						<li>Tabla de asignaci&oacute;n de archivos.</li>
-						<li>Asignaci&oacute;n indexada.</li>
+						<li>Asignación contigua.</li>
+						<li>Asignación ligada.</li>
+						<li>Tabla de asignación de archivos.</li>
+						<li>Asignación indexada.</li>
 						<li>Multinivel.</li>
 					</ul>
 				</section>
 
 				<section id="asignacion-contigua">
-					<h2>Asignaci&oacute;n contigua</h2>
+					<h2>Asignación contigua</h2>
 					<div class="left half">
 						<ul>
 							<li>
 								Cada archivo ocupa un conjunto contiguo de bloques en el disco.
 							</li>
 							<li>
-								Simple implementaci&oacute;n.
+								Simple implementación.
 							</li>
 							<li>
 								Desperdicia espacio.
 							</li>
-							<li>Se hace f&aacute;cil el acceso aleatorio y secuencial.</li>
+							<li>Se hace fácil el acceso aleatorio y secuencial.</li>
 							<li>
-								No pueden crecer los archivos por tener los l&iacute;mites
+								No pueden crecer los archivos por tener los límites
 								definidos.
 							</li>
 						</ul>
 					</div>
 					<div class="left half">
-						<img src="img/class10/contigua.png" alt="Alocaci&oacute;n contigua" />
+						<img src="img/class10/contigua.png" alt="Alocación contigua" />
 					</div>
 					<aside class="notes">
-						La simple implementaci&oacute;n es porque s&oacute;lo 
-						se requiere la posici&oacute;n inicial (n&uacute;mero del bloque) 
+						La simple implementación es porque sólo 
+						se requiere la posición inicial (número del bloque) 
 						y la longitud del mismo.
 					</aside>
 				</section>
 
 				<section id="asignacion-ligada">
-					<h2>Asignaci&oacute;n ligada</h2>
+					<h2>Asignación ligada</h2>
 					
 					<div class="left half">
 						<ul>
@@ -199,30 +199,30 @@
 								Cada archivo es una lista enlazada de bloques 
 								regados por todo el disco.
 							</li>
-							<li>Solo requiere de una direcci&oacute;n inicial y final.</li>
+							<li>Solo requiere de una dirección inicial y final.</li>
 							<li>No desperdicia espacio pero se dificulta el acceso aleatorio.</li>
 						</ul>
 					</div>
 					<div class="left half">
-						<img src="img/class10/enlazada.png" alt="Alocaci&oacute;n ligada" />
+						<img src="img/class10/enlazada.png" alt="Alocación ligada" />
 					</div>
 				</section>
 
 
 				<section id="asignacion-indexada">
-					<h2>Asignaci&oacute;n indexada</h2>
+					<h2>Asignación indexada</h2>
 					
 					<div class="left half">
 						<ul>
-							<li>Junta todos los apuntadores en un &uacute;nico bloque &iacute;ndice.</li>
-							<li>Requiere tabla &iacute;ndice.</li>
+							<li>Junta todos los apuntadores en un único bloque índice.</li>
+							<li>Requiere tabla índice.</li>
 							<li>Permite el acceso aleatorio.</li>
-							<li>Acceso din&aacute;mico sin fragmentaci&oacute;n externa, pero con la sobrecarga
-							del bloque &iacute;ndice.</li>
+							<li>Acceso dinámico sin fragmentación externa, pero con la sobrecarga
+							del bloque índice.</li>
 						</ul>
 					</div>
 					<div class="left half">
-						<img src="img/class10/indexada.png" alt="Alocaci&oacute;n ligada" />
+						<img src="img/class10/indexada.png" alt="Alocación ligada" />
 					</div>
 				</section>
 
@@ -230,7 +230,7 @@
 				<section id="fat">
 					<h2>FAT (File Allocation Table)</h2>
 					<div class="center">
-						<img src="img/class10/fat.png" alt="Alocaci&oacute;n ligada" />
+						<img src="img/class10/fat.png" alt="Alocación ligada" />
 						<p class="nota">Ejemplo de como funciona las particiones FAT</p>
 					</div>
 				</section>
@@ -246,31 +246,31 @@
 
 
 				<section id="journaling">
-					<h2>Sistemas de archivo con sistemas de bit&aacute;cora (o journaling)</h2>
+					<h2>Sistemas de archivo con sistemas de bitácora (o journaling)</h2>
 					<ul>
 						<li>
-							Guardan cada actualizaci&oacute;n al sistema 
-							de archivos como una transacci&oacute;n.
+							Guardan cada actualización al sistema 
+							de archivos como una transacción.
 						</li>
 						<li>
-							Todas las transacciones se escriben a la bit&aacute;cora.
+							Todas las transacciones se escriben a la bitácora.
 						</li>
 						<li>
-							Una transacci&oacute;n se compromete cuando 
-							est&aacute; escrita en la bit&aacute;cora, pero no esta
+							Una transacción se compromete cuando 
+							está escrita en la bitácora, pero no esta
 							actualizada en el S.A.
 						</li>
 						<li>
-							Las transacciones en la bit&aacute;cora son escritas de 
-							manera s&iacute;ncrona al S.A.
+							Las transacciones en la bitácora son escritas de 
+							manera síncrona al S.A.
 						</li>
 						<li>
-							Al modificar el S.A. se elimina la transacci&oacute;n
-							de la bit&aacute;cora.
+							Al modificar el S.A. se elimina la transacción
+							de la bitácora.
 						</li>
 						<li>
 							Si se cae el sistema de archivos, todas las transacciones 
-							pendientes en la bit&aacute;cora se realizan.
+							pendientes en la bitácora se realizan.
 						</li>
 					</ul>
 				</section>
@@ -281,7 +281,7 @@
 					<h2>Almacenamiento secundario</h2>
 					<ul>
 						<li>Lectura y escritura aleatorias.</li>
-						<li>Almacenamiento no vol&aacute;til.</li>
+						<li>Almacenamiento no volátil.</li>
 						<li>Alta velocidad de acceso.</li>
 						<li>Susceptibles de ser soporte para el sistema de archivos.</li>
 					</ul>
@@ -289,16 +289,16 @@
 					<p>
 						<h3>Principales elementos</h3>
 						<ul>
-							<li><strong>Discos:</strong> su estructura y c&oacute;mo es gestionado.</li>
+							<li><strong>Discos:</strong> su estructura y cómo es gestionado.</li>
 							<li>
-								<strong>Controladores:</strong> c&oacute;mo se controlan todas las operaciones 
+								<strong>Controladores:</strong> cómo se controlan todas las operaciones 
 								sobre los discos y como se realiza la
-								planificaci&oacute;n de peticiones.
+								planificación de peticiones.
 							</li>
 						</ul>
 					</p>
 					<aside class="notes">
-						Solo la RAM es mas r&aacute;pida
+						Solo la RAM es mas rápida
 					</aside>
 				</section>
 
@@ -306,7 +306,7 @@
 					<h2>Almacenamiento secundario</h2>
 					<h3>Discos</h3>
 					<p>
-						Son dispositivos de almacenamiento masivo no vol&aacute;til, acceso aleatorio 
+						Son dispositivos de almacenamiento masivo no volátil, acceso aleatorio 
 						a nivel de sector, soporte para el sistema de intercambio del gestor de
 						memoria virtual o para el sistema de archivos. Y se pueden clasificar en:
 					</p>
@@ -319,11 +319,11 @@
 						</ul>
 					</div>
 					<div class="half left">
-						<h4>Por a la tecnolog&iacute;a empleada</h4>
+						<h4>Por a la tecnología empleada</h4>
 						<ul>
 							<li>Discos duros</li>
-							<li>Discos &oacute;pticos</li>
-							<li>Discos extra&iacute;bles</li>
+							<li>Discos ópticos</li>
+							<li>Discos extraíbles</li>
 						</ul>
 					</div>
 					<aside class="notes">
@@ -336,10 +336,10 @@
 				<section id="estructura-disco">
 					<h2>Estructura de un disco duro</h2>
 					<p>
-						Los DD est&aacute;n compuesto por varias superficies magnetizadas y cabezas
-						lectoras/escritoras por efecto electromagn&eacute;tico. Las superficies se 
+						Los DD están compuesto por varias superficies magnetizadas y cabezas
+						lectoras/escritoras por efecto electromagnético. Las superficies se 
 						dividen en <strong>cilindros</strong>, con una <strong>pista</strong>
-						para cada cabeza y un cierto n&uacute;mero de <strong>sectores</strong> por pista.
+						para cada cabeza y un cierto número de <strong>sectores</strong> por pista.
 					</p>
 					
 					<div class="half left center">
@@ -347,7 +347,7 @@
 						<p class="nota">
 							Fuente de la imagen: 
 							<a href="http://estaciontecnologica.com/defraggler/" target="_blank">
-								Estaci&oacute;n tecnol&oacute;gica
+								Estación tecnológica
 							</a>
 						</p>
 					</div>
@@ -366,37 +366,37 @@
 					<h3>Tiempo de acceso</h3>
 					<p>
 						Las operaciones de E/S se calculan en base a dos
-						par&aacute;metros:
+						parámetros:
 					</p>
 					<ul>
 						<li>
-							<strong>Tiempo de b&uacute;squeda:</strong> 
+							<strong>Tiempo de búsqueda:</strong> 
 							lo que se tarda a ir de una pista a otra.				
 						</li>
 						<li>
 							<strong>Tiempo de latencia:</strong>
-							la media rotaci&oacute;n que tardan en llegar
+							la media rotación que tardan en llegar
 							los datos bajo las cabezas, una vez sobre la pista.
 
 							<p class="center">
-								<strong>T_acceso</strong> = n * T_b&uacute;squeda + T_latencia + T_transferencia.
+								<strong>T_acceso</strong> = n * T_búsqueda + T_latencia + T_transferencia.
 							</p>
 						</li>
 					</ul>
 				</section>
 
 				<section id="estructura-fisica">
-					<h2>Estructura f&iacute;sica del disco</h2>
+					<h2>Estructura física del disco</h2>
 					<ul>
 						<li>
 							<h3>Densidad de cada pista</h3>
 							La densidad lineal de almacenamiento es
 							constante. Actualmente las pistas exteriores tienen
-							m&aacute;s sectores que las interiores. 
+							más sectores que las interiores. 
 						</li>
 						<li>
 							<h3>Intercalado de sectores</h3>
-							Optimiza la velocidad de acceso a sectores l&oacute;gicamente 
+							Optimiza la velocidad de acceso a sectores lógicamente 
 							consecutivos. Mientras el controlador copia datos a memoria 
 							principal no puede transfiriendo datos del disco, que se sigue girando.
 						</li>
@@ -404,7 +404,7 @@
 				</section>
 
 				<section>
-					<h2>Estructura f&iacute;sica del disco</h2>
+					<h2>Estructura física del disco</h2>
 					<ul>
 						<li>
 							<h3>Almacenamiento intermedio en el controlador</h3>
@@ -418,27 +418,27 @@
 					</ul>
 				</section>
 				<section>
-					<h2>Estructura f&iacute;sica del disco</h2>
+					<h2>Estructura física del disco</h2>
 					<ul>
 						<li>
 							Los discos se ven como grandes vectores de
-							bloques l&oacute;gicos (unidad m&iacute;nima de transferencia)
+							bloques lógicos (unidad mínima de transferencia)
 						</li>
 						<li>
 							Este vector se proyecta sobre los sectores del disco secuencialmente
 						</li>
 						<li>
-							La numeraci&oacute;n crece en la pista, luego en las restantes
+							La numeración crece en la pista, luego en las restantes
 							pistas del cilindro y luego en los restantes 
 							cilindros del disco.
 						</li>
 						<li>
-							El manejador de disco no sabe nada de archivos, s&oacute;lo de
+							El manejador de disco no sabe nada de archivos, sólo de
 							particiones y bloques
 						</li>
 						<li>
 							<strong>Sector 0:</strong> primer sector de la primera pista 
-							del primer cilindro, all&iacute; se guarda la tabla de particiones.
+							del primer cilindro, allí se guarda la tabla de particiones.
 						</li>
 						<li>
 							<strong>Particiones activas o de sistema:</strong> permiten 
@@ -452,11 +452,11 @@
 					<p>
 						El sistema operativo es responsable de utilizar el hardware
 						eficientemente. En el caso de los discos, esto significa un
-						tiempo de acceso r&aacute;pido y ancho de banda.
+						tiempo de acceso rápido y ancho de banda.
 					</p>
 					<ul>
 						<li>
-							<h3>Tiempo de b&uacute;squeda</h3>
+							<h3>Tiempo de búsqueda</h3>
 							Es el tiempo que toma al disco mover las cabezas
 							al cilindro que contiene el sector deseado.
 						</li>
@@ -468,19 +468,19 @@
 					</ul>
 
 					<aside class="notes">
-						El ancho de banda del disco es el n&uacute;mero total de bytes transferidos,
+						El ancho de banda del disco es el número total de bytes transferidos,
 						divididos por el tiempo total entre la primera solicitud de servicio y el
-						termino de la &uacute;ltima transferencia.
+						termino de la última transferencia.
 					</aside>
 				</section>
 
 				<section id="dd-camara-lenta">
-					<h2>Funcionamiento del disco duro en c&aacute;mara lenta</h2>
+					<h2>Funcionamiento del disco duro en cámara lenta</h2>
 					<div class="center">
 						<iframe width="560" height="315" 
 						src="http://www.youtube.com/embed/3owqvmMf6No" 
 						frameborder="0" allowfullscreen></iframe>
-						<p class="nota">Observe el movimiento del brazo mec&aacute;nico</p>
+						<p class="nota">Observe el movimiento del brazo mecánico</p>
 					</div>
 				</section>
 
@@ -500,7 +500,7 @@
 
 					<p>
 						Para los siguientes ejemplos, vamos a suponer que la apuntador de cabeza
-						est&aacute; en el sector 53. Y se va a trabajar con la siguiente cola de
+						está en el sector 53. Y se va a trabajar con la siguiente cola de
 						solicitudes (0 - 199):
 					</p>
 					<p class="center">
@@ -520,9 +520,9 @@
 				<section id="SSTF">
 					<h2>Shortest Seek Time First (SSTF) </h2>
 					<p>
-						Accede a las peticiones mas cercanas de la posici&oacute;n actual, pero
+						Accede a las peticiones mas cercanas de la posición actual, pero
 						existe riesgo de nunca atender a las mas lejanas debido a nuevas
-						peticiones cercanas (hambruna). Este algoritmo es una modificaci&oacute;n
+						peticiones cercanas (hambruna). Este algoritmo es una modificación
 						de SJF.
 					</p>
 					<div class="center"><img src="img/class10/sstf.png" alt="SSTF"></div>
@@ -542,14 +542,14 @@
 				<section id="cscan">
 					<h2>C-SCAN (Lista circular) </h2>
 					<p>
-						Provee un tiempo de espera m&aacute;s uniforme que SCAN, pues la 
+						Provee un tiempo de espera más uniforme que SCAN, pues la 
 						cabeza se mueve de un extremo del disco al otro, sirviendo solicitudes
 						conforme avanza. Pero cuando llega al otro extremo, regresa al inicio 
 						del disco, sin atender ninguna solicitud en el camino de regreso.
 					</p>
 					<p>
 						Trata los cilindros como una <strong>lista circular</strong> que da
-						la vuelta del &uacute;ltimo cilindro al primero.
+						la vuelta del último cilindro al primero.
 					</p>
 					<div class="center"><img src="img/class10/cscan.png" alt="cscan"></div>
 				</section>
@@ -557,8 +557,8 @@
 				<section id="c-look">
 					<h2>C-LOOK</h2>
 					<p>
-						Versi&oacute;n modificada de C-SCAN, el brazo s&oacute;lo va tan lejos 
-						como la &uacute;ltima solicitud en cada direcci&oacute;n, da reversa
+						Versión modificada de C-SCAN, el brazo sólo va tan lejos 
+						como la última solicitud en cada dirección, da reversa
 						inmediatamente, sin antes ir hasta el final del disco.
 					</p>
 					<div class="center"><img src="img/class10/clook.png" alt="clook"></div>
@@ -567,7 +567,7 @@
 
 
 			<section>
-				<h1>&iquest;Dudas y preguntas?</h1>
+				<h1>¿Dudas y preguntas?</h1>
 			</section>
 
 			</div>

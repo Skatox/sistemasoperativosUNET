@@ -6,7 +6,7 @@
 
 		<title>Sistemas Operativos | UNET</title>
 
-		<meta name="description" content="L&aacute;minas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del T&aacute;chira">
+		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
 		<meta name="author" content="Miguel Angel Useche Castro">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -43,9 +43,9 @@
 						</div>
 						<div class="left">
 							<p id="definition-header">
-								Universidad Nacional Experimental Del T&aacute;chira<br />
+								Universidad Nacional Experimental Del Táchira<br />
 								Decanato De Docencia<br />
-								Dpto. Ingenier&iacute;a Inform&aacute;tica
+								Dpto. Ingeniería Informática
 							</p>
 						</div>
 					</div>
@@ -54,7 +54,7 @@
 						Sistemas Operativos
 					</h1>
 					<h2 id="subject-code">
-						C&oacute;digo 0435607T
+						Código 0435607T
 					</h2>
 					<div class="professor-info">
 						<p>
@@ -69,7 +69,7 @@
 				<h2>Contenido</h2>
 				<ul>
 					<li>El sistema de E/S (I/O).</li>
-					<li>Caracterizaci&oacute;n de los dispositivos de E/S.</li>
+					<li>Caracterización de los dispositivos de E/S.</li>
 					<li>Controladores.</li>
 				</ul>
 			</section>
@@ -83,7 +83,7 @@
 						<li>Memoria</li>
 						<li>Dispositivos de E/S:
 							<ul>
-								<li>Dispositivos de Interfaz de usuario (perif&eacute;ricos)</li>
+								<li>Dispositivos de Interfaz de usuario (periféricos)</li>
 								<li>Dispositivos de Almacenamiento (secundario-terciario)</li>
 								<li>Dispositivos de Comunicaciones</li>
 							</ul>
@@ -99,7 +99,7 @@
 						<ul>
 							<li>CPU ejecuta operaciones a 1-4 GHz aproximadamente.</li>
 							<li>El acceso a RAM es de nanosegundos.</li>
-							<li>Dispositivos de E/S: acceso de milisegundos o m&aacute;s.</li>
+							<li>Dispositivos de E/S: acceso de milisegundos o más.</li>
 						</ul>
 					</p>
 				</section>
@@ -108,7 +108,7 @@
 			<section>
 				<section id="sistema-es">
 					<h2>Sistema de E/S</h2>
-					<p>Ofrece una visi&oacute;n l&oacute;gica simplificada de dispositivos de E/S:</p>
+					<p>Ofrece una visión lógica simplificada de dispositivos de E/S:</p>
 					<ul>
 						<li>Para otros componentes del SO: Ejemplo. el sistema de archivos.</li>
 						<li>Para el usuario.</li>
@@ -116,47 +116,47 @@
 					<h3>Objetivos</h3>
 					<ul>
 						<li>Optimizar la E/S, implementando mecanismos para mejorar prestaciones.</li>
-						<li>Facilitar el manejo de los dispositivos perif&eacute;ricos.</li>
-						<li>Permitir conectar cualquier tipo de dispositivo f&iacute;sico sin remodelar el sistema operativo.</li>
-						<li>Permitir conectar dispositivos solventando autom&aacute;ticamente su instalaci&oacute;n (plug&play).</li>
+						<li>Facilitar el manejo de los dispositivos periféricos.</li>
+						<li>Permitir conectar cualquier tipo de dispositivo físico sin remodelar el sistema operativo.</li>
+						<li>Permitir conectar dispositivos solventando automáticamente su instalación (plug&play).</li>
 					</ul>
 				</section>
 
 
 				<section id="caracterizacion-es">
-					<h2>Caracterizaci&oacute;n de los Dispositivos de E/S</h2>
-					<h3>¿C&oacute;mo se ven los dispositivo de E/S?</h3>
+					<h2>Caracterización de los Dispositivos de E/S</h2>
+					<h3>¿Cómo se ven los dispositivo de E/S?</h3>
 					<ul>
 						<li>
 							<strong>Los programadores:</strong> una caja negra que permite leer y 
-			 				escribir datos a trav&eacute;s de una funcionalidad bien definida.
+			 				escribir datos a través de una funcionalidad bien definida.
 						</li>
 						<li>
 							<strong>Los fabricantes de dispositivos:</strong> 
 							instrumento muy complejo, cientos o miles de componentes
-							electr&oacute;nicos o electro-mec&aacute;nicos.
+							electrónicos o electro-mecánicos.
 						</li>
 						<li>
 							<strong>Los diseñadores de sistemas operativos:</strong>
 							les interesa la funcionalidad, pero con gran detalle; 
-							la interfaz f&iacute;sica y su comportamiento interno para
+							la interfaz física y su comportamiento interno para
 							 poder optimizar el acceso.
 						</li>
 					</ul>
 				</section>
 				<section>
 					<h3>Elementos del Sistema de Entrada / Salida</h3>
-					<h4>Perif&eacute;ricos o dispositivos de E/S</h4>
+					<h4>Periféricos o dispositivos de E/S</h4>
 					<ul>
-						<li>Son el componente f&iacute;sico.</li>
-						<li>Se conectan al computador a trav&eacute;s del controlador de dispositivo.</li>
+						<li>Son el componente físico.</li>
+						<li>Se conectan al computador a través del controlador de dispositivo.</li>
 					</ul>
 					<h4>Controladores de dispositivos</h4>
 					<ul>
-						<li>Son el componente electr&oacute;nico</li>
+						<li>Son el componente electrónico</li>
 						<li>
-							Se encargan de la transferencia de informaci&oacute;n entre la memoria 
-							principal y los perif&eacute;ricos
+							Se encargan de la transferencia de información entre la memoria 
+							principal y los periféricos
 						</li>
 						<li>Conectan el bus de la computadora con el dispositivo (generalmente mediante cables)</li>
 					</ul>
@@ -166,7 +166,7 @@
 				<section id="controladores">
 					<h2>Controladores</h2>
 					<p>
-						Los est&aacute;ndares permiten usar un controlador
+						Los estándares permiten usar un controlador
 						para distintos Dispositivos:
 					</p>
 					<ul>
@@ -178,7 +178,7 @@
 						El controlador es la interfaz del dispositivo 
 						con el bus de la computadora y es el componente 
 						que se ve desde el CPU. Poseen <strong>3 registros principales</strong>, 
-						necesarios para su programaci&oacute;n:</p>
+						necesarios para su programación:</p>
 					<ul>
 						<li>Registros de Datos.</li>
 						<li>Registros de Estado.</li>
@@ -186,10 +186,10 @@
 					</ul>
 				</section>
 				<section id="caracteristicas-controladores">
-					<h2>Caracter&iacute;sticas de un controlador</h2>
+					<h2>Características de un controlador</h2>
 					<ul>
 						<li>
-							<h4>Direcci&oacute;n de E/S:</h4>
+							<h4>Dirección de E/S:</h4>
 							<ul>
 								<li>Usando puertos.</li>
 								<li>Mapeado en memoria.</li>
@@ -198,14 +198,14 @@
 						<li>
 							<h4>Unidad de transferencia:</h4>
 							<ul>
-								<li>De car&aacute;cter.</li>
+								<li>De carácter.</li>
 								<li>De bloque.</li>
 							</ul>
 						</li>
 						<li>
-							<h4>Interacci&oacute;n computadora-controlador:</h4>
+							<h4>Interacción computadora-controlador:</h4>
 							<ul>
-								<li>Interrupci&oacute;n.</li>
+								<li>Interrupción.</li>
 								<li>E/S programada.</li>
 							</ul>
 						</li>
@@ -218,7 +218,7 @@
 							<h4>Dispositivos por puertos de E/S (ej. arquitectura Intel):</h4>
 							<p>
 								Al controlador se le asigna un puerto de E/S, una
-								interrupci&oacute;n hardware. Se programa con operaciones de 
+								interrupción hardware. Se programa con operaciones de 
 								E/S (portin y portout) para indicar que registro se quiere 
 								manipular y como.
 							</p>
@@ -226,10 +226,10 @@
 						<li>
 							<h4>Dispositivos proyectados en memoria:</h4>
 							<p>
-								Se asigna a cada controlador un rango de direcci&oacute;n
-							   	es a trav&eacute;s de las cu&aacute;les se accede a sus registros.
+								Se asigna a cada controlador un rango de dirección
+							   	es a través de las cuáles se accede a sus registros.
 					   			Se programa con instrucciones de acceso a memoria,
-						   		se reserva una zona de memoria f&iacute;sica para asignar a
+						   		se reserva una zona de memoria física para asignar a
 								controladores de E/S.
 						   	</p>
 					   </li>
@@ -239,28 +239,28 @@
 					</aside>
 				</section>
 				<section>
-					<h2>Caracter&iacute;sticas de un controlador</h2>
+					<h2>Características de un controlador</h2>
 					<h3>En Windows</h3>
 					<div class="center">
 						<img src="img/class11/wines.png" alt="ES en Windows" />
 					</div>
 				</section>
 				<section>
-					<h2>Caracter&iacute;sticas de un controlador</h2>
+					<h2>Características de un controlador</h2>
 					<h3>En Linux</h3>
 					<div class="center">
 						<img src="img/class11/lines.png" class="noborder" alt="ES en Linux" />
 					</div>
 				</section>
 				<section id="caracteristicas-controladores-2">
-					<h2>Caracter&iacute;sticas de un controlador</h2>
+					<h2>Características de un controlador</h2>
 					<h3>b) De acuerdo a la unidad de transferencia</h3>
 					<ul>
 						<li>
 							<h4>Operaciones (leer, escribir, posicionarse)</h4>
 							<ul>
 								<li>
-									Posible acceso a trav&eacute;s de ficheros proyectados en
+									Posible acceso a través de ficheros proyectados en
 									memoria como los discos y cintas.
 								</li>
 							</ul>
@@ -268,7 +268,7 @@
 						<li>
 							<h4>Dispositivos de caracter</h4>
 							<ul>
-								<li>Acceso secuencial a nivel de car&aacute;cter.</li>
+								<li>Acceso secuencial a nivel de carácter.</li>
 								<li>
 									Operaciones: get, put, ....
 									Ejemplo: terminales, impresoras, interfaces de red.
@@ -276,7 +276,7 @@
 							</ul>
 							<h4>Dispositivos de bloque</h4>
 							<ul>
-								<li>Accesso por bloques de datos, utilizan b&uacute;ffers.</li>
+								<li>Accesso por bloques de datos, utilizan búffers.</li>
 								<li>El disco duro funciona de esta manera.</li>
 							</ul>
 						</li>
@@ -358,7 +358,7 @@
 					<ul>
 						<li>Espera ocupada.</li>
 						<li>
-							Complicado coordinar gesti&oacute;n de
+							Complicado coordinar gestión de
 						 	dispositivos con otras actividades.
 						 </li>
 					</ul>
@@ -371,17 +371,17 @@
 				</section>
 
 				<section id="caracteristicas-controladores-3">
-					<h2>Caracter&iacute;sticas de un controlador</h2>
-					<h3>c) De acuerdo a interacci&oacute;n computador-controlador</h3>
+					<h2>Características de un controlador</h2>
+					<h3>c) De acuerdo a interacción computador-controlador</h3>
 					<h4>E/S por interrupciones:</h4>
 					<div class="right">
 						<img src="img/class11/irqs.jpg" class="noborder" alt="IRQ">
 						<p class="nota">Lista de IRQs en Windows</p>
 					</div>
 					<p>
-						El procesador env&iacute;a la orden de E/S al controlador
+						El procesador envía la orden de E/S al controlador
 						del dispositivo y  se dedica 
-						a otras tareas hasta que llega una interrupci&oacute;n del dispositivo.
+						a otras tareas hasta que llega una interrupción del dispositivo.
 
 					</p>
 					<aside class="notes">
@@ -390,26 +390,26 @@
 					</aside>
 				</section>
 				<section id="caracteristicas-controladores-3">
-					<h2>Caracter&iacute;sticas de un controlador</h2>
-					<h3>c) De acuerdo a interacci&oacute;n computador-controlador</h3>
+					<h2>Características de un controlador</h2>
+					<h3>c) De acuerdo a interacción computador-controlador</h3>
 					<h4>E/S por interrupciones:</h4>
 					<p>
-						Las rutinas de interrupci&oacute;n suelen tener dos partes:
+						Las rutinas de interrupción suelen tener dos partes:
 					</p>
 					<ul>
 						<li>
-							<strong> Parte gen&eacute;rica:</strong>
+							<strong> Parte genérica:</strong>
 							<ul>
-								<li>Captura de la interrupci&oacute;n</li>
+								<li>Captura de la interrupción</li>
 								<li>Salvaguarda de estado del procesador</li>
-								<li>Activaci&oacute;n de la rutina de manejo de la interrupci&oacute;n</li>
+								<li>Activación de la rutina de manejo de la interrupción</li>
 							</ul>
 						</li>
 						<li>
-							<strong>Planificar la ejecuci&oacute;n de la rutina:</strong>
+							<strong>Planificar la ejecución de la rutina:</strong>
 							<ul>
-								<li>Desactivaci&oacute;n de la interrupci&oacute;n</li>
-								<li>Restauraci&oacute;n del estado del procesador</li>
+								<li>Desactivación de la interrupción</li>
+								<li>Restauración del estado del procesador</li>
 								<li>Ceder de control (RET)</li>
 							</ul>
 						</li>
@@ -427,7 +427,7 @@
 
 	
 			<section>
-				<h1>&iquest;Dudas y preguntas?</h1>
+				<h1>¿Dudas y preguntas?</h1>
 			</section>
 
 			</div>
