@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 	<head>
 		<meta charset="utf-8">
@@ -16,16 +16,20 @@
 
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/unet.css">
+		<link rel="stylesheet" href="css/lightbox.css">
+
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-
-		<link rel="stylesheet" href="css/theme/unet.css" id="theme">
-
-
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
 		</script>
 
 		<!--[if lt IE 9]>
@@ -39,7 +43,7 @@
 				<section>
 					<div class="unet">
 						<div class="left">
-							<img class="noborder" src="img/class1/UNET.png" alt="UNET Logo">
+							<img class="noborder" src="img/intro/UNET.png" alt="UNET Logo">
 						</div>
 						<div class="left">
 							<p id="definition-header">
@@ -68,215 +72,11 @@
 				<section id="contenido" class='slide'>
 					<h2>Contenido</h2>
 					<ul>
-						<li>Estructura de un archivo.</li>
-						<li>Bloque de control de un archivo.</li>
-						<li>Estructuras del SA en memoria</li>
-						<li>Métodos de asignación</li>
-						<li>Gestión de almacenamiento.</li>
 						<li>Estructura física de los discos.</li>
 						<li>Planificadores del disco.</li>
 					</ul>
 				</section>
-			
-			<section>
-				<section id="estructura-archivo">
-					<h2>Sistemas de archivos</h2>
-					<ul>
-						<li>
-							Son unidades lógicas para estructurar la información
-							guardada en un dispositivo de almacenamiento, 
-							para posteriormente ser representada 
-							textualmente o gráficamente utilizando un gestor de archivos.
-						</li>
-						<li>
-							Se almacenan en el disco y se dise&ntilde;an mediante capas.
-						</li>
-						<li>Cada Sistema Operativo suele soportar sus propios sistemas de archivos.</li>
-						<li>
-							Algunos estan dise&ntilde;ados para velocidad, otro para grandes archivos, para peque&ntilde;os, 
-							para base de datos, lectura rápida, etc.
-						</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Sistemas de archivos</h2>
-					<div class="center">
-						<img src="img/class10/sistemaarchivos.jpg" alt="Sistema de archivos de Minix" />
-					</div>
-				</section>
 
-				<section id="bloque-control-archivo">
-					<h2>Bloque de control de archivo</h2>
-					<p>
-						Es una estructura de almacenamiento que contiene 
-						información de un archivo.
-					</p>
-					<table id="bloque-archivo" >
-						<tr>
-							<td class="p1 center">Permisos de archivo</td>
-						</tr>
-						<tr>
-							<td class="p1 center">Fecha de creación (creado, acceso, modificado)</td>
-						</tr>
-						<tr>
-							<td class="p1 center">Due&ntilde;o del archivo, grupo, ACL</td>
-						</tr>
-						<tr>
-							<td class="p1 center">Tama&ntilde;o del archivo</td>
-						</tr>
-						<tr>
-							<td class="p1 center">Puntero(s) al bloque(s) del archivo</td>
-						</tr>
-					</table>
-				</section>
-
-				<section id="sistemas-archivos-memoria">
-					<h2>Sistema de archivos en Memoria</h2>
-					<div class="center">
-						<img src="img/class10/samemoria.jpg" alt="Sistemas de archivos en memoria" />
-						<p class="nota">
-							Proceso de lectura y escritura a través del sistema de archivo
-							cargado en memoria
-						</p>
-					</div>
-				</section>
-			</section>
-
-			<section>
-				<section id="gestion-espacio-ocupado">
-					<h2>Gestión de espacio ocupado</h2>
-					<p>	
-						A medida que se va almacenando información en el disco,
-						es necesario administrar el espacio libre restante
-						para permitir almacenar la mayor cantidad posible de bloques 
-						de archivos.
-					</p>
-					<ul>
-						<li>Asignación contigua.</li>
-						<li>Asignación ligada.</li>
-						<li>Tabla de asignación de archivos.</li>
-						<li>Asignación indexada.</li>
-						<li>Multinivel.</li>
-					</ul>
-				</section>
-
-				<section id="asignacion-contigua">
-					<h2>Asignación contigua</h2>
-					<div class="left half">
-						<ul>
-							<li>
-								Cada archivo ocupa un conjunto contiguo de bloques en el disco.
-							</li>
-							<li>
-								Simple implementación.
-							</li>
-							<li>
-								Desperdicia espacio.
-							</li>
-							<li>Se hace fácil el acceso aleatorio y secuencial.</li>
-							<li>
-								No pueden crecer los archivos por tener los límites
-								definidos.
-							</li>
-						</ul>
-					</div>
-					<div class="left half">
-						<img src="img/class10/contigua.png" alt="Alocación contigua" />
-					</div>
-					<aside class="notes">
-						La simple implementación es porque sólo 
-						se requiere la posición inicial (número del bloque) 
-						y la longitud del mismo.
-					</aside>
-				</section>
-
-				<section id="asignacion-ligada">
-					<h2>Asignación ligada</h2>
-					
-					<div class="left half">
-						<ul>
-							<li>
-								Cada archivo es una lista enlazada de bloques 
-								regados por todo el disco.
-							</li>
-							<li>Solo requiere de una dirección inicial y final.</li>
-							<li>No desperdicia espacio pero se dificulta el acceso aleatorio.</li>
-						</ul>
-					</div>
-					<div class="left half">
-						<img src="img/class10/enlazada.png" alt="Alocación ligada" />
-					</div>
-				</section>
-
-
-				<section id="asignacion-indexada">
-					<h2>Asignación indexada</h2>
-					
-					<div class="left half">
-						<ul>
-							<li>Junta todos los apuntadores en un único bloque índice.</li>
-							<li>Requiere tabla índice.</li>
-							<li>Permite el acceso aleatorio.</li>
-							<li>Acceso dinámico sin fragmentación externa, pero con la sobrecarga
-							del bloque índice.</li>
-						</ul>
-					</div>
-					<div class="left half">
-						<img src="img/class10/indexada.png" alt="Alocación ligada" />
-					</div>
-				</section>
-
-
-				<section id="fat">
-					<h2>FAT (File Allocation Table)</h2>
-					<div class="center">
-						<img src="img/class10/fat.png" alt="Alocación ligada" />
-						<p class="nota">Ejemplo de como funciona las particiones FAT</p>
-					</div>
-				</section>
-
-
-				<section id="unix">
-					<h2>Sistema de archivos de Unix</h2>
-					<div class="center">
-						<img src="img/class10/unixfs.png" alt="Unix file system" />
-						<p class="nota">Estructura de un sistema de archivos UNIX</p>
-					</div>
-				</section>
-
-
-				<section id="journaling">
-					<h2>Sistemas de archivo con sistemas de bitácora (o journaling)</h2>
-					<ul>
-						<li>
-							Guardan cada actualización al sistema 
-							de archivos como una transacción.
-						</li>
-						<li>
-							Todas las transacciones se escriben a la bitácora.
-						</li>
-						<li>
-							Una transacción se compromete cuando 
-							está escrita en la bitácora, pero no esta
-							actualizada en el S.A.
-						</li>
-						<li>
-							Las transacciones en la bitácora son escritas de 
-							manera síncrona al S.A.
-						</li>
-						<li>
-							Al modificar el S.A. se elimina la transacción
-							de la bitácora.
-						</li>
-						<li>
-							Si se cae el sistema de archivos, todas las transacciones 
-							pendientes en la bitácora se realizan.
-						</li>
-					</ul>
-				</section>
-			</section>
-
-			<section>
 				<section id="almacenamiento-secundario">
 					<h2>Almacenamiento secundario</h2>
 					<ul>
@@ -343,7 +143,7 @@
 					</p>
 					
 					<div class="half left center">
-						<img src="img/class10/disco.png" alt="Estructura de un disco" />
+						<img src="img/class12/disco.png" alt="Estructura de un disco" />
 						<p class="nota">
 							Fuente de la imagen: 
 							<a href="http://estaciontecnologica.com/defraggler/" target="_blank">
@@ -352,11 +152,11 @@
 						</p>
 					</div>
 					<div class="half left center">
-						<img src="img/class10/cilindro.jpg" alt="Cilindro" />
+						<img src="img/class12/cilindro.jpg" alt="Cilindro" />
 						<p class="nota">Ejemplo de un cilindro del disco</p>
 						<p>
 						La capacidad del disco se mide mediante: 
-						<strong> Capacidad = cilindros * pistas * sectores * tama&ntilde;o sector </strong>
+						<strong> Capacidad = cilindros * pistas * sectores * tamaño sector </strong>
 					</p>
 					</div>
 				</section>
@@ -514,7 +314,7 @@
 						Se van atendiendo las peticiones a medida que van llegando 
 						a la cola.
 					</p>
-					<div class="center"><img src="img/class10/fcfs.png" alt="FCFS"></div>
+					<div class="center"><img src="img/class12/fcfs.png" alt="FCFS"></div>
 				</section>
 
 				<section id="SSTF">
@@ -525,7 +325,7 @@
 						peticiones cercanas (hambruna). Este algoritmo es una modificación
 						de SJF.
 					</p>
-					<div class="center"><img src="img/class10/sstf.png" alt="SSTF"></div>
+					<div class="center"><img src="img/class12/sstf.png" alt="SSTF"></div>
 				</section>
 
 				<section id="scan">
@@ -536,7 +336,7 @@
 						otro extremo, donde se voltea el movimiento de la cabeza y 
 						sigue sirviendo.
 					</p>
-					<div class="center"><img src="img/class10/scan.png" alt="scan"></div>
+					<div class="center"><img src="img/class12/scan.png" alt="scan"></div>
 				</section>
 
 				<section id="cscan">
@@ -551,7 +351,7 @@
 						Trata los cilindros como una <strong>lista circular</strong> que da
 						la vuelta del último cilindro al primero.
 					</p>
-					<div class="center"><img src="img/class10/cscan.png" alt="cscan"></div>
+					<div class="center"><img src="img/class12/cscan.png" alt="cscan"></div>
 				</section>
 
 				<section id="c-look">
@@ -561,14 +361,12 @@
 						como la última solicitud en cada dirección, da reversa
 						inmediatamente, sin antes ir hasta el final del disco.
 					</p>
-					<div class="center"><img src="img/class10/clook.png" alt="clook"></div>
+					<div class="center"><img src="img/class12/clook.png" alt="clook"></div>
 				</section>
 
-
-
-			<section>
-				<h1>¿Dudas y preguntas?</h1>
-			</section>
+				<section id="preguntas">
+					<h1>¿Dudas y preguntas?</h1>
+				</section>
 
 			</div>
 
@@ -576,7 +374,8 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
-
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
 		<script>
 
 			// Full list of configuration options available here:
@@ -587,7 +386,7 @@
 				history: true,
 				center: true,
 
-				theme: 'unet',
+				theme: 'mozilla',
 				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Optional libraries used to extend on reveal.js
@@ -600,7 +399,6 @@
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
-
 		</script>
 
 	</body>

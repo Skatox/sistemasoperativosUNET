@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 	<head>
 		<meta charset="utf-8">
@@ -16,16 +16,20 @@
 
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/unet.css">
+		<link rel="stylesheet" href="css/lightbox.css">
+
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-
-		<link rel="stylesheet" href="css/theme/unet.css" id="theme">
-
-
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
 		</script>
 
 		<!--[if lt IE 9]>
@@ -38,16 +42,14 @@
 			<div class="slides">
 				<section>
 					<div class="unet">
-						<div class="left">
-							<img class="noborder" src="img/class1/UNET.png" alt="UNET Logo">
+						<div class="logo-wrapper left">
+							<img  src="img/intro/UNET.png" alt="UNET Logo">
 						</div>
-						<div class="left">
-							<p id="definition-header">
-								Universidad Nacional Experimental Del Táchira<br />
-								Decanato De Docencia<br />
-								Dpto. Ingeniería Informática
-							</p>
-						</div>
+						<p id="definition-header" class="left">
+							Universidad Nacional Experimental Del Táchira<br />
+							Decanato De Docencia<br />
+							Dpto. Ingeniería Informática
+						</p>
 					</div>
 
 					<h1 class="clear">
@@ -58,7 +60,7 @@
 					</h2>
 					<div class="professor-info">
 						<p>
-							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche<a> -
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
 							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
 							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
 						</p>
@@ -74,9 +76,9 @@
 								<li>Atributos.</li>
 								<li>Operaciones.</li>
 								<li>Tipos.</li>
+								<li>Métodos de acceso.</li>
 							</ul>
 						</li>
-						<li>Métodos de acceso a archivos.</li>
 						<li>Estructura de directorios.</li>
 						<li>Operaciones en directorios.</li>
 						<li>Montaje de archvos.</li>
@@ -85,317 +87,388 @@
 					</ul>
 				</section>
 
-				<section>
-					<section id="archivo-definicion">
-						<h2>¿Qué es un archivo?</h2>
-						<div>
+				<section id="intro">
+					<h2>Introducción</h2>
+					<p class="text-left">
+						Hay tres requerimientos básicos de un sistema informático:
+					</p>
+					<ol>
+						<li>
+							Debe ser posible almacenar una gran cantidad de
+							información.
+						</li>
+						<li>
+							La información debe sobrevivir a la terminación del
+							proceso que la utilice.
+						</li>
+						<li>
+							Múltiples procesos deben ser capaz de acceder a
+							la información concurrentemente.
+						</li>
+					</ol>
+				</section>
+
+				<section id="intro-2">
+					<h2>Introducción</h2>
+					<p class="text-left">
+						Surgen las preguntas:
+					</p>
+					<ul>
+						<li>
+						 	¿Cómo se encuentra la información?
+						 </li>
+						<li>
+						 	¿Cómo evitamos que un usuario lea la información
+							de otro usuario?
+						 </li>
+						<li>
+						 	¿Cómo se sabe cuales bloques están libres?
+						 </li>
+					</ul>
+				</section>
+
+				<section id="archivo-definicion">
+					<h2>¿Qué es un archivo?</h2>
+					<div>
+						<blockquote>
+							"Un archivo o fichero informático es un conjunto de bits 
+							almacenado en un dispositivo" 
+							<cite>Wikipedia, 2012</cite>
+						</blockquote>
+						<ul>
+							<li>
+								Una colección de información relacionada con nombre que se
+								guarda en un medio secundario.
+							</li>
+							<li>
+								Es una secuencia de bits, bytes, líneas o registros cuyo
+								significado es definido por su creador y usuario del mismo.
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<section id="archivo-definicion-2">
+					<h2>Archivos</h2>
+					<ul>
+						<li>
+							Es una colección de información relacionada,
+							grabada en un almacenamiento secundario.
+						</li>
+						<li>
+							Son unidades lógicas de información creadas
+							por los procesos.
+						</li>
+						<li>
+							Desde el punto de vista del usuario, es la
+							unidad de almacenamiento secundario lógico.
+						</li>
+						<li>
+							No es posible escribir datos en un
+							almacenamiento secundario si no esta dentro
+							de un archivo. 
+						</li>
+					</ul>
+				</section>
+
+				<section id="atributos-archivo-1">
+					<h2>Atributos de archivo (1/2)</h2>
+					<ul>
+						<li>
+							<strong>Nombre</strong>: identifica al archivo de forma legible para el usuario.
+						</li>
+						<li>
+							<strong>Identificador (i_nodo)</strong>: es un código para 
+							identificar al archivo dentro del sistema de archivos.
+						</li>
+						<li>
+							<strong>Tipo</strong>: indica el formato del contenido del archivo.
+						</li>
+						<li>
+							<strong>Ubicación</strong>: es un puntero al dispositivo donde se 
+							almacena el archivo y al lugar donde se encuentra el archivo
+							dentro del dispositivo.
+						</li>
+					</ul>
+					<aside class="notes">
+						<p>El inodo no es visible para el usuario.</p>
+						<p></p>
+					</aside>
+				</section>
+
+				<section id="atributos-archivo-2">
+					<h2>Atributos de archivo (2/2)</h2>
+					<ul>
+						<li>
+							<strong>Tamaño</strong> Indica el tamaño del archivo (en bytes,
+							palabras o bloques).
+						</li>
+						<li>
+							<strong>Protección</strong> información del control de acceso.
+						</li>
+						<li>
+							<strong>Fecha, hora y dueño</strong> información adicional 
+							para conocer cuando y quien hizo los últimos cambios.
+						</li>
+					</ul>
+					<aside class="notes">
+						La información de archivos se almacena en la estructura del 
+					   directorio, que se mantiene en el disco.
+					</aside>
+				</section> 
+
+				<section id="archivos">
+					<h2>Archivos</h2>
+					<img src="img/class10/Archivos.png" alt="Listado de archivos">
+					<p>Ejemplo de archivos en la carpeta <strong>/etc</strong></p>
+				</section>
+				
+				<section id="estructura-archivo">
+					<h2>Estructura de archivo</h2>
+					<ul>
+						<li><strong>Ninguna:</strong> secuencia de palabras o bytes.</li>
+						<li>
+							<strong>Estructura de registro sencilla: </strong>
 							<ul>
-								<li>"Un archivo o fichero informático es un conjunto de bits 
-								almacenado en un dispositivo" (Wikipedia, 2012)</li>
-								<li>Una colección de información relacionada con nombre que se
-									guarda en un medio secundario.</li>
-								<li>
-									Es una secuencia de bits, bytes, líneas o registros cuyo
-									significado es definido por su creador y usuario del mismo.
-								</li>
+								<li>Líneas.</li>
+								<li>Longitud fija.</li>
+								<li>Longitud variable.</li>
 							</ul>
-						</div>
-					</section>
-					<section id="estructura-archivo">
-						<h2>Estructura de archivo</h2>
-						<ul>
-							<li><strong>Ninguna:</strong> secuencia de palabras o bytes.</li>
-							<li>
-								<strong>Estructura de registro sencilla: </strong>
-								<ul>
-									<li>Líneas.</li>
-									<li>Longitud fija.</li>
-									<li>Longitud variable.</li>
-								</ul>
-							</li>
-							<li><strong>Estructuras complejas:</strong>
-								<ul>
-									<li>Documento con formato</li>
-									<li>Archivo para cargar relocalizable</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
-
-					<section id="atributos-archivo-1">
-						<h2>Atributos de archivo (1/2)</h2>
-						<ul>
-							<li>
-								<strong>Nombre</strong>: identifica al archivo de forma legible para el usuario.
-							</li>
-							<li>
-								<strong>Identificador (i_nodo)</strong>: es un código para 
-								identificar al archivo dentro del sistema de archivos.
-							</li>
-							<li>
-								<strong>Tipo</strong>: indica el formato del contenido del archivo.
-							</li>
-							<li>
-								<strong>Ubicación</strong>: es un puntero al dispositivo donde se 
-								almacena el archivo y al lugar donde se encuentra el archivo
-								dentro del dispositivo.
-							</li>
-						</ul>
-						<aside class="notes">
-							<p>El inodo no es visible para el usuario.</p>
-							<p></p>
-						</aside>
-					</section>
-
-					<section id="atributos-archivo-2">
-						<h2>Atributos de archivo (2/2)</h2>
-						<ul>
-							<li>
-								<strong>Tama&ntilde;o</strong> Indica el tama&ntilde;o del archivo (en bytes,
-								palabras o bloques).
-							</li>
-							<li>
-								<strong>Protección</strong> información del control de acceso.
-							</li>
-							<li>
-								<strong>Fecha, hora y due&ntilde;o</strong> información adicional 
-								para conocer cuando y quien hizo los últimos cambios.
-							</li>
-						</ul>
-						<aside class="notes">
-							La información de archivos se almacena en la estructura del 
-						   directorio, que se mantiene en el disco.
-						</aside>
-					</section> 
-				</section>
-				<section>
-					<section id="operaciones-archivo-1">
-						<h2>Operaciones con archivos (1/3)</h2>
-						<ul>
-							<li>
-								<h3>Creación</h3> Cuando se crea un archivo, se busca
-								un espacio libre lo suficientemente grande para almacenarlo y
-								luego se agrega en el directorio de entradas de archivo.
-							</li>
-							<li>
-								<h3>Escritura</h3> Al escribir, se accede al archivo con una
-								llamada al sistema especificando su nombre y ubicación, 
-								el sistema explora la ubicación y devuelve un 
-								<strong>puntero de escritura</strong>.
-							</li>
-						</ul>
-						<aside class="notes">
-							El puntero de referencia apunta a una ubicación dentro
-							del archivo, el cual se actualiza a una nueva posición 
-							cada vez que realizamos una operación de escritura.
-						</aside>
-					</section>
-
-					<section id="operaciones-archivo-2">
-						<h2>Operaciones con archivos (2/3)</h2>
-						<ul>
-							<li>
-								<h3>Lectura</h3> Se accede al archivo con una
-								llamada al sistema especificando su nombre y 
-								donde debe colocarse el siguiente bloque del archivo. 
-								De esta manera se obtiene un <strong>puntero de lectura
-								</strong> para recorrer su contenido.
-							</li>
-							<li>
-								<h3>Reposicionamiento</h4> Se explora el directorio 
-								hasta encontrar el archivo indicado, se actualiza la 
-								entrada del puntero de posición con la nueva 
-								ubicación (sin realizar operaciones E/S).
-							</li>
-							<p class="nota">
-								<strong>Nota:</strong> Los puntero de lectura y escritura 
-								son únicos para cada proceso.
-							</p>
-						</ul>
-						<aside class="notes">
-							Una ubicación por ejemplo, puede ser la RAM.
-						</aside>
-					</section>
-
-					<section id="operaciones-archivo-3">
-						<h2>Operaciones con archivos (3/3)</h2>
-						<ul>
-							<li>
-								<h3>Borrado</h3> Para eliminar el archivo, se explora el directorio
-								hasta encontrarlo, luego se libera su espacio en el dissco y se 
-								procede a eliminar la entrada del disco.
-							</li>
-							<li>
-								<h3>Truncado</h3> Esta operación consiste en borrar todo el
-								contenido de un archivo pero manteniendo sus atributos. En vez de 
-								borrar y volver a crear el archivo, se reinicia el archivo con
-								una longitud igual a 0 y se libera el espació asignado previamente.
-							</li>
-						</ul>
-					</section>
+						</li>
+						<li><strong>Estructuras complejas:</strong>
+							<ul>
+								<li>Documento con formato</li>
+								<li>Archivo para cargar relocalizable</li>
+							</ul>
+						</li>
+					</ul>
 				</section>
 
-				<section>
-					<section id="tipos-archivo">
-						<h2>Tipos de archivo</h2>
-						<ul>
-							<li>
-								Usualmente conocemos dos tipos de archivos: <strong>binarios y de texto.</strong> 
-								Sin embargo, a bajo nivel <strong>ambos son binarios,</strong> la única 
-								diferencia se interpreta: los archivos de texto son codificados en ASCII, 
-								cada byte representa un caracter o un valor como: salto de línea,
-								 retorno del carro, entre otros.
-							</li>
-							<li>
-								Una técnica común para implementar los tipos de archivos, es 
-								<strong>dividir el nombre del archivo en 2 partes:</strong>
-								una para el <strong>nombre</strong> y otra para 
-								<strong>la extensión</strong>.
-							</li>
-							<li>
-								La extensión simplemente <strong>indica el formato del contenido,
-								</strong> sin embargo, puede ser creado/editado por el usuario por lo que
-								no es confiable interpretar el archivo solo por la extensión.
-							</li>
-						</ul>
-						<aside class="notes">
-							<p>	
-								Suelen ser las iniciales o abreviaciones del tipo
-								de archivo
-							</p>
-						</aside>
-					</section>
-
-					<section id="extensiones-archivos">
-						<h2>Tipos comunes de archivo</h2>
-						<table class="comparacion center">
-							<tr>
-								<th>Tipo</th>
-								<th>Extensión usual</th>
-								<th>Función</th>
-							</tr>
-							<tr>
-								<td>Ejecutable</td>
-								<td>exe, com, bin o niguna.</td>
-								<td>
-									Programas en lenguaje de máquina 
-									listos para ser ejecutados
-								</td>
-							</tr>
-							<tr>
-								<td>Objeto</td>
-								<td>obj, o</td>
-								<td>
-									Lenguaje de máquina compilado 
-									pero no montado.
-								</td>
-							</tr>
-							<tr>
-								<td>Código fuente</td>
-								<td>c, cc, cpp, java, py, asm, asp, php, js</td>
-								<td>Código fuente en diversos lenguajes.</td>
-							</tr>
-							<tr>
-								<td>Bibliotecas</td>
-								<td>so, dll, a, lib</td>
-								<td>Bibliotecas de rutina para programadores.</td>
-							</tr>
-							<tr>
-								<td>Impresión o visualización</td>
-								<td>ps, pdf, jpg, bmp, png</td>
-								<td>Archivos para visualizar imágenes o documentos</td>
-							</tr>
-							<tr>
-								<td>Archivado</td>
-								<td>zip, rar, tar, gz, bz2</td>
-								<td>Archivos comprimidos para ahorrar espacio.</td>
-							</tr>
-						</table>
-					</section>
+				<section id="operaciones-archivo-1">
+					<h2>Operaciones con archivos (1/3)</h2>
+					<ul>
+						<li>
+							<h3>Creación</h3> Cuando se crea un archivo, se busca
+							un espacio libre lo suficientemente grande para almacenarlo y
+							luego se agrega en el directorio de entradas de archivo.
+						</li>
+						<li>
+							<h3>Escritura</h3> Al escribir, se accede al archivo con una
+							llamada al sistema especificando su nombre y ubicación, 
+							el sistema explora la ubicación y devuelve un 
+							<strong>puntero de escritura</strong>.
+						</li>
+					</ul>
+					<aside class="notes">
+						El puntero de referencia apunta a una ubicación dentro
+						del archivo, el cual se actualiza a una nueva posición 
+						cada vez que realizamos una operación de escritura.
+					</aside>
 				</section>
 
-				<section>
-					<section id="metodos-accesso">
-						<h2>Métodos de acceso</h2>
-						<ul>
-							<li>
-								<h3>Acceso secuencial.</h3>
-							</li>
-							<li>
-								<h3>Acceso directo.</h3>
-							</li>
-						</ul>
-					</section>
-					<section id="metodos-accesso">
-						<h2>Métodos de acceso</h2>
-						<h3>Acceso secuencial.</h3>
-						<ul>
-							<li>
-								La información es procesada en orden.
-							</li>
-							<li>
-								Es el método mas común, usado por los archivos de texto.
-							</li>
-							<li>
-								Dependiendo de la operación realizada, el puntero del archivo
-								se incrementa o disminuye, además es posible ubicarlo a 
-								cualquier parte moviéndose <strong>N</strong> cantidad de 
-								registros.
-							</li>
-						</ul>
-						<aside class="notes">
-							Los archivos en orden un registro esta después de otro.
-						</aside>
-					</section>
-					<section>
-						<h2>Métodos de acceso</h2>
-						<h3>Acceso directo.</h3>
-						<ul>
-							<li>
-								El archivo esta compuesto por registros de 
-								<strong>longitud fija</strong>.
-							</li>
-							<li>
-								No existe restricciones en cuanto al orden de 
-								lectura o escritura.
-							</li>
-						</ul>	
-					</section>
-					<section id="accesos">
-						<h2>Métodos de acceso</h2>
-						<div class="half left center">
+				<section id="operaciones-archivo-2">
+					<h2>Operaciones con archivos (2/3)</h2>
+					<ul>
+						<li>
+							<h3>Lectura</h3> Se accede al archivo con una
+							llamada al sistema especificando su nombre y 
+							donde debe colocarse el siguiente bloque del archivo. 
+							De esta manera se obtiene un <strong>puntero de lectura
+							</strong> para recorrer su contenido.
+						</li>
+						<li>
+							<h3>Reposicionamiento</h3> Se explora el directorio 
+							hasta encontrar el archivo indicado, se actualiza la 
+							entrada del puntero de posición con la nueva 
+							ubicación (sin realizar operaciones E/S).
+						</li>
+					</ul>
+					<p class="nota">
+						<strong>Nota:</strong> Los puntero de lectura y escritura 
+						son únicos para cada proceso.
+					</p>
+					<aside class="notes">
+						Una ubicación por ejemplo, puede ser la RAM.
+					</aside>
+				</section>
+
+				<section id="operaciones-archivo-3">
+					<h2>Operaciones con archivos (3/3)</h2>
+					<ul>
+						<li>
+							<h3>Borrado</h3> Para eliminar el archivo, se explora el directorio
+							hasta encontrarlo, luego se libera su espacio en el dissco y se 
+							procede a eliminar la entrada del disco.
+						</li>
+						<li>
+							<h3>Truncado</h3> Esta operación consiste en borrar todo el
+							contenido de un archivo pero manteniendo sus atributos. En vez de 
+							borrar y volver a crear el archivo, se reinicia el archivo con
+							una longitud igual a 0 y se libera el espació asignado previamente.
+						</li>
+					</ul>
+				</section>
+
+				<section id="tipos-archivo">
+					<h2>Tipos de archivo</h2>
+					<ul>
+						<li>
+							Usualmente conocemos dos tipos de archivos: <strong>binarios 
+							y de texto.</strong> Sin embargo, a bajo nivel <strong>ambos 
+							son binarios,</strong> la única diferencia se interpreta: 
+							los archivos de texto son codificados en ASCII, cada byte 
+							representa un caracter o un valor como: salto de línea,
+							retorno del carro, entre otros.
+						</li>
+						<li>
+							Una técnica común para implementar los tipos de archivos, es 
+							<strong>dividir el nombre del archivo en 2 partes:</strong>
+							una para el <strong>nombre</strong> y otra para 
+							<strong>la extensión</strong>.
+						</li>
+						<li>
+							La extensión simplemente <strong>indica el formato del contenido,
+							</strong> sin embargo, puede ser creado/editado por el usuario 
+							por lo que no es confiable interpretar el archivo solo 
+							por la extensión.
+						</li>
+					</ul>
+					<aside class="notes">
+						<p>	
+							Suelen ser las iniciales o abreviaciones del tipo
+							de archivo
+						</p>
+					</aside>
+				</section>
+
+				<section id="extensiones-archivos">
+					<h2>Tipos comunes de archivo</h2>
+					<table class="comparacion center">
+						<tr>
+							<th>Tipo</th>
+							<th>Extensión usual</th>
+							<th>Función</th>
+						</tr>
+						<tr>
+							<td>Ejecutable</td>
+							<td>exe, com, bin o niguna.</td>
+							<td>
+								Programas en lenguaje de máquina 
+								listos para ser ejecutados
+							</td>
+						</tr>
+						<tr>
+							<td>Objeto</td>
+							<td>obj, o</td>
+							<td>
+								Lenguaje de máquina compilado 
+								pero no montado.
+							</td>
+						</tr>
+						<tr>
+							<td>Código fuente</td>
+							<td>c, cc, cpp, java, py, asm, asp, php, js</td>
+							<td>Código fuente en diversos lenguajes.</td>
+						</tr>
+						<tr>
+							<td>Bibliotecas</td>
+							<td>so, dll, a, lib</td>
+							<td>Bibliotecas de rutina para programadores.</td>
+						</tr>
+						<tr>
+							<td>Impresión o visualización</td>
+							<td>ps, pdf, jpg, bmp, png</td>
+							<td>Archivos para visualizar imágenes o documentos</td>
+						</tr>
+						<tr>
+							<td>Archivado</td>
+							<td>zip, rar, tar, gz, bz2</td>
+							<td>Archivos comprimidos para ahorrar espacio.</td>
+						</tr>
+					</table>
+				</section>
+
+				<section id="metodos-acceso">
+					<h2>Métodos de acceso</h2>
+					<ul>
+						<li>
 							<h3>Acceso secuencial.</h3>
-							<pre>
-								<code>
-								read next
-								write next
-								reset
-								no read after last write
-								//(rewrite)
-								</code>
-							</pre>
-							<p>
-								<img src="img/class9/secuencial.png" alt="Acceso secuencial" />
-							</p>
-						</div>
-						<div style="width: 45%" class="right">
+						</li>
+						<li>
 							<h3>Acceso directo.</h3>
-							<pre>
-								<code>
-								read n
-								write n
-								position to n
-								read next
-								write nex
-								rewrite n
-								n = relative block number
+						</li>
+					</ul>
+				</section>
+				<section id="acceso-secuencial">
+					<h2>Métodos de acceso</h2>
+					<h3>Acceso secuencial.</h3>
+					<ul>
+						<li>
+							La información es procesada en orden.
+						</li>
+						<li>
+							Es el método mas común, usado por los archivos de texto.
+						</li>
+						<li>
+							Dependiendo de la operación realizada, el puntero del archivo
+							se incrementa o disminuye, además es posible ubicarlo a 
+							cualquier parte moviéndose <strong>N</strong> cantidad de 
+							registros.
+						</li>
+					</ul>
+					<aside class="notes">
+						Los archivos en orden un registro esta después de otro.
+					</aside>
+				</section>
+				<section id="acceso-directo">
+					<h2>Métodos de acceso</h2>
+					<h3>Acceso directo.</h3>
+					<ul>
+						<li>
+							El archivo esta compuesto por registros de 
+							<strong>longitud fija</strong>.
+						</li>
+						<li>
+							No existe restricciones en cuanto al orden de 
+							lectura o escritura.
+						</li>
+					</ul>	
+				</section>
+				<section id="accesos">
+					<h2>Métodos de acceso</h2>
+					<div class="half left center">
+						<h3>Acceso secuencial.</h3>
+						<pre>
+							<code>
+							read next
+							write next
+							reset
+							no read after last write
+							//(rewrite)
 							</code>
-							</pre>
-						</div>
-					</section>
-			</section>
+						</pre>
+						<p>
+							<a href="img/class10/secuencial.png" data-lightbox="Acceso secuencial">
+								<img src="img/class10/secuencial.png" alt="Acceso secuencial" />
+							</a>
+						</p>
+					</div>
+					<div style="width: 45%" class="right">
+						<h3>Acceso directo.</h3>
+						<pre>
+							<code>
+							read n
+							write n
+							position to n
+							read next
+							write nex
+							rewrite n
+							n = relative block number
+						</code>
+						</pre>
+					</div>
+				</section>
 
-			<section>
 				<section id="estructura-directorios">
 					<h2>Estructura de directorios</h2>
 					<div class="left half">
@@ -411,7 +484,7 @@
 						</ul>
 					</div>
 					<div class="half left">
-						<img src="img/class9/folder.png" alt="carpeta">
+						<img src="img/class10/folder.png" alt="carpeta">
 					</div>
 					<aside class="notes">
 						Un directorio es un objeto que relaciona de forma univoca
@@ -423,24 +496,12 @@
 				<section id="operaciones-directorios">
 					<h2>Operaciones de directorios</h2>
 					<ul>
-						<li>
-							<h3>Búsqueda de archivos</h3>
-						</li>
-						<li>
-							<h3>Crear archivos</h3>
-						</li>
-						<li>
-							<h3>Borrar archivos</h3>
-						</li>
-						<li>
-							<h3>Listar</h3>
-						</li>
-						<li>
-							<h3>Renombrar archivos</h3>
-						</li>
-						<li>
-							<h3>Recorrer el sistema de ficheros</h3> 
-						</li>
+						<li>Búsqueda de archivos.</li>
+						<li>Crear archivos.</li>
+						<li>Borrar archivos.</li>
+						<li>Listar.</li>
+						<li>Renombrar archivos.</li>
+						<li>Recorrer el sistema de ficheros.</li>
 					</ul>
 					<aside class="notes">
 						Listar muestra todos los archivos asociados
@@ -453,11 +514,11 @@
 				<section id="jerarquia-directorios-1">
 					<h2>Directorios de un nivel</h2>
 					<div class="center">
-						<img src="img/class9/1level_folder.png" alt=""/>
+						<img src="img/class10/1level_folder.png" alt=""/>
 					</div>
 					<h2>Directorios de dos niveles</h2>
 					<div class="center">
-						<img src="img/class9/2level_folder.png" alt=""/>
+						<img src="img/class10/2level_folder.png" alt=""/>
 					</div>
 					<aside class="notes">
 						Las de 1 nivel era como inicialmente eran los primeros
@@ -470,7 +531,7 @@
 				<section id="jerarquia-directorios-2">
 					<h2>Directorios en forma de arbol</h2>
 					<div class="center">
-						<img src="img/class9/tree_folder.png" alt=""/>
+						<img src="img/class10/tree_folder.png" alt=""/>
 					</div>
 					<aside class="notes">
 						<ul>
@@ -485,19 +546,19 @@
 				<section id="jerarquia-directorios-3">
 					<h2>Directorios en forma de grafo acíclico</h2>
 					<div class="center">
-						<img src="img/class9/grafo_folder.png" alt=""/>
+						<img src="img/class10/grafo_folder.png" alt=""/>
 					</div>
 					<aside class="notes">
-						<li>Se pueden compartir archivos.</li>
-						<li>Aparecen los enlaces de archivos.</li>
-						<li>Un archivo puede tener múltiples rutas.</li>
+						Se pueden compartir archivos.
+						Aparecen los enlaces de archivos.
+						Un archivo puede tener múltiples rutas.
 					</aside>
 				</section>
 
 				<section id="jerarquia-directorios-4">
 					<h2>Directorios en forma de grafo general</h2>
 					<div class="center">
-						<img src="img/class9/grafo_general_folder.png" alt=""/>
+						<img src="img/class10/grafo_general_folder.png" alt=""/>
 					</div>
 					<ul>
 						<li>Aparecen las rutas relativas, absolutas y los enlaces:
@@ -512,8 +573,7 @@
 						Se lleva un contador de referencias a un archivo.
 					</aside>
 				</section>
-			</section>
-			<section>
+
 				<section id="montaje-archivos">
 					<h2>Montaje de sistema de archivos</h2>
 					<div class="left half">
@@ -529,7 +589,7 @@
 						</ul>
 					</div>
 					<div class="half right">
-						<img src="img/class9/montajes.gif" alt="">
+						<img src="img/class10/montajes.gif" alt="">
 					</div>
 					<p class="clear">
 						El S.O. chequea que el dispositivo contiene un sistema
@@ -541,329 +601,10 @@
 						sistema de archivos distintos.
 					</aside>
 				</section>
-			</section>
 
-			<section>
-				<section id="seguridad">
-					<h2>Seguridad</h2>
-					<p>
-						Cuando se almacenan los datos en el disco, es necesario protegerlos
-						frente a los da&ntilde;os físicos (fiabilidad) y a los accesos
-						incorrectos (protección).
-					</p>
-					<h3>Tipos de ataques</h3>
-					<div class="half left">
-						<h4>Contra la seguridad</h4>
-							<ul>
-								<li>Caballo de Troya.</li>
-								<li>Bombas Lógicas.</li>
-								<li>Virus.</li>
-								<li>Gusanos.</li>
-								<li>Canales ocultos.</li>
-							</ul>
-					</div>
-					<div class="half left">
-						<h4>Contra la protección</h4>
-						<ul>
-							<li>Matriz de control de acceso.</li>
-							<li>Jerarquías de acceso.</li>
-							<li>Listas de control de acceso.</li>
-							<li>Listas de capacidades.</li>
-						</ul>
-					</div>
+				<section id="preguntas">
+					<h1>¿Dudas y preguntas?</h1>
 				</section>
-
-				<section id="caballos-troya">
-					<h2>Seguridad</h2>
-					<div class="half left">
-						<h3>Caballos de Troya</h3>
-						<ul>
-							<li>De apariencia inofensiva.</li>
-							<li>No se reproduce por si mismo (como los virus)</li>
-							<li>
-								Se suele usar para: robar capacidades de cómputo, 
-								información personal, controlar el equipos,
-								entre otros.
-							</li>
-							<li>
-								Entre los mas conocidos tenemos:
-							 	Netbus, Sub7, Back Orifice, etc.
-							</li>
-						</ul>
-					</div>
-					<div class="half left">
-						<img src="img/class9/trojanhorse.jpg" alt="Caballo de troya" />
-						<img src="img/class9/trojanhorse2.jpg" alt="Caballo de troya" />
-					</div>
-					<aside class="notes">
-						Parece realizar una función deseada por el usuario, 
-						pero en realidad permite abrir accesos no autorizados al sistema.
-					</aside>
-				</section>
-
-				<section id="bombas-logicas">
-					<h2>Seguridad</h2>
-					<div class="half left">
-						<h3>Bombas Lógicas</h3>
-						<ul>
-							<li>
-								Es un código insertado en un programa, 
-								inactivo por un período hasta que se detona por
-								una acción. 
-							</li>
-							<li>
-								Ejemplos: BETA de Windows,
-								problema en los servidores de Jurassic Park (ficción),
-								ataque a Corea del Sur (multiplataforma y borraba los discos).
-							</li>
-						</ul>
-					</div>
-					<div class="half left">
-						<img src="img/class9/timebomb.jpg" alt="Caballo de troya" />
-						<img src="img/class9/timebomb2.jpg" alt="Caballo de troya" />
-					</div>
-					<aside class="notes">
-						Las acciones pueden ser: detectar determinada 
-						condición, una fecha dada, al escribir 
-						una clave o falta de ésta.
-					</aside>
-				</section>
-
-				<section id="virus">
-					<h2>Seguridad</h2>
-					<h3>Virus</h3>
-					
-					<div class="left half">
-						<ul>
-							<li>
-								Fragmentos de código que se <strong>reproduce a sí 
-								mismo</strong> infectando código de otros programas del sistema.
-							</li>
-							<li>
-								Suelen aprovechar vulnerabilidades para
-								reproducirse o realizar da&ntilde;os.
-							</li>
-						</ul>
-					</div>
-					<div class="left half">
-						<img src="img/class9/virus.jpg" alt="virus" />
-					</div>
-					<aside class="notes">
-						Se ubican en la RAM, el disco duro, pueden infectar otro programa,
-						en el MBR, scripts, macros de archivos.
-					</aside>
-				</section>
-				<section>
-					<h3>Virus</h3>
-					<h4>Tipos de Virus</h4>
-					<ul>
-						<li><strong>Ejecutables:</strong> se anexan a programas ejecutables.</li>
-						<li><strong>Residente en memoria:</strong> permanece en memoria aunque finalice el programa infectado.</li>
-						<li><strong>De arranque:</strong> infecta el cargador del S.O. en el MBR.</li>
-						<li><strong>De macro:</strong> infectan documentos en vez de programas.</li>
-						<li><strong>De código fuente:</strong> infectan códigos de programas.</li>
-					</ul>
-				</section>
-
-				<section id="worms">
-					<h2>Seguridad</h2>
-					<h3>Gusanos</h3>
-					<div class="left half">
-						<ul>
-							<li>
-								Son programas que se propagan copiándose a sí mismos de una
-								máquina a otra a través de la red, utilizando fallos de seguridad 
-								de los S.O.
-							</li>
-								<li>
-								No suelen causar más da&ntilde;os que el consumo de recursos. 
-							</li>
-						</ul>
-					</div>
-					<div class="left half">
-						<img src="img/class9/worm.jpg" alt="morris worm" />
-					</div>
-					<ul>
-						<li>
-							Se evitan con firewalls, actualizaciones de software y S.O.
-						</li>
-					</ul>
-					<aside class="notes">
-						El 2 de noviembre de 1988, Robert Tappan Morris liberó lo que se conocería
-						como el <strong>gusano Morrisstudent</strong>, da&ntilde;ando aproximadamente
-						el 10% de Internet.
-					</aside>
-				</section>
-
-				<section id="canales-ocultos">
-					<h2>Seguridad</h2>
-					<h3>Canales ocultos</h3>
-						<p>
-							Consiste en una comunicación ilícita establecida entre dos o más procesos utilizando mecanismos al margen de los proporcionados por el 
-							sistema.
-						</p>
-						<p>
-							Son difíciles de detectar, pues se suelen confundir con programas 
-							del sistema operativo. Por ejemplo: Un proceso monitoriza la carga de la 
-							CPU para recibir y la información que otro le envía
-							sobrecargando o aliviando la CPU.
-						</p>
-				</section>
-
-				<section id="rootkits">
-					<h2>Seguridad</h2>
-					<div class="left half">
-						<h3>Rootkits (Kit de root)</h3>
-						<p>
-							Es un software oculto, generalmente 
-							malicioso, dise&ntilde;ado para ocultar la existencia de ciertos 
-							procesos o programas, de métodos de detección 
-							normales y permitir ejecutarse con altos privilegios para 
-							acceder a una computadora.
-						</p> 
-					</div>
-					<div class="left half">
-						<img src="img/class9/rootkit.gif" alt="Rootkit" />
-					</div>
-				</section>
-				<aside class="notes">
-					Uno de los casos mas conocido fue el rootkit incluído
-					en los CDs de música de SONY.
-				</aside>
-			</section>
-			<section>
-				<section id="esquemas-seguridad">
-					<h2>Esquemas de seguridad</h2>
-					<ul>
-						<li>Matriz de control de acceso</li>
-						<li>Jerarquías de acceso</li>
-						<li>Listas de control de acceso</li>
-						<li>Listas de capacidades</li>
-					</ul>			
-				</section>
-				<section id="acm">
-					<h2>Esquemas de seguridad</h2>
-					<h3>Matriz de control de acceso</h3>
-					<div class="half right">
-						<img src="img/class9/acm.png" alt="ACM" />
-						<p class="nota">Fuente: 
-							<a href="http://ingenieriadelaseguridad.blogspot.com" />
-								ingenieriadelaseguridad.blogspot.com
-							</a>
-						</p>
-					</div>
-					<div class="half left">
-						<ul>
-							<li>
-								Consiste en una matriz que relaciona dominios con un conjunto de objetos.
-							</li>
-							<li>
-								Es fácil de implementar.
-							</li>
-							<li>
-								Se suele conocer como ACM, por sus siglas en inglés: 
-								<strong>Access Control Matrix</strong>.
-							</li>
-						</ul>
-					</div>
-					<aside class="notes">
-						Suele ser inviable en casos donde
-						existen muchas reglas, debido a la enormidad de la estructura
-						y muchas celdas estarían vacías.
-					</aside>
-				</section>
-
-				<section id="jerarquias-acceso">
-					<h2>Esquemas de seguridad</h2>
-					<h3>Jerarquías de acceso</h3>
-					<div class="half right">
-						<img src="img/class9/jerarquia.jpg" alt="jerarquia de acceso" />
-						<p class="nota">Ejemplo de seguridad de módulos de una aplicación</p>
-					</div>
-					<div class="half left">
-						<ul>
-							<li>
-								Organiza distintos derechos de accesos de forma jerarquíca.	
-							</li>
-							<li>
-								Fácil de implementar pero poderosa.
-							</li>
-							<li>
-								Permite la reutilización de derechos y consume pocos recursos.
-							</li>
-						</ul>
-					</div>
-					<aside class="notes">
-						Un ejemplo es el sistema de archivos: el administrador tiene
-						acceso a todo, el grupo a archivos de varios usuarios
-						y el usuario solo a sus archivos. 
-					</aside>
-				</section>
-
-				<section id="jerarquias-acceso">
-					<h2>Esquemas de seguridad</h2>
-					<h3>Lista de control de acceso</h3>
-					<div class="half right">
-						<img src="img/class9/acl.png" alt="ACM" />
-						<p class="nota">Fuente: 
-							<a href="http://ingenieriadelaseguridad.blogspot.com" />
-								ingenieriadelaseguridad.blogspot.com
-							</a>
-						</p>
-					</div>
-					<div class="half left">
-						<ul>
-							<li>
-								Es de las matriz de control sin espacios vacíos 
-								al ser implementado en una lista dinámica 
-								como estructura de datos.
-							</li>
-							<li>
-								Son ampliamente utilizadas en el mercado
-								por su rápida lectura, robustez, entre otros. 
-							</li>
-						</ul>
-					</div>
-					<aside class="notes">
-						Es usado en routers, servidores
-						de autenticación, sistemas de archivos, etc.
-					</aside>
-				</section>
-
-				<section id="listas-capacidades">
-					<h2>Listas de capacidades</h2>
-					<h3>Lista de control de acceso</h3>
-					<div class="half right">
-						<img src="img/class9/listacapacidades.png" alt="ACM" />
-						<p class="nota">
-							Ejemplo de una lista de capacidades
-							para almacenar información de un archivos.
-						</p>
-					</div>
-					<div class="half left">
-						<ul>
-							<li>
-								Permite almacenar el control de acceso de varios objetos,
-								al guardar en cada fila de la estructura
-								toda la información de permisología del objeto.
-								
-							</li>
-						</ul>
-					</div>
-					<ul>
-						<li>
-							De ésta manera, la búsqueda es mas rápida al momento
-							de consultar la información de un objeto, pues la información
-							esta ordenada por objetos.
-						</li>
-					</ul>
-				</section>
-			</section>
-
-
-			<section>
-				<h1>¿Dudas y preguntas?</h1>
-			</section>
 
 			</div>
 
@@ -871,7 +612,8 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
-
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
 		<script>
 
 			// Full list of configuration options available here:
@@ -882,7 +624,7 @@
 				history: true,
 				center: true,
 
-				theme: 'unet',
+				theme: 'mozilla',
 				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Optional libraries used to extend on reveal.js
@@ -895,7 +637,6 @@
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
-
 		</script>
 
 	</body>

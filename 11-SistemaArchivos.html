@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="es">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sistemas Operativos | UNET</title>
+
+		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
+		<meta name="author" content="Miguel Angel Useche Castro">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/unet.css">
+		<link rel="stylesheet" href="css/lightbox.css">
+
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div class="unet">
+						<div class="logo-wrapper left">
+							<img  src="img/intro/UNET.png" alt="UNET Logo">
+						</div>
+						<p id="definition-header" class="left">
+							Universidad Nacional Experimental Del Táchira<br />
+							Decanato De Docencia<br />
+							Dpto. Ingeniería Informática
+						</p>
+					</div>
+
+					<h1 class="clear">
+						Sistemas Operativos
+					</h1>
+					<h2 id="subject-code">
+						Código 0435607T
+					</h2>
+					<div class="professor-info">
+						<p>
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
+							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+						</p>
+					</div>
+				</section>
+		
+				<section id="contenido" class='slide'>
+					<h2>Contenido</h2>
+					<ul>
+						<li>Sistemas de Archivos:
+							<ul>
+								<li>Definición.</li>
+								<li>Principales implementaciones.</li>
+							</ul>
+						</li>
+						<li>Sistemas de archivos virtuales</li>
+					</ul>
+				</section>
+
+				<section id="Sistemas-de-archivo">
+					<h2>Sistemas de archivos</h2>
+					<ul>
+						<li>
+							Son unidades lógicas para estructurar la información
+							guardada en un dispositivo de almacenamiento, 
+							para posteriormente ser representada 
+							textualmente o gráficamente utilizando un gestor de archivos.
+						</li>
+						<li>
+							Se almacenan en el disco y se diseñan mediante capas.
+						</li>
+						<li>Cada Sistema Operativo suele soportar sus propios sistemas de archivos.</li>
+						<li>
+							Algunos estan diseñados para velocidad, otro para grandes archivos, para pequeños, 
+							para base de datos, lectura rápida, etc.
+						</li>
+					</ul>
+				</section>
+
+				<section id="Sistemas-de-archivo-2">
+					<h2>Sistemas de archivos</h2>
+					<ul>
+						<li>
+							Es la forma en la que los archivos y directorios
+							son almacenados, administración del espacio,
+							eficiencia y confiabilidad.
+						</li>
+						<li>
+							Diferente al punto de vista de usuario, donde
+							sólo se preocupan en como nombrar los
+							archivos, recuperarlos, operaciones sobre ellos
+							y otros elementos relacionados con la interfaz.
+						</li>
+					</ul>
+					<aside class="notes">
+						Los discos se pueden dividir en una o mas
+						particiones con sistemas de archivos
+						independientes en cada partición
+					</aside>
+				</section>
+
+				<section id="distribucion-sistema-archivos">
+					<h2>Distribución del<br>sistema de archivos</h2>
+					<img src="img/class11/sistemaarchivos.png" alt="Sistema de archivos">
+				</section>
+
+				<section id="bloque-control-archivo">
+					<h2>Bloque de control de archivo</h2>
+					<p>
+						Es una estructura de almacenamiento que contiene 
+						información de un archivo.
+					</p>
+					<table id="bloque-archivo" >
+						<tr>
+							<td class="p1 center">
+								Permisos de archivo
+							</td>
+						</tr>
+						<tr>
+							<td class="p1 center">
+								Fecha de creación (creado, acceso, modificado)
+							</td>
+						</tr>
+						<tr>
+							<td class="p1 center">
+								Dueño del archivo, grupo, ACL
+							</td>
+						</tr>
+						<tr>
+							<td class="p1 center">
+								Tamaño del archivo
+							</td>
+						</tr>
+						<tr>
+							<td class="p1 center">						
+								Puntero(s) al bloque(s) del archivo.
+							</td>
+						</tr>
+					</table>
+				</section>
+
+				<section id="sistemas-archivos-memoria">
+					<h2>Sistema de archivos en Memoria</h2>
+					<div class="center">
+						<img src="img/class11/samemoria.jpg" alt="Sistemas de archivos en memoria" />
+						<p class="nota">
+							Proceso de lectura y escritura a través del sistema de archivo
+							cargado en memoria
+						</p>
+					</div>
+				</section>
+
+				<section id="gestion-espacio-ocupado">
+					<h2>Gestión de espacio ocupado</h2>
+					<p>	
+						A medida que se va almacenando información en el disco,
+						es necesario administrar el espacio libre restante
+						para permitir almacenar la mayor cantidad posible de bloques 
+						de archivos.
+					</p>
+					<ul>
+						<li>Asignación contigua.</li>
+						<li>Asignación ligada.</li>
+						<li>Tabla de asignación de archivos.</li>
+						<li>Asignación indexada.</li>
+						<li>Multinivel.</li>
+					</ul>
+				</section>
+
+				<section id="asignacion-contigua">
+					<h2>Asignación contigua</h2>
+					<div class="left half">
+						<ul>
+							<li>
+								Cada archivo ocupa un conjunto contiguo de bloques en el disco.
+							</li>
+							<li>
+								Simple implementación.
+							</li>
+							<li>
+								Desperdicia espacio.
+							</li>
+							<li>Se hace fácil el acceso aleatorio y secuencial.</li>
+							<li>
+								No pueden crecer los archivos por tener los límites
+								definidos.
+							</li>
+						</ul>
+					</div>
+					<div class="left half">
+						<a href="img/class11/contigua.png" data-lightbox="Alocación contigua">
+							<img src="img/class11/contigua.png" alt="Alocación contigua">
+						</a>
+					</div>
+					<aside class="notes">
+						La simple implementación es porque sólo 
+						se requiere la posición inicial (número del bloque) 
+						y la longitud del mismo.
+
+						Se puede leer todo el archivo en una sola operación, sin
+						búsquedas adicionales ni retrasos por rotación.
+						
+						Con el transcurso del tiempo los discos se fragmentan.
+					</aside>
+				</section>
+
+				<section id="asignacion-ligada">
+					<h2>Asignación ligada</h2>
+					
+					<div class="left half">
+						<ul>
+							<li>
+								Cada archivo es una lista enlazada de bloques 
+								regados por todo el disco.
+							</li>
+							<li>Solo requiere de una dirección inicial y final.</li>
+							<li>
+								No desperdicia espacio pero se dificulta el acceso aleatorio.
+							</li>
+							<li>
+								El puntero ocupa espacio, por lo que el espacio de
+								almacenamiento ya no es el bloque completo
+							</li>
+						</ul>
+					</div>
+					<div class="left half">
+						<a href="img/class11/enlazada.png" data-lightbox="Alocación ligada">
+							<img src="img/class11/enlazada.png" alt="Alocación ligada">
+						</a>
+					</div>
+					<aside class="notes">
+						Se pueden utilizar todos los bloques del disco. No pierde
+						espacio por fragmentación.
+
+						Es mucho mas lento puesto que debe recorrer y buscar
+						cada bloque del archivo en operaciones separadas.
+					</aside>
+				</section>
+
+
+				<section id="asignacion-indexada">
+					<h2>Asignación indexada</h2>
+					
+					<div class="left half">
+						<ul>
+							<li>Junta todos los apuntadores en un único bloque índice.</li>
+							<li>Requiere una tabla índice.</li>
+							<li>Permite el acceso aleatorio.</li>
+							<li>Acceso dinámico sin fragmentación externa, pero con la sobrecarga
+							del bloque índice.</li>
+						</ul>
+					</div>
+					<div class="left half">
+						<img src="img/class11/indexada.png" alt="Alocación ligada" />
+					</div>
+
+					<aside class="notes">
+						Toda la tabla de memoria debe estar cargada en
+						memoria principal todo el tiempo. En un disco de 200GB
+						y bloques de 1KB, la tabla requiere cerca de 600MB de
+						RAM. 
+					</aside>
+				</section>
+
+				<section id="inodes">
+					<h2>Nodos i (i_nodes)</h2>
+					<ul>
+						<li>
+							Lista los atributos y las direcciones 
+							de disco de los bloques del archivo.
+						</li>
+						<li>
+							Cada nodo-i está identificado por un número entero
+						</li>
+						<li>
+							Esta lista solo necesita estar en memoria cuando el
+							archivo esta abierto.
+						</li>
+						<li>
+							Si un nodo-i ocupa <em>n</em> bytes y puede haber 
+							un máximo de <em>k</em> archivos abiertos, 
+							entonces el arreglo que contiene todos los nodos-i
+							en memoria es de <em>nk bytes</em>
+						</li>
+					</ul>
+				</section>
+
+				<section id="inode-ejemplo">
+					<h2>Ejemplo de nodo-i</h2>
+					<img src="img/class11/nodos-i.png" alt="Nodos-i">
+					<p>
+						Fuente: 
+						<a href="http://classes.soe.ucsc.edu/cmps111/Fall08/inode_with_signatures.jpg">
+							Darrell Long	
+						</a>
+					</p>
+				</section>
+
+				<section id="journaling">
+					<h2>Sistemas de archivo con sistemas de bitácora (o journaling)</h2>
+					<ul>
+						<li>
+							Guardan cada actualización al sistema 
+							de archivos como una transacción.
+						</li>
+						<li>
+							Todas las transacciones se escriben a la bitácora.
+						</li>
+						<li>
+							Una transacción se compromete cuando 
+							está escrita en la bitácora, pero no esta
+							actualizada en el S.A.
+						</li>
+						<li>
+							Las transacciones en la bitácora son escritas de 
+							manera síncrona al S.A.
+						</li>
+						<li>
+							Al modificar el S.A. se elimina la transacción
+							de la bitácora.
+						</li>
+						<li>
+							Si se cae el sistema de archivos, todas las transacciones 
+							pendientes en la bitácora se realizan.
+						</li>
+					</ul>
+				</section>
+
+				<section id="ejemplos">
+					<h1>Ejemplos de<br>implementaciones</h1>
+				</section>
+
+
+				<section id="fat">
+					<h2>FAT (File Allocation Table)</h2>
+					<div class="center">
+						<img src="img/class11/fat.png" alt="Sistema FAT" />
+						<p class="nota">Ejemplo de como funciona las particiones FAT</p>
+					</div>
+				</section>
+
+				<section id="ntfs">
+					<h2>NTFS (New Technology File System)</h2>
+					<div class="center">
+						<img src="img/class11/ntfs.jpg" alt="Sistema NTFS" />
+						<p class="nota">Ejemplo de como funciona las particiones NTFS</p>
+					</div>
+				</section>
+
+
+				<section id="unix">
+					<h2>Sistema de archivos de Unix</h2>
+					<div class="center">
+						<img src="img/class11/unixfs.png" alt="Unix file system" />
+						<p class="nota">Estructura de un sistema de archivos UNIX</p>
+					</div>
+				</section>
+
+				<section id="sistemas-archivos-virtuales">
+					<h2>Sistemas de<br>archivos virtuales</h2>
+					<ul>
+						<li>
+							En los SO modernos se pueden conseguir varios
+							sistemas de archivos coexistiendo: EXT3, EXT4,
+							NTFS, FAT32, NFS.
+						</li>
+						<li>
+							Para evitar heterogeneidad en las llamadas al
+							sistema, se ha implementado un meta
+							sistema de archivos llamado VFS 
+							(Virtual File System).
+						</li>
+						<li>
+							Se crea una capa adicional para hacer las llamadas
+						</li>
+					</ul>
+				</section>
+
+				<section id="sistemas-archivos-virtuales-2">
+					<h2>Sistemas de<br>archivos virtuales</h2>
+					<img src="img/class11/vfs.png" alt="VFS">
+				</section>
+
+				<section id="optimizacion-espacio">
+					<h2>Administración y optimización</h2>
+					<h3>Administración de espacio del disco</h3>
+					<ul>
+						<li>
+							Se divide el espacio en bloque de tamaño fijo.
+						</li>
+						<li>
+							Los archivos se dividen en bloques que serán
+							asignados a cada uno de los espacios (o bloques)
+							disponibles en el disco.
+						</li>
+						<li>
+							Los bloques de los archivos pueden o no ser
+							asignados de forma contigua. 
+						</li>
+					</ul>
+				</section>
+
+				<section id="optimizacion-bloque">
+					<h2>Administración y optimización</h2>
+					<h3>Tamaño del bloque</h3>
+					<p>
+						¿Qué tan grande debe ser el tamaño
+						de cada bloque del disco?
+					</p>
+					<ul>
+						<li>
+							Bloques de tamaño grande crean gran desperdicio de
+							espacio en archivos pequeños, pero hace la búsqueda
+							mas rápida.
+						</li>
+						<li>
+							Bloque de tamaño pequeño minimizan el desperdicio de
+							espacio pero ralentizan significativamente la lectura de
+							archivos, puesto que deben recorrer varios bloques para
+							tener acceso a el. 
+						</li>
+					</ul>
+				</section>
+
+				<section id="tamano-bloque">
+					<h2>Administración y optimización</h2>
+					<h3>Tamaño del bloque</h3>
+					<img src="img/class11/tamañobloque.png" alt="Tamaño del bloque">
+				</section>
+
+
+				<section id="cuotas-disco">
+					<h2>Administración y optimización</h2>
+					<h3>Cuotas de disco</h3>
+					<ul>
+						<li>
+							En los sistemas multiusuario se hace necesario que se
+							haga una distribución equitativa del disco entre los
+							usuarios.
+						</li>
+						<li>
+							Se pueden definir cuotas de disco de grupos y de
+							usuarios.
+						</li>
+						<li>
+							Permite evitar que un usuario o proceso sature el disco y
+							monopolice este recurso. 
+						</li>
+					</ul>					
+				</section>
+
+				<section id="respaldos">
+					<h2>Respaldos</h2>
+					<h3>Recuperación ante desastres</h3>
+					<ul>
+						<li> 
+							Los respaldos pueden ser definidos en esquemas 
+							completas, incrementales o diferenciales.
+						</li>
+						<li>
+							Se debe tener en cuenta permisos de usuario, cuotas de
+							disco, estado del sistema de archivo, archivos borrados
+							lógicamente
+						</li>
+					</ul>
+				</section>
+
+				<section id="consistencia">
+					<h2>Consistencia del S.A.</h2>
+					<ul>
+						<li>
+							Los sistemas de archivos leen/modifican/escriben en
+							bloques. Si hay una falla en el sistema antes de escribir
+							los cambios, puede crearse una inconsistencia.
+						</li>
+						<li>
+							Se puede tornar mas crítico sin las inconsistencias se
+							presentas en bloques con nodos-i, directorios o la lista
+							de bloques libres.
+						</li>
+						<li>
+							Existen herramientas que permiten verificar el sistema de
+							archivos, desde el punto de vista de metadatos y datos.
+							Ej: <strong>fsck</strong> y <strong>scandisk</strong>.
+						</li>
+					</ul>
+				</section>
+
+				<section id="consistencia-2">
+					<h2>Consistencia del S.A.</h2>
+					<p class="text-left">
+						Algunas situaciones no deseadas en un sistema de archivos:
+					</p>
+					<ul>
+						<li>
+							Bloque faltante en la tabla de bloques libres y bloques en uso.
+						</li>
+						<li>
+							Bloque duplicado en la tabla de bloques libres.
+						</li>
+						<li>
+							Bloque duplicado en la tabla de bloques usados
+						</li>
+					</ul>
+				</section>
+
+				<section id="rendimiento">
+					<h2>Rendimiento del S.A.</h2>
+					<ul>
+						<li>
+							El disco duro es el dispositivo mas lento del sistema, en
+							comparación con el CPU o la memoria principal.
+						</li>
+						<li>
+							Sus componentes mecánicos requieren movimiento para
+							ubicar la pieza de información a leer, así como también
+							el tiempo para leer la pieza de información en si.
+						</li>
+						<li>
+							Si se requiere una serie de datos, es necesario repetir el
+							proceso de movimiento del cabezal y lectura del dato,
+							tantas veces como el proceso lo requiera. 
+						</li>
+					</ul>
+				</section>
+
+				<section id="rendimiento-2">
+					<h2>Rendimiento del S.A.</h2>
+					<h3>Uso de cache</h3>
+					<ul>
+						<li>
+							Consiste en mantener una serie bloques utilizados
+							frecuentemente en un espacio de memoria principal.
+						</li>
+						<li>
+							El reemplazo de los bloques en cache se hacen utilizando los
+							métodos de FIFO, segunda oportunidad y LRU.
+						</li>
+						<li>
+							Las estrategias de escritura y sincronización con el disco se
+							llevan a cambo mediante cache de escritura inmediata (mayor
+							I/O, cambios se reflejan inmediatamente) y cache de escritura
+							diferida (menos I/O, cambios se reflejan en lapsos de tiempo
+							determinados). 
+						</li>
+					</ul>
+				</section>
+				<section id="rendimiento-3">
+					<h2>Rendimiento del S.A.</h2>
+					<h3>Desfragmentación de discos</h3>
+					<ul>
+						<li>
+							En un sistema recién instalado los archivos están
+							organizados de forma contigua.
+						</li>
+						<li>
+							En la vida útil del sistema, se crean, modifican y eliminan
+							archivos, dejando huecos y archivos esparcidos por
+							todas partes.
+						</li>
+						<li>
+							La desfragmentación reubica los archivos, colocándolos
+							uno tras otro en el disco, de tal forma que el cabezal no
+							necesite realizar tantas operaciones de búsqueda para
+							recuperar la información. 
+						</li>
+					</ul>
+				</section>
+
+				<section id="preguntas">
+					<h1>¿Dudas y preguntas?</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				center: true,
+
+				theme: 'mozilla',
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>

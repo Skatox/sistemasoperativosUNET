@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 	<head>
 		<meta charset="utf-8">
@@ -194,7 +194,7 @@
 		            </div>
 		        </section>
 		        <section id="exclusion-mutua-desactivacion-interrupciones">
-		            <h2>Exclusión Mutua <br> con espera ocupada</h2>
+		            <h2>Exclusión Mutua<br> con espera ocupada</h2>
 		            <h3>Desactivación de Interrupciones (hardware)</h3>
 		            <p>
 		                Es el método mas simple, consiste en desactivar todas las interrupciones
@@ -216,7 +216,7 @@
 		            </div>
 		        </section>
 		        <section id="exclusion-mutua-desactivacion-interrupciones-2">
-		            <h2>Exclusión Mutua <br> con espera ocupada</h2>
+		            <h2>Exclusión Mutua<br> con espera ocupada</h2>
 		            <h3>Desactivación de Interrupciones (hardware)</h3>
 		            <ul>
 		                <li>No es correcto que procesos del usuario desactiven interrupciones.</li>
@@ -340,7 +340,7 @@
 				</section>
 				<section id="exclusion-mutua-peterson-2">
 					<h2>Exclusión Mutua con Espera ocupada</h2>
-		            <h3>Solución de Peterson <br> (para 2 procesos)</h3>
+		            <h3>Solución de Peterson<br> (para 2 procesos)</h3>
 					<pre>
 						<code class="cpp">#define N 2
 int turno, interesado[N];
@@ -391,7 +391,7 @@ void salirSC(int proceso) {
 	                </p>
 		        </section>
 		        <section id="dormir-esperar">
-		            <h2>Exclusión Mutua <br>sin Espera ocupada</h2>
+		            <h2>Exclusión Mutua<br>sin Espera ocupada</h2>
 		            <h3>Dormir y despertar</h3>
 		            <ul>
 		                <li>
@@ -411,13 +411,13 @@ void salirSC(int proceso) {
 	                <h3>Problema del Productor - Consumidor</h3>
 	                <ul>
 	                    <li>Es un problema donde se puede aplicar este algoritmo.</li>
-	                    <li>Dos procesos comparter un buffer de tama&ntilde;o fijo.</li>
-	                    <li>Un proceso es el productor y a&ntilde;ade información al buffer.</li>
+	                    <li>Dos procesos comparter un buffer de tamaño fijo.</li>
+	                    <li>Un proceso es el productor y añade información al buffer.</li>
 	                    <li>Otro es el consumidor y lee (o modifica) la información del buffer.</li>
 	                </ul>
 		        </section>
 		        <section id="productor-consumidor-2">
-		            <h2>El problema del <br>Productor - Consumidor</h2>
+		            <h2>El problema del<br>Productor - Consumidor</h2>
 		            <ul>
 		                <li>
 		                    El problema del productor es cuando vaya a poner un elemento en el buffer
@@ -436,7 +436,7 @@ void salirSC(int proceso) {
 		            </ul>
 		        </section>
 		        <section id="productor-consumidor-3">
-		        	<h2>El problema del <br>Productor - Consumidor</h2>
+		        	<h2>El problema del<br>Productor - Consumidor</h2>
 	                <img src="img/class5/producto-consumidor.png" alt="pc" />
 		        </section>
 		        <section id="productor-consumidor-4">
@@ -527,7 +527,7 @@ void salirSC(int proceso) {
 		            </ul>
 	            </section>
 				<section id="productor-consumidor-semaforos">
-		            <h3>Productor - Consumidor <br> con Semaforos</h3>
+		            <h3>Productor - Consumidor<br> con Semaforos</h3>
 		            <ol>
 		                <li><strong>FULL (LLeno):</strong>cuenta las ranuras ocupadas.</li>
 		                <li><strong>EMPTY (Vacío):</strong>cuenta las ranuras libres.</li>
@@ -538,7 +538,7 @@ void salirSC(int proceso) {
 		            </ol>
 		        </section>
 		        <section id="productor-consumidor-semaforos-2">
-		            <h2>Productor - Consumidor <br> con Semaforos</h2>
+		            <h2>Productor - Consumidor<br> con Semaforos</h2>
 		            <div class="center">
 		                <pre>
 		                	<code class="cpp">#define N 100
@@ -718,7 +718,7 @@ int IN, OUT;</code>
 		                <h3>Problemas</h3>
 		                <ul>
 		                    <li>Son mas complejos de implementar.</li>
-		                    <li>Todos los mensajes son del mismo tama&ntilde;o.</li>
+		                    <li>Todos los mensajes son del mismo tamaño.</li>
 		                    <li>
 		                        Para evitar la pérdida de mensajes se deben implementar acuses
 		                        de recibos, pero incrementan la complejidad.
@@ -791,7 +791,7 @@ int IN, OUT;</code>
 		            </pre></div>
 		        </section>
 		        <section id="problemas-filosofos">
-		            <h2>Problemas de clásicos de <br>sincronización</h2>
+		            <h2>Problemas de clásicos de<br>sincronización</h2>
 		            <h3>Problema de los Filósofos</h3>
 		            <div class="half right">
 		                <img src="img/class5/filosofos.png" alt="filosfos" />
@@ -816,7 +816,7 @@ int IN, OUT;</code>
 	            	</ul>
 	            </section>
 	            <section id="problemas-filosofos-2">
-		            <h2>Problemas de clásicos de <br>sincronización</h2>
+		            <h2>Problemas de clásicos de<br>sincronización</h2>
 		            <h3>Problema de los Filósofos</h3>
 		            <div>
 		                <p>

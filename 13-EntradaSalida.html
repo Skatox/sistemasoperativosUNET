@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 	<head>
 		<meta charset="utf-8">
@@ -16,16 +16,20 @@
 
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/unet.css">
+		<link rel="stylesheet" href="css/lightbox.css">
+
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-
-		<link rel="stylesheet" href="css/theme/unet.css" id="theme">
-
-
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
 		</script>
 
 		<!--[if lt IE 9]>
@@ -38,16 +42,14 @@
 			<div class="slides">
 				<section>
 					<div class="unet">
-						<div class="left">
-							<img class="noborder" src="img/class1/UNET.png" alt="UNET Logo">
+						<div class="logo-wrapper left">
+							<img  src="img/intro/UNET.png" alt="UNET Logo">
 						</div>
-						<div class="left">
-							<p id="definition-header">
-								Universidad Nacional Experimental Del Táchira<br />
-								Decanato De Docencia<br />
-								Dpto. Ingeniería Informática
-							</p>
-						</div>
+						<p id="definition-header" class="left">
+							Universidad Nacional Experimental Del Táchira<br />
+							Decanato De Docencia<br />
+							Dpto. Ingeniería Informática
+						</p>
 					</div>
 
 					<h1 class="clear">
@@ -58,54 +60,53 @@
 					</h2>
 					<div class="professor-info">
 						<p>
-							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche<a> -
+							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
 							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
 							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
 						</p>
 					</div>
 				</section>
 
-			<section id="contenido" class='slide'>
-				<h2>Contenido</h2>
-				<ul>
-					<li>El sistema de E/S (I/O).</li>
-					<li>Caracterización de los dispositivos de E/S.</li>
-					<li>Controladores.</li>
-				</ul>
-			</section>
-
-			<section>
-				<section id="introduccion">
-					<h2>Dispositivos de E/S</h2>
-					<h3>Recursos de un Computadora</h3>
+				<section id="contenido" class='slide'>
+					<h2>Contenido</h2>
 					<ul>
-						<li>CPU</li>
-						<li>Memoria</li>
-						<li>Dispositivos de E/S:
-							<ul>
-								<li>Dispositivos de Interfaz de usuario (periféricos)</li>
-								<li>Dispositivos de Almacenamiento (secundario-terciario)</li>
-								<li>Dispositivos de Comunicaciones</li>
-							</ul>
-						</li>
+						<li>El sistema de E/S (I/O).</li>
+						<li>Caracterización de los dispositivos de E/S.</li>
+						<li>Controladores.</li>
 					</ul>
 				</section>
-				
-				<section>
-					<h2>Dispositivos de E/S</h2>
-					<p>
-						Los sistemas operativos se esfuerzan para optimizar la E/S.
-						Debido a que son los mas lentos de todo el sistema, por ejemplo:
-						<ul>
-							<li>CPU ejecuta operaciones a 1-4 GHz aproximadamente.</li>
-							<li>El acceso a RAM es de nanosegundos.</li>
-							<li>Dispositivos de E/S: acceso de milisegundos o más.</li>
-						</ul>
-					</p>
-				</section>
-			</section>
 
-			<section>
+				<section>
+					<section id="introduccion">
+						<h2>Dispositivos de E/S</h2>
+						<h3>Recursos de un Computadora</h3>
+						<ul>
+							<li>CPU</li>
+							<li>Memoria</li>
+							<li>Dispositivos de E/S:
+								<ul>
+									<li>Dispositivos de Interfaz de usuario (periféricos)</li>
+									<li>Dispositivos de Almacenamiento (secundario-terciario)</li>
+									<li>Dispositivos de Comunicaciones</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Dispositivos de E/S</h2>
+						<p>
+							Los sistemas operativos se esfuerzan para optimizar la E/S.
+							Debido a que son los mas lentos de todo el sistema, por ejemplo:
+							<ul>
+								<li>CPU ejecuta operaciones a 1-4 GHz aproximadamente.</li>
+								<li>El acceso a RAM es de nanosegundos.</li>
+								<li>Dispositivos de E/S: acceso de milisegundos o más.</li>
+							</ul>
+						</p>
+					</section>
+				</section>
+
 				<section id="sistema-es">
 					<h2>Sistema de E/S</h2>
 					<p>Ofrece una visión lógica simplificada de dispositivos de E/S:</p>
@@ -161,8 +162,7 @@
 						<li>Conectan el bus de la computadora con el dispositivo (generalmente mediante cables)</li>
 					</ul>
 				</section>
-			</section>
-			<section>
+
 				<section id="controladores">
 					<h2>Controladores</h2>
 					<p>
@@ -211,7 +211,7 @@
 						</li>
 					</ul>
 				</section>
-				<section>
+				<section id="caracteristicas-controladores-2">
 					<h3>a) De acuerdo al direccionamiento de la E/S</h3>
 					<ul>
 						<li>
@@ -415,20 +415,19 @@
 						</li>
 					</ul>
 				</section>
-			</section>
 
-			<section id="arquitectura">
-				<h2>Arquitectura de dispositivos de E/S</h2>
-				<div class="center">
-					<img src="img/class11/arquitectura.png" alt="">
-				</div>
-				<br />
-			</section>
+				<section id="arquitectura">
+					<h2>Arquitectura de dispositivos de E/S</h2>
+					<div class="center">
+						<img src="img/class11/arquitectura.png" alt="">
+					</div>
+					<br />
+				</section>
 
 	
-			<section>
-				<h1>¿Dudas y preguntas?</h1>
-			</section>
+				<section>
+					<h1>¿Dudas y preguntas?</h1>
+				</section>
 
 			</div>
 
@@ -436,7 +435,8 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
-
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
 		<script>
 
 			// Full list of configuration options available here:
@@ -447,7 +447,7 @@
 				history: true,
 				center: true,
 
-				theme: 'unet',
+				theme: 'mozilla',
 				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Optional libraries used to extend on reveal.js
@@ -461,5 +461,6 @@
 				]
 			});
 		</script>
+
 	</body>
 </html>
