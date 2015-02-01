@@ -186,7 +186,7 @@
 					</ul>
 				</section>
 				<section id="caracteristicas-controladores">
-					<h2>Características de un controlador</h2>
+					<h2>Características de<br> un controlador</h2>
 					<ul>
 						<li>
 							<h4>Dirección de E/S:</h4>
@@ -238,22 +238,22 @@
 						Nombrar el 1GB reservado
 					</aside>
 				</section>
-				<section>
-					<h2>Características de un controlador</h2>
+				<section id="caracteristicas">
+					<h2>Características de un <br> controlador</h2>
 					<h3>En Windows</h3>
 					<div class="center">
-						<img src="img/class11/wines.png" alt="ES en Windows" />
+						<img src="img/class13/wines.png" alt="ES en Windows" />
 					</div>
 				</section>
-				<section>
-					<h2>Características de un controlador</h2>
+				<section id="caracteristicas-2">
+					<h2>Características de un <br> controlador</h2>
 					<h3>En Linux</h3>
 					<div class="center">
-						<img src="img/class11/lines.png" class="noborder" alt="ES en Linux" />
+						<img src="img/class13/lines.png" class="noborder" alt="ES en Linux" />
 					</div>
 				</section>
-				<section id="caracteristicas-controladores-2">
-					<h2>Características de un controlador</h2>
+				<section id="caracteristicas-controladores-3">
+					<h2>Características de <br> un controlador</h2>
 					<h3>b) De acuerdo a la unidad de transferencia</h3>
 					<ul>
 						<li>
@@ -282,7 +282,7 @@
 						</li>
 					</ul>
 				</section>
-				<section>
+				<section id="segun-unidad-transferencia">
 					<h3>b) De acuerdo a la unidad de transferencia</h3>
 					<ul>
 						<li>
@@ -294,19 +294,19 @@
 						<li>
 							<p>Ejemplo de lectura de un único dispositivo:</p>
 							<pre><code>
-								configurar_dispositivo();
-								while(!fin_lectura())
-								{
-								&nbsp;&nbsp;programar_lectura();
-								&nbsp;&nbsp;while (!dato_recibido());
-								&nbsp;&nbsp;leer_dato();
-								}
+	configurar_dispositivo();
+	while(!fin_lectura())
+	{
+	&nbsp;&nbsp;programar_lectura();
+	&nbsp;&nbsp;while (!dato_recibido());
+	&nbsp;&nbsp;leer_dato();
+	}
 							</code></pre>
 							
 						</li>
 					</ul>
 				</section>
-				<section>
+				<section id="segun-tasa-transferencia">
 					<h3>b) De acuerdo a la unidad de transferencia</h3>
 					<ul>
 						<li>
@@ -314,36 +314,35 @@
 							<p>Ejemplo de lectura de un múltiples dispositivos:</p>
 							<div class="half left">
 							<pre><code>
-									configurar_dispositivo();
-									while(!fin_transferencias())
-									{
-									if (dispositivo_preparado(DISP1))
-										atender_disp(DISP1);
+configurar_dispositivo();
 
-									if (dispositivo_preparado(DISP2))
-										atender_disp(DISP2);
+while(!fin_transferencias())
+{
+&nbsp;&nbsp;if (dispositivo_preparado(DISP1))
+&nbsp;&nbsp;&nbsp;&nbsp;atender_disp(DISP1);
 
-									if (dispositivo_preprado(DISPN))
-										atender_disp(DISPN);
-									}
-								</code></pre>
+&nbsp;&nbsp;if (dispositivo_preparado(DISP2))
+&nbsp;&nbsp;&nbsp;&nbsp;atender_disp(DISP2);
+
+&nbsp;&nbsp;if (dispositivo_preprado(DISPN))
+&nbsp;&nbsp;&nbsp;&nbsp;atender_disp(DISPN);
+}</code></pre>
 							<p class="nota">Prioridad uniforme</p>
 						</div>
 						<div class="half left">
 							<pre><code>
-								configurar_dispositivo();
-								while(!fin_transferencias())
-								{
-								if (dispositivo_preparado(DISP1))
-									atender_disp(DISP1);
+configurar_dispositivo();
+while(!fin_transferencias())
+{
+&nbsp;&nbsp;if (dispositivo_preparado(DISP1))
+&nbsp;&nbsp;&nbsp;&nbsp;atender_disp(DISP1);
 
-								else if (dispositivo_preparado(DISP2))
-									atender_disp(DISP2);
+&nbsp;&nbsp;else if (dispositivo_preparado(DISP2))
+&nbsp;&nbsp;&nbsp;&nbsp;atender_disp(DISP2);
 
-								else if (dispositivo_preprado(DISPN))
-									atender_disp(DISPN);
-								}
-							</code></pre>
+&nbsp;&nbsp;else if (dispositivo_preprado(DISPN))
+&nbsp;&nbsp;&nbsp;&nbsp;atender_disp(DISPN);
+}</code></pre>
 							<p class="nota">Prioridad Escalonada</p>
 						</div>
 						</li>
@@ -352,7 +351,7 @@
 						La diferencia son los IFs
 					</aside>
 				</section>
-				<section>
+				<section id="inconvenientes">
 					<h3>Controladores</h3>
 					<h4>Inconvenientes:</h4>
 					<ul>
@@ -370,12 +369,12 @@
 					</ul>
 				</section>
 
-				<section id="caracteristicas-controladores-3">
-					<h2>Características de un controlador</h2>
+				<section id="caracteristicas-controladores-4">
+					<h2>Características de un <br> controlador</h2>
 					<h3>c) De acuerdo a interacción computador-controlador</h3>
 					<h4>E/S por interrupciones:</h4>
 					<div class="right">
-						<img src="img/class11/irqs.jpg" class="noborder" alt="IRQ">
+						<img src="img/class13/irqs.jpg" class="noborder" alt="IRQ">
 						<p class="nota">Lista de IRQs en Windows</p>
 					</div>
 					<p>
@@ -389,8 +388,7 @@
 						listo para enviar o transmitir datos sino que hace otras tareas
 					</aside>
 				</section>
-				<section id="caracteristicas-controladores-3">
-					<h2>Características de un controlador</h2>
+				<section id="caracteristicas-controladores-5">
 					<h3>c) De acuerdo a interacción computador-controlador</h3>
 					<h4>E/S por interrupciones:</h4>
 					<p>
@@ -419,9 +417,25 @@
 				<section id="arquitectura">
 					<h2>Arquitectura de dispositivos de E/S</h2>
 					<div class="center">
-						<img src="img/class11/arquitectura.png" alt="">
+						<img src="img/class13/arquitectura.png" alt="">
 					</div>
 					<br />
+				</section>
+
+				<section id="scheduler">
+					<h2>Gestión de E/S en Linux</h2>
+					<p>
+						Linux provee 4 tipos de gestores de E/S o elevadores llamados:
+					</p>
+					<ul>
+						<li>Anticipatory (Anticipadores)</li>
+						<li>Deadline (</li>
+						<li>CFQ (Complete Fairness Queueing)</li>
+						<li>Noop (No operation = FIFO)</li>
+					</ul>
+					<aside>
+						CFQ suele ser por defecto y NOOP para SSD
+					</aside>
 				</section>
 
 	

@@ -830,6 +830,46 @@
 					</div>
 				</section>
 
+				<section id="implementaciones">
+					<h1>Implementaciones</h1>
+				</section>
+
+				<section id="windows">
+					<h2>Windows</h2>
+					<p>
+						Según el libro <em>Windows Internals, Part 1: Covering Windows Server 2008 R2 and Windows 7</em>
+						(2012), Windows utiliza un sistema de colas multinivel <strong>basado en prioridades</strong> 
+						donde existen varias colas.
+					</p>
+					<p>
+						Siempre un proceso de la cola de la mayor prioridad se encuentra en ejecución, 
+						con la limitación de que ciertos hilos de prioridad alta pueden ser ejecutados
+						en el procesador que se les permita o prefieran ejecutarse, un fenómeno llamado
+						<em>Afinidad del procesador</em>.
+					</p>
+				</section>
+
+				<section id="macos">
+					<h2>MacOS</h2>
+					<p>
+						Utiliza una colas de retroalimentación con 4 prioridades: normal, sistema, kernel y
+						tiempo real. 
+					</p>
+				</section>
+
+				<section id="linux">
+					<h2>CFS - Complete Fair Schedule</h2>
+					<p>
+						Desde la versión 2.6.23 utiliza una variante cola justa (utilizada en los paquetes
+						de red). Es un algoritmo similar al <em>Round Robin</em> donde al momento que un proceso
+						regresa a la cola, ésta se coloca en una posición en base al tiempo que duró en el procesador.
+					</p>
+					<aside class="notes">
+						Tomar en cuenta que si salio un proceso por espera de E/S entonces
+						duró poco tiempo en el CPU.
+					</aside>
+				</section>
+
 				<section id="preguntas">
 					<h1>¿Preguntas?</h1>
 				</section>
@@ -864,4 +904,5 @@
 			});
 		</script>
 	</body>
+
 </html>

@@ -306,6 +306,10 @@
 							en memoria es de <em>nk bytes</em>
 						</li>
 					</ul>
+					<aside class="notes">
+						En el caso de Linux cada i-nodo ocupa 128bytes, entonces un
+						archivo de 1KB requiere 8 inodos. 4KB requiere 32.
+					</aside>
 				</section>
 
 				<section id="inode-ejemplo">
@@ -400,8 +404,11 @@
 				</section>
 
 				<section id="sistemas-archivos-virtuales-2">
-					<h2>Sistemas de<br>archivos virtuales</h2>
+					<h2>Sistemas de<br>archivos virtuales (VFS)</h2>
 					<img src="img/class11/vfs.png" alt="VFS">
+					<aside class="notes">
+						El primer VFS fue incluido en  SunOS en 1986.
+					</aside>
 				</section>
 
 				<section id="optimizacion-espacio">

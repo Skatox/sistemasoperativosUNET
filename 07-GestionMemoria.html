@@ -528,7 +528,7 @@
 						La memoria principal alberga tanto el sistema operativo
 						como los procesos de los usuarios. Por ello, la memoria
 						se divide en una partición para el S.O. y otro para las
-						tareas del usuario.
+						tareas del usuario. (ésta última se llama Memoria dinámica)
 					</aside>
 				</section>
 				<section id="memoria-dinamica">
@@ -717,6 +717,28 @@
 					</ul>
 				</section>
 
+				<section id="evitar-fragmentacion">
+					<h2>¿Cómo evitar la fragmentación</h2>
+					<p>Existen 2 maneras de evitarla:</p>
+					<ul>
+						<li>
+							Utilizar los circuitos del paginado de memoria, 
+							para mapear bloques no contiguos como si
+							estuviesen uno al lado del otro.
+						</li>
+						<li>
+							Llevar el control de los bloques asignados y libres,
+							evitando la necesidad de dividir huecos grandes.
+						</li>
+					</ul>
+					<aside class="notes">
+						El kernel prefiere el segundo método porque cuando se hace operaciones
+						DMA no se respeta el orden de los circuitos, se dañá la tabla de páginas
+						y se debe actualizar, conviene tener muchos bloques para mejorar la 
+						caché.
+					</aside>
+				</section>
+
 				<section>
 					<h2>Formas para llevar el registro de la memoria</h2>
 					<ul>
@@ -790,9 +812,13 @@
 						<li>
 							El problema es que crea fragmentación interna.
 						</li>
+						<li>
+							El algoritmo utilizado en Linux está
+							basado en este.
+						</li>
 					</ul>
 				</section>
-			
+
 				<section id="preguntas">
 					<h1>¿Preguntas?</h1>
 				</section>

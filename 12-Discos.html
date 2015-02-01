@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="es">
 
@@ -96,6 +97,10 @@
 								planificación de peticiones.
 							</li>
 						</ul>
+						<aside class="notes">
+							La controladora es un circuito integrado que se conecta a la 
+							tarjeta madre a través del cable IDE o SATA.
+						</aside>
 					</p>
 					<aside class="notes">
 						Solo la RAM es mas rápida
@@ -154,17 +159,32 @@
 					<div class="half left center">
 						<img src="img/class12/cilindro.jpg" alt="Cilindro" />
 						<p class="nota">Ejemplo de un cilindro del disco</p>
-						<p>
-						La capacidad del disco se mide mediante: 
-						<strong> Capacidad = cilindros * pistas * sectores * tamaño sector </strong>
-					</p>
 					</div>
+				</section>
+
+				<section id="capacidad-disco">
+					<h2>Capacidad de un disco duro</h2>
+					<ul>
+						<li>
+							La capacidad del disco se mide mediante: <br>
+							<strong> Capacidad = cilindros * pistas * sectores * tamaño sector </strong>
+						</li>
+						
+						<li>
+							Estos datos suelen estar impresos en el reverso del disco.
+						</li>
+
+						<li>
+							Los SSD escriben la información en bloques, por lo tanto,
+							no se organizan de la misma forma que los disco duros mecánicos.
+						</li>
+					</ul>
 				</section>
 
 				<section id="tiempo-acceso">
 					<h2>Estructura de un disco duro</h2>
 					<h3>Tiempo de acceso</h3>
-					<p>
+					<p class="text-left">
 						Las operaciones de E/S se calculan en base a dos
 						parámetros:
 					</p>
@@ -178,10 +198,11 @@
 							la media rotación que tardan en llegar
 							los datos bajo las cabezas, una vez sobre la pista.
 
-							<p class="center">
-								<strong>T_acceso</strong> = n * T_búsqueda + T_latencia + T_transferencia.
-							</p>
 						</li>
+						<br>
+						<p class="center">
+							<strong>T_acceso</strong> = n * T_búsqueda + T_latencia + T_transferencia.
+						</p>
 					</ul>
 				</section>
 
