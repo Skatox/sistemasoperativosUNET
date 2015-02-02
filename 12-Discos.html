@@ -70,12 +70,32 @@
 					</div>
 				</section>
 	
-				<section id="contenido" class='slide'>
+				<section id="contenido">
 					<h2>Contenido</h2>
 					<ul>
+						<li>Introducción</li>
 						<li>Estructura física de los discos.</li>
 						<li>Planificadores del disco.</li>
+						<li>Gestión de disco.</li>
+						<li>Gestión de volúmenes.</li>
 					</ul>
+				</section>
+
+				<section id="introduccion">
+					<h2>Introducción</h2>
+					<p>
+						El sistema de archivos puede verse como una estructura
+						de tres capas:
+					</p>
+					<ul>
+						<li>Interfaz de usuario.</li>
+						<li>Estructuras de datos.</li>
+						<li>Estructuras de almacenamiento.</li>
+					</ul>
+					<p class="nota">
+						También se requieren ciertos métodos para hacer uso de la
+						parte física del S.A.
+					</p>
 				</section>
 
 				<section id="almacenamiento-secundario">
@@ -85,10 +105,19 @@
 						<li>Almacenamiento no volátil.</li>
 						<li>Alta velocidad de acceso.</li>
 						<li>Susceptibles de ser soporte para el sistema de archivos.</li>
+						<li>Suele ser mas económicos que otros tipos de memoria.</li>
 					</ul>
+					<aside class="notes">
+						Preguntar cuales son, como por ejemplo: Magnéticos como 
+						disco duros, cintas, diskette. Ópticos como CD, DVD, Blu-Ray.
+						Sólido como memorias flash, SSD. Híbridos como SSD y HD.
+					</aside>
+				</section>
 
+				<section id="elementos-discos">
+					<h2>Almacenamiento secundario</h2>
+					<h3>Principales elementos</h3>
 					<p>
-						<h3>Principales elementos</h3>
 						<ul>
 							<li><strong>Discos:</strong> su estructura y cómo es gestionado.</li>
 							<li>
@@ -312,8 +341,8 @@
 						de E/S de disco:
 					</p>
 					<ul>
-						<li>FCSS</li>
-						<li>SSTF</li>
+						<li>FCFS (First Come First Served)</li>
+						<li>SSTF (Shortest Seek Time First)</li>
 						<li>LOOK</li>
 						<li>C-LOOK- SCAN</li>
 						<li>C-SCAN</li>
@@ -383,6 +412,45 @@
 						inmediatamente, sin antes ir hasta el final del disco.
 					</p>
 					<div class="center"><img src="img/class12/clook.png" alt="clook"></div>
+				</section>
+
+				<section id="gestion-disco">
+					<h2>Gestión de disco</h2>
+					<h3>Formateo de disco</h3>
+					<ul>
+						<li>Un disco nuevo es como una pizarra en blanco.</li>
+						<li>
+							Es necesario crear una estructura o dividir el disco
+							en unidades (sectores, cilindros, pistas), que sean
+							manejables para el hardware (formateo físico).
+						</li>
+						<li>
+							El sistema operativo requiere crear su propia
+							estructura para grabar datos en un disco físico.
+							Crea entonces particiones y sistemas de archivos.
+						</li>	
+					</ul>
+				</section>
+
+				<section id="arranque">
+					<h2>Gestión de arranque</h2>
+					<h3>Bloque de arranque</h3>
+					<ul>
+						<li>
+							Es el primer bloque a leer luego de que el hardware
+							del computador ha sido iniciado.
+						</li>
+						<li>
+							Se encuentra el cargador del sistema o los
+							sistemas operativos instalados en el computador
+							(Master boot record, MBR). Allí se identifica cual
+							partición o sistema operativo debe iniciar.
+						</li>
+						<li>
+							Un ejemplo es un computador con dual boot.
+							(Windows y Linux instalados en el mismo equipo).
+						</li>
+					</ul>
 				</section>
 
 				<section id="preguntas">
