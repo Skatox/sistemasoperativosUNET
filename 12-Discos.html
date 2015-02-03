@@ -453,6 +453,407 @@
 					</ul>
 				</section>
 
+				<section id="bloques-defectuosos">
+ 					<h2>Bloques defectuosos</h2>
+ 					<ul>
+						<li>
+							Los discos poseen parte móviles con una mínimas
+							tolerancias.
+						</li>
+						<li>
+							Durante su uso se pueden presentar bloques
+							defectuosos, los cuales deben ser gestionados por
+							el sistema operativo para evitar su uso.
+						</li>
+						<li>
+							Usualmente existen herramientas para marcar
+							estos bloques y eliminarlos como utilizables. Se
+							pierde un poco de espacio disponible pero se evita
+							la pérdida de datos.
+						</li>
+ 					</ul>	
+				</section>
+
+				<section id="gestion-volumenes">
+ 					<h2>Gestión de volúmenes</h2>
+ 					<ul>
+ 						<li>
+ 							Aquí es donde se planifica el espacio y la
+							disposición de los discos del sistema.
+ 						</li>
+ 						<li>
+							Se deben tener en cuenta los dispositivos,
+							velocidades, balanceo de carga, tolerancia a
+							fallos.
+						</li>
+						<li>
+							Para administrar esto recursos se tienen los
+							administradores de volúmenes.
+						</li>
+ 					</ul>
+				</section>
+
+				<section id="gestion-volumenes-2">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Administradores de volúmenes</h3>
+ 					<ul>
+ 						<li>
+ 							Permite agrupar dispositivos físicos (como discos o
+							particiones) en un mismo dispositivo virtual que,
+							visto desde el sistema operativo, será un disco
+							simple con prestaciones especiales.
+						</li>
+						<li>
+							Algunos de los volúmenes gestionados por estas
+							herramientas son: RAID, LVM, EVMS, VVM.
+						</li>
+					</ul>
+				</section>
+
+				<section id="raid">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>RAID</h3>
+ 					<ul>
+ 						<li>
+	 						Acrónimo de <em>Redundant Array of Inexpensive Disks</em>
+							(Arreglo redundante de discos baratos).
+						</li>
+						<li>
+							La idea es agrupar varios discos para tener
+							prestaciones adicionales como guardar información
+							redundante, o también obtener un volume lógico
+							con la capacidad de varios discos físicos.
+						</li>
+						<li>
+							Con esta organización se pueden obtener ventajas
+							de rendimiento y tolerancia a fallos en la
+							información, según se disponga el arreglo de
+							discos.
+						</li>
+					</ul>
+				</section>
+
+				<section id="raid-2">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>RAID</h3>
+					<ul>
+						<li>
+							Al tener varios discos físicos disponibles se puede
+							distribuir los datos en ellos.
+						</li>
+						<li>
+							No se depende de un solo cabezal de
+							lectura/escritura para llevar a cabo los accesos al
+							disco.
+						</li>	
+						<li>
+							Con los datos distribuidos en los distintos discos,
+							según su disposición, no se tiene un único punto de
+							fallo de hardware, permitiendo la recuperación de la
+							información en caso de algún incidente.
+						</li>	
+					</ul>
+				</section>
+
+
+				<section id="raid0">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<ul>
+						<li>
+							<strong>RAID 0</strong>: distribución en bandas de datos a 
+							nivel de bloques y <strong>no tiene</strong> redundancia
+						</li>	
+					</ul>
+					<img src="img/class12/raid0.png" height="335" width="640" alt="RAID 0">
+				</section>
+
+				<section id="raid1">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<ul>
+						<li>
+							<strong>RAID 1</strong>: duplicación espejo de los discos.
+						</li>	
+					</ul>
+					<img src="img/class12/raid1.png" height="335" width="640" alt="RAID 0">
+				</section>
+
+				<section id="raid2">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<ul>
+						<li>
+							<strong>RAID 2</strong>: Organización con código de 
+							corrección de errores ECC. Distribuye los bytes en 
+							discos distintos. Si uno de los discos falla, se 
+							puede reconstruir los datos a partir de su paridad
+						</li>	
+					</ul>
+					<img src="img/class12/raid2.png" height="335" width="640" alt="RAID 0">
+				</section>
+
+				<section id="raid3-1">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<ul>
+						<li>
+							<strong>RAID 3</strong>: 
+							organización de paridad con entrelazados
+							de bits. Tiene las mismas características de RAID
+							2. Requiere un disco de paridad. Aumenta la tasa
+							de transferencia al leer un byte en N vías. El
+							arreglo completo soporta menos operaciones de
+							E/S por segundo, todos los discos participan en
+							cada lectura/escritura simultáneamente. También
+							tiene implicaciones de procesamiento al calcular la
+							paridad en cada lectura/escritura (todos los niveles
+							de RAID la tienen).
+						</li>
+					</ul>
+				</section>
+
+				<section id="raid3-2">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<h4>RAID 3</h4>
+					<img src="img/class12/raid3.png" height="302" width="436" alt="RAID 3">
+				</section>
+
+				<section id="raid4-1">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<ul>
+						<li>
+							<strong>RAID 4</strong>: 
+							organización de paridad con entrelazado
+							de bloques. Utiliza una distribución de bandas a
+							nivel de bloques como en RAID 0, pero
+							manteniendo un bloque de paridad en un disco
+							separado, con información de los bloques de los
+							otros N discos. Un bloque solo es accedido por un
+							disco, liberando los otros para lectura de otros
+							bloques.
+						</li>
+					</ul>
+				</section>
+
+				<section id="raid4-2">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<h4>RAID 4</h4>
+					<img src="img/class12/raid4.png" height="189" width="320" alt="RAID 4">
+				</section>
+
+				<section id="raid5-1">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<ul>
+						<li>
+							<strong>RAID 5</strong>: 
+							paridad distribuida con entrelazado de
+							bloques. Se distribuyen la paridad y los datos en
+							los N + 1 discos del arreglo. Un bloque de paridad
+							no esta contenido en el mismo disco donde se
+							encuentran los datos que representa. Evita el uso
+							excesivo de un único disco de paridad. Es el mas
+							utilizado.
+						</li>
+					</ul>
+				</section>
+
+				<section id="raid5-2">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<h4>RAID 5</h4>
+					<img src="img/class12/raid5.png" height="209" width="344" alt="RAID 5">
+				</section>
+
+				<section id="raid6-1">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<ul>
+						<li>
+							<strong>RAID 6</strong>: 
+							esquema de redundancia P + Q. Es muy
+							parecido a RAID 5, pero almacena información
+							redundante adicional para proteger los datos ante
+							múltiples fallas de disco.
+						</li>
+					</ul>
+				</section>
+
+				<section id="raid6-2">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<h4>RAID 6</h4>
+					<img src="img/class12/raid6.png" height="207" width="356" alt="RAID 6">
+				</section>
+
+				<section id="investigar">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Niveles de RAID</h3>
+					<ul>
+						<li>RAID 0+1: (Investigar)</li>
+						<li>RAID 1+0: (Investigar)</li>
+						<li>RAID 10: (Investigar)</li>
+						<li>RAID 5+0: (Investigar)</li>
+					</ul>
+				</section>
+
+				<section id="lvm-1">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Logical Volume Manager (LVM)</h3>
+					<ul>
+						<li>
+							Es un método de localización de espacio en disco
+							que puede ser fácilmente redimensionado.
+						</li>
+						<li>
+							Un volumen lógico puede estar compuesto de
+							varios volúmenes físicos (o particiones), pero un
+							volumen físico no puede estar en mas de un
+							volumen lógico.
+						</li>
+						<li>
+							Es una arquitectura independiente a la estructura
+							de los discos físicos.
+						</li>
+					</ul>
+				</section>
+
+				<section id="lvm-2">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Logical Volume Manager (LVM)</h3>
+					<ul>
+						<li>
+							Es sobre los volúmenes lógicos donde se hacen las
+							particiones para instalar el sistema operativo y las
+							aplicaciones.
+						</li>
+						<li>
+							Cuando una de estas “particiones” requiere mas
+							espacio, se utilizan las herramientas
+							administrativas de LVM para extenderlas hasta
+							donde se requiera.
+						</li>
+					</ul>
+				</section>
+
+				<section id="lvm-3">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Logical Volume Manager (LVM)</h3>
+					<ul>
+						<li>
+							Los elementos básicos que los componen:
+							<ul>
+								<li>
+									<strong>Physical volume/Volúmenes físicos (PV)</strong>: 
+									particiones en el disco rígido donde se puede tener un 
+									grupo de volúmenes.
+								</li>
+								<li>
+									<strong>Volume group/Grupo de volúmenes (VG)</strong>: 
+									Son grupos de volúmenes físicos que son usados como volúmenes 
+									de almacenamiento (como si fueran un solo disco). 
+									Contienen volúmenes lógicos.
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section id="lvm-4">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Logical Volume Manager (LVM)</h3>
+					<ul>
+						<li>
+							Los elementos básicos que los componen:
+							<ul>
+								<li>
+									<strong>Logical volume/Volúmenes lógicos (LV): </strong>
+									una partición virtual/lógica que reside en un 
+									grupo de volúmenes y está compuesta por extensiones físicas. 
+									Pueden verse como particiones normales.
+								</li>
+								<li>
+									<strong>Physical extent/Extensiones físicas (PE):</strong> 
+									una pequeña parte de un disco (usualmente 4MB) que puede
+									ser asignada a un volumen lógico. Las extensiones
+									físicas son partes de los discos que pueden ser
+									asignadas a cualquier partición
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section id="ventajas-lvm">
+					<h2>Gestión de volúmenes</h2>
+					<h3>Ventajas de LVM (1/2)</h3>
+					<ul>
+						<li>
+							Usar cualquier cantidad de discos como un gran disco (VG).
+						</li>
+						<li>
+							Tener particiones (LV) del tamaño de varios discos.
+						</li>
+						<li>
+							Redimensionar/crear/borrar particiones (LV) y discos
+							(VG) como sea necesario (no depende de la posición del
+							volumen lógico dentro del grupo de volúmenes, como
+							pasa con las particiones normales).
+						</li>
+					</ul>
+				</section>
+
+				<section id="ventajas-lvm-2">
+					<h2>Gestión de volúmenes</h2>
+					<h3>Ventajas de LVM (2/2)</h3>
+					<ul>
+						<li>
+							Redimensionar/crear/borrar particiones (LV) y discos
+							(VG) en línea (los sistemas de archivo aun necesitan ser
+							redimensionados, pero algunos soportan
+							dimensionamiento en línea).
+						</li>
+						<li>
+							Se puede nombrar los discos (VG) y particiones (LV)
+							como sea necesario.
+						</li>
+						<li>
+							Se crean pequeñas particiones (LV) y se pueden
+							dimensionar dinámicamente mientras se van llenando.
+						</li>
+					</ul>
+				</section>
+
+				<section id="desventajas-lvm">
+					<h2>Gestión de volúmenes</h2>
+					<h3>Desventajas de LVM (2/2)</h3>
+					<ul>
+						<li>
+							Exclusivo de Linux (o casi). No hay apoyo oficial en la
+							mayoría del resto de sistemas operativos (FreeBSD,
+							Windows, ...).
+						</li>
+						<li>
+							Se puede nombrar los discos (VG) y particiones (LV)
+							como sea necesario.
+						</li>
+						<li>
+							Los pasos adicionales en la configuración del sistema, lo
+							hace más “complicado”.
+						</li>
+					</ul>
+				</section>
+
+				<section id="lvm-5">
+ 					<h2>Gestión de volúmenes</h2>
+					<h3>Logical Volume Manager (LVM)</h3>
+					<img src="img/class12/lvm.png" height="348" width="600" alt="LVM">
+				</section>
+
 				<section id="preguntas">
 					<h1>¿Dudas y preguntas?</h1>
 				</section>
