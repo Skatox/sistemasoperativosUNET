@@ -66,36 +66,1016 @@
 						</p>
 					</div>
 				</section>
+
+				<section id="introduccion">
+					<h2>Introducción</h2>
+					<ul>
+						<li>Introducción</li>
+						<li>Entorno de seguridad</li>
+						<li>Fundamentos de criptografía</li>
+						<li>Mecanismos de protección</li>
+						<li>Autenticación</li>
+						<li>Ataques</li>
+						<li>Defensas</li>
+					</ul>
+				</section>
 		
-				<section id="seguridad">
-					<h2>Seguridad</h2>
-					<p>
-						Cuando se almacenan los datos en el disco, es necesario protegerlos
-						frente a los daños físicos (fiabilidad) y a los accesos
-						incorrectos (protección).
-					</p>
-					<h3>Tipos de ataques</h3>
-					<div class="half left">
-						<h4>Contra la seguridad</h4>
+				<section id="introduccion-2">
+					<h2>Introducción</h2>
+					<ul>
+						<li>
+							Tanto las empresas como los usuarios del
+							hogar tienen datos importantes en sus equipos.
+						</li>
+						<li>
+							Con las nuevas aplicaciones es necesario
+							preocuparse por la protección de los sistemas
+							computacionales.
+						</li>
+						<li>
+							En sistemas multiusuario es necesario
+							diferenciar y proteger los datos de cada uno de
+							los usuarios del sistema.
+						</li>
+					</ul>
+				</section>
+
+				<section id="introduccion-3">
+					<h2>Introducción</h2>
+					<ul>
+						<li>
+							Se aplican clasificaciones de usuarios según
+							sus funciones y características. Grupos y ACL.
+						</li>
+						<li>
+							Con las comunicaciones aparecieron las
+							amenazas externas. Interconectan usuarios
+							alrededor del mundo, no todos bien
+							intencionados.
+						</li>
+					</ul>
+				</section>
+
+				<section id="entorno-seguridad">
+					<h2>Entorno de seguridad</h2>
+					<ul>
+						<li>
+							<strong>Protección:</strong> mecanismo que permite controlar
+							el acceso a los programas, procesos o usuarios
+							definidos en el sistema informático.
+						</li>
+						<li>
+							<strong>Seguridad:</strong> define el uso predefinido de los
+							recursos y el acceso previsto de un sistema
+							informático, ya sea local o a través de redes de
+							datos.
+						</li>
+					</ul>
+				</section>
+
+				<section id="entorno-seguridad-2">
+					<h2>Entorno de seguridad</h2>
+					<ul>
+						<li>
+							<strong>Amenazas:</strong> Desde la perspectiva de seguridad existen 4
+							objetivos fundamentales a cumplir, así como sus
+							amenazas fundamentales:
+						</li>
+					</ul>
+
+					<table class="banquero">
+						<thead>
+							<tr>
+								<th>Objetivo</th>
+								<th>Amenaza</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Confidencialidad de los datos</td>
+								<td>Exposición de los datos</td>
+							</tr>
+							<tr>
+								<td>Integridad de los datos</td>
+								<td>Alteración de los datos</td>
+							</tr>
+							<tr>
+								<td>Disponibilidad del sistema</td>
+								<td>Denegación del servicio</td>
+							</tr>
+							<tr>
+								<td>Exclusión de usuarios externos</td>
+								<td>Los virus se apropian del sistema</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<aside class="notes">
+						Explicar que vamos a entrar en detalles de cada uno de ellos
+					</aside>
+				</section>
+
+				<section id="confidencialidad">
+					<h2>Amenazas</h2>
+					<h3>Confidencialidad de los datos</h3>
+					<ul>
+						<li>Garantizar que los usuarios secretos permanezcan de esa manera.</li>
+						<li>
+							Permitir que sólo los usuarios autorizados tengan
+							acceso a los datos que se le han permitido.
+						</li>
+						<li>
+							El usuario debe ser capaz de otorgar los permisos
+							según sea requerido.
+						</li>
+					</ul>
+				</section>
+	
+				<section id="integridad">
+					<h2>Amenazas</h2>
+					<h3>Integridad de los datos</h3>
+					<ul>
+						<li>
+							Lo usuarios no autorizados no deben ser capaces de modificar
+							datos sin el permiso del propietario. 
+						</li>
+						<li>
+							Incluye la eliminación e inclusión de datos falsos. 
+						</li>
+						<li>
+							Se debe garantizar esa condición para que el sistema sea
+							confiable.
+						</li>
+					</ul>
+				</section>
+	
+				<section id="disponibilidad">
+					<h2>Amenazas</h2>
+					<h3>Disponibilidad de los datos</h3>
+					<ul>
+						<li>
+							Nadie puede perturbar el sistema para hacerlo inutilizable. 
+						</li>
+						<li>
+							Un ataque muy común en este aspecto son los DoS
+							(Denial of Service, Denegación de servicio).
+							Difíciles de controlar, y mas difíciles aun son los DDoS.
+						</li>
+					</ul>
+				</section>
+	
+				<section id="privacidad">
+					<h2>Amenazas</h2>
+					<h3>Privacidad</h3>
+					<ul>
+						<li>Proteger a los individuos sobre el mal uso de la información sobre ellos.</li>
+						<li>Existen marcos legales que permiten acceder a información privada de los usuarios.</li>
+					 	<li>¿Hasta donde llega la privacidad entonces?</li>
+					</ul>
+				</section>
+	
+				<section id="intrusos">
+					<h2>Amenazas</h2>
+					<h3>Intrusos</h3>
+					<ul>
+						<li>
+							Se refiere a personas que “husmean” en lugares
+							donde no tienen permitido hacerlo normalmente.
+						<li>
+							Pueden actuar de dos formas:
 							<ul>
-								<li>Caballo de Troya.</li>
-								<li>Bombas Lógicas.</li>
-								<li>Virus.</li>
-								<li>Gusanos.</li>
-								<li>Canales ocultos.</li>
+								<li>
+									<strong>Intrusos pasivos:</strong> los que solo 
+									quieren ver información no autorizada.
+								</li>
+								<li>
+									<strong>Intrusos activos:</strong> Ven información 
+									no autorizada y la modifican.
+								</li>
 							</ul>
+						</li>
+					</ul>
+				</section>
+	
+				<section id="intrusos-2">
+					<h2>Amenazas</h2>
+					<h3>Intrusos</h3>
+					<ul>
+						<li>
+							Algunas categorías comunes:
+							<ul>
+								<li>
+									Usuarios no técnicos que se entrometen de forma
+									casual. Ej: Explorar los recursos compartidos de una red.
+								</li>
+								<li>
+									Intrusos que husmean. Son usuarios con ciertas
+									habilidades que consideran como un reto personal
+									irrumpir en un sistema informático local para obtener
+									información.
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				
+				<section id="intrusos-3">
+					<h2>Amenazas</h2>
+					<h3>Intrusos</h3>
+					<ul>
+						<li>
+							Algunas categorías comunes:
+							<ul>
+								<li>
+									Intentos determinados para obtener dinero. Ej: quedarse
+									con pequeñas cantidades de dinero, desviar cuentas que
+									tengan años sin movimientos, chantaje, extorsión.
+								</li>
+								<li>
+									Espionaje comercial o militar. Se trata de un ataque mas
+									serio y planificado, donde el objetivo es obtener
+									información específica y muy valiosa para su
+									contraparte.
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+						Stuxnet fue de espionaje y para obtener dinero los SCAM de nigeria
+					</aside>
+				</section>
+
+				<section id="intrusos-4">
+					<h2>Amenazas</h2>
+					<h3>Intrusos</h3>
+					<ul>
+						<li>
+							La cantidad de esfuerzo y recursos necesarios para
+							contener este tipo de personas será proporcional al
+							valor de la información que se desea proteger.
+						</li>
+					</ul>
+				</section>
+
+				<section id="perdida-datos">
+					<h2>Entornos de seguridad</h2>
+					<h3>Pérdida accidental de datos</h3>
+					<ul>
+						<li>
+							Accidentalmente también es probable perder información:
+							<ul>
+								<li>Accidentes y desastres naturales.</li>
+								<li>Errores de hardware o software.</li>
+								<li>Errores humanos.</li>
+							</ul>
+						</li>
+						<li>
+							Una política de respaldo bien diseñada puede
+							sobrellevar cualquiera de estos eventos.
+						</li>
+					</ul>
+				</section>
+
+				<section id="fundamentos-criptografia">
+					<h2>Fundamentos de criptografía</h2>
+					<p>
+						La idea fundamental es cambiar los datos originales utilizando un 
+						mecanismo que sólo las partes interesadas conozcan y sean capaces
+						de entender, evitando así que terceras personas puedan leer 
+						información que no les pertenece.
+					</p>
+				</section>
+
+				<section id="criptografia-clave-secreta">
+					<h2>Fundamentos de criptografía</h2>
+					<h3>Criptografía de clave secreta</h3>
+					<ul>
+						<li>
+							Consiste en alterar la información utilizando una
+							clave, la cual debe ser conocida tanto por el emisor
+							como por el receptor. También se conoce como
+							criptografía de clave simétrica
+						</li>
+						<li>
+							El emisor utiliza un algoritmo de cifrado junto con la
+							clave para modificar el mensaje. Luego el receptor
+							utiliza la misma clave para descifrar el contenido y
+							volverlo legible.
+						</li>
+					</ul>					
+				</section>
+
+				<section id="ejemplo-criptografia-clave-secreta">
+					<h2>Fundamentos de criptografía</h2>
+					<h3>Criptografía de clave secreta</h3>
+					<img src="img/class14/criptografia.png" height="300" width="450" alt="Ejemplo de cifrado">
+				</section>
+
+				<section id="problemas-criptografia-clave-secreta">
+					<h2>Fundamentos de criptografía</h2>
+					<h3>Criptografía de clave secreta</h3>
+					<h4>Problemas</h4>
+					<ul>
+						<li>El emisor y el receptor deben tener la clave secreta compartida.</li>
+						<li>
+							Si se compromete la clave, es posible que un tercero se
+							haga pasar por un emisor legítimo y pueda leer los
+							mensajes interceptados.
+						</li>
+						<li>
+							El transporte de la clave es un paso muy delicado.
+						</li>
+					</ul>
+				</section>
+
+				<section id="criptografia-clave-publica">
+					<h2>Fundamentos de criptografía</h2>
+					<h3>Criptografía de clave pública</h3>
+					<ul>
+						<li>Utiliza distintas claves para el cifrado y descifrado.</li>
+						<li>No se puede calcular una clave a partir de la otra.</li>
+						<li>
+							La clave de cifrado puede ser pública y sólo la de
+							descifrado permanece privada.
+						</li>
+						<li>
+							El mensaje cifrado por el remitente con la clave
+							pública del receptor y sólo puede ser descifrado
+							con la clave privada del receptor, que solo él posee.
+						</li>
+					</ul>
+				</section>
+
+				<section id="ejemplo-criptografia-clave-publica">
+					<h2>Fundamentos de criptografía</h2>
+					<h3>Criptografía de clave publica</h3>
+					<img src="img/class14/llavepublica.png" height="340" width="450" alt="Ejemplo de cifrado">
+				</section>
+
+				<section id="problemas-criptografia-clave-publica">
+					<h2>Fundamentos de criptografía</h2>
+					<h3>Criptografía de clave pública</h3>
+					<h4>Problemas</h4>
+					<ul>
+						<li>Mayor tiempo de procesamiento del mensaje.</li>
+						<li>Las claves son de mayor tamaño que las simétricas.</li>
+						<li>El mensaje cifrado ocupa mayor tamaño que el original.</li>
+					</ul>
+					<aside class="notes">
+						Mostrar las llaves de correos
+					</aside>
+				</section>
+
+				<section id="firmas-digitales">
+					<h2>Fundamentos de criptografía</h2>
+					<h3>Firmas digitales</h3>
+					<ul>
+						<li>
+							Permite verificar la autenticidad de la información
+							emitida por el remitente. Equivale a la firma
+							autógrafa, sin el problema de la falsificación.
+						</li>
+						<li>
+							Utiliza como base el cifrado asimétrico.
+						</li>
+						<li>
+							Es un número calculado a partir de una función
+							hash o resumen aplicado al documento que se
+							desea enviar.
+						</li>
+						<li>El número hash cifrado se envía junto con el documento.</li>
+					</ul>
+					<aside class="notes">
+						Mostrar correos firmados
+					</aside>
+				</section>
+
+				<section id="firmas-digitales-2">
+					<h2>Fundamentos de criptografía</h2>
+					<h3>Firmas digitales</h3>
+					<ul>
+						<li>
+							El número es cifrado con la clave privada del
+							remitente y sólo puede ser descifrado con la clave
+							pública del remitente en manos del destinatario.
+						</li>
+						<li>
+							Una vez recibido el mensaje, se calcula
+							nuevamente su numero hash, se descifra el que
+							viene junto con el documento y se procede a
+							compararlo.
+						</li>
+						<li>
+							Si ambos valores coinciden, entonces el
+							documento no ha sufrido modificaciones y ha sido
+							enviado por quien dice ser enviado.
+						</li>
+					</ul>
+				</section>
+
+				<section id="ejemplo-de-firma-digital">
+					<h2>Fundamentos de criptografía</h2>
+					<h3>Firmas digitales</h3>
+					<a href="img/class14/firmadigital.png" target="_blank" title="Ver en grande">
+						<img src="img/class14/firmadigital.png" class="half" alt="Firma digital">
+					</a>
+				</section>
+
+				<section id="mecanismos-proteccion">
+					<h2>Mecanismos de protección</h2>
+					<ul>
+						<li>
+							Define que elementos deben protegerse dentro
+							del sistema y la manera de protegerlos.
+						</li>
+						<li>
+							Se define en función de ciertos modelos
+							implementados según las necesidades de cada
+							aplicación.
+						</li>
+						<li>
+							Existen numerosos trabajos realizados en este
+							campo, solo se revisaran algunos de ellos.
+						</li>
+					</ul>
+				</section>
+
+				<section id="mecanismos-proteccion-2">
+					<h2>Mecanismos de protección</h2>
+					<h3>Modelos de protección</h3>
+					<ul>
+						<li>Dominios de protección</li>
+						<li>Listas de control de acceso (ACL)</li>
+						<li>Capacidades</li>
+						<li>Sistemas confiables</li>
+						<li>Base de cómputo confiable</li>
+						<li>Modelos formales de sistemas seguros</li>
+						<li>Seguridad multinivel</li>
+						<li>Canales encubiertos</li>
+					</ul>
+				</section>
+
+				<section id="modelos-de-proteccion">
+					<h2>Mecanismos de protección</h2>
+					<h3>Modelos de protección</h3>
+					<h4>Dominios de protección</h4>
+					<ul>
+						<li>
+							Un sistema computacional tiene muchos objetos que
+							necesitan protección.
+						</li>
+						<li>
+							Sobre estos objetos se pueden realizar operaciones.
+						</li>
+						<li>
+							Un <em>dominio</em> es un conjunto de pares (objeto, permiso), donde 
+							se define quien puede hacer una operación especifica sobre un objeto.
+						</li>
+						<li>
+							Para resolver los conflictos de dominios de protección se
+							aplica el criterio de <em>Mínimo privilegio</em>.
+						</li>
+					</ul>
+				</section>
+
+				<section id="matriz-de-proteccion">
+					<h2>Mecanismos de protección</h2>
+					<h3>Modelos de protección</h3>
+					<h4>Dominios de protección</h4>
+					<div class="half left">
+						<ul>
+							<li>
+								<strong>Matriz de protección:</strong> es una matriz donde se definen los
+								objetos en conjunto con sus dominios de protección.
+							</li>
+							<li>
+								Se suele conocer como ACM, por sus siglas en inglés: 
+								<strong>Access Control Matrix</strong>.
+							</li>
+						</ul>
+					</div>
+				
+					<div class="half left">
+						<a href="img/class14/acm.png" title="ACM" target="_blank">
+							<img src="img/class14/acm.png" alt="ACM" />
+						</a>
+						<p class="nota">Fuente: 
+							<a href="http://ingenieriadelaseguridad.blogspot.com" >
+								ingenieriadelaseguridad.blogspot.com
+							</a>
+						</p>
+					</div>
+					<aside class="notes">
+						Facil de implementar pero suele ser inviable en casos donde
+						existen muchas reglas, debido a la enormidad de la estructura
+						y muchas celdas estarían vacías.
+					</aside>
+				</section>
+
+				<section id="acl">
+					<h2>Mecanismos de protección</h2>
+					<h3>Modelos de protección</h3>
+					<h4>Listas de control de acceso (ACL)</h4>
+					<ul>
+						<li>
+							Consiste en asociar con cada objeto una lista ordenada,
+							que contenga todos los dominios que pueden acceder al
+							objeto, y la forma de hacerlo.
+						</li>
+						<li>
+							En la practica las ACL pueden ser aplicadas para
+							usuarios individuales o grupos de usuarios, facilitando la
+							gestión de permisos de sistemas con grandes cantidades
+							de usuarios y recursos.
+						</li>
+						<li>Almacena la matriz de protección por columnas.</li>
+					</ul>
+				</section>
+
+				<section id="acl-2">
+					<h2>Mecanismos de protección</h2>
+					<h3>Modelos de protección</h3>
+					<h4>Listas de control de acceso (ACL)</h4>
+					<div class="half right">
+						<a href="img/class14/acl.png" title="ACL">
+							<img src="img/class14/acl.png" alt="ACL" />
+						</a>
+						<p class="nota">Fuente: 
+							<a href="http://ingenieriadelaseguridad.blogspot.com" title="Ver fuente original">
+								ingenieriadelaseguridad.blogspot.com
+							</a>
+						</p>
 					</div>
 					<div class="half left">
-						<h4>Contra la protección</h4>
 						<ul>
-							<li>Matriz de control de acceso.</li>
-							<li>Jerarquías de acceso.</li>
-							<li>Listas de control de acceso.</li>
-							<li>Listas de capacidades.</li>
+							<li>
+								Es de las matriz de control sin espacios vacíos 
+								al ser implementado en una lista dinámica 
+								como estructura de datos.
+							</li>
+							<li>
+								Son ampliamente utilizadas en el mercado
+								por su rápida lectura, robustez, entre otros. 
+							</li>
 						</ul>
+					</div>
+					<aside class="notes">
+						Es usado en routers, servidores
+						de autenticación, sistemas de archivos, etc.
+					</aside>
+				</section>
+
+				<section id="acl-linux">
+					<h2>Mecanismos de protección</h2>
+					<h3>Modelos de protección</h3>
+					<h4>Listas de control de acceso (ACL)</h4>
+					<img src="img/class14/acl2.png" alt="ACL" />
+					<p class="nota">Ejemplo en Linux</p>
+				</section>
+
+				<section id="acl-windows">
+					<h2>Mecanismos de protección</h2>
+					<h3>Modelos de protección</h3>
+					<h4>Listas de control de acceso (ACL)</h4>
+					<img src="img/class14/aclwin.png" alt="ACL" />
+					<p class="nota">Ejemplo en Windows</p>
+				</section>
+
+
+				<section id="listas-capacidades">
+					<h2>Mecanismos de protección</h2>
+					<h3>Modelos de protección</h3>
+					<h4>Listas de capacidades</h4>
+					<div class="half right">
+						<img src="img/class14/listacapacidades.png" alt="ACM" />
+						<p class="nota">
+							Ejemplo de una lista de capacidades
+							para almacenar información de un archivos.
+						</p>
+					</div>
+					<div class="half left">
+						<ul>
+							<li>
+								Permite almacenar el control de acceso de varios objetos,
+								al guardar en cada fila de la estructura
+								toda la información de permisología del objeto.
+								
+							</li>
+						</ul>
+					</div>
+					<ul>
+						<li>
+							De ésta manera, la búsqueda es mas rápida al momento
+							de consultar la información de un objeto, pues la información
+							esta ordenada por objetos.
+						</li>
+					</ul>
+				</section>
+
+				<section id="listas-capacidades-caracteristicas">
+					<h2>Mecanismos de protección</h2>
+					<h3>Modelos de protección</h3>
+					<h4>Listas de capacidades</h4>
+					<ul>
+						<li>A cada proceso se le asocia una lista de objetos que se puede utilizar.</li>
+						<li>Se le otorgan ciertos derechos sobre un objeto.</li>
+						<li>Requiere la protección de cada lista de capacidad en el sistema operativo.</li>
+						<li>Se definen las acciones que un usuario puede realizar sobre un recurso.</li>
+						<li>Se refiere a la matriz de protección por filas.</li>
+					</ul>
+				</section>
+
+				<section id="esteganografia">
+					<h2>Mecanismos de protección</h2>
+					<h3>Esteganografía</h3>
+					<ul>
+						<li>
+							Ocultar la existencia de información en un objeto
+							que normalmente no la llevaría (portador). Ej: Una
+							imagen.
+						</li>
+						<li>
+							Se puede utilizar para transferir información sin que
+							sea visible, ocultar marcas de agua para verificar
+							los derechos de autor en una imagen.
+						</li>
+						<li>
+							La criptografía cifra información para que sea
+							ilegible por un tercero. La esteganografía oculta
+							información en un portador de forma que no sea
+							advertida su existencia.
+						</li>
+					</ul>
+				</section>
+
+				<section id="autenticacion">
+					<h2>Autenticación</h2>
+					<ul>
+						<li>
+							Todos los sistemas computacionales seguros
+							deberían solicitar que los usuarios se
+							autentiquen de tal forma de identificar quien
+							esta haciendo uso de los sus recursos.
+						</li>
+					</ul>
+				</section>
+
+				<section id="autenticacion-2">
+					<h2>Autenticación</h2>
+					<ul>
+						<li>
+							La mayoría de los métodos para autenticar
+							usuarios le solicitan, incluso combinación de:
+							<ul>
+								<li>Algo que conoce</li>
+								<li>Algo que tiene</li>
+								<li>Algo que es</li>
+							</ul>
+						</li>
+						<li>
+							Es la primera barrera para mantener usuarios
+							no autorizados fuera del alcance del sistema.
+						</li>
+					</ul>
+				</section>
+
+				<section id="autenticacion-mediante-contrasenas">
+					<h2>Autenticación</h2>
+					<h3>Mediante contraseñas</h3>
+					<ul>
+						<li>
+							Se le solicita nombre de usuario y contraseña (algo que sabe).
+						</li>
+						<li>
+							Oculta los caracteres de la contraseña, pero aún se
+							puede determinar su longitud.
+						</li>
+						<li>
+							Se debe manejar los errores de la contraseña. Un
+							mensaje incorrecto puede revelar la existencia o no
+							de un usuario.
+						</li>
+					</ul>
+				</section>
+
+				<section id="autenticacion-mediante-contrasenas-2">
+					<h2>Autenticación</h2>
+					<h3>Mediante contraseñas</h3>
+					<ul>
+						<li>
+							Algunas fallas conocidas de los inicios de sesión
+							protegidas por contraseña:
+							<ul>
+								<li>Iniciar el computador desde otro dispositivo de inicio.</li>
+								<li>Ataques de fuerza bruta.</li>
+								<li>Formatos de contraseñas viejo.</li>
+								<li>Contraseñas muy viejas y siempre utilizadas.</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section id="autenticacion-mediante-objeto-fisico">
+					<h2>Autenticación</h2>
+					<h3>Mediante objeto físico</h3>
+					<div class="half left">
+						<ul>
+							<li>
+								El sistema le solicita al usuario un objeto físico para
+								autenticarse. Ej: Tarjeta magnética, Tarjeta de
+								proximidad, tarjetas inteligentes, llave.
+							</li>
+							<li>
+								Estos dispositivos contienen información que
+								identifica al usuario en un sistema informático. 
+							</li>
+						</ul>
+					</div>
+					<div class="half left">
+						<img src="img/class14/rsa.jpg" height="496" width="459" alt="Tarjeta RSA">						
+					</div>
+
+					<aside class="notes">
+						El tipo de información y la manera de procesarla
+						depende del dispositivo y el sistema informático en
+						el que se este identificando.
+					</aside>
+				</section>
+
+				<section id="autenticacion-mediante-biometria">
+					<h2>Autenticación</h2>
+					<h3>Mediante biometría</h3>
+					<ul>
+						<li>
+							Mide características físicas del usuario difíciles de
+							falsificar. (algo que es).
+						</li>
+						<li>
+							Consta de dos partes: inscripción (registro de la
+							característica) e identificación (uso de la
+							característica en el sistema).
+						</li>	
+						<li>
+							Debe utilizarse una característica que se puede
+							distinguir entre los usuarios. Ej: Huella digital, iris.
+							No siendo así color de ojos, color de cabello.
+						</li>	
+					</ul>
+				</section>
+
+				<section id="autenticacion-mediante-biometria-2">
+					<h2>Autenticación</h2>
+					<h3>Mediante biometría</h3>
+					<ul>
+						<li>
+							Existen dispositivos que combinan varias de
+							estas técnicas: Lectores biométricos que
+							solicitan una tarjeta de proximidad y una clave.
+						</li>
+						<li>
+							Todo depende de las aplicaciones y los
+							recursos que se desean proteger.
+						</li>	
+						<li>
+							Controles mas elaborados requieren mayor
+							esfuerzo administrativo, así como también
+							tienen mayores costos de implementación.
+						</li>
+					</ul>
+				</section>
+
+				<section id="ejemplo-autenticacion-mediante-biometria">
+					<h2>Autenticación</h2>
+					<h3>Mediante biometría</h3>
+					<img src="img/class14/biometric.png" height="333" width="400" alt="Ejemplo de máquina">
+					<p class="nota">Máquina de autenticación biométrica de Fujitsu</p>
+				</section>
+
+				<section id="ataques">
+					<h1>Ataques informáticos</h1>
+				</section>
+
+				<section id="ataques-interior">
+					<h2>Ataques desde el interior</h2>
+					<ul>
+						<li>
+							En ocasiones se dice que los enemigos de un
+							sistema pueden encontrarse dentro de la
+							organización.
+						</li>
+						<li>
+							Son usuarios auténticos que pueden tener
+							acceso a recursos del sistema en forma
+							legítima.
+						</li>
+						<li>
+							Entonces son necesarios ciertos controles
+							internos para evitar situaciones no deseadas.
+						</li>
+					</ul>
+				</section>
+
+				<section id="bombas-logicas">
+					<h2>Ataques desde el interior</h2>
+					<h3>Bombas Lógicas</h3>
+					<div class="half left">
+						<ul>
+							<li>
+								Es un código insertado en un programa de forma secreta,
+								para crear una situación de chantaje.
+							</li> 
+							<li>
+								Está inactivo por un período hasta que se detona por
+								una acción. 
+							</li>
+							<li>
+								Ejemplos: BETA de Windows,
+								problema en los servidores de Jurassic Park (ficción),
+								ataque a Corea del Sur (multiplataforma y borraba los discos).
+							</li>
+						</ul>
+					</div>
+					<div class="half left">
+						<img src="img/class14/timebomb.jpg" alt="Caballo de troya" />
+						<img src="img/class14/timebomb2.jpg" alt="Caballo de troya" />
+					</div>
+					<aside class="notes">
+						Las acciones pueden ser: detectar determinada 
+						condición, una fecha dada, al escribir 
+						una clave o falta de ésta. 
+
+						Si el dueño no proporciona la información requerida activa la bomba.
+					</aside>
+				</section>
+
+				<section id="trampas">
+					<h2>Ataques desde el interior</h2>
+					<h3>Trampas o Backdoors</h3>
+					<ul>
+						<li>
+							Son modificaciones en los sistemas que permiten
+							acceso sin los controles regulares. Ej: inicio de
+							sesión con un usuario “qwerty” sin contraseña.
+						</li>	
+						<li>
+							Se puede minimizar haciendo revisiones de código
+							y partes sensibles del sistema regularmente por
+							entes externos a la organización.
+						</li>	
+					</ul>
+				</section>
+
+
+				<section id="suplantacion-identidad">
+					<h2>Ataques desde el interior</h2>
+					<h3>Suplantación de identidad</h3>
+					<div class="half left">
+						<ul>
+							<li>
+								Es un usuario legítimo que trata de recolectar
+								información de los demás usuarios mediante un
+								inicio de sesión falso.
+							</li> 
+							<li>
+								Por eso los sistemas han incluido una combinación
+								de teclas para el inicio de sesión.
+							</li>
+						</ul>
+					</div>
+					<div class="half left">
+						<img src="img/class14/robo_identidad.jpg" alt="Caballo de troya" />
 					</div>
 				</section>
 
+				<section id="explotar-codigo">
+					<h2>Explotar errores de código</h2>
+					<ul>
+						<li>
+							Consiste en analizar la construcción de los
+							programas y ubicar errores de funcionamiento
+							que puedan aprovecharse para realizar
+							acciones no comunes en el sistema.
+						</li>
+						<li>
+							Generalmente se busca obtener privilegios mas
+							elevados, alterar el sistema o sacar información
+							que permita traspasar los controles regulares y
+							poder controlarlo.
+						</li>
+					</ul>
+				</section>
+
+				<section id="desbordamiento-buffer">
+					<h2>Explotar errores de código</h2>
+					<h3>Desbordamiento de buffer</h3>
+					<ul>
+						<li>
+							Se vale de la falta de validación en los límites de
+							memoria utilizado por los compiladores,
+							generalmente de C.
+						</li>
+						<li>
+							Consiste en dirigir una petición en una dirección de
+							memoria fuera del espacio de direcciones del
+							programa.
+						</li>
+						<li>
+							Podría incluirse rutinas especificas para realizar
+							acciones particulares en el sistema.
+						</li>
+					</ul>
+				</section>
+
+				<section id="cadenas-formato">
+					<h2>Explotar errores de código</h2>
+					<h3>Mediante cadenas de formato</h3>
+					<ul>
+						<li>
+							Consiste en crear cadenas específicas con ciertas
+							acciones en las entradas de datos de los sistemas.
+							Ej: agregar un ls en una entrada para una pagina
+							web.
+						</li>
+						<li>
+							Es necesario conocer ciertas características del
+							programa que se esta utilizando para crear las
+							cadenas necesarias como entrada.
+						</li>
+					</ul>
+					<aside class="notes">
+						Explicar printf y scan en C, como se sobreescribe la memoria
+					</aside>
+				</section>
+
+
+				<section id="ataques-libc">
+					<h2>Explotar errores de código</h2>
+					<h3>Ataques de retorno a libc</h3>
+					<ul>
+						<li>
+							Consiste en aprovecharse de las funciones de una
+							biblioteca compartida para introducir y ejecutar
+							código malicioso en memoria, en vez de
+							proporcionar los datos para los cuales esta
+							diseñada la entrada del programa.
+						<li>
+							Esto permite que usuarios maliciosos puedan
+							ejecutar programas dentro de programas sin previa
+							autorización de los programadores o
+							administradores de sistemas.
+						</li>
+					</ul>
+				</section>
+
+				<section id="desbordamiento-enteros">
+					<h2>Explotar errores de código</h2>
+					<h3>Ataques por desboradmiento de enteros</h3>
+					<div class="half left">
+						<ul>
+							<li>
+								Se logra desbordando la mantisa de dos
+								operaciones con enteros.
+							<li>
+								Puede utilizarse para iniciar un ataque de
+								desbordamiento de pila.
+							</li>
+						</ul>
+					</div>
+					<div class="half left">
+						<img src="img/class14/integer_overflow.jpg" height="549" width="600" alt="Desbordamiento">
+					</div>
+				</section>
+
+				<section id="inyeccion-codigo">
+					<h2>Inyección de código</h2>
+
+					<ul>
+						<li>
+							Hace que un programa ejecute código sin darse
+							cuenta de ello.
+						</li>
+						<li>
+							Si un programa solicita al usuario algún dato y este
+							se ejecuta directamente en la Shell del sistema
+							operativo, el usuario podría ingresar comandos
+							para realizar acciones no deseadas dentro del
+							sistema.
+						</li>
+					</ul>
+				</section>
+
+				<section id="privilegios">
+					<h2>Ataques por escalada <br> de privilegios</h2>
+					<ul>
+						<li>
+							Tiene como objeto engañar al sistema para que le
+							proporcione mas permisos de los que un usuario
+							debería tener, con el fin de acceder a otras partes
+							del sistema y obtener información sensible o
+							modificar datos del sistema.
+						</li>
+					</ul>
+				</section>
 
 				<section id="caballos-troya">
 					<h2>Seguridad</h2>
@@ -125,34 +1105,6 @@
 					</aside>
 				</section>
 
-				<section id="bombas-logicas">
-					<h2>Seguridad</h2>
-					<div class="half left">
-						<h3>Bombas Lógicas</h3>
-						<ul>
-							<li>
-								Es un código insertado en un programa, 
-								inactivo por un período hasta que se detona por
-								una acción. 
-							</li>
-							<li>
-								Ejemplos: BETA de Windows,
-								problema en los servidores de Jurassic Park (ficción),
-								ataque a Corea del Sur (multiplataforma y borraba los discos).
-							</li>
-						</ul>
-					</div>
-					<div class="half left">
-						<img src="img/class14/timebomb.jpg" alt="Caballo de troya" />
-						<img src="img/class14/timebomb2.jpg" alt="Caballo de troya" />
-					</div>
-					<aside class="notes">
-						Las acciones pueden ser: detectar determinada 
-						condición, una fecha dada, al escribir 
-						una clave o falta de ésta.
-					</aside>
-				</section>
-
 				<section id="virus">
 					<h2>Seguridad</h2>
 					<h3>Virus</h3>
@@ -177,7 +1129,9 @@
 						en el MBR, scripts, macros de archivos.
 					</aside>
 				</section>
-				<section>
+
+				<section id="virus-2">
+					<h2>Seguridad</h2>
 					<h3>Virus</h3>
 					<h4>Tipos de Virus</h4>
 					<ul>
@@ -223,7 +1177,8 @@
 					<h2>Seguridad</h2>
 					<h3>Canales ocultos</h3>
 						<p>
-							Consiste en una comunicación ilícita establecida entre dos o más procesos utilizando mecanismos al margen de los proporcionados por el 
+							Consiste en una comunicación ilícita establecida entre dos o más procesos 
+							utilizando mecanismos al margen de los proporcionados por el 
 							sistema.
 						</p>
 						<p>
@@ -254,135 +1209,6 @@
 						en los CDs de música de SONY.
 					</aside>
 				</section>
-
-				<section id="esquemas-seguridad">
-					<h2>Esquemas de seguridad</h2>
-					<ul>
-						<li>Matriz de control de acceso</li>
-						<li>Jerarquías de acceso</li>
-						<li>Listas de control de acceso</li>
-						<li>Listas de capacidades</li>
-					</ul>			
-				</section>
-				<section id="acm">
-					<h2>Esquemas de seguridad</h2>
-					<h3>Matriz de control de acceso</h3>
-					<div class="half right">
-						<img src="img/class14/acm.png" alt="ACM" />
-						<p class="nota">Fuente: 
-							<a href="http://ingenieriadelaseguridad.blogspot.com" />
-								ingenieriadelaseguridad.blogspot.com
-							</a>
-						</p>
-					</div>
-					<div class="half left">
-						<ul>
-							<li>
-								Consiste en una matriz que relaciona dominios con un conjunto de objetos.
-							</li>
-							<li>
-								Es fácil de implementar.
-							</li>
-							<li>
-								Se suele conocer como ACM, por sus siglas en inglés: 
-								<strong>Access Control Matrix</strong>.
-							</li>
-						</ul>
-					</div>
-					<aside class="notes">
-						Suele ser inviable en casos donde
-						existen muchas reglas, debido a la enormidad de la estructura
-						y muchas celdas estarían vacías.
-					</aside>
-				</section>
-
-				<section id="jerarquias-acceso">
-					<h2>Esquemas de seguridad</h2>
-					<h3>Jerarquías de acceso</h3>
-					<div class="half right">
-						<img src="img/class14/jerarquia.jpg" alt="jerarquia de acceso" />
-						<p class="nota">Ejemplo de seguridad de módulos de una aplicación</p>
-					</div>
-					<div class="half left">
-						<ul>
-							<li>
-								Organiza distintos derechos de accesos de forma jerarquíca.	
-							</li>
-							<li>
-								Fácil de implementar pero poderosa.
-							</li>
-							<li>
-								Permite la reutilización de derechos y consume pocos recursos.
-							</li>
-						</ul>
-					</div>
-					<aside class="notes">
-						Un ejemplo es el sistema de archivos: el administrador tiene
-						acceso a todo, el grupo a archivos de varios usuarios
-						y el usuario solo a sus archivos. 
-					</aside>
-				</section>
-
-				<section id="jerarquias-acceso">
-					<h2>Esquemas de seguridad</h2>
-					<h3>Lista de control de acceso</h3>
-					<div class="half right">
-						<img src="img/class14/acl.png" alt="ACM" />
-						<p class="nota">Fuente: 
-							<a href="http://ingenieriadelaseguridad.blogspot.com" />
-								ingenieriadelaseguridad.blogspot.com
-							</a>
-						</p>
-					</div>
-					<div class="half left">
-						<ul>
-							<li>
-								Es de las matriz de control sin espacios vacíos 
-								al ser implementado en una lista dinámica 
-								como estructura de datos.
-							</li>
-							<li>
-								Son ampliamente utilizadas en el mercado
-								por su rápida lectura, robustez, entre otros. 
-							</li>
-						</ul>
-					</div>
-					<aside class="notes">
-						Es usado en routers, servidores
-						de autenticación, sistemas de archivos, etc.
-					</aside>
-				</section>
-
-				<section id="listas-capacidades">
-					<h2>Listas de capacidades</h2>
-					<h3>Lista de control de acceso</h3>
-					<div class="half right">
-						<img src="img/class14/listacapacidades.png" alt="ACM" />
-						<p class="nota">
-							Ejemplo de una lista de capacidades
-							para almacenar información de un archivos.
-						</p>
-					</div>
-					<div class="half left">
-						<ul>
-							<li>
-								Permite almacenar el control de acceso de varios objetos,
-								al guardar en cada fila de la estructura
-								toda la información de permisología del objeto.
-								
-							</li>
-						</ul>
-					</div>
-					<ul>
-						<li>
-							De ésta manera, la búsqueda es mas rápida al momento
-							de consultar la información de un objeto, pues la información
-							esta ordenada por objetos.
-						</li>
-					</ul>
-				</section>
-
-
 
 				<section id="preguntas">
 					<h1>¿Dudas y preguntas?</h1>
