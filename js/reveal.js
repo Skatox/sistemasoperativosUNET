@@ -2508,7 +2508,7 @@ var Reveal = (function(){
 	 */
 	function onPointerDown( event ) {
 
-		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH ) {
+		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === "touch" ) {
 			event.touches = [{ clientX: event.clientX, clientY: event.clientY }];
 			onTouchStart( event );
 		}
@@ -2520,7 +2520,7 @@ var Reveal = (function(){
 	 */
 	function onPointerMove( event ) {
 
-		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH ) {
+		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === "touch"  ) {
 			event.touches = [{ clientX: event.clientX, clientY: event.clientY }];
 			onTouchMove( event );
 		}
@@ -2532,7 +2532,7 @@ var Reveal = (function(){
 	 */
 	function onPointerUp( event ) {
 
-		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH ) {
+		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === "touch"  ) {
 			event.touches = [{ clientX: event.clientX, clientY: event.clientY }];
 			onTouchEnd( event );
 		}
