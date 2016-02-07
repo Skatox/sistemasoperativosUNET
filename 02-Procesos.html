@@ -66,7 +66,7 @@
 						</p>
 					</div>
 				</section>
-				
+
 				<section id="contenido">
 					<h2>Contenido</h2>
 					<ul>
@@ -91,11 +91,11 @@
 
 				<section id="monotarea">
 					<h2>Sistemas monotarea</h2>
-					<ul> 
+					<ul>
 						<li>Al principio las computadoras solo podían ejecutar 1 programa al mismo tiempo.</li>
 						<li>Todos los recursos del sistema estaban disponibles sólo para ese proceso.</li>
 						<li>
-							Si fallaba o el programa estaba mal escrito se alteraba el 
+							Si fallaba o el programa estaba mal escrito se alteraba el
 							funcionamiento de todo el sistema.
 						</li>
 					</ul>
@@ -104,11 +104,11 @@
 					<h2>Sistemas multitarea</h2>
 					<ul>
 						<li>
-							Permite la ejecución de varias tareas al mismo tiempo, 
+							Permite la ejecución de varias tareas al mismo tiempo,
 							<strong>multiplexando</strong> el CPU e incrementando la productividad.
 						</li>
 						<li>
-							En estos sistemas estan formados por un conjunto de procesos: 
+							Estos sistemas estan formados por un conjunto de procesos:
 							<ul>
 								<li>Procesos del sistema.</li>
 								<li>Procesos de usuario.</li>
@@ -116,7 +116,7 @@
 						</li>
 					</ul>
 					<aside class="notes">
-						Los procesos del sistema operativo que ejecutan código del sistema 
+						Los procesos del sistema operativo que ejecutan código del sistema
 						(tareas no incluidas en el núcleo) y los de usuario ejecutan
 						código del usuario.
 					</aside>
@@ -130,9 +130,9 @@
 						un proceso es:
 					</p>
 					<blockquote>
-						"Una actividad que utiliza recursos, y se gestiona con el fin 
-						de permitir que los elementos de entrada se transformen 
-						en resultados"		
+						"Una actividad que utiliza recursos, y se gestiona con el fin
+						de permitir que los elementos de entrada se transformen
+						en resultados"
 					</blockquote>
 				</section>
 				<section id="proceso-definicion">
@@ -140,7 +140,7 @@
 					<ul>
 						<li>
 							Un proceso no es más que una instancia de un programa en ejecución,
-							incluyendo los valores actuales del contador de programa, los 
+							incluyendo los valores actuales del contador de programa, los
 							registros y las variables.
 						</li>
 						<li>Esta compuesto por:</li>
@@ -154,10 +154,10 @@
 						</tr>
 					</table>
 					<aside class="notes">
-						Código del programa, el contenido de los registros 
-						del procesador, la Pila del proceso es: variables 
-						remotas, parámetros de funciones, dirección a 
-						retornar, variables locales. Sección de datos son las 
+						Código del programa, el contenido de los registros
+						del procesador, la Pila del proceso es: variables
+						remotas, parámetros de funciones, dirección a
+						retornar, variables locales. Sección de datos son las
 						variables globales.
 					</aside>
 				</section>
@@ -165,13 +165,13 @@
 					<h2>Procesos</h2>
 					<ul>
 						<li>
-							Todo el software ejecutable del computador es organizado en 
+							Todo el software ejecutable del computador es organizado en
 							varios procesos secuenciales.
 						</li>
 						<li>
-							Los procesos se conmutan rápidamente con la CPU, dando la 
-							impresión varios de ellos ejecutándose al mismo tiempo
-							(Multiprogramación). 
+							Los procesos se conmutan rápidamente con la CPU, dando la
+							impresión de que varios de ellos están ejecutándose al mismo tiempo
+							(Multiprogramación).
 						</li>
 					</ul>
 				</section>
@@ -197,13 +197,13 @@
 					<h2>Procesos</h2>
 					<ul>
 						<li >
-							Un proceso <strong>NO</strong> es un programa, es 
+							Un proceso <strong>NO</strong> es un programa,
 							es un <em>programa en ejecución</em>
 						</li>
 						<li>
 							Un ejemplo es una receta de cocina y un
 							cocinero... en mitad de receta su hijo llega con
-							una picada de abeja... 
+							una picada de abeja...
 						</li>
 						<li>
 							Iniciar dos veces un programa no quiere decir
@@ -217,7 +217,7 @@
 					<blockquote>
 						"Los procesos son como un ser humano: son generados, tienen
 						mas o menos una vida significativa, opcionalmente generan
-						uno o mas procesos hijos, y eventualmente mueren. Una 
+						uno o mas procesos hijos, y eventualmente mueren. Una
 						pequeña diferencia es el que la reproducción no es común
 						entre los procesos - cada proceso tienen un solo padre."
 						<cite>Understanding the Linux Kernel<br>(2nd edition)</cite>
@@ -243,7 +243,7 @@
 						</li>
 						<li>
 							<strong>Salida por error</strong>: El proceso no se completa
-							alguna situación excepcional. Ej: falta algún parámetro en 
+							alguna situación excepcional. Ej: falta algún parámetro en
 							el comando. Salida voluntaria.
 						</li>
 					</ul>
@@ -253,13 +253,13 @@
 					<h2>Terminación de procesos</h2>
 					<ul>
 						<li>
-							<strong>Error fatal</strong>: Producido por el proceso. Producido por un 
+							<strong>Error fatal</strong>: Producido por el proceso. Producido por un
 							error en el programa. Salida Involuntaria.
 						</li>
 						<li>
 							<strong>Eliminado por otro proceso:</strong> Se ejecuta otro
-							proceso con suficientes privilegios para realizar otra llamada 
-							al sistema indicándole que debe eliminar el proceso. Salida 
+							proceso con suficientes privilegios para realizar otra llamada
+							al sistema indicándole que debe eliminar el proceso. Salida
 							involuntaria. Ej : En Linux el comando <em>kill</em>
 						</li>
 					</ul>
@@ -281,23 +281,23 @@
 						<img src="img/class2/jerarquia.jpg"  alt="Jerarquia de procesos en UNIX">
 					</div>
 					<ul>
-						<li>Un ejemplo fácil del ver es el inicio de un sistema Linux.</li>
+						<li>Un ejemplo fácil de ver es el inicio de un sistema Linux.</li>
 					</ul>
 				</section>
 
-				<section id="estados" > 
+				<section id="estados" >
 					<h2>Estados del proceso</h2>
 					<ul>
 						<li>Durante el tiempo de vida en el sistema un proceso toma varios estados.</li>
 						<li>
 							Algunos de ellos son propios de la naturaleza
 							del proceso y otros son debido a otros factores
-							del sistema operativo y su planificador. 							
+							del sistema operativo y su planificador.
 						</li>
 					</ul>
 				</section>
 
-				<section id="estados-2" > 
+				<section id="estados-2" >
 					<h2>Estados del proceso</h2>
 					<p>
 						<a href="img/class2/estados_proceso.gif" data-lightbox="estados">
@@ -305,7 +305,7 @@
 						</a>
 					</p>
 				</section>
-				<section id="estados-3" > 
+				<section id="estados-3" >
 					<h2>Estados del proceso</h2>
 					<ul>
 						<li><strong>Nuevo: </strong> está siendo creado.</li>
@@ -314,11 +314,11 @@
 							<strong>Ejecución: </strong> se encuentra en el procesador
 							realizando sus operaciones.
 						 </li>
-						<li> 
-							<strong>Espera/Bloqueado: </strong> no está en el CPU y esta 
+						<li>
+							<strong>Espera/Bloqueado: </strong> no está en el CPU y esta
 							en espera de un evento (operación con un dispositivo de E/S
 							o por una señal).
-						</li> 
+						</li>
 						<li> <strong>Suspendido:</strong> pasa de la memoria al disco para liberar espacio.
 						</li>
 						<li><strong>Terminado:</strong> ha terminado su ejecución.</li>
@@ -329,15 +329,15 @@
 					<h2>Planificación de procesos</h2>
 					<ul>
 						<li>
-							El objetivo de la multiprogramación es ejecutar 
+							El objetivo de la multiprogramación es ejecutar
 							varios procesos al mismo tiempo con el fin de <strong>maximizar</strong>
 							el uso del CPU.
 						</li>
 						<li>
 							Para cumplir este objetivo, el <strong>planificador de procesos
-							</strong> selecciona un proceso disponible para ejecutarlo. 
-							En el caso de sistemas de un procesador, nunca habrá mas 
-							de un proceso en ejecución, por ello, desperar hasta
+							</strong> selecciona un proceso disponible para ejecutarlo.
+							En el caso de sistemas de un procesador, nunca habrá mas
+							de un proceso en ejecución, por ello, deben esperar hasta
 							que el CPU quede libre y se asigne un nuevo proceso.
 						</li>
 					</ul>
@@ -351,7 +351,7 @@
 						</a>
 					</p>
 					<p class="nota">
-						A medida que se van creando y ejecutando procesos en el sistema, 
+						A medida que se van creando y ejecutando procesos en el sistema,
 						al cambiar de estado se coloca
 						en su respectiva cola para ser procesado de acuerdo al planificador.
 					</p>
@@ -371,7 +371,7 @@
 						<ul>
 							<li>Realizado por el planificador del S.O.</li>
 							<li>
-								Se origina con una interrupción del procesador, que puede ser por 
+								Se origina con una interrupción del procesador, que puede ser por
 								suceso externo (culminación de un proceso de E/S), por una excepción,
 								el proceso culminó, etc.
 							</li>
@@ -384,7 +384,7 @@
 							<li>Se ejecuta una rutina llamada <strong>Cambio de contexto</strong>:
 								<ol>
 									<li>
-										Se salva el estado del programa en ejecución del 
+										Se salva el estado del programa en ejecución del
 										microprocesador a la memoria principal.
 									</li>
 									<li>Selecciona otro programa a ejecutar según un algoritmo equitativo.</li>
@@ -393,9 +393,9 @@
 										a los registros del microprocesador.
 									</li>
 				    				<li>
-				    					Ejecuta el programa saltando a la instrucción que estaba 
+				    					Ejecuta el programa saltando a la instrucción que estaba
 				    					pendiente de ejecutar.
-				    				</li>    
+				    				</li>
 				    			</ol>
 							</li>
 						</ul>
@@ -414,17 +414,17 @@
 							procesos o Bloques de control de procesos.
 						</li>
 						<li>
-							Mantiene elementos como: Estado, contador del programa, 
-							registros del CPU, información de planificación de la CPU, 
+							Mantiene elementos como: Estado, contador del programa,
+							registros del CPU, información de planificación de la CPU,
 							información contable, información de E/S.
 						</li>
 					</ul>
 				</section>
 
-				<section id="pcb" > 
+				<section id="pcb" >
 					<h2>Bloque de control de proceso (PCB)</h2>
 					<p>
-						Es una estructura de datos en el núcleo del S.O con 
+						Es una estructura de datos en el núcleo del S.O con
 						información requerida para administrar un proceso en particular,
 						esta compuesto por:
 					</p>
@@ -432,14 +432,14 @@
 						<li>
 							<strong>Estado: </strong> el estado actual del proceso.
 						</li>
-						<li><strong>Contador de programa:</strong> 
+						<li><strong>Contador de programa:</strong>
 							dirección de la siguiente instrucción a realizar.
 						</li>
-						<li><strong>Registros del CPU: </strong> depende de la arquitectura 
-							de la computadora, guarda punteros de pila, registros de 
+						<li><strong>Registros del CPU: </strong> depende de la arquitectura
+							de la computadora, guarda punteros de pila, registros de
 							propósito general, acumuladores, entre otros.
 						</li>
-						<li><strong>Información de planificación de la CPU: </strong> 
+						<li><strong>Información de planificación de la CPU: </strong>
 							la prioridad del proceso y demás valores
 							para el algoritmo de planificación.
 						</li>
@@ -450,11 +450,11 @@
 					<div class="half left">
 						<ul>
 							<li>
-								<strong>Información contable:</strong> almacena la cantidad 
-								de tiempo en el CPU,  límite de tiempo asignado, 
-								numero de proceso, entre otros. 
+								<strong>Información contable:</strong> almacena la cantidad
+								de tiempo en el CPU,  límite de tiempo asignado,
+								numero de proceso, entre otros.
 							</li>
-							<li><strong>Información de E/S:</strong> posee un 
+							<li><strong>Información de E/S:</strong> posee un
 								listado de los archivos y dispositivos de E/S
 								asignados al proceso.</li>
 						</ul>
