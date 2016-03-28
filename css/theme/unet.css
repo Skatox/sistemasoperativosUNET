@@ -11,7 +11,7 @@
 .reveal section img.noborder { border: 0; box-shadow: none; background: transparent; }
 .clear { clear: both }
 
-strong { color: #552222;}
+strong { color: #552222; font-weight: normal !important;}
 
 .reveal .center { margin: 0 auto}
 .reveal .nomargin {margin: 0;}
@@ -26,7 +26,8 @@ strong { color: #552222;}
 .reveal section h2 { color: #C4E8FF; font-size: 1.8em; text-shadow: 1px 2px 2px #0000FF; }
 .reveal section h3 { font-size: 1.3em; color: #ff9000; text-shadow: 1px 2px 2px #904500;}
 .reveal li h3 { margin-top: 40px; }
-.reveal ul { margin: 15px 0 15px 50px }
+.reveal ul { text-align: left; margin: 15px 0 15px 50px }
+.reveal ol { text-align: left; }
 
 #definition-header {
   text-align: left;
