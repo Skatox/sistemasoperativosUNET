@@ -73,6 +73,7 @@
 						<li>Sistemas de Archivos:
 							<ul>
 								<li>Definición.</li>
+								<li>Breve historia.</li>
 								<li>Principales implementaciones.</li>
 							</ul>
 						</li>
@@ -353,6 +354,81 @@
 					</ul>
 				</section>
 
+				<section id="historia-intro">
+					<h1>Breve historia</h1>
+				</section>
+
+				<section id="fs-early">
+					<h2>Principios de la historia moderna</h2>
+					<h3>(principios de los 80)</h3>
+					<ul>
+						<li>Basados en sectores.</li>
+						<li>Tablas de inodos.</li>
+						<li>Mapas de bit para espacio libre.</li>
+						<li>Resource forks.</li>
+						<li>Estructura de jerarquía de directorios.</li>
+					</ul>
+					<aside class="notes">
+						La jerarquía estaba limitada por la profundidad y tamaño.
+						Los sectores usaban mapas CHS (Cylinder-head-sector) y optimizaciones, muy
+						bajo nivel.
+					</aside>
+				</section>
+
+				<section id="fs-almost">
+					<h2>Casi historia moderna</h2>
+					<h3>(finales de los 80)</h3>
+					<ul>
+						<li>Gran uso de arboles balanceados.</li>
+						<li>Primeros usos de <em>journaling</em></li>
+						<li>Se pudo usar direcciones de 32bits.</li>
+						<li>
+							La optimización de CHS, permitió tener varios sistemas en
+							un mismo disco.
+						</li>
+					</ul>
+				</section>
+
+				<section id="fs-modern">
+					<h2>Historia moderna</h2>
+					<h3>(principios de los 90)</h3>
+					<ul>
+						<li>Se maximizó la concurrencia de E/S.</li>
+						<li>Soporte para archivos mayores a 4GB.</li>
+						<li>Se realizan investigaciones para mejorar la búsqueda.</li>
+						<li>
+							Aparecen investigaciones de S.A. con registros <em>(logs)</em>
+							y <a href="https://es.wikipedia.org/wiki/Copy-on-write" target="_blank">
+							copy-on-write</a>.
+						</li>
+					</ul>
+					<aside class="notes">
+						Cuando se accede a un archivo se hace una copia del mismo y se devuelve
+						un puntero al proceso para que no puedan ver los cambios de otros procesos.
+					</aside>
+				</section>
+
+				<section id="fs-recent">
+					<h2>Historia reciente</h2>
+					<h3>(finales de los 90)</h3>
+					<ul>
+						<li>Aparece soporte asíncrono de journaling.</li>
+						<li>Transformación de datos (compresión).</li>
+						<li>Actualización de software para implementar nuevas características.</li>
+					</ul>
+				</section>
+
+				<section id="fs-actual">
+					<h2>Tecnologías actuales</h2>
+					<h3>(Desde el 2000)</h3>
+					<ul>
+						<li>Correción transparente de errores.</li>
+						<li>Manejo directo de dispositivos.</li>
+						<li>Árboles estructurados de registros.</li>
+						<li>Árboles balanceados de referencias de copy-write.</li>
+					</ul>
+				</section>
+
 				<section id="ejemplos">
 					<h1>Ejemplos de<br>implementaciones</h1>
 				</section>
@@ -597,6 +673,20 @@
 					</ul>
 				</section>
 
+				<section id="anexos">
+					<h1>Anexos</h1>
+				</section>
+
+				<section id="filesystems-linux">
+					<h2>Sistemas de archivos</h2>
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/SMcVdZk7wV8" frameborder="0" allowfullscreen>
+					</iframe>
+					<p>
+						Linux Filesystems: Where did they come from?
+						Charla realizada en el linux.conf.au de 2014 sobre
+						sistemas de archivos.
+					</p>
+				</section>
 				<section id="preguntas">
 					<h1>¿Dudas y preguntas?</h1>
 				</section>
