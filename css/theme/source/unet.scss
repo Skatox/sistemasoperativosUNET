@@ -2,6 +2,17 @@
 * CUSTOM CLASESS
 *********************************/
 
+$gradientTopColor:#000011;
+$gradientBottomColor:#30AA90;
+
+body {
+  background: $gradientTopColor; /* Old Browsers */
+  background: -webkit-linear-gradient(top left,$gradientTopColor,$gradientBottomColor); /*Safari 5.1-6*/
+  background: -o-linear-gradient(top left,$gradientTopColor,$gradientBottomColor); /*Opera 11.1-12*/
+  background: -moz-linear-gradient(top left,$gradientTopColor,$gradientBottomColor); /*Fx 3.6-15*/
+  background: linear-gradient(top left, $gradientTopColor, $gradientBottomColor); /*Standard*/
+}
+
 .slides {
   .half {
     width: 50%;
@@ -36,25 +47,39 @@
 }
 
 strong {
-  color: #552222;
+  color: #CCffCC;
   font-weight: normal !important;
 }
 
+$linkColor: #99ff99;
+$linkColorHover: #33aa33;
 .reveal {
+  color: #eee;
+  font-size: 2rem;
+
+  a {
+    color: $linkColor;
+
+    &:hover { color: $linkColorHover; }
+  }
+
+  sup {
+    font-size: 50%;
+  }
+
   .center {
     margin: 0 auto;
   }
   .nomargin {
     margin: 0;
   }
-  .slides section .text-left {
-    text-align: left;
+  .slides section {
+    .text-left { text-align: left }
+    .text-right { text-align: right }
   }
-  blockquote {
-    background: #EEE;
-    padding: 25px;
-  }
+  
   cite {
+    clear: both;
     display: block;
     text-align: right;
     margin-top: 15px;
@@ -69,17 +94,16 @@ strong {
       text-align: center;
     }
     h1 {
-      font-size: 2.5em;
+      font-size: 6rem;
     }
     h2 {
-      color: #C4E8FF;
-      font-size: 1.8em;
-      text-shadow: 1px 2px 2px #0000FF;
+      font-size: 5rem;
+      text-shadow: 1px 2px 2px #333;
     }
     h3 {
-      font-size: 1.3em;
-      color: #ff9000;
-      text-shadow: 1px 2px 2px #904500;
+      font-size: 3rem;
+      text-shadow: 1px 2px 2px #333;
+      text-decoration: underline;
     }
   }
   li h3 {
@@ -92,6 +116,29 @@ strong {
   ol {
     text-align: left;
   }
+
+  p.note {
+    clear: both;
+    background: #880000;
+    border: 2px solid #660000;
+    box-shadow: 3px 3px 2px #333;
+    color: #EEAAAA;
+    padding: 20px 15px;
+    font-size: 1.8rem;
+  }
+
+  p.caption {
+    margin: 2px;
+    font-size: 1.5rem;
+  }
+
+  .stroke {
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+  }
 }
 
 #definition-header {
@@ -100,6 +147,17 @@ strong {
   padding-left: 10px;
   margin-bottom: 100px;
   font-size: 24px;
+}
+
+#W3C {
+  img {
+    float: left;
+  }
+  h3 {
+    float: left;
+    margin-top: 3.5rem;
+    margin-left: 1rem;
+  }
 }
 
 .logo-wrapper img {
@@ -115,6 +173,50 @@ strong {
   > section {
     padding: 0;
   }
+}
+
+table {
+  th {
+    background: #0090FF;
+    color: #FFF;
+    border: 1 solid #333;
+  }
+}
+
+.slides {
+  table {
+    margin: 0 auto;
+    th {
+      padding: 20px;
+    }
+  }
+}
+
+
+p.nota {
+  color: #333;
+  font-style: italic;
+  font-size: 0.5em;
+  padding: 20px;
+  text-align: center;
+  text-shadow: 0 0 2px #555;
+}
+
+.reveal section pre {
+  box-shadow: none;
+  width: 100%;
+  code {
+    box-shadow: 0 0 6px #000010;
+  }
+}
+
+/* Intro */
+.reveal {
+  .professor-info a {
+    font-size: 2rem;
+
+  }
+  
 }
 
 table {
@@ -219,15 +321,6 @@ table.procesos {
   }
 }
 
-p.nota {
-  color: #333;
-  font-style: italic;
-  font-size: 0.5em;
-  padding: 20px;
-  text-align: center;
-  text-shadow: 0 0 2px #555;
-}
-
 table {
   &.banquero {
     th, td {
@@ -244,13 +337,5 @@ table {
   &.comparacion {
     padding: 0;
     font-size: 0.7em;
-  }
-}
-
-.reveal section pre {
-  box-shadow: none;
-  width: 100%;
-  code {
-    box-shadow: 0 0 6px #000010;
   }
 }
