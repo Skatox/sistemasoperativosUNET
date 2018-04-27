@@ -119,12 +119,13 @@ $linkColorHover: #33aa33;
 
   p.note {
     clear: both;
+    color: #EEAAAA;
     background: #880000;
     border: 2px solid #660000;
     box-shadow: 3px 3px 2px #333;
-    color: #EEAAAA;
-    padding: 20px 15px;
-    font-size: 1.8rem;
+    display: inline-block;
+    padding: 15px;
+    font-size: 1rem;
   }
 
   p.caption {
