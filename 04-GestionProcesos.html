@@ -3,20 +3,13 @@
 
 	<head>
 		<meta charset="utf-8">
-
 		<title>Sistemas Operativos | UNET</title>
-
 		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
 		<meta name="author" content="Miguel Angel Useche Castro">
-
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
 		<link rel="stylesheet" href="css/theme/unet.css">
 		<link rel="stylesheet" href="css/lightbox.min.css">
 
@@ -43,7 +36,7 @@
 				<section>
 					<div class="unet">
 						<div class="logo-wrapper left">
-							<img  src="img/intro/UNET.png" alt="UNET Logo">
+							<img class="noborder" src="img/UNET.png" alt="UNET Logo">
 						</div>
 						<p id="definition-header" class="left">
 							Universidad Nacional Experimental Del Táchira<br />
@@ -266,8 +259,8 @@
 							ubicado al principio de la cola, pasa a ejecutarse y es eliminado de la cola.
 						</li>
 					</ul>
-					<p class="nota">
-						Uno de los problemas de este algoritmo es el efecto <strong>Convoy</strong>,
+					<p class="note">
+						Uno de los problemas de este algoritmo es el efecto <strong>Convoy</strong>, 
 						el cual ocurre cuando un proceso espera mucho tiempo, debido a un proceso 
 						utilizando el CPU por mucho tiempo.
 					</p>
@@ -614,46 +607,46 @@
 						<h3>Ejemplo de cola multinivel</h3>
 						<div class="cola-multi center">
 							<div class="third left">
-								<img src="img/class4/flecha.png" alt="-->" />
+								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
 							</div>
 							<div class="third left p5">
 								Sistema
 							</div>
 							<div class="third left">
-								<img src="img/class4/flecha.png" alt="-->" />
+								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
 							</div>
 						</div>
 						<div class="cola-multi">
 							<div class="third left">
-								<img src="img/class4/flecha.png" alt="-->" />
+								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
 							</div>
 							<div class="third left p4">
 								Interactivos
 							</div>
 							<div class="third left">
-								<img src="img/class4/flecha.png" alt="-->" />
+								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
 							</div>
 						</div>
 						<div class="cola-multi">
 							<div class="third left">
-								<img src="img/class4/flecha.png" alt="-->" />
+								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
 							</div>
 							<div class="third left p2">
 								Por lotes
 							</div>
 							<div class="third left">
-								<img src="img/class4/flecha.png" alt="-->" />
+								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
 							</div>
 						</div>
 						<div class="cola-multi">
 							<div class="third left">
-								<img src="img/class4/flecha.png" alt="-->" />
+								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
 							</div>
 							<div class="third left p3">
 								Usuario
 							</div>
 							<div class="third left">
-								<img src="img/class4/flecha.png" alt="-->" />
+								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
 							</div>
 						</div>
 					</div>
@@ -664,10 +657,10 @@
 					<div>
 						<ul>
 							<li>
-								En este algoritmo un proceso <strong>puede moverse</strong> de una cola a otra.
+								Un proceso <strong>puede moverse</strong> de una cola a otra.
 							</li>
 							<li>
-								Este algortimo está definido por los siguientes parámetros:
+								Definido por los siguientes parámetros:
 								<ul>
 									<li>Número de colas.</li>
 									<li>Algoritmos de planificación para cada cola.</li>
@@ -691,30 +684,30 @@
 				<section>
 					<h3>Ejemplo de cola multinivel con retroalimentación</h3>
 					<div class="cola-multi">
-						<div class="third left">
-							<img src="img/class4/flecha.png" alt="-->" />
+						<div class="third left" style="text-align: right">
+							<img src="img/class4/flecha.png" class="noborder" alt="-->" />
 						</div>
 						<div class="third left p5">
 							quantum = 8
 						</div>
-						<div class="third left">
-							<img src="img/class4/flecha_abajo.png" alt="-->" />
+						<div class="third left" style="text-align: left">
+							<img src="img/class4/flecha_abajo.png" class="noborder" alt="-->" />
 						</div>
 					</div>
 					<div class="cola-multi">
-						<div class="third left">
-							<img src="img/class4/flecha_abajo.png" alt="-->" />
+						<div class="third left" style="text-align: right">
+							<img src="img/class4/flecha_abajo.png" class="noborder" alt="-->" />
 						</div>
 						<div class="third left p4">
 							quatum = 16
 						</div>
-						<div class="third left">
-							<img src="img/class4/flecha_izq.png" alt="-->" />
+						<div class="third left" style="text-align: left">
+							<img src="img/class4/flecha_izq.png" class="noborder" alt="-->" />
 						</div>
 					</div>
 					<div class="cola-multi">
-						<div class="third left">
-							<img src="img/class4/flecha.png" alt="-->" />
+						<div class="third left" style="text-align: right">
+							<img src="img/class4/flecha.png" class="noborder" alt="-->" />
 						</div>
 						<div class="third left p2">
 							FCFS
@@ -838,18 +831,30 @@
 					</div>
 				</section>
 
+				<section id="comic">
+					<h2>Planificador</h2>
+					<a href="img/class4/scheduling.png" data-lightbox="scheduling">
+						<img class="half" src="img/class4/scheduling.png">
+					</a>
+					<p class="center">
+						Fuente: <a href="https://drawings.jvns.ca/scheduling/" title="Ver imagen original">
+							Julia Evans
+						</a>
+					</p>
+				</section>
+
 				<section id="implementaciones">
 					<h1>Implementaciones</h1>
 				</section>
 
-				<section id="windows">
+				<section id="windows" data-background="img/class4/windows_10.jpg" data-background-repeat="none">
 					<h2>Windows</h2>
-					<p>
+					<p class="dark">
 						Según el libro <em>Windows Internals, Part 1: Covering Windows Server 2008 R2 and Windows 7</em>
 						(2012), Windows utiliza un sistema de colas multinivel <strong>basado en prioridades</strong> 
 						donde existen varias colas.
 					</p>
-					<p>
+					<p  class="dark">
 						Siempre un proceso de la cola de la mayor prioridad se encuentra en ejecución, 
 						con la limitación de que ciertos hilos de prioridad alta pueden ser ejecutados
 						en el procesador que se les permita o prefieran ejecutarse, un fenómeno llamado
@@ -857,9 +862,9 @@
 					</p>
 				</section>
 
-				<section id="macos">
-					<h2>OS X</h2>
-					<p>
+				<section id="macos" data-background="img/class4/osx.jpg" data-background-repeat="none">
+					<h2 class="dark">macOS</h2>
+					<p class="dark">
 						Utiliza una colas de retroalimentación con 4 prioridades: normal, sistema, kernel y
 						tiempo real. 
 					</p>
@@ -870,9 +875,12 @@
 					</aside>
 				</section>
 
-				<section id="linux">
-					<h2>CFS - Complete Fair Schedule</h2>
-					<p>
+				<section id="linux" data-background="img/class4/linux_tux.jpg" data-background-repeat="none">
+					<div class="dark">
+						<h2>Linux</h2>
+						<h3>CFS - Complete Fair Schedule</h3>
+					</div>
+					<p class="dark">
 						Desde la versión 2.6.23 utiliza una variante cola justa (utilizada en los paquetes
 						de red). Es un algoritmo similar al <em>Round Robin</em> donde al momento que un proceso
 						regresa a la cola, ésta se coloca en una posición en base al tiempo que duró en el procesador.
@@ -883,8 +891,8 @@
 					</aside>
 				</section>
 
-				<section id="preguntas">
-					<h1>¿Preguntas?</h1>
+				<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
+					<h1 class="stroke">¿Preguntas?</h1>
 				</section>
 			</div>
 		</div>

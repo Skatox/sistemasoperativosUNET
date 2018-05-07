@@ -57,6 +57,11 @@ $linkColorHover: #33aa33;
   color: #eee;
   font-size: 2rem;
 
+  .dark {
+    background: rgba(0,0,0,.60);
+    padding: 1rem;
+  }
+
   a {
     color: $linkColor;
 
@@ -169,7 +174,7 @@ $linkColorHover: #33aa33;
   margin-bottom: 100px;
 }
 
-.reveal .slidess > section {
+.reveal .slides > section {
   padding: 0;
   > section {
     padding: 0;
