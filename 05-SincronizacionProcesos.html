@@ -125,13 +125,16 @@
 		        <section id="seccion-critica">
 		            <h2>Sección Crítica</h2>
 		            <p>
-		                Es el segmento del código del programa donde se accede a un recurso
-		                compartido (como una estructura en memoria o un dispositivo de E/S) que
+		                Segmento del código del programa donde se accede a un recurso
+		                compartido (estructura en memoria o un dispositivo de E/S) que
 		                no debe ser accedido por otro hilo de ejecución para evitar conflictos
 		                o alteración del resultado esperado.
 		            </p>
-		            <p class="center">
-		                <img src="img/class5/seccion_critica.png" alt="Seccion critica" />
+		            <p class="center  half">
+		                <a href="img/class5/seccion_critica.png" data-lightbox="seccion critica" >
+		                	<img src="img/class5/seccion_critica.png" alt="Seccion critica" /> 
+		                </a>
+		                
 		            </p>
 		        </section>
 		        <section id="condiciones-evitar-competencia">
@@ -660,7 +663,7 @@ signal(S);</code>
 		            </ul>
 		        </section>
 		        <section id="productor-consumidor-contadores">
-		            <h2>Productor - Consumidor con contadores</h2>
+		            <h3>Productor - Consumidor con contadores</h3>
 		            <p>
 		                En este caso se utilizan 2 contadores:
 		                <strong>IN</strong> para los items producidos y <strong>OUT</strong>
@@ -724,7 +727,7 @@ int IN, OUT;</code>
 		            </div>
 		        </section>
 		        <section id="lector-escritor">
-		            <h2>Problemas de clásicos de sincronización</h2>
+		            <h3>Problemas de clásicos de sincronización</h3>
 		            <div class="half left">
 		                <ul>
 		                    <li>
@@ -740,14 +743,14 @@ int IN, OUT;</code>
 		                </ul>
 		            </div>
 		            <div class="half right">
-	                	<h3>Lectores - escritores</h3>
 		                <img src="img/class5/lector-escritores.png" alt="lectores y escritores" />
+		                <h4>Lectores - escritores</h4>
 		            </div>
 		        </section>
 		        <section id="lector-escritor-2">
 		            <h2>Problemas de clásicos de sincronización</h2>
 	                <h3>Lectores - escritores</h3>
-	                <p class="text-left">La solución al problema utiliza:</p>
+	                <p>La solución al problema utiliza:</p>
 	                <ul>
 	                    <li>Semáforo <strong>mutex</strong> inicializado a 1.</li>
 	                    <li>Semáforo <strong>writer</strong> inicializado a 1.</li>
@@ -784,8 +787,8 @@ int IN, OUT;</code>
 		            </pre></div>
 		        </section>
 		        <section id="problemas-filosofos">
-		            <h2>Problemas de clásicos de<br>sincronización</h2>
-		            <h3>Problema de los Filósofos</h3>
+		            <h3>Problemas de clásicos de sincronización</h3>
+		            <h4>Problema de los Filósofos</h4>
 		            <div class="half right">
 		                <img src="img/class5/filosofos.png" alt="filosfos" />
 		            </div>
@@ -799,8 +802,6 @@ int IN, OUT;</code>
 							Para comer, necesita 2 tenedores y  
 							sólo puede tomar los de sus lados.
 						</li>
-					</ul>
-					<ul class="nomargin">
 						<li>
 							Si cualquier filósofo coge un tenedor y el otro está ocupado, 
 							espera con el tenedor en la mano, hasta agarrar el otro tenedor, 
@@ -809,11 +810,11 @@ int IN, OUT;</code>
 	            	</ul>
 	            </section>
 	            <section id="problemas-filosofos-2">
-		            <h2>Problemas de clásicos de<br>sincronización</h2>
-		            <h3>Problema de los Filósofos</h3>
+		            <h3>Problemas de clásicos de sincronización</h3>
+		            <h4>Problema de los Filósofos</h4>
 		            <div>
 		                <p>
-		                    Permitir máximo 4 filosofos en la mesa.
+		                    Permitir máximo 4 filósofos en la mesa.
 		                </p>
 		                <pre>
 		                	<code class="cpp">#define N 4
