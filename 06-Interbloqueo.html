@@ -3,20 +3,13 @@
 
 	<head>
 		<meta charset="utf-8">
-
 		<title>Sistemas Operativos | UNET</title>
-
 		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
 		<meta name="author" content="Miguel Angel Useche Castro">
-
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/mozilla.css" id="theme">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
 		<link rel="stylesheet" href="css/theme/unet.css">
 		<link rel="stylesheet" href="css/lightbox.min.css">
 
@@ -43,17 +36,17 @@
 				<section>
 					<div class="unet">
 						<div class="logo-wrapper left">
-							<img  src="img/intro/UNET.png" alt="UNET Logo">
+							<img class="noborder" src="img/UNET.png" alt="UNET Logo">
 						</div>
 						<p id="definition-header" class="left">
-							Universidad Nacional Experimental Del Táchira<br>
-							Decanato De Docencia<br>
+							Universidad Nacional Experimental Del Táchira<br />
+							Decanato De Docencia<br />
 							Dpto. Ingeniería en Informática
 						</p>
 					</div>
 
 					<h1 class="clear">
-						Sistemas Operativos
+						Interbloqueo 
 					</h1>
 					<h2 id="subject-code">
 						Código 0435607T
@@ -151,7 +144,7 @@
 				</section>
 
 				<section id="empleo-de-recurso">
-					<h2>Interacción de<br>procesos y recursos</h2>
+					<h3>Interacción de<br>procesos y recursos</h3>
 					<p>
 						En modo de operación normal, un proceso puede obtener un recurso
 						solo a través de la siguiente secuencia:
@@ -217,8 +210,11 @@
 					</div>
 					<div class="right half">
 						<img src="img/class6/grafico-interbloqueo.png" alt="grafo" />
-						<p class="nota">Ejemplo de interbloqueo en grafos de alocación de recursos.
-						- Fuente: <a href="http://es.wikipedia.org/wiki/Bloqueo_mutuo" target="_blank">Wikipedia</a></p>
+						<p>
+							<small>Ejemplo de interbloqueo en grafos de alocación de recursos. - Fuente: 
+								<a href="http://es.wikipedia.org/wiki/Bloqueo_mutuo" target="_blank">Wikipedia</a>
+							</small>
+						</p>
 					</div>
 				</section>				
 
@@ -355,13 +351,13 @@
 							a pedirlo para solicitar otros recursos.
 						</li>
 					</ul>
-					<p class="nota"><strong>Nota:</strong> En ambos casos se puede 
-						dar una inanición (un proceso nunca se termina de ejecutar).</p>
+					<p class="note"><strong>Nota:</strong> En ambos casos se puede 
+						dar una <em>inanición</em> (un proceso nunca se termina de ejecutar).</p>
 				</section>
 
 				<section>
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
-					<h3>Prevención del Interbloqueo<br>No expropiación</h3>
+					<h3>Estrategias para enfrentar los bloqueos</h3>
+					<h4>Prevención del Interbloqueo No expropiación</h4>
 					<ul>
 						<li>
 							Utilizado en recursos cuyo estado se puede almacenar y 
@@ -497,9 +493,8 @@
 				</section>
 							
 				<section id="algoritmo-banquero-ejemplo">
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
-					<h3>Algoritmo del banquero</h3>
-					<br>
+					<h3>Estrategias para<br>enfrentar los bloqueos</h3>
+					<h4>Algoritmo del banquero</h4>
 					<div class="half left center">
 						<p>
 							E = { 6 , 3 , 4 , 2 }
@@ -592,9 +587,8 @@
 					</div>
 				</section>
 				<section id="algoritmo-banquero-ejemplo-2">
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
-					<h3>Algoritmo del banquero</h3>
-					<br>
+					<h3>Estrategias para<br>enfrentar los bloqueos</h3>
+					<h4>Algoritmo del banquero</h4>
 					<div class="half left center">
 						<p>
 							Existencia = { 10 , 5 , 7 }
@@ -740,8 +734,7 @@
 
 				<section id="deteccion-recuperacion-2">
 					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
-					<h3>Detección</h3>
-					<h4>Una sola instancia de recurso para cada tipo</h4>
+					<h3>Detección: Una sola instancia de recurso para cada tipo</h3>
 					<div class="half left">
 						<p>
 							Consiste en usar una variante del grafo de asignación
@@ -758,8 +751,8 @@
 				</section>
 
 				<section id="varias-instancias">
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
-					<h3>Varias instancias de cada tipo de recursos</h3>
+					<h3>Estrategias para <br>enfrentar los bloqueos</h3>
+					<h4>Varias instancias de cada tipo de recursos</h4>
 					<p>
 						Se aplica el algoritmo del banquero, pero se utilizan
 						los términos similares como:
@@ -775,7 +768,7 @@
 							actualmente a cada proceso.
 						</li>
 						<li>
-							<strong>Request: </strong> una matriz <em>n</em>x<em>m</em> que 
+							<strong>Request: </strong> una matriz <em>n</em> x <em>m</em> que 
 							especifica la solicitud actual efectuada por cada proceso.
 						</li>
 					</ul>
@@ -837,8 +830,7 @@
 
 				<section id="expropiacion-recursos">
 					<h2>Detección y recuperación de los interbloqueos</h2>
-					<h3>Recuperación de los interbloqueo</h3>
-					<h4>Expropiación de recursos</h4>
+					<h3>Recuperación de los interbloqueo: Expropiación de recursos</h3>
 					<ul>
 						<li>
 							<strong>Selección de una víctima: </strong>
@@ -858,11 +850,11 @@
 					</ul>
 				</section>
 
-					<section id="preguntas">
-						<h1>¿Preguntas?</h1>
-					</section>
-				</div>
+					<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
+					<h1 class="stroke">¿Preguntas?</h1>
+				</section>
 			</div>
+		</div>
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 		<script src="js/lightbox.min.js"></script>
@@ -891,4 +883,5 @@
 			});
 		</script>
 	</body>
+
 </html>
