@@ -126,6 +126,7 @@
 		            <h2>Sección Crítica</h2>
 		            <p>
 		                Segmento del código del programa donde se accede a un recurso
+<<<<<<< HEAD
 		                compartido (como una estructura en memoria o un dispositivo de E/S) que
 		                no debe ser accedido por otro hilo de ejecución para evitar conflictos
 		                o alteración del resultado esperado.
@@ -134,6 +135,17 @@
 		            	<a href="img/class5/seccion_critica.png" title="Ver detalles" data-lightbox="Ejemplo de sección crítica">
 		                	<img src="img/class5/seccion_critica.png" alt="Seccion critica" />
 		            	</a>
+=======
+		                compartido (estructura en memoria o un dispositivo de E/S) que
+		                no debe ser accedido por otro hilo de ejecución para evitar conflictos
+		                o alteración del resultado esperado.
+		            </p>
+		            <p class="center  half">
+		                <a href="img/class5/seccion_critica.png" data-lightbox="seccion critica" >
+		                	<img src="img/class5/seccion_critica.png" alt="Seccion critica" /> 
+		                </a>
+		                
+>>>>>>> 3bae6968bbf93643339c4739ba8de516fa4824d5
 		            </p>
 		        </section>
 		        <section id="condiciones-evitar-competencia">
@@ -742,14 +754,18 @@ int IN, OUT;</code>
 		                </ul>
 		            </div>
 		            <div class="half right">
+<<<<<<< HEAD
 	                	<h4>Lectores - escritores</h4>
+=======
+>>>>>>> 3bae6968bbf93643339c4739ba8de516fa4824d5
 		                <img src="img/class5/lector-escritores.png" alt="lectores y escritores" />
+		                <h4>Lectores - escritores</h4>
 		            </div>
 		        </section>
 		        <section id="lector-escritor-2">
 		            <h2>Problemas de clásicos de sincronización</h2>
 	                <h3>Lectores - escritores</h3>
-	                <p class="text-left">La solución al problema utiliza:</p>
+	                <p>La solución al problema utiliza:</p>
 	                <ul>
 	                    <li>Semáforo <strong>mutex</strong> inicializado a 1.</li>
 	                    <li>Semáforo <strong>writer</strong> inicializado a 1.</li>
@@ -786,12 +802,19 @@ int IN, OUT;</code>
 		            </pre></div>
 		        </section>
 		        <section id="problemas-filosofos">
+<<<<<<< HEAD
 		            <h3>Problemas de clásicos de<br>sincronización</h3>
 		            <div class="third right">
 		            	<h4>Problema de los Filósofos</h4>
 		            	<a href="img/class5/filosofos.png" data-lightbox="Problema de los filósofos" title="Problema de los filósofos">
 		                	<img src="img/class5/filosofos.png" alt="filosfos" />
 		            	</a>
+=======
+		            <h3>Problemas de clásicos de sincronización</h3>
+		            <h4>Problema de los Filósofos</h4>
+		            <div class="half right">
+		                <img src="img/class5/filosofos.png" alt="filosfos" />
+>>>>>>> 3bae6968bbf93643339c4739ba8de516fa4824d5
 		            </div>
 		            <ul class="twothird nomargin left">
 						<li>
@@ -811,11 +834,11 @@ int IN, OUT;</code>
 	            	</ul>
 	            </section>
 	            <section id="problemas-filosofos-2">
-		            <h2>Problemas de clásicos de<br>sincronización</h2>
-		            <h3>Problema de los Filósofos</h3>
+		            <h3>Problemas de clásicos de sincronización</h3>
+		            <h4>Problema de los Filósofos</h4>
 		            <div>
 		                <p>
-		                    Permitir máximo 4 filosofos en la mesa.
+		                    Permitir máximo 4 filósofos en la mesa.
 		                </p>
 		                <pre>
 		                	<code class="cpp">#define N 4

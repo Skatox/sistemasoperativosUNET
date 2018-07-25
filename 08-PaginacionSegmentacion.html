@@ -163,12 +163,15 @@
 							unidad de memoria.
 						</li>
 					</ul>
-					<div class="center">
-						<p class="nota">
+				</section>
+				<section id="paginacion-ejemplo">
+					<h2>Paginación</h2>
+					<h3>Dirección lógica</h3>
+						<p>
 							Memoria de 2KB con tamaño de páginas 256B.<br />
 							Dirección:  <strong>0x75B</strong> = 11101011011
 						</p>
-						<div class="slide">
+						<div class="fragment">
 							<table >
 								<tr>
 									<th>Página</th>
@@ -180,14 +183,14 @@
 								</tr>
 							</table>
 						</div>
-					</div>
 				</section>
 
 				<section>
 					<h2>Paginación</h2>
 					<div class="center">
 						<img src="img/class8/paginacion.png" alt="Paginación"/>
-						<p class="nota">
+						<br>
+						<p>
 							Modelo de paginación de la memoria lógica y
 							física
 						</p>
@@ -223,35 +226,38 @@
 							</tr>
 						</table>
 					</div>
-					<h4>Memoria física</h4>
-					<table class="memoria">
-						<tr>
-							<th>0</th><th>4</th><th>8</th><th>12</th>
-							<th>16</th><th>20</th><th>24</th><th>28</th>
-						</tr>
-						<tr>
-							<td class="libre">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;
-							</td>
-							<td class="center">i j k l</td>
-							<td class="center">m n o p</td>
-							<td class="libre">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;
-							</td>
-							<td class="libre">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;
-							</td>
-							<td class="center">a b c d</td>
-							<td class="center">e f g h</td>
-							<td class="libre">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;
-							</td>
-						</tr>
-					</table>
+					<div style="clear:both" class="fragment">
+					<br>
+						<h4>Memoria física</h4>
+						<table class="memoria">
+							<tr>
+								<th>0</th><th>4</th><th>8</th><th>12</th>
+								<th>16</th><th>20</th><th>24</th><th>28</th>
+							</tr>
+							<tr>
+								<td class="libre">
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td class="center">i j k l</td>
+								<td class="center">m n o p</td>
+								<td class="libre">
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td class="libre">
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td class="center">a b c d</td>
+								<td class="center">e f g h</td>
+								<td class="libre">
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+							</tr>
+						</table>
+					</div>
 				</section>
 
 				<section id="tabla-paginas">
@@ -276,28 +282,31 @@
 						</table>
 					</div>
 					<ul>
-						<li class="slide"><strong>Accedido:</strong> indica si se ha leído 
+						<li class="fragment"><strong>Accedido:</strong> indica si se ha leído 
 							información de esa página, útil para algoritmos
 							como LRU (Less Recently Used).
 						</li>
-						<li class="slide"><strong>Modificado:</strong> advierte sobre cambios
+						<li class="fragment"><strong>Modificado:</strong> advierte sobre cambios
 							en los datos de la página desde que fue cargada del
 							disco, para guardarlos al momento de salir de la 
 							memoria.
 						</li>
-						<li class="slide"><strong>Presente / Ausente: </strong> permite conocer
+						<li class="fragment"><strong>Presente / Ausente: </strong> permite conocer
 							si la página se encuentra cargada en memoria o 
 							en el disco.
 						</li>
-						<li class="slide"><strong>Protección:</strong> muestra el tipo de acceso
+						<li class="fragment"><strong>Protección:</strong> muestra el tipo de acceso
 							permitido para el contenido de la página (lectura o 
 							escritura).
 						</li>
-						<li class="slide"><strong>Número del marco:</strong> guarda el valor
+						<li class="fragment"><strong>Número del marco:</strong> guarda el valor
 							del marco de página donde se encuentra ubicada la 
 							información.
 						</li>
 					</ul>
+					<aside class="notes">
+						Hablar de red social
+					</aside>
 				</section>
 				<section>
 					<h2>Implementación de la tabla de página</h2>
@@ -324,18 +333,20 @@
 
 				<section>
 					<h2>Memoria asociativa</h2>
-					<div class="center">
-						<img src="img/class8/tlb.png" alt="TLB" />
+					<div class="center half">
+						<a href="img/class8/tlb.png" title="TLB" data-lightbox="tlb">
+							<img src="img/class8/tlb.png" alt="TLB" />
+						</a>
+						<p>TLB</p>
 					</div>
 				</section>
 
 				<section>
 					<h2>Memoria asociativa</h2>
-					<div class="center">
+					<div class="center half">
 						<img src="img/class8/tlb_detalle.png" alt="TLB" />
 					</div>
-					<br />
-					<p class="nota">
+					<p>
 						Si la página esta en un registro asociativo
 						<strong>se obtiene el número de marco</strong>, 
 						de lo contrario, se debe buscar en la tabla de páginas.
@@ -352,20 +363,20 @@
 							
 						</ul>
 					</div>
-					<p>
+					<p class="text-left">
 						Si encuentra el número de marco en el TLB:<br /> 
 						<strong>20ns + 100ns = 120 ns</strong>
 					</p>
-					<p>
+					<p class="text-left">
 						Si no encuentra el número de marco en el TLB:<br /> 
 						<strong>20ns + 100ns + 100ns = 220 ns</strong>
 					</p>
-					<p>
+					<p class="text-left">
 						Tiempo efectivo de acceso:<br />
 						<strong>0,8x120 + 0,20x220 = 140ns</strong>
 					</p>
 
-					<p>
+					<p class="text-left">
 						Tiempo efectivo de acceso para 90% de aciertos:<br />
 						<strong>0,9x120 + 0,10x220 = 130ns</strong>
 					</p>
@@ -383,7 +394,7 @@
 					<div class="center">
 						<img src="img/class8/tasa_acceso.png" alt="tasa de acceso" />
 					</div>
-					<p class="nota">
+					<p class="note">
 						A mayor porcentaje de acierto, menor es el tiempo de acceso 
 						a los datos en memoria.
 					</p>
@@ -401,12 +412,12 @@
 								Gracias al uso de tabla de páginas, se puede
 								compartir código común entre procesos.
 							</li>
-							<li class="slide">
+							<li class="fragment">
 								Esto es implementado a través de la compartición
 								de un marco de memoria, para ello, el marco
 								debe estar asociado en la tabla de proceso.
 							</li>
-							<li class="slide">
+							<li class="fragment">
 								El número de página asociado al marco, puede
 								ser diferente en cada proceso.
 							</li>
@@ -423,17 +434,17 @@
 					<div class="left twothird">
 						<ul>
 							<li>
-								Debido a que las tablas de página pueden ocupar mucho espacio,
+								Si tablas de página ocupa mucho espacio,
 								éstas se someten a una paginación, creando una organización
-								páginada de múltiples niveles.
+								páginada de múltiples niveles. Por ejemplo, 
+								<strong>la páginacion en dos niveles</strong>.
 							</li>
-							<li>Un ejemplo de este tipo es la páginacion en dos niveles.</li>
 							<li>
-								Las direcciones lógicas ahora possen la siguiente estructura:
+								Las direcciones lógicas ahora poseen la siguiente estructura:
 							</li>
 						</ul>
 					</div>
-					<table class="banquero">
+					<table class="memoria-compartida">
 						<tr>
 							<td colspan="3" class="center">
 								<strong>0x1AA76F</strong> = 0110101010011101101111
@@ -463,7 +474,7 @@
 								Por ello, una dirección lógica consiste en un par
 								de valores:<br />
 									<div class="center">
-										<strong>número de segmento, desplazamiento</strong>
+										<strong><small>número de segmento, desplazamiento</small></strong>
 									</div>
 							</li>
 							<li>
@@ -476,7 +487,9 @@
 						</ul>
 					</div>
 					<div class="left half">
-						<img src="img/class8/segmentos.png" alt="segmentos" class="noborder" />
+						<a href="img/class8/segmentos.png" data-lightbox="segmentacion" title="Segmentación de Mem">
+							<img src="img/class8/segmentos.png" alt="segmentos" class="noborder" />
+						</a>
 					</div>
 					<aside class="notes">
 						<ul>
@@ -500,8 +513,12 @@
 
 				<section id="segmentacion-ejemplo">
 					<h2>Segmentación</h2>
-					<div class="center">
-						<img src="img/class8/ejemplo_segmentacion.png" alt="" />
+					<div class="half center">
+						<a href="img/class8/ejemplo_segmentacion.png" title="Segmentación de Memoria" data-lightbox="segmentacion2">
+							
+							<img src="img/class8/ejemplo_segmentacion.png" alt="" />
+						</a>
+						<p>Ejemplo de Segmentación de Memoria</p>
 					</div>
 				</section>
 
