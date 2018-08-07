@@ -213,7 +213,9 @@
 				<section id="archivos">
 					<h2>Archivos</h2>
 					<img src="img/class10/Archivos.png" alt="Listado de archivos">
-					<p>Ejemplo de archivos en la carpeta <strong>/etc</strong></p>
+					<p>
+						<small>Ejemplo de archivos en la carpeta <strong>/etc</strong></small>
+					</p>
 				</section>
 				
 				<section id="estructura-archivo">
@@ -238,7 +240,7 @@
 				</section>
 
 				<section id="operaciones-archivo-1">
-					<h2>Operaciones con archivos (1/3)</h2>
+					<h2>Operaciones con archivos (1/4)</h2>
 					<ul>
 						<li>
 							<h3>Creación</h3> Cuando se crea un archivo, se busca
@@ -260,23 +262,28 @@
 				</section>
 
 				<section id="operaciones-archivo-2">
-					<h2>Operaciones con archivos (2/3)</h2>
+					<h2>Operaciones con archivos (2/4)</h2>
 					<ul>
 						<li>
-							<h3>Lectura</h3> Se accede al archivo con una
+							<h3>Lectura</h3> acceso al archivo con una
 							llamada al sistema especificando su nombre y 
-							donde debe colocarse el siguiente bloque del archivo. 
+							donde debe ubicar el siguiente bloque del archivo. 
 							De esta manera se obtiene un <strong>puntero de lectura
 							</strong> para recorrer su contenido.
 						</li>
+					</ul>
+				</section>
+				<section id="operaciones-archivo-3">
+					<h2>Operaciones con archivos (3/4)</h2>
+					<ul>
 						<li>
-							<h3>Reposicionamiento</h3> Se explora el directorio 
+							<h3>Reposicionamiento</h3> explora el directorio 
 							hasta encontrar el archivo indicado, se actualiza la 
 							entrada del puntero de posición con la nueva 
 							ubicación (sin realizar operaciones E/S).
 						</li>
 					</ul>
-					<p class="nota">
+					<p class="note">
 						<strong>Nota:</strong> Los puntero de lectura y escritura 
 						son únicos para cada proceso.
 					</p>
@@ -285,8 +292,8 @@
 					</aside>
 				</section>
 
-				<section id="operaciones-archivo-3">
-					<h2>Operaciones con archivos (3/3)</h2>
+				<section id="operaciones-archivo-4">
+					<h2>Operaciones con archivos (4/4)</h2>
 					<ul>
 						<li>
 							<h3>Borrado</h3> Para eliminar el archivo, se explora el directorio
@@ -437,13 +444,11 @@
 					<div class="half left center">
 						<h3>Acceso secuencial.</h3>
 						<pre>
-							<code>
-							read next
-							write next
-							reset
-							no read after last write
-							//(rewrite)
-							</code>
+							<code>read next
+write next
+reset
+no read after last write
+//(rewrite)</code>
 						</pre>
 						<p>
 							<a href="img/class10/secuencial.png" data-lightbox="Acceso secuencial">
@@ -454,15 +459,13 @@
 					<div style="width: 45%" class="right">
 						<h3>Acceso directo.</h3>
 						<pre>
-							<code>
-							read n
-							write n
-							position to n
-							read next
-							write nex
-							rewrite n
-							n = relative block number
-						</code>
+							<code>read n
+write n
+position to n
+read next
+write nex
+rewrite n
+n = relative block number</code>
 						</pre>
 					</div>
 				</section>
@@ -598,6 +601,24 @@
 						En cada punto de montaje pueden existir
 						sistema de archivos distintos.
 					</aside>
+				</section>
+
+				<section id="anexos">
+					<h1>Anexos</h1>
+				</section>
+
+				<section id="comic">
+					<h2>Cache del sistema de archivos</h2>
+					<a href="img/class10/filesystem-cache.png" data-lightbox="cache">
+						<img src="img/class10/filesystem-cache.png" class="half">
+					</a>
+					<p>
+						Fuente: <a href="https://drawings.jvns.ca/filesystem-cache/" target="_blank">Julia Evans</a>
+					</p>
+				</section>
+
+				<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
+					<h1 class="stroke">¿Preguntas?</h1>
 				</section>
 
 				<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
