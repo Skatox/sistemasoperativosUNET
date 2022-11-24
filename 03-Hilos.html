@@ -6,28 +6,20 @@
 		<title>Sistemas Operativos | UNET</title>
 		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
 		<meta name="author" content="Miguel Angel Useche Castro">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
-		<link rel="stylesheet" href="css/theme/unet.css">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/moon.css">
+		<link rel="stylesheet" href="dist/theme/unet.css" id="theme">
 		<link rel="stylesheet" href="css/lightbox.min.css">
 
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = 'css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
-
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	</head>
 
 	<body>
@@ -46,7 +38,7 @@
 					</div>
 
 					<h1 class="clear">
-						Sistemas Operativos
+						Hilos de ejecución
 					</h1>
 					<h2 id="subject-code">
 						Código 0435607T
@@ -78,17 +70,15 @@
 							un mismo espacio de direcciones, con un padre
 							común.
 						</li>
-					</ul>						
-					<div class="half right">
-						<img src="img/class2/hebras.jpg" alt="Hebras" />
-					</div>
-					<ul class="nomargin">
 						<li>
 							Es diferente un proceso hijo (se ejecuta en
 							espacio de direcciones separados) a un hilo (se
 							ejecuta en el mismo espacio de direcciones)
 						</li>
-					</ul>
+					</ul>						
+					<div class="half right">
+						<img src="img/class2/hebras.jpg" alt="Hebras" />
+					</div>
 				</section>
 
 				<section id="hebras">
@@ -184,9 +174,9 @@
 						<a href="img/class2/GameThreads.jpg" data-lightbox="Killzone">
 							<img src="img/class2/GameThreads.jpg" alt="Imagen de Killzone 2" />
 						</a>
-						<p>
-							<small>Ejemplo de hilos/hebras en un juego</small>
-						</p>
+						<br>
+						<small>Ejemplo de hilos/hebras en un juego</small>
+							<iframe src="https://www.youtube.com/embed/EXtMjxC0M4U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 				</section>
 				<section id="modelo-hebras" >
@@ -287,32 +277,30 @@
 				</section>
 			</div>
 		</div>
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
-		<script src="js/lightbox.min.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="js/lightbox-plus-jquery.min.js"></script>
 		<script>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
 			Reveal.initialize({
 				controls: true,
-				progress: false,
-				history: true,
+				progress: true,
 				center: true,
+				hash: true,
+				history: true,
+				theme: 'unet',
+				transition: 'linear',
 
-				theme: 'mozilla',
-				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
-
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
 			});
+
 		</script>
 	</body>
 </html>

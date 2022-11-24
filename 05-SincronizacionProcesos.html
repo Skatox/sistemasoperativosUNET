@@ -6,28 +6,20 @@
 		<title>Sistemas Operativos | UNET</title>
 		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
 		<meta name="author" content="Miguel Angel Useche Castro">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
-		<link rel="stylesheet" href="css/theme/unet.css">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/moon.css">
+		<link rel="stylesheet" href="dist/theme/unet.css" id="theme">
 		<link rel="stylesheet" href="css/lightbox.min.css">
 
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = 'css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
-
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	</head>
 
 	<body>
@@ -126,8 +118,7 @@
 		            <h2>Sección Crítica</h2>
 		            <p>
 		                Segmento del código del programa donde se accede a un recurso
-<<<<<<< HEAD
-		                compartido (como una estructura en memoria o un dispositivo de E/S) que
+		                compartido (estructura en memoria o un dispositivo de E/S) que
 		                no debe ser accedido por otro hilo de ejecución para evitar conflictos
 		                o alteración del resultado esperado.
 		            </p>
@@ -135,17 +126,6 @@
 		            	<a href="img/class5/seccion_critica.png" title="Ver detalles" data-lightbox="Ejemplo de sección crítica">
 		                	<img src="img/class5/seccion_critica.png" alt="Seccion critica" />
 		            	</a>
-=======
-		                compartido (estructura en memoria o un dispositivo de E/S) que
-		                no debe ser accedido por otro hilo de ejecución para evitar conflictos
-		                o alteración del resultado esperado.
-		            </p>
-		            <p class="center  half">
-		                <a href="img/class5/seccion_critica.png" data-lightbox="seccion critica" >
-		                	<img src="img/class5/seccion_critica.png" alt="Seccion critica" /> 
-		                </a>
-		                
->>>>>>> 3bae6968bbf93643339c4739ba8de516fa4824d5
 		            </p>
 		        </section>
 		        <section id="condiciones-evitar-competencia">
@@ -754,12 +734,8 @@ int IN, OUT;</code>
 		                </ul>
 		            </div>
 		            <div class="half right">
-<<<<<<< HEAD
 	                	<h4>Lectores - escritores</h4>
-=======
->>>>>>> 3bae6968bbf93643339c4739ba8de516fa4824d5
 		                <img src="img/class5/lector-escritores.png" alt="lectores y escritores" />
-		                <h4>Lectores - escritores</h4>
 		            </div>
 		        </section>
 		        <section id="lector-escritor-2">
@@ -865,32 +841,30 @@ while (true) {
 				</section>
 			</div>
 		</div>
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
-		<script src="js/lightbox.min.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="js/lightbox-plus-jquery.min.js"></script>
 		<script>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
 			Reveal.initialize({
 				controls: true,
-				progress: false,
-				history: true,
+				progress: true,
 				center: true,
+				hash: true,
+				history: true,
+				theme: 'unet',
+				transition: 'linear',
 
-				theme: 'mozilla',
-				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
-
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
 			});
+
 		</script>
 	</body>
 
