@@ -51,7 +51,7 @@
 						</p>
 					</div>
 				</section>
-		
+
 				<section id="contenido">
 					<h2>Contenido</h2>
 					<ul>
@@ -117,7 +117,7 @@
 							de la tabla de páginas.
 						</li>
 						<li>
-							Si al solicitar el acceso a una página marcada como no 
+							Si al solicitar el acceso a una página marcada como no
 							disponible, significa que no está en la memoria principal.
 							Entonces se invoca a un proceso llamado <strong>intercambio
 							de página</strong>.
@@ -191,17 +191,17 @@
 						<li><h4>Del Reloj</h4></li>
 					</ul>
 				</section>
-				
+
 				<section >
 					<h2>Algoritmos de sustitución de páginas</h2>
 					<h3>Primero en entrar, primero en salir (FIFO)</h3>
 					<ul>
 						<li>
 							Consiste en guardar el orden en que son
-							cargadas las páginas, al momento de 
-							<strong>no existir marcos de página 
-							libres</strong>, retira de memoria la 
-							página mas antigua 
+							cargadas las páginas, al momento de
+							<strong>no existir marcos de página
+							libres</strong>, retira de memoria la
+							página mas antigua
 							<em>(la que llegó primero a memoria)</em>.
 						</li>
 						<li>
@@ -223,23 +223,23 @@
 						<li>
 							Es una módificacion del algoritmo anterior,
 							literalmente le da una segunda oportunidad
-							a las páginas antes de moverlas de la 
+							a las páginas antes de moverlas de la
 							memoria principal.
 						</li>
 						<li>
-							El hardware necesita tener soporte del bit 
+							El hardware necesita tener soporte del bit
 							de referencia para implementar este algoritmo.
 						</li>
 						<li>
 							Sigue el mismo principio de FIFO, pero antes
 							de sacar la página de memoria comprueba el bit
-							de refencia, si esta en <strong>001</strong> 
-							(fijado) se cambia a <strong>099</strong> como 
+							de refencia, si esta en <strong>001</strong>
+							(fijado) se cambia a <strong>099</strong> como
 							si estuviese entrando de nuevo (dando una segunda
 							oportunidad), en caso contrario, lo libera.
 						</li>
 						<li>
-							Con este ligero cambio, se incrementa el 
+							Con este ligero cambio, se incrementa el
 							rendimiento respecto al algoritmo anterior.
 						</li>
 					</ul>
@@ -248,17 +248,17 @@
 					<h2>Algoritmos de sustitución de páginas</h2>
 					<h3>No usadas recientemente (NRU)</h3>
 					<ul>
-						<li>Utiliza los 2 siguientes bits 
-							(Se encienden por hardware y son apagados 
+						<li>Utiliza los 2 siguientes bits
+							(Se encienden por hardware y son apagados
 							por software):
 							<ul>
 								<li>
-									<strong>M:</strong> 
+									<strong>M:</strong>
 									Se enciende al modificar el contenido
 									de la página.
 								</li>
 								<li>
-									<strong>R:</strong> 
+									<strong>R:</strong>
 									Se enciende cuando se accede a la página.
 								</li>
 							</ul>
@@ -286,7 +286,7 @@
 							acceso reciente.
 						</li>
 						<li>
-							El algoritmo desaloja, una página al azar de 
+							El algoritmo desaloja, una página al azar de
 							la clase mas inferior. Da prioridad a las páginas
 							pocos referenciadas en lugar de las solicitadas
 							frecuentemente con modificaciones.
@@ -305,13 +305,13 @@
 						</li>
 						<li>
 							Al ocurrir un fallo de memoria, revisa cuál página
-							<strong>NO</strong> ha sido usada recientemente y 
+							<strong>NO</strong> ha sido usada recientemente y
 							realiza el intercambio.
 						</li>
 						<li>
 							Se puede implementar con listas dinámicas o contadores,
-							pero ambos son métodos muy costosos y con muchas 
-							limitaciones de hardware (no se pueden implementar 
+							pero ambos son métodos muy costosos y con muchas
+							limitaciones de hardware (no se pueden implementar
 							contadores tan grandes).
 						</li>
 					</ul>
@@ -323,7 +323,7 @@
 					<div class="left half">
 						<ul>
 							<li>
-								Utiliza una lista circular y un puntero que 
+								Utiliza una lista circular y un puntero que
 								realiza la función de manecilla.
 							</li>
 							<li>
@@ -335,10 +335,10 @@
 					</div>
 					<div class="left half">
 						<img src="img/class9/reloj.png" alt="algoritmo de reloj" />
-					</div>	
+					</div>
 					<p>
-						Si <strong>R = 0</strong> se desaloja esa 
-						página. Si es <strong>R = 1</strong> 
+						Si <strong>R = 0</strong> se desaloja esa
+						página. Si es <strong>R = 1</strong>
 						se incrementa la manecilla una posición.
 					</p>
 					<aside class="notes">
@@ -346,7 +346,7 @@
 						esa página, se introduce la nueva en esa
 						posición, se incrementa la manecilla
 						(puntero) una posición.
-						Si <strong>R = 1</strong> se incrementa 
+						Si <strong>R = 1</strong> se incrementa
 						la manecilla (puntero) una posición.
 					</aside>
 				</section>
@@ -361,13 +361,13 @@
 					<ul>
 						<li>
 							Sucede cuando un proceso invierte mas tiempo
-							en implementando mecanismos de paginación 
+							en implementando mecanismos de paginación
 							que en su propia ejecución.
 						</li>
 						<li>
 							Provoca graves problemas de rendimiento.
-							Ejemplo: Aumento del grado de 
-							multiprogramación. 
+							Ejemplo: Aumento del grado de
+							multiprogramación.
 						</li>
 					</ul>
 				</section>
@@ -421,7 +421,13 @@
 					</p>
 				</section>
 
-				<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
+				<section id="video-ipc">
+					<h2>Video sobre IPC</h2>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/Y2mDwW2pMv4?si=rNGXR09PLb7bxkiK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <p>
+            En este vídeo podrán ver como se intercambia la información entre procesos.
+					</p>
+				</section><section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
 					<h1 class="stroke">¿Preguntas?</h1>
 				</section>
 			</div>
