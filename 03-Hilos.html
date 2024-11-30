@@ -51,7 +51,7 @@
 						</p>
 					</div>
 				</section>
-				
+
 				<section id="contenido">
 					<h2>Contenido</h2>
 					<ul>
@@ -76,7 +76,7 @@
 							espacio de direcciones separados) a un hilo (se
 							ejecuta en el mismo espacio de direcciones)
 						</li>
-					</ul>						
+					</ul>
 					<div class="half right">
 						<img src="img/class2/hebras.jpg" alt="Hebras" />
 					</div>
@@ -87,7 +87,7 @@
 					<ul>
 						<li>Posee un contador de programa, un conjunto de registros y una pila.</li>
 						<li>
-							Es creada por un proceso y comparte la sección de código, 
+							Es creada por un proceso y comparte la sección de código,
 							sección de datos y recursos del sistema operativo.
 						</li>
 						<li>Una tarea <strong>(proceso pesado)</strong> posee una o muchas hebras.
@@ -102,7 +102,7 @@
 					</div>
 					<p>
 						<strong>Nota: </strong>
-						Observe como las hebras comparten la sección de código, archivo y datos 
+						Observe como las hebras comparten la sección de código, archivo y datos
 						del proceso al que pertenecen. Pero cada una tiene su propia sección de pila y registros.
 					</p>
 				</section>
@@ -110,14 +110,14 @@
 				<section id="uso-hilos">
 					<h2>Uso de hilos</h2>
 					<ul>
-						
+
 						<li>No producen un aumento de rendimiento.</li>
 						<li>
 							Muy eficientes cuando hay muchos cálculos y
 							operaciones de E/S.
 						</li>
 						<li>
-							Útiles en equipos con varios CPU. Se aprovecha 
+							Útiles en equipos con varios CPU. Se aprovecha
 							realmente el procesamiento en paralelo.
 						</li>
 						<li>
@@ -138,7 +138,7 @@
 						<li>Son mas rápidas de crear, hasta 10 veces mas que un proceso.</li>
 						<li>Es mas económico realizar el cambio de contexto.</li>
 						<li>
-							Mas rápido de eliminar pues solo es necesario 
+							Mas rápido de eliminar pues solo es necesario
 							vaciar su pila y registros,en un proceso toca eliminar todo el PCB.
 						</li>
 					</ul>
@@ -147,13 +147,13 @@
 					<h2>Ventajas de utilizar <br />hebras sobre procesos</h2>
 					<ul>
 						<li>
-							Permite mayor control de la comunicación permitiendo 
-							crear rutinas propias,	pues en el caso de procesos, 
+							Permite mayor control de la comunicación permitiendo
+							crear rutinas propias,	pues en el caso de procesos,
 							es necesario usar rutinas del sistema operativo para
 							la comunicación.
 						</li>
 						<li>
-							Permite incrementar el grado de concurrencia al aprovechar 
+							Permite incrementar el grado de concurrencia al aprovechar
 							el hardware con multiprocesadores.
 						</li>
 					</ul>
@@ -194,19 +194,19 @@
 							los datos de otro hilo. No existe protección entre ellos.
 						</li>
 						<li>
-							Los hilos son tratados como procesos desde el punto de 
+							Los hilos son tratados como procesos desde el punto de
 							vista de estados dentro del procesador. Pasan por los
 							mismos estados de un proceso: Listo, Ejecución, Bloqueado o
 							terminado.
 						</li>
 					</ul>
-				</section>	
+				</section>
 				<section id="modelo-hilos-2" >
 					<h2>Modelo de hebras</h2>
 					<ul>
 						<li>Cada hilo tiene su propia pila.</li>
 						<li>
-							Se debe considerar la sincronización y competencia de 
+							Se debe considerar la sincronización y competencia de
 							los recursos de un proceso. Un hilo podría bloquear a
 							otro mientras espera un dispositivo de E/S.
 						</li>
@@ -233,7 +233,7 @@
 					<ul>
 						<li>Estándar definido por la IEEE conocido como 1003.1c</li>
 						<li>Define mas de 60 llamadas a funciones para gestionar hilos.</li>
-						<li>Aceptado por la mayoría de sistemas UNIX.</li>						
+						<li>Aceptado por la mayoría de sistemas UNIX.</li>
 					</ul>
 				</section>
 				<section id="biblioteca-hebras-winapi">
@@ -243,7 +243,7 @@
 						<li>Implementación hecha para los sistemas Windows (Microsoft).</li>
 						<li>Define su interfaz de llamadas para la gestión de los hilos.</li>
 						<li>
-							Se define una estructura para el manejo de los 
+							Se define una estructura para el manejo de los
 							hilos llamada Win32 Thread Information Block
 						</li>
 					</ul>
@@ -257,7 +257,7 @@
 						<p>
 							<img src="img/class2/bascule.jpg" alt="Tony Arcieri" class="left"/>
 					 		Cuando se enfrenta a un problema, alguna gente dice: "Ya sé, usaré
-					 		hilos." Ahora ellos tieAhora ellnen 2 problproblememasas 2 problemas. 
+					 		hilos." Ahora ellos tieAhora ellnen 2 problproblememasas 2 problemas.
 					 		<cite>
 					 			Tony Arcieri - <a href="http://twitter.com/bascule" target="_blank">@bascule</a>
 					 		</cite>
@@ -275,6 +275,10 @@
 							Julia Evans
 						</a>
 					</p>
+				</section>
+        <section id="video-hilos">
+					<h2>Video sobre Hilos</h2>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/M9HHWFp84f0?si=uxS-1lkzTZ-GOGRh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 				</section>
 				<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
 					<h1 class="stroke">¿Preguntas?</h1>
