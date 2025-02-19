@@ -74,8 +74,8 @@
 					<div class="half left">
 						<p>
 							Fue creada por John Von Neumann en 1949, para solucionar
-							<strong>el problema de recableado</strong> cada vez 
-							que era necesario ejecutar una nueva tarea de 
+							<strong>el problema de recableado</strong> cada vez
+							que era necesario ejecutar una nueva tarea de
 							una computadora.
 						</p>
 						<p>
@@ -94,7 +94,7 @@
 							<li>La unidad aritmético-lógica o ALU.</li>
 							<li>La unidad de control.</li>
 							<li>La memoria principal.</li>
-							<li>Un dispositivo de entrada/salida.</li>  
+							<li>Un dispositivo de entrada/salida.</li>
 							<li>El bus de datos.</li>
 						</ul>
 					</div>
@@ -104,7 +104,7 @@
 						</a>
 						<p>
 							<small>
-								Basada en la imagen de 
+								Basada en la imagen de
 								<a href="http://es.wikipedia.org/wiki/Arquitectura_de_von_Neumann" target="_blank">
 									wikipedia.org
 								</a>
@@ -119,8 +119,8 @@
 					</h3>
 					<ol>
 						<li>
-							Se prende la computadora y se lee la siguiente instrucción 
-							desde la memoria en la dirección indicada por el contador de 
+							Se prende la computadora y se lee la siguiente instrucción
+							desde la memoria en la dirección indicada por el contador de
 							programa y se la guarda en el registro de instrucción.
 						</li>
 						<li>
@@ -131,7 +131,7 @@
 							Decodifica la instrucción mediante la unidad de control y
 							coordina los demas componentes para ejecutarla.
 						</li>
-						<li>Se ejecuta la instrucción. (Cuando se realizan ciclos se 
+						<li>Se ejecuta la instrucción. (Cuando se realizan ciclos se
 							modifica el contador del programa para repetir
 							instrucciones)
 						</li>
@@ -142,7 +142,7 @@
 					<div class="left half">
 						<ul>
 							<li>
-								Todos los CPUs estan conectados por el 
+								Todos los CPUs estan conectados por el
 								mismo canal al puente norte.
 							</li>
 							<li>
@@ -185,16 +185,16 @@
 						</a>
 					</div>
 				</section>
-		
+
 				<section id="afirmaciones-memoria">
 					<h2>Afirmaciones sobre la memoria</h2>
 					<ul>
 						<li>
-							Un programa debe cargarse en memoria desde disco y 
+							Un programa debe cargarse en memoria desde disco y
 							colocarse dentro de un proceso para que se ejecute.
 						</li>
 						<li>
-							La memoria principal y los registros son los únicos 
+							La memoria principal y los registros son los únicos
 							dispositivos de almacenamiento a los que puede acceder
 							la CPU directamente.
 						</li>
@@ -231,14 +231,14 @@
 					<h3>Etapas en el procesamiento de un programa de usuario</h3>
 					<div class="left half">
 						<ul>
-							<li><strong>Tiempo compilación:</strong> si se conoce donde 
+							<li><strong>Tiempo compilación:</strong> si se conoce donde
 								va a residir el proceso en memoria, se genera <strong>
 								código absoluto</strong>, si cambia de posición
 								se debe recompilar.
 							</li>
-							<li><strong>Tiempo de carga:</strong> si no se conoce la ubicación 
+							<li><strong>Tiempo de carga:</strong> si no se conoce la ubicación
 								del proceso en memoría, se genera <strong>código
-								reubicable</strong>. 
+								reubicable</strong>.
 							</li>
 						</ul>
 					</div>
@@ -252,9 +252,9 @@
 						<div class="left half">
 							<ul>
 								<li>
-									<strong>Tiempo de ejecución:</strong> si el proceso puede 
-									cambiar de posición durante su ejecución, la 
-									vinculación se realiza en el momento de ejecución. 
+									<strong>Tiempo de ejecución:</strong> si el proceso puede
+									cambiar de posición durante su ejecución, la
+									vinculación se realiza en el momento de ejecución.
 									Necesita soporte hardware para el mapeo de direcciones (
 									registros base y límite)
 								</li>
@@ -268,19 +268,19 @@
 				<section  id="espacio-direcciones-fisicas-logicas">
 					<h2>Espacio de Direcciones<br />Físicas y Lógicas</h2>
 					<p>
-						Para obtener una buena Gestión de Memoria, se debe 
+						Para obtener una buena Gestión de Memoria, se debe
 						separar las direcciones de memorias en dos tipos:
 					</p>
 					<ul>
 						<li>
-							<strong>Dirección Lógica:</strong> 
+							<strong>Dirección Lógica:</strong>
 							Es la dirección generada por el CPU u proceso, también
 							se le conoce como <strong>dirección virtual</strong>.
 						</li>
 						<br>
 						<li>
-							<strong>Dirección Física:</strong> 
-							Es la dirección cargada en el <strong>registro de direcciones 
+							<strong>Dirección Física:</strong>
+							Es la dirección cargada en el <strong>registro de direcciones
 							de memoria</strong> de la memoria. Es decir, la dirección
 							vista por la unidad de memoria.
 						</li>
@@ -294,7 +294,7 @@
 						se le conoce como <strong>espacio de direcciones lógicas</strong> y
 						para las físicas como <strong>espacio de direcciones físicas</strong>.
 					</p>
-				</section>			
+				</section>
 
 				<section  id="espacio-direcciones-fisicas-logicas-2">
 					<h2>Registro base y límite</h2>
@@ -338,7 +338,7 @@
 					<ul>
 						<li>
 							La MMU (Memory Management Unit) es un dispositivo
-							para transformar de direcciones virtuales en físicas, 
+							para transformar de direcciones virtuales en físicas,
 							utilizando una circuitería de hardware llamada
 							<strong>Unidad de segmentación</strong>.
 						</li>
@@ -348,8 +348,8 @@
 							registro de ubicación) en el momento que es enviada a memoria.
 						</li>
 						<li>
-							El programa de usuario trabaja con <em><strong>direcciones 
-							lógicas</strong></em>; 
+							El programa de usuario trabaja con <em><strong>direcciones
+							lógicas</strong></em>;
 							nunca ve las <em><strong>direcciones físicas</strong></em> reales.
 						</li>
 					</ul>
@@ -359,7 +359,7 @@
 					<p class="center">
 						<img src="img/class7/mmu.png" alt="MMU" />
 					</p>
-				</section>	
+				</section>
 
 				<section  id="intercambio">
 					<h2>Intercambio</h2>
@@ -389,13 +389,13 @@
 					<h2>Intercambio</h2>
 					<ul>
 						 <li>
-						 	El algoritmo para el intercambio, se llama <strong>Roll out, 
-						 	roll in</strong> y es una variante del algoritmos de 
-						 	planificación basados en prioridad; un proceso de baja 
-						 	prioridad se retira de memoria para cargar y ejecutar 
+						 	El algoritmo para el intercambio, se llama <strong>Roll out,
+						 	roll in</strong> y es una variante del algoritmos de
+						 	planificación basados en prioridad; un proceso de baja
+						 	prioridad se retira de memoria para cargar y ejecutar
 						 	otro con mayor prioridad.
 					 	 </li>
-					 	 <li>La mayor parte del tiempo de intercambio es tiempo 
+					 	 <li>La mayor parte del tiempo de intercambio es tiempo
 					 	 	de transferencia; el cual es directamente proporcional
 					 	 	a la cantidad de memoria intercambiada.
 					 	 </li>
@@ -418,11 +418,11 @@
 						 	dos o más procesos.
 					 	</li>
 						<li>
-							Capacidad de proporcionar un servicio interactivo a varios 
+							Capacidad de proporcionar un servicio interactivo a varios
 							usuarios (varios procesos en memoria).
 						</li>
 						<li>
-							Desperdicio de tiempo por parte de los procesos limitados 
+							Desperdicio de tiempo por parte de los procesos limitados
 							por E/S en la monoprogramación.
 						</li>
 					</ul>
@@ -446,7 +446,7 @@
 						<h4 >Fórmula del uso de CPU</h4>
 						<p>
 							Para conocer el tiempo de uso del procesador, se puede
-							obtener un valor aproximado a través de la siguiente 
+							obtener un valor aproximado a través de la siguiente
 							fórmula:
 						</p>
 						<p class="center">
@@ -456,7 +456,7 @@
 							<strong>n</strong>: grado de multiprogramación <br />
 						 	<strong>p</strong>: fracción de tiempo de espera de E/S
 					 	</p>
-					 </div> 
+					 </div>
 				</section>
 				<section  id="modelo-multiprogamacion">
 					<h2>Modelo de Multiprogramación</h2>
@@ -486,7 +486,7 @@
 					<div class="center">
 						<img src="img/class7/equilibrio.png" alt=""/>
 					</div>
-					<!-- 
+					<!--
 						Cada proceso de usuario 4GB => n = 4; si p=0.8, CPU = 60%
 						Si compramos 16GB => n = 8; si p=0.8, CPU = 83%; ganancia: 38%
 						Si compramos otros 16GB CPU=93%; ganancia: 12%
@@ -505,8 +505,8 @@
 							vector de interrupciones.
 						</li>
 						<li>
-							Cuando se utiliza multiprogramación, se crean 
-							<strong>particiones de tamaño fijo</strong> para cada 
+							Cuando se utiliza multiprogramación, se crean
+							<strong>particiones de tamaño fijo</strong> para cada
 							proceso.
 						</li>
 						<li>
@@ -532,9 +532,9 @@
 							</a>
 						</p>
 						<p><small>
-							Fuente: 
+							Fuente:
 							<a href="http://www.codinghorror.com/blog/2007/03/dude-wheres-my-4-gigabytes-of-ram.html">
-								Coding Horror</a> 
+								Coding Horror</a>
 							(Blog de Jeff Atwood)
 							</small>
 						</p>
@@ -543,7 +543,7 @@
 				<section  id="asignacion-memoria-contigua-2">
 					<h2>Asignación de memoria contigua</h2>
 					<p>
-						La zona para procesos de usuarios se encuentra dividida a su 
+						La zona para procesos de usuarios se encuentra dividida a su
 						vez en varias particiones que se asignarán a los procesos:
 					</p>
 					<ul>
@@ -566,13 +566,13 @@
 
 					<ul>
 						<li>
-							Se le conoce como <strong>Hueco</strong> a un bloque de 
+							Se le conoce como <strong>Hueco</strong> a un bloque de
 							memoria disponible. A lo largo del tiempo existirán
 							huecos de diversos tamaños distribuidos a lo largo de la
 							memoria.
 						</li>
 						<li>
-							Cuando un proceso llega, se le asigna un hueco lo 
+							Cuando un proceso llega, se le asigna un hueco lo
 							suficientemente grande para caber en él.
 						</li>
 						<li>
@@ -593,7 +593,7 @@
 					<h2>Asignación Estática <br />de Memoria Particionada</h2>
 					<p>
 						Existen varias formas para satisfacer las solicitudes
-						de tamaño <em>n</em> partiendo de una lista 
+						de tamaño <em>n</em> partiendo de una lista
 						de huecos.
 					</p>
 					<ul>
@@ -606,11 +606,11 @@
 						<li>
 							<strong>Mejor ajuste (Best-fit)</strong>
 							Asigna el hueco más pequeño que es lo suficientemente
-							grande. 
+							grande.
 						</li>
 					</ul>
 					<aside class="notes">
-						En este caso, se busca en toda la lista el menor huecos 
+						En este caso, se busca en toda la lista el menor huecos
 						(al menos que esté ordenada por tamaño) para desperdiciar
 						el menor espacio posible.
 					</aside>
@@ -623,7 +623,7 @@
 							El tamaño y ubicación de las particiones no es fijo,
 							cambia a lo largo del tiempo.
 						</li>
-						
+
 						<li>
 							Cuando un proceso sale de la memoria, se libera su
 							espacio creando una nueva partición libre (hueco).
@@ -636,7 +636,7 @@
 					<aside class="notes">
 						<ul>
 							<li>
-								Cuando llega un proceso se le asigna memoria de un 
+								Cuando llega un proceso se le asigna memoria de un
 								hueco lo suficientemente grande para ocuparlo.
 							</li>
 							<li>
@@ -649,19 +649,19 @@
 				<section id="asignacion-dinamica-2">
 					<h2>Asignación Dinámica <br />de Memoria Particionada</h2>
 					<!--
-						Existen varias maneras de satisfacer una solicitud de 
+						Existen varias maneras de satisfacer una solicitud de
 						tamaño <em>n</em> partiendo de una lista de huecos.
 					-->
 					<ul>
 						<li>
 							<strong>Primer ajuste (First-fit)</strong>
-							Se <em>asigna el primer hueco</em> lo 
+							Se <em>asigna el primer hueco</em> lo
 							suficientemente grande.
 						</li>
 						<br>
 						<li>
 							<strong>Mejor ajuste (Best-fit)</strong>
-							Se <em>asigna el hueco más pequeño</em> 
+							Se <em>asigna el hueco más pequeño</em>
 							que es lo suficientemente grande.
 						</li>
 						<br>
@@ -673,16 +673,16 @@
 					<aside class="notes">
 						<p>
 							Para el mejor ajuste,se
-						debe buscar en toda la lista de huecos 
+						debe buscar en toda la lista de huecos
 						(salvo si está ordenada por tamaño).
 						</p>
 						<p>
 							Para el peor ajuste,  hay
-							que buscar en la lista completa de huecos 
+							que buscar en la lista completa de huecos
 							(salvo si está ordenada por tamaño).
 						</p>
 						<p>
-							Los dos primeros métodos, son los mejores 
+							Los dos primeros métodos, son los mejores
 							para aprovechar el espacio en memoria.
 						</p>
 					</aside>
@@ -693,7 +693,7 @@
 					<ul>
 						<li>
 							<strong>Fragmentación Interna</strong>
-							la memoria asignada puede ser ligeramente mayor de la 
+							la memoria asignada puede ser ligeramente mayor de la
 							solicitada; esta diferencia de tamaño se encuentra en
 							la partición pero no es usada.
 						</li>
@@ -706,7 +706,7 @@
 							<div class="center">
 								<small>
 									<em>Fragmentación</em>
-									 = 
+									 =
 									 1 - (<em>Tamaño del mayor Hueco</em> / <em>Total de Memoria</em>)
 								</small>
 							</div>
@@ -719,7 +719,7 @@
 					<p>Existen 2 maneras de evitarla:</p>
 					<ul>
 						<li>
-							Utilizar los circuitos del paginado de memoria, 
+							Utilizar los circuitos del paginado de memoria,
 							para mapear bloques no contiguos como si
 							estuviesen uno al lado del otro.
 						</li>
@@ -731,7 +731,7 @@
 					<aside class="notes">
 						El kernel prefiere el segundo método porque cuando se hace operaciones
 						DMA no se respeta el orden de los circuitos, se dañá la tabla de páginas
-						y se debe actualizar, conviene tener muchos bloques para mejorar la 
+						y se debe actualizar, conviene tener muchos bloques para mejorar la
 						caché.
 					</aside>
 				</section>
@@ -783,12 +783,12 @@
 						</a>
 					</div>
 					<ul>
-						<li>Se ordenan por dirección para 
+						<li>Se ordenan por dirección para
 							aumentar la velocidad lectura.
 						</li>
 						<li>
 							Se pueden tener 2 listas: una para los espacios
-							ocupados y otra para los huecos. Sin embargo, la 
+							ocupados y otra para los huecos. Sin embargo, la
 							liberación es lenta.
 						</li>
 					</ul>
@@ -830,6 +830,11 @@
 						Fuente: <a href="https://drawings.jvns.ca/" target="_blank">Julia Evans</a>
 					</p>
 				</section>
+
+        <section id="video-cache">
+          <h2>Video sobre la caché</h2>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/zF4VMombo7U?si=CYZo9NiocjMSUsmj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </section>
 
 				<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
 					<h1 class="stroke">¿Preguntas?</h1>
