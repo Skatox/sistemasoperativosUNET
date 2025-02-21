@@ -76,12 +76,12 @@
 						<li>
 							Los procesos en muchas ocasiones requieren
 							comunicación con otros procesos.
-						</li>	
+						</li>
 						<li>
-							Los procesos pueden compartir directamente un espacio 
+							Los procesos pueden compartir directamente un espacio
 							de direcciones lógico o pueden comunicarse a través de
 							archivos o mensajes. Procesos cooperativos.
-						</li>	
+						</li>
 						<li>
 							El acceso concurrente y desordenado a los
 							datos compartidos puede dar lugar a incoherencia de los datos.
@@ -99,7 +99,7 @@
 						</li>
 						<li>
 							¿Cómo se puede obtener la secuencia de ejecución
-							apropiada cuando hay dependencias?	
+							apropiada cuando hay dependencias?
 						</li>
 					</ul>
 				</section>
@@ -135,7 +135,7 @@
 		            <h2>Condiciones para evitar la competencia</h2>
 		            <ul>
 		                <li class="fragment">
-		                    Dos o más procesos <strong> no pueden estar dentro de sus 
+		                    Dos o más procesos <strong> no pueden estar dentro de sus
 		                    secciones críticas</strong> al mismo tiempo.
 		                </li>
 		                <li class="fragment">
@@ -147,7 +147,7 @@
 		                    fuera de su sección crítica <strong>puede bloquear otro procesos</strong>.
 		                </li>
 		                <li class="fragment">
-		                    <strong>Ningún proceso deberá tener que esperar 
+		                    <strong>Ningún proceso deberá tener que esperar
 		                    indefinidamente</strong> para entrar a su región crítica.
 		                </li>
 		            </ul>
@@ -221,10 +221,10 @@
 		                En éste caso se utiliza una variable binaria, donde 0 representa
 		                cuando no hay ningún proceso en su sección crítica
 		                y 1 cuando está ocupada. Entonces cada proceso antes de ingresar
-		                a la sección crítica verifica el estado de la <strong>variable de 
-		                cerradura</strong> y en caso de tener 0 como valor, cambia el 
+		                a la sección crítica verifica el estado de la <strong>variable de
+		                cerradura</strong> y en caso de tener 0 como valor, cambia el
 		                valor a 1 e ingresa a la misma, en caso de que la misma sea 1
-		                el proceso se queda en espera verificando hasta que el estado 
+		                el proceso se queda en espera verificando hasta que el estado
 		                cambie a 0.
 		            </p>
 	            </section>
@@ -258,26 +258,26 @@
 		            <h2>Exclusión Mutua con Espera ocupada</h2>
 		            <h3>Alternancia estricta</h3>
 		            <p>
-		                 Conocido también como la primera versión del 
+		                 Conocido también como la primera versión del
 		                 algoritmo de Dekker, obliga a cada proceso tener un turno
 		                 y <strong>existe un cambio de turno cada vez que un proceso
 		                 sale de la sección critica.</strong>
-		             </p>           
+		             </p>
 		             <ul>
 		                <li class="fragment">
-		                    Bloquea el acceso al otro proceso cuando se está 
+		                    Bloquea el acceso al otro proceso cuando se está
 		                    en una sección crítica.
 		                </li>
 		                <li class="fragment">
-		                    Si un proceso es mas lento que el otro, bloquea al otro 
-		                    por mucho tiempo. <strong>Viola la regla 3:</strong> 
+		                    Si un proceso es mas lento que el otro, bloquea al otro
+		                    por mucho tiempo. <strong>Viola la regla 3:</strong>
 		                    ningún proceso debe bloquear a otro fuera de su sección crítica.
 		                </li>
 		                <li class="fragment">
-		                    Si uno de ellos se bloquea dentro o fuera de la 
+		                    Si uno de ellos se bloquea dentro o fuera de la
 		                    sección crítica, puede bloquear al resto.
 		                </li>
-		            </ul>  
+		            </ul>
 	            </section>
 	            <section id="exclusion-mutua-alternancia-2">
 		            <h2>Exclusión Mutua con Espera ocupada</h2>
@@ -315,13 +315,13 @@
 			                sincronización.
 			            </li>
 			            <li>
-			                Antes de leer la variable compartida, cada proceso 
+			                Antes de leer la variable compartida, cada proceso
 			                <strong>llama a una función para entrar a su sección
-			                crítica</strong> pasando su respectivo número 
+			                crítica</strong> pasando su respectivo número
 			                como parámetro.
 			            </li>
 			            <li>
-			                Luego se provoca una espera (en caso necesario) hasta que 
+			                Luego se provoca una espera (en caso necesario) hasta que
 			                el proceso pueda entrar. Al finalizar, se <strong>llama a otra función
 			                para liberar su sección crítica</strong> e indicar que ha finalizado
 			                para permitir la entrada a otros procesos.
@@ -360,7 +360,7 @@ void salirSC(int proceso) {
 			                <li>
 			                    Esta instrucción <strong>lee el valor de un registro en memoria
 			                    y guarda un valor (distinto a 0)</strong>. Al ser una instrucción
-			                    por hardware, el procesador garantiza que la instrucción TSL 
+			                    por hardware, el procesador garantiza que la instrucción TSL
 			                    se realiza sin interrupciones de otros proceso.
 			                </li>
 		            	</ul>
@@ -388,11 +388,11 @@ void salirSC(int proceso) {
 		                    Ahora se presentan soluciones donde no se desperdicia el tiempo del CPU.
 		                </li>
 		                <li class="fragment">
-		                    <strong>sleep: </strong> es una llamada al sistema que provoca 
+		                    <strong>sleep: </strong> es una llamada al sistema que provoca
 		                    a quien lo llamó se bloquee hasta que otro proceso lo despierte.
 		                </li>
 		                <li class="fragment">
-		                	<strong>wakeup:</strong> es una llamada al sistema para 
+		                	<strong>wakeup:</strong> es una llamada al sistema para
 		                	despertar un proceso bloqueado.
 		                </li>
 		            </ul>
@@ -420,7 +420,7 @@ void salirSC(int proceso) {
 		                    un elemento)
 		                </li>
 		                <li>
-		                    Cada proceso debe <strong>chequear al otro para despertarlo 
+		                    Cada proceso debe <strong>chequear al otro para despertarlo
 		                    antes de irse a dormir</strong>.
 		                </li>
 		            </ul>
@@ -438,9 +438,9 @@ void salirSC(int proceso) {
  int item;
  while (1) {
   producir_item( &amp;item);
-   
+
    if (contador == N) sleep();
- 
+
    insertar(item);
    contador++;
 
@@ -461,9 +461,9 @@ void salirSC(int proceso) {
 
   contador--
 
-  if (contador == N-1) 
+  if (contador == N-1)
     wakeup(productor);
-  
+
   consumir_item(item);
  }
 }</code>
@@ -477,7 +477,7 @@ void salirSC(int proceso) {
 		                <li>Propuesto por Dijkstra en 1965.</li>
 		                <li>
 		                    Es una varible entera denominada
-		                    <em>S</em> donde (exceptuando su inicialización) 
+		                    <em>S</em> donde (exceptuando su inicialización)
 		                    se acceden mediante llamadas <strong>wait()</strong>
 		                    y <strong>signal()</strong>.
 		                </li>
@@ -487,8 +487,8 @@ void salirSC(int proceso) {
 		                </li>
 		                <li class="fragment">
 		                    <strong>wait() - DOWN</strong>
-		                    verifica si el valor del semaforo es mayor a cero. 
-		                    Si es así, lo decrementa y continúa sus 
+		                    verifica si el valor del semaforo es mayor a cero.
+		                    Si es así, lo decrementa y continúa sus
 		                    operaciones; en caso contrario se va a dormir y espera
 		                    para continuar.
 		                </li>
@@ -500,9 +500,9 @@ void salirSC(int proceso) {
 		            <ul>
 		                <li>
 		                    <strong>signal() - UP</strong>
-		                    incrementa el valor del semáforo. Si existe uno o 
+		                    incrementa el valor del semáforo. Si existe uno o
 		                    mas procesos dormidos y no pueden completar una operación
-		                    <em>wait()</em>, el semáforo elige uno al azar 
+		                    <em>wait()</em>, el semáforo elige uno al azar
 		                    y le permite completar <em>wait()</em>.
 		                </li>
 		                <li>
@@ -522,7 +522,7 @@ void salirSC(int proceso) {
 		                <li><strong>FULL (LLeno):</strong>cuenta las ranuras ocupadas.</li>
 		                <li><strong>EMPTY (Vacío):</strong>cuenta las ranuras libres.</li>
 		                <li>
-		                    <strong>MUTEX:</strong>Controla que tanto el consumidor, 
+		                    <strong>MUTEX:</strong>Controla que tanto el consumidor,
 		                    como productor entre al mismo tiempo al buffer.
 		                </li>
 		            </ol>
@@ -788,17 +788,17 @@ int IN, OUT;</code>
 		            </div>
 		            <ul class="twothird nomargin left">
 						<li>
-							5 filósofos sentados alrededor de una mesa. 
-							Pasan su vida cenando y pensando. C/U tiene un 
+							5 filósofos sentados alrededor de una mesa.
+							Pasan su vida cenando y pensando. C/U tiene un
 							plato de fideos y un tenedor a la izquierda de su plato.
 						</li>
 						<li>
-							Para comer, necesita 2 tenedores y  
+							Para comer, necesita 2 tenedores y
 							sólo puede tomar los de sus lados.
 						</li>
 						<li>
-							Si alguno coge un tenedor y el otro está ocupado, 
-							espera con el tenedor en la mano, hasta agarrar el otro, 
+							Si alguno coge un tenedor y el otro está ocupado,
+							espera con el tenedor en la mano, hasta agarrar el otro,
 							para luego comer.
 						</li>
 	            	</ul>
@@ -825,7 +825,15 @@ while (true) {
 		            </div>
 		        </section>
 
-		        <section id="anexos">
+            <section id="patrones-de-multihilo">
+              <h2>Patrones de multihilo</h2>
+              <a href="img/class5/multithread-patterns.png" data-lightbox="patterns" data-title="Patrones de multihilo">
+                <img class="third" src="img/class5/multithread-patterns.png" alt="patrones de multihilo" />
+              </a>
+              <p><small>Fuente: Alex Xu</small></p>
+            </section>
+
+		    <section id="anexos">
 					<h1>Anexos</h1>
 				</section>
 

@@ -38,7 +38,7 @@
 					</div>
 
 					<h1 class="clear">
-						Interbloqueo 
+						Interbloqueo
 					</h1>
 					<h2 id="subject-code">
 						Código 0435607T
@@ -70,7 +70,7 @@
 							recursos que pueden ser utilizados por un solo
 							proceso a la vez.
 						</li>
-						<li>	
+						<li>
 							Una ley aprobada en Kansas en el siglo XX:
 							Cuando dos trenes se aproximen a la vez a un
 							cruce, ambos deben detenerse por completo y
@@ -85,14 +85,14 @@
 
 					<ul>
 						<li>
-							<strong>Interbloqueo</strong>: ocurre cuando dos o mas procesos 
-							permanentemente se bloquean mutuamente (no pueden cambiar de 
+							<strong>Interbloqueo</strong>: ocurre cuando dos o mas procesos
+							permanentemente se bloquean mutuamente (no pueden cambiar de
 							estado), donde cada proceso tiene bloqueado un recurso que otros
 							procesos intentan bloquear. No existe una solución general para
 							esta situación.
 						</li>
 						<li>
-							<strong>Recurso</strong>: Cualquier dispositivo de 
+							<strong>Recurso</strong>: Cualquier dispositivo de
 							hardware o pieza de información de un sistema
 							computacional.
 						</li>
@@ -107,18 +107,26 @@
 					<img src="img/class5/deadlock.jpg" alt="deadlock" />
 				</section>
 
+        <section id="interbloqueo-3">
+          <h2>Diagrama de interbloqueo</h2>
+          <a href="img/class6/deadlock-diagram.png" data-lightbox="deadlock" data-title="Diagrama de deadlock">
+            <img class="third" src="img/class6/deadlock-diagram.png" alt="Diagrama de deadlock" />
+          </a>
+          <p><small>Fuente Alex Xu</small></p>
+        </section>
+
 				<section id="tipos-de-recursos">
 					<h2>Tipos de recursos</h2>
-	
+
 					<ul>
 						<li>
 							<strong>Recursos apropiativos</strong>: Le pueden ser
 							quitados a un proceso sin efectos dañinos. Ej: Memoria
-							RAM. Caso impresora. 
+							RAM. Caso impresora.
 						</li>
 						<li>
-							<strong>Recursos no apropiativos</strong>: no se le 
-							pueden quitar a un proceso sin consecuencias no 
+							<strong>Recursos no apropiativos</strong>: no se le
+							pueden quitar a un proceso sin consecuencias no
 							deseadas. Ej: Grabador de CD.
 						</li>
 					</ul>
@@ -132,18 +140,18 @@
 					</p>
 					<ul>
 						<li class="fragment">
-							<strong>Solicitud: </strong> mediante una <strong>llamada al sistema</strong>, 
-							el proceso pide acceder a un recurso, si esta libre se le 
+							<strong>Solicitud: </strong> mediante una <strong>llamada al sistema</strong>,
+							el proceso pide acceder a un recurso, si esta libre se le
 							concede inmediamente, de lo contrario, espera hasta poder
 							adquirirlo.
 						</li>
 						<li class="fragment">
-							<strong>Uso: </strong> el proceso opera sobre el recurso, 
-							por ejemplo, si solicitó acceder a un pendrive escribe o 
+							<strong>Uso: </strong> el proceso opera sobre el recurso,
+							por ejemplo, si solicitó acceder a un pendrive escribe o
 							lee archivos en él.
 						</li>
 						<li class="fragment">
-							<strong>Liberación: </strong> mediante una <strong>llamada al sistema</strong>, 
+							<strong>Liberación: </strong> mediante una <strong>llamada al sistema</strong>,
 							el proceso pide libera el recurso cuando ya no lo necesita usar.
 						</li>
 					</ul>
@@ -164,13 +172,13 @@
 							Flechas:
 							<ul>
 								<li>
-									De asignación <strong>(Rj→Pi)</strong>, indican 
+									De asignación <strong>(Rj→Pi)</strong>, indican
 									que el recurso <strong>j</strong> se
 									asignó al proceso <strong>i</strong>.
 								</li>
 								<li>
-									De solicitud <strong>(Pi→Rj)</strong>, indican 
-									que el proceso <strong>i</strong> solicita el 
+									De solicitud <strong>(Pi→Rj)</strong>, indican
+									que el proceso <strong>i</strong> solicita el
 									recurso <strong>j</strong>.
 								</li>
 							</ul>
@@ -192,12 +200,12 @@
 					<div class="right half">
 						<img src="img/class6/grafico-interbloqueo.png" alt="grafo" />
 						<p>
-							<small>Ejemplo de interbloqueo en grafos de alocación de recursos. - Fuente: 
+							<small>Ejemplo de interbloqueo en grafos de alocación de recursos. - Fuente:
 								<a href="http://es.wikipedia.org/wiki/Bloqueo_mutuo" target="_blank">Wikipedia</a>
 							</small>
 						</p>
 					</div>
-				</section>				
+				</section>
 
 				<section id="representacion-grafos-3">
 					<h2>Recursos e interbloqueos</h2>
@@ -208,12 +216,12 @@
 							<li><strong>R</strong> = { R1, R2, R3 }</li>
 							<li>
 								<strong>F</strong> = {<br>
-								&nbsp;&nbsp;&nbsp;P1R1, P2R2, P4R3,<br> 
+								&nbsp;&nbsp;&nbsp;P1R1, P2R2, P4R3,<br>
 								&nbsp;&nbsp;&nbsp;R1P2, R2P4, R3P1, R3P2<br>}
 							</li>
 						</ul>
 						<p class="text-left">
-							Instancias: 1 de <strong>R1</strong> y 
+							Instancias: 1 de <strong>R1</strong> y
 							<strong>R2</strong>, 2 de <strong>R3</strong>.
 						</p>
 					</div>
@@ -232,12 +240,12 @@
 				<section id="condiciones-interbloqueo">
 					<h2>Condiciones de competencias</h2>
 					<ul>
-						<li><strong>Exclusión mutua:</strong> 
+						<li><strong>Exclusión mutua:</strong>
 							solo un proceso puede usar un
 							recurso cada vez, si otro proceso lo solicita, debe esperar
 							a que sea liberado.
 						</li>
-						<li><strong>Retención y espera:</strong> 
+						<li><strong>Retención y espera:</strong>
 							un proceso está reteniendo
 							un recurso y espera para por otro recurso adicional pero
 							retenido por otro proceso.
@@ -248,15 +256,15 @@
 				<section id="condiciones-interbloqueo-2">
 					<h2>Condiciones de competencias</h2>
 					<ul>
-						<li><strong>Sin desalojo:</strong> los recursos no pueden 
-							ser desalojados, pues solo el proceso es capaz de 
+						<li><strong>Sin desalojo:</strong> los recursos no pueden
+							ser desalojados, pues solo el proceso es capaz de
 							liberar dicho recurso.
 						</li>
-						<li><strong>Espera circular:</strong> 
-							Existe una cadena cerrada de 
-							procesos <strong>{P0, P1, ..., Pn}</strong>, cada uno 
+						<li><strong>Espera circular:</strong>
+							Existe una cadena cerrada de
+							procesos <strong>{P0, P1, ..., Pn}</strong>, cada uno
 							de los cuales retiene, al menos, un recurso necesitado por
-							el siguiente proceso de la cadena <em>(P0 espera por P1, 
+							el siguiente proceso de la cadena <em>(P0 espera por P1,
 							P1 por P2, P2 por P3, ..., Pn por P0)</em>.
 						</li>
 					</ul>
@@ -268,7 +276,7 @@
 						Existe maneras de evitar el interbloqueo si se conoce cierta
 						información de los procesos antes de asignarle recursos.
 					</p>
-					<p> 
+					<p>
 						Si se comprueba que no se producirá un interbloqueo (estado inseguro)
 						se le asigna el recurso, de lo contrario lo hace esperar.
 					</p>
@@ -279,12 +287,12 @@
 					<p>Estos métodos son de dos tipos:</p>
 					<ul>
 						<li>
-							<h3>Métodos indirectos</h3> consisten en impedir la aparición 
-							de alguna de las condiciones necesarias para que se 
+							<h3>Métodos indirectos</h3> consisten en impedir la aparición
+							de alguna de las condiciones necesarias para que se
 							dé el interbloqueo.
 						</li>
 						<li>
-							<h3>Métodos directos</h3> consisten en evitar la aparición del 
+							<h3>Métodos directos</h3> consisten en evitar la aparición del
 							circulo vicioso de espera.
 						</li>
 					</ul>
@@ -305,18 +313,18 @@
 					<h3>Prevención del Interbloqueo - Retención y espera</h3>
 					<ul>
 						<li>
-							Consiste en evitar la retención de recursos mientras 
+							Consiste en evitar la retención de recursos mientras
 							espera que se le asignen otros. Esto se puede lograr:
 						</li>
 						<li>
-							Exigir al proceso que pida <strong>todos los 
+							Exigir al proceso que pida <strong>todos los
 							recursos de una vez</strong> antes de ejecutarse.
-							Pero se retendrían muchos recursos no utilizados 
+							Pero se retendrían muchos recursos no utilizados
 							retrasando la ejecución de otros procesos.
 						</li>
 						<li>
 							Los procesos no saben cuantos recursos necesitará sino
-							hasta cuando comience a ejecutarse, por eso no es 
+							hasta cuando comience a ejecutarse, por eso no es
 							óptimo.
 						</li>
 					</ul>
@@ -327,12 +335,12 @@
 					<ul>
 						<li>
 							Un proceso <strong>sólo puede solicitar recursos cuando
-							no tiene ninguno asignado</strong>. Pero puede ocurrir 
-							que  se libera un recurso y mas tarde se debe volver 
+							no tiene ninguno asignado</strong>. Pero puede ocurrir
+							que  se libera un recurso y mas tarde se debe volver
 							a pedirlo para solicitar otros recursos.
 						</li>
 					</ul>
-					<p class="note"><strong>Nota:</strong> En ambos casos se puede 
+					<p class="note"><strong>Nota:</strong> En ambos casos se puede
 						dar una <em>inanición</em> (un proceso nunca se termina de ejecutar).</p>
 				</section>
 
@@ -341,14 +349,14 @@
 					<h4>Prevención del Interbloqueo No expropiación</h4>
 					<ul>
 						<li>
-							Utilizado en recursos cuyo estado se puede almacenar y 
+							Utilizado en recursos cuyo estado se puede almacenar y
 							restaurarse posteriormente. En esta estrategia se permite
 							al S.O. la expropiación de recursos a un proceso bloqueado.
 						</li>
 						<li>
 							Si un proceso solicita un recurso que no se le pueden asignar
-							por los momentos, <strong>se liberan todos los recursos 
-							retenidos por él</strong> y quedan a disposición de los 
+							por los momentos, <strong>se liberan todos los recursos
+							retenidos por él</strong> y quedan a disposición de los
 							procesos activos.
 						</li>
 					</ul>
@@ -381,8 +389,8 @@
 					<p>
 						Consiste en asignar los recursos solamente cuando <strong>no presentan
 						un posible riesgo de interbloqueo</strong>. Para ello, es necesario
-						<strong>conocer las futuras peticiones</strong> de los recursos: cada 
-						proceso ha de declarar por anticipado la cantidad máxima de recursos 
+						<strong>conocer las futuras peticiones</strong> de los recursos: cada
+						proceso ha de declarar por anticipado la cantidad máxima de recursos
 						a utilizar a lo largo de su ejecución.
 					</p>
 				</section>
@@ -394,7 +402,7 @@
 					</p>
 					<ul>
 						<li>
-							No iniciar un proceso si sus demandas 
+							No iniciar un proceso si sus demandas
 							presentan condiciones que pueden llevar al interbloqueo.
 						</li>
 						<li>
@@ -414,7 +422,7 @@
 					<ul>
 						<li>
 							<strong>Estado seguro:</strong> es cuando existe una secuencia de
-							asignación de recursos donde <strong>no se va</strong> a producir 
+							asignación de recursos donde <strong>no se va</strong> a producir
 							un interbloqueo.
 						</li>
 						<li>
@@ -427,8 +435,8 @@
 					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
 					<h3>Algoritmo del banquero</h3>
 					<div class="left twothird">
-						Propuesto por Dijkstra basado en la <strong>negativa 
-						asignación de recursos</strong>, su nombre es inspirado 
+						Propuesto por Dijkstra basado en la <strong>negativa
+						asignación de recursos</strong>, su nombre es inspirado
 						en la similitud del manejo de dinero y/o capital del banco cuando
 						sus clientes van a realizar préstamos respecto a la asignación
 						de recursos a procesos.
@@ -449,7 +457,7 @@
 							los procesos <strong>Pj, j %lt; i</strong> (procesos anteriores).
 						</li>
 						<li>
-							El peor caso: que todos los procesos soliciten a la vez el 
+							El peor caso: que todos los procesos soliciten a la vez el
 							máximo de recursos necesarios.
 						</li>
 					</ul>
@@ -459,7 +467,7 @@
 					<h3>Algoritmo del banquero</h3>
 					<ul>
 						<li>
-							El primer proceso de la secuencia podría finalizar con los 
+							El primer proceso de la secuencia podría finalizar con los
 							recursos disponibles en el sistema.
 						</li>
 						<li>
@@ -467,12 +475,12 @@
 							liberados en el proceso 1 y así sucesivamente.
 						</li>
 						<li>
-							Si se pueden atender todas las peticiones de los procesos 
+							Si se pueden atender todas las peticiones de los procesos
 							<strong> no existirá interbloqueo</strong>.
 						</li>
 					</ul>
 				</section>
-							
+
 				<section id="algoritmo-banquero-ejemplo">
 					<h3>Estrategias para<br>enfrentar los bloqueos</h3>
 					<h4>Algoritmo del banquero</h4>
@@ -673,7 +681,7 @@
 							arena y pretenda que no hay ningún problema.
 						</li>
 						<li>
-							Tal vez si usted lo ignora, él lo ignorará a usted. 
+							Tal vez si usted lo ignora, él lo ignorará a usted.
 						</li>
 					</ul>
 				</section>
@@ -692,7 +700,7 @@
 						</li>
 						<li>
 							Existen distintos métodos para detectar y recuperar
-							los bloqueos. 
+							los bloqueos.
 						</li>
 					</ul>
 				</section>
@@ -719,10 +727,10 @@
 					<div class="half left">
 						<p>
 							Consiste en usar una variante del grafo de asignación
-							de recursos denominada <strong>grafo de espera</strong>. 
+							de recursos denominada <strong>grafo de espera</strong>.
 						</p>
 						<p>
-							Para obtener ese grafo, se deben eliminar los nodos 
+							Para obtener ese grafo, se deben eliminar los nodos
 							de recursos y redirigiendo las correspondientes aristas.
 						</p>
 					</div>
@@ -749,7 +757,7 @@
 							actualmente a cada proceso.
 						</li>
 						<li>
-							<strong>Request: </strong> una matriz <em>n</em> x <em>m</em> que 
+							<strong>Request: </strong> una matriz <em>n</em> x <em>m</em> que
 							especifica la solicitud actual efectuada por cada proceso.
 						</li>
 					</ul>
@@ -768,7 +776,7 @@
 							<strong>Apropiación</strong>: quitar temporalmente el recurso a su
 							propietario actual. Depende de la naturaleza del proceso
 							y del recurso. No todos los recursos permiten esto sin
-							consecuencias y sin que el proceso actual lo note. 
+							consecuencias y sin que el proceso actual lo note.
 						</li>
 					</ul>
 				</section>
@@ -786,7 +794,7 @@
 							hasta este punto), y se asigna el recurso a otro proceso
 							del interbloqueo. Si el proceso trata de adquirir
 							nuevamente el recurso origen del bloqueo, tendrá que
-							esperar. 
+							esperar.
 						</li>
 					</ul>
 				</section>
@@ -798,7 +806,7 @@
 					<ul>
 						<li>
 							Un proceso muy drástico consiste en <strong>interrumpir todos
-							los procesos implicados en el interbloqueo</strong>, pero se 
+							los procesos implicados en el interbloqueo</strong>, pero se
 							pierde todo el tiempo de cpu invertido hasta el momento.
 						</li>
 						<li>
