@@ -109,8 +109,8 @@
 		                Fenómeno producido cuando varios procesos
 		                <strong> compiten por el acceso a uno o varios recursos </strong>
 		                produciendo el bloqueo en la ejecución. Ocasiona
-		                el cuelge del S.O. Para evitarlo se debe garantizar el acceso
-		                seguro a recursos compartidos,<strong>coordinando y sincronizando los
+		                el cuelgue del S.O. Para evitarlo se debe garantizar el acceso
+		                seguro a recursos compartidos,<strong> coordinando y sincronizando los
 		                procesos.</strong>
 		            </p>
 		            <div class="center">
@@ -143,8 +143,8 @@
 		                    u orden de ejecución de los procesos.
 		                </li>
 		                <li class="fragment">
-		                    <strong>Ningún proceso</strong> ejecutandose
-		                    fuera de su sección crítica <strong>puede bloquear otro procesos</strong>.
+		                    <strong>Ningún proceso</strong> ejecutándose
+		                    fuera de su sección crítica <strong>puede bloquear otros procesos</strong>.
 		                </li>
 		                <li class="fragment">
 		                    <strong>Ningún proceso deberá tener que esperar
@@ -155,9 +155,9 @@
 	            <section id="exclusion-mutua">
 	                <h2>Exclusión Mutua</h2>
 	                <p>
-	                    Es el método mas común para evitar el uso simultáneo
+	                    Es el método más común para evitar el uso simultáneo
 	                    de los recursos del sistema como variables globales y dispositivos de E/S, por
-	                    dos (2) o mas procesos del sistema.
+	                    dos (2) o más procesos del sistema.
 	                </p>
 		        </section>
 		        <section id="exclusion-mutua-2">
@@ -187,7 +187,7 @@
 		            <h2>Exclusión Mutua<br> con espera ocupada</h2>
 		            <h3>Desactivación de Interrupciones (hardware)</h3>
 		            <p>
-		                Es el método mas simple, consiste en desactivar todas las interrupciones
+		                Es el método más simple, consiste en desactivar todas las interrupciones
 		                de hardware antes de entrar a la sección crítica. Sin embargo,
 		                en la práctica no es recomendable porque si el proceso falla en
 		                su sector crítico, el sistema operativo no puede recuperarse y se
@@ -261,7 +261,7 @@
 		                 Conocido también como la primera versión del
 		                 algoritmo de Dekker, obliga a cada proceso tener un turno
 		                 y <strong>existe un cambio de turno cada vez que un proceso
-		                 sale de la sección critica.</strong>
+		                 sale de la sección crítica.</strong>
 		             </p>
 		             <ul>
 		                <li class="fragment">
@@ -269,7 +269,7 @@
 		                    en una sección crítica.
 		                </li>
 		                <li class="fragment">
-		                    Si un proceso es mas lento que el otro, bloquea al otro
+		                    Si un proceso es más lento que el otro, bloquea al otro
 		                    por mucho tiempo. <strong>Viola la regla 3:</strong>
 		                    ningún proceso debe bloquear a otro fuera de su sección crítica.
 		                </li>
@@ -401,7 +401,7 @@ void salirSC(int proceso) {
 	                <h3>Problema del Productor - Consumidor</h3>
 	                <ul>
 	                    <li>Es un problema donde se puede aplicar este algoritmo.</li>
-	                    <li>Dos procesos comparter un buffer de tamaño fijo.</li>
+	                    <li>Dos procesos comparten un buffer de tamaño fijo.</li>
 	                    <li>Un proceso es el productor y añade información al buffer.</li>
 	                    <li>Otro es el consumidor y lee (o modifica) la información del buffer.</li>
 	                </ul>
@@ -415,7 +415,7 @@ void salirSC(int proceso) {
 		                    algún elemento)
 		                </li>
 		                <li>
-		                    El problema del consumidor es cuando va consumir un elemento del buffer
+		                    El problema del consumidor es cuando va a consumir un elemento del buffer
 		                    pero está vacío. (Se va a dormir y despierta cuando exista
 		                    un elemento)
 		                </li>
@@ -482,12 +482,12 @@ void salirSC(int proceso) {
 		                    y <strong>signal()</strong>.
 		                </li>
 		                <li class="fragment">
-		                    Simboliza el numero de <em>wakeups</em>
+		                    Simboliza el número de <em>wakeups</em>
 		                    pendientes, 0 indica que no hay alguno por despertar.
 		                </li>
 		                <li class="fragment">
 		                    <strong>wait() - DOWN</strong>
-		                    verifica si el valor del semaforo es mayor a cero.
+		                    verifica si el valor del semáforo es mayor a cero.
 		                    Si es así, lo decrementa y continúa sus
 		                    operaciones; en caso contrario se va a dormir y espera
 		                    para continuar.
@@ -501,7 +501,7 @@ void salirSC(int proceso) {
 		                <li>
 		                    <strong>signal() - UP</strong>
 		                    incrementa el valor del semáforo. Si existe uno o
-		                    mas procesos dormidos y no pueden completar una operación
+		                    más procesos dormidos y no pueden completar una operación
 		                    <em>wait()</em>, el semáforo elige uno al azar
 		                    y le permite completar <em>wait()</em>.
 		                </li>
@@ -528,7 +528,7 @@ void salirSC(int proceso) {
 		            </ol>
 		        </section>
 		        <section id="productor-consumidor-semaforos-2">
-		            <h2>Productor - Consumidor<br> con Semaforos</h2>
+		            <h2>Productor - Consumidor<br> con Semáforos</h2>
 		            <div class="center">
 		                <pre>
 		                	<code class="cpp">#define N 100
@@ -578,7 +578,7 @@ semaforo mutex = 1, empty = N, full = 0;
 			            </li>
 			            <li>
 			                Se encuentra en un nivel superior de los semáforos, ya que al usar
-			                estos últimos, si no estan programados correctamente pueden provocar
+			                estos últimos, si no están programados correctamente pueden provocar
 			                <strong>bloqueos mutuos.</strong>
 			            </li>
 		            </ul>
@@ -586,8 +586,8 @@ semaforo mutex = 1, empty = N, full = 0;
 	           <section id="bloqueos-mutuos">
                     <h2>Bloqueos mutuos (deadlocks)</h2>
 	                <div class="third left">
-                        Ocurre cuando 2 o mas procesos esperan indefinidamente un evento que sólo
-                        puede ocurrir por uno de los otros procesos que estan esperando.
+                        Ocurre cuando 2 o más procesos esperan indefinidamente un evento que sólo
+                        puede ocurrir por uno de los otros procesos que están esperando.
 	                </div>
 	                <div class="twothird left">
 	                    <a href="img/class5/deadlock.jpg" data-lightbox="deadlock">
