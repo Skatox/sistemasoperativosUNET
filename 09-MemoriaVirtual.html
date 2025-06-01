@@ -100,7 +100,7 @@
 					<aside class="notes">
 						<ul class="clear">
 							<li>
-								Permite al sistema operativo ejecutar mas procesos
+								Permite al sistema operativo ejecutar más procesos
 								al mismo tiempo. Pues cada programa podría
 								ocupar menos espacio en la memoria física.
 							</li>
@@ -130,11 +130,11 @@
 						<li>
 							Se selecciona una página en memoria (usando un algoritmo
 							de sustitución de páginas), si esta tuvo modificaciones
-							se escribe en el area de intercambio y se procesde a leer la
+							se escribe en el área de intercambio y se procede a leer la
 							página solicitada para realizar el intercambio de páginas.
 						</li>
 						<li>
-							En caso de no existir la página en el area de intercambio
+							En caso de no existir la página en el área de intercambio
 							se carga desde el disco duro.
 						</li>
 					</ul>
@@ -147,7 +147,7 @@
 							<li>Trampa.</li>
 							<li>La página está en el almacen de respaldo.</li>
 							<li>Carga la página que falta.</li>
-							<li>Reestablece la Tabla de páginas.</li>
+							<li>Restablece la Tabla de páginas.</li>
 							<li>Reinicia la instrucción.</li>
 						</ol>
 					</div>
@@ -162,7 +162,7 @@
 
 					<aside class="notes">
 						El S.O. no carga las páginas a memoria apenas se le solicitan,
-						siempre espera hasta el último momento (fallo de pagina) para hacerlo
+						siempre espera hasta el último momento (fallo de página) para hacerlo
 					</aside>
 				</section>
 
@@ -201,7 +201,7 @@
 							cargadas las páginas, al momento de
 							<strong>no existir marcos de página
 							libres</strong>, retira de memoria la
-							página mas antigua
+							página más antigua
 							<em>(la que llegó primero a memoria)</em>.
 						</li>
 						<li>
@@ -211,7 +211,7 @@
 						<li>
 							Un <strong>problema</strong> de este algoritmo
 							es que se puede quitar de memoria una página
-							muy utilizada solo porque es la mas antigua en
+							muy utilizada solo porque es la más antigua en
 							memoria.
 						</li>
 					</ul>
@@ -221,7 +221,7 @@
 					<h3>Segunda oportunidad</h3>
 					<ul>
 						<li>
-							Es una módificacion del algoritmo anterior,
+							Es una modificación del algoritmo anterior,
 							literalmente le da una segunda oportunidad
 							a las páginas antes de moverlas de la
 							memoria principal.
@@ -233,7 +233,7 @@
 						<li>
 							Sigue el mismo principio de FIFO, pero antes
 							de sacar la página de memoria comprueba el bit
-							de refencia, si esta en <strong>001</strong>
+							de refencia, si está en <strong>001</strong>
 							(fijado) se cambia a <strong>099</strong> como
 							si estuviese entrando de nuevo (dando una segunda
 							oportunidad), en caso contrario, lo libera.
@@ -265,7 +265,7 @@
 						</li>
 						<li>
 							Con la combinación de estos bits se crean
-							las siguientes clase:
+							las siguientes clases:
 							<ul>
 								<li><strong>Clase 0:</strong> No solicitada, no modificada.</li>
 								<li><strong>Clase 1:</strong> No solicitada, modificada.</li>
@@ -287,8 +287,8 @@
 						</li>
 						<li>
 							El algoritmo desaloja, una página al azar de
-							la clase mas inferior. Da prioridad a las páginas
-							pocos referenciadas en lugar de las solicitadas
+							la clase más inferior. Da prioridad a las páginas
+							poco referenciadas en lugar de las solicitadas
 							frecuentemente con modificaciones.
 						</li>
 					</ul>
@@ -360,7 +360,7 @@
 					<h2>Sobrepaginación</h2>
 					<ul>
 						<li>
-							Sucede cuando un proceso invierte mas tiempo
+							Sucede cuando un proceso invierte más tiempo
 							en implementando mecanismos de paginación
 							que en su propia ejecución.
 						</li>
@@ -394,7 +394,7 @@
 					<ul>
 						<li>
 							Mientras se accede al archivo físicamente en el
-							disco, se provocan fallos de pagina, lo que
+							disco, se provocan fallos de página, lo que
 							ocasiona que se vaya cargando el archivo del
 							disco a marcos de página en la memoria
 							principal.

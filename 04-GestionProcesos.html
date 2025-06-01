@@ -128,7 +128,7 @@
 					<aside class="notes">
 						La ejecución de un proceso consiste en una alternancia entre,
 						ráfagas de CPU y ráfagas de E/S. Un proceso limitado por E/S
-						es aquél mayor tiempo accediendo a la E/S que usando el CPU 
+						es aquél mayor tiempo accediendo a la E/S que usando el CPU
 						(ráfagas de CPU cortas), un proceso limitado por CPU pasa 
 						más tiempo computando que accediendo a E/S (ráfagas de CPU largas).
 					</aside>
@@ -220,7 +220,7 @@
 					<h3>Procesamiento por lotes</h3>
 					<ul>
 						<li>Primero en entrar, primero en ser atendido (FCFS)</li>
-						<li>Trabajo mas corto primero (SJF)</li>
+						<li>Trabajo más corto primero (SJF)</li>
 						<li>Menor tiempo restante a continuación (SRTN)</li>
 					</ul>
 				</section>
@@ -408,7 +408,7 @@
 						Asigna un espacio de tiempo a cada proceso (<strong>cuanto o quantum</strong>)
 						para ejecutarse, si el proceso: termina, acaba el cuanto, se bloquea por acceso
 						a E/S. El S.O. hace un cambio de contexto y lo coloca (si aún debe seguir 
-						ejecútandose) al final de la cola.
+						ejecutándose) al final de la cola.
 					</p>
 					<ul >
 						<li>El cuanto o quantum suele estar entre los 10ms y 100ms.</li>
@@ -494,7 +494,7 @@
 					<h3>Por prioridades</h3>
 					<p>
 						Cada proceso tiene asociado una prioridad, entonces al momento de quedar la CPU
-						libre, se le asigna el proceso con la prioridad mas alta. Sin embargo, hay que
+						libre, se le asigna el proceso con la prioridad más alta. Sin embargo, hay que
 						tener cuidado, pues los procesos con baja prioridad pueden no ser ejecutados debido
 						a la llegada de procesos con prioridad superior, esto se resuelve aplicando
 						la técnica de <strong>envejecimiento.</strong>
@@ -575,7 +575,7 @@
 						<ul>
 							<li>
 								Cada proceso es clasificado en grupos, por ejemplo: de primer o segundo 
-								plano,de usuario o del sistema, de usuarios locales o remotos,
+								plano, de usuario o del sistema, de usuarios locales o remotos,
 								tamaño de memoria, prioridad, entre otros.
 							</li>
 							<li>
@@ -583,7 +583,7 @@
 								una para agrupación realizada. 
 							</li>
 							<li>
-								Cada una de las cola posee su propio algoritmo de planificación 
+								Cada una de las colas posee su propio algoritmo de planificación
 								para cada proceso dentro de ella.
 							</li>
 							<li>
@@ -738,7 +738,7 @@
 							<strong>Desventajas:</strong> Es equitativo para el 
 							usuario pero no para el CPU o los procesos. Un usuario puede
 							tener mucho CPU asignado y no lo usará nunca.
-							Un usuario puede necesitar mas CPU del asignado
+							Un usuario puede necesitar más CPU del asignado
 							y tampoco lo podrá conseguir. 
 						</li>
 					</ul>
@@ -786,12 +786,12 @@
 							que todos trabajen a un ritmo similar.
 						</li>
 						<li>
-							<strong>Multiprocesamiento asimetrico:</strong> un núcleo se suele 
+							<strong>Multiprocesamiento asimétrico:</strong> un núcleo se suele
 							encargar de realizar la planificación, procesamiento
 							de las E/S y actividades del sistema operativo.
 						</li>
 						<li>
-							<strong>Multiprocesamiento simetrico (SMP):</strong> cada procesador 
+							<strong>Multiprocesamiento simétrico (SMP):</strong> cada procesador
 							se autoplanifica: existe una cola de procesos preparados en común
 							o cada uno tiene su propia cola, existe seguridad para no tomar 
 							el mismo proceso al mismo tiempo.
@@ -865,7 +865,7 @@
 					</p>
 					<aside class="notes">
 						Mac OS utiliza tiempo real porque está diseñado para computadoras
-						de escritorio y necesita responder lo mas rápido las peticiones
+						de escritorio y necesita responder lo más rápido las peticiones
 						de entrada de usuarios
 					</aside>
 				</section>
@@ -881,7 +881,7 @@
 						regresa a la cola, ésta se coloca en una posición en base al tiempo que duró en el procesador.
 					</p>
 					<aside class="notes">
-						Tomar en cuenta que si salio un proceso por espera de E/S entonces
+						Tomar en cuenta que si salió un proceso por espera de E/S entonces
 						duró poco tiempo en el CPU.
 					</aside>
 				</section>

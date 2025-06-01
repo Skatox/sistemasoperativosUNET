@@ -165,7 +165,7 @@
 						<li>El proceso es representado por un <strong>círculo</strong>.</li>
 						<li>El recurso se representa con un <strong>cuadrado</strong>.</li>
 						<li>
-							En caso de existir mas de una instacia de un recurso, dentro
+							En caso de existir mas de una instancia de un recurso, dentro
 							del cuadrado se observarán cada una de ellas.
 						</li>
 						<li>
@@ -247,8 +247,8 @@
 						</li>
 						<li><strong>Retención y espera:</strong>
 							un proceso está reteniendo
-							un recurso y espera para por otro recurso adicional pero
-							retenido por otro proceso.
+							un recurso y espera por otro recurso adicional pero
+							está retenido por otro proceso.
 						</li>
 					</ul>
 				</section>
@@ -336,7 +336,7 @@
 						<li>
 							Un proceso <strong>sólo puede solicitar recursos cuando
 							no tiene ninguno asignado</strong>. Pero puede ocurrir
-							que  se libera un recurso y mas tarde se debe volver
+							que  se libera un recurso y más tarde se debe volver
 							a pedirlo para solicitar otros recursos.
 						</li>
 					</ul>
@@ -374,7 +374,7 @@
 					<h3>Prevención del Interbloqueo - Espera circular</h3>
 					<p>
 						A cada recurso se le asigna un orden, y el proceso solo puede solicitar
-						recursos con un orden superior al recurso actual. Ademas debe liberar
+						recursos con un orden superior al recurso actual. Además debe liberar
 						el recurso retenido para obtener el solicitado.
 					</p>
 					<p>
@@ -452,7 +452,7 @@
 						<li>
 							Dada una secuencia de procesos <strong>P = {P1, P2, ..., Pn}</strong>,
 							se considera como <strong>estado seguro</strong>, si los recursos
-							que pide Pi, en el peor de los casos se pueden antender
+							que pide Pi, en el peor de los casos se pueden atender
 							con los recursos disponibles más los recursos poseídos por todos
 							los procesos <strong>Pj, j %lt; i</strong> (procesos anteriores).
 						</li>
@@ -674,7 +674,7 @@
 				</section>
 				<section id="algoritmo-avestruz">
 					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
-					<h3>Ignorar todo el problema<br> (Algoritmo del Avestruz</h3>
+					<h3>Ignorar todo el problema<br> (Algoritmo del Avestruz)</h3>
 					<ul>
 						<li>
 							Es el algoritmo mas simple: Meta su cabeza en la
@@ -710,8 +710,8 @@
 					<h3>Detección y recuperación de Interbloqueo</h3>
 					<h4>Detección</h4>
 					<ul>
-						<li>Una sola instacia de recurso para cada tipo.</li>
-						<li>Varias instacias de cada tipo de recursos.</li>
+						<li>Una sola instancia de recurso para cada tipo.</li>
+						<li>Varias instancias de cada tipo de recursos.</li>
 					</ul>
 					<h4>Recuperación</h4>
 					<ul>
