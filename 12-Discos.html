@@ -112,7 +112,7 @@
 						</ul>
 						<aside class="notes">
 							La controladora es un circuito integrado que se conecta a la 
-							tarjeta madre a través del cable IDE o SATA.
+							tarjeta madre a través del cable SATA (en muy viejas con IDE).
 						</aside>
 					</p>
 					<aside class="notes">
@@ -131,9 +131,9 @@
 					<div class="half left">
 						<h4>Por la interfaz de su controlador:</h4>
 						<ul>
-							<li>Dispositivos <strong>SCSI</strong></li>
-							<li>Dispositivos <strong>IDE</strong></li>
+                            <li>Dispositivos <strong>NVMe</strong></li>
 							<li>Dispositivos <strong>SATA</strong></li>
+							<li>Dispositivos <strong>SCSI</strong></li>
 						</ul>
 					</div>
 					<div class="half left">
@@ -148,6 +148,7 @@
 						SCSI (Small Computer System Interface),
 						IDE (Integrated Drive Electronics ),
 						SATE (Serial Ata)
+                        NVMe (Non-Volatile Memory Express)
 					</aside>
 				</section>
 
@@ -225,21 +226,9 @@
 						<li>
 							<h3>Densidad de cada pista</h3>
 							La densidad lineal de almacenamiento es
-							constante. Actualmente las pistas exteriores tienen
+							constante. Las pistas exteriores tienen
 							más sectores que las interiores. 
 						</li>
-						<li>
-							<h3>Intercalado de sectores</h3>
-							Optimiza la velocidad de acceso a sectores lógicamente 
-							consecutivos. Mientras el controlador copia datos a memoria 
-							principal no puede transfiriendo datos del disco, que se sigue girando.
-						</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Estructura física del disco</h2>
-					<ul>
 						<li>
 							<h3>Almacenamiento intermedio en el controlador</h3>
 							Se puede leer la pista entera y mantenerla en memoria 
@@ -315,6 +304,126 @@
 						<p><small>Observe el movimiento del brazo mecánico</small></p>
 					</div>
 				</section>
+
+                <section id="nvme-ssd">
+                    <h2>Disco Duros NVMe y SSD</h2>
+                    <ul>
+                        <li>
+                            <strong>Discos de Estado Sólido (SSD):</strong> utilizan memoria flash
+                            NAND para almacenar datos, sin partes móviles. Esto los hace más rápidos,
+                            silenciosos, resistentes a golpes y con menor consumo energético.
+                        </li>
+                        <li>
+                            <strong>NVMe (Non-Volatile Memory Express):</strong> es una interfaz de
+                            comunicación y protocolo diseñado específicamente para SSDs de
+                            alta velocidad, usa el bus PCIe para ofrecer mayor ancho de banda y menor
+                            latencia.
+                            </strong>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="nvme-ssd-caracteristicas">
+                    <h2>Características Principales de SSD y NVMe</h2>
+                    <ul>
+                        <li>
+                            <strong>Estructura Física:</strong>
+                            <ul>
+                                <li><strong>SSD</strong>: utilizan celdas de memoria 
+                                    flash organizadas en páginas y bloques. No tienen cilindros,
+                                    pistas ni sectores como los HDD, sino que gestionan datos 
+                                    en bloques lógicos.
+                                </li>
+                                <li><strong>NVMe</strong>: aprovecha la alta velocidad del bus PCIe
+                                    (hasta PCIe 5.0 en 2025) para acceder directamente a la memoria
+                                    flash, eliminando cuellos de botella de interfaces como SATA.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section id="img-de-celdas-ssd">
+                    <h2>Celdas de un disco duro SSD</h2>
+                    <p class="center">
+                        <img src="/img/class12/ssd-cells.jpg" alt="celdas de discos SSD" />
+                    </p>
+                    <p><small>Tipos de celdas de un disco SSD</small></p>
+                </section>
+                <section id="rendimiento-disco-ssd">
+                    <h2>Rendimiento de discos SSD</h2>
+                    <ul>
+                        <li>
+                            <strong>Rendimiento:</strong>
+                            <ul>
+                                <li>
+                                    <strong>SD SATA:</strong> velocidades de lectura/escritura de
+                                    hasta ~550 MB/s.
+                                </li>
+                                <li>
+                                    <strong>NVMe</strong>: velocidades de lectura/escritura de 
+                                    hasta 7,000 MB/s (PCIe 4.0) o más con PCIe 5.0, y latencias
+                                    significativamente menores (<100 µs).
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Tiempo de Acceso:</strong> el tiempo de acceso es mucho menor 
+                            que en HDD, ya que no hay movimiento mecánico. La latencia se mide 
+                            en microsegundos en lugar de milisegundos.
+                        </li>
+                        <li>
+                            <strong>Durabilidad:</strong> tienen un número limitado de ciclos de
+                            escritura por celda (TLC, QLC), pero tecnologías modernas como 3D
+                            NAND mejoran la longevidad.
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="nvme-ssd-ventajas">
+                    <h2>Ventajas de SSD y NVMe</h2>
+                    <ul>
+                        <li>Mayor velocidad de lectura/escritura, ideal para sistemas operativos, aplicaciones y transferencia de datos.</li>
+                        <li>Menor consumo energético, beneficioso para dispositivos móviles y servidores.</li>
+                        <li>Resistencia a impactos físicos, ya que no tienen partes móviles.</li>
+                        <li>NVMe permite operaciones paralelas masivas (hasta 64,000 colas de comandos frente a 1 en SATA), optimizando el acceso concurrente.</li>
+                    </ul>
+                </section>
+
+                <section id="nvme-ssd-desventajas">
+                    <h2>Desventajas de SSD y NVMe</h2>
+                    <ul>
+                        <li>Costo por GB más alto que los HDD, aunque la brecha se ha reducido.</li>
+                        <li>SSD tienen ciclos de escritura limitados, lo que afecta su vida útil en escenarios de escritura intensiva.</li>
+                        <li>NVMe requiere hardware compatible (puertos PCIe) y puede ser más costoso que SSD SATA.</li>
+                    </ul>
+                </section>
+
+                <section id="nvme-ssd-aplicaciones">
+                    <h2>Aplicaciones de SSD y NVMe</h2>
+                    <ul>
+                        <li>
+                            <strong>SSD SATA:</strong> Uso en laptops, escritorios y servidores donde se necesita un equilibrio entre costo y rendimiento.
+                        </li>
+                        <li>
+                            <strong>NVMe:</strong> Ideal para aplicaciones de alto rendimiento como edición de video, gaming, inteligencia artificial, bases de datos y servidores empresariales.
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="nvme-ssd-gestion-so">
+                    <h2>Gestión en Sistemas Operativos</h2>
+                    <ul>
+                        <li>
+                            <strong>TRIM:</strong> Comando esencial para SSD que optimiza el rendimiento al liberar bloques no utilizados, reduciendo la latencia en operaciones de escritura.
+                        </li>
+                        <li>
+                            <strong>Soporte en SO:</strong> Los sistemas operativos modernos (Windows, Linux, macOS) están optimizados para SSD/NVMe, con soporte para TRIM, alineación de particiones y gestión de desgaste.
+                        </li>
+                        <li>
+                            <strong>Particionamiento:</strong> Similar a los HDD, pero los SO deben alinear particiones con los tamaños de página de la memoria flash (típicamente 4 KB o múltiplos) para maximizar el rendimiento.
+                        </li>
+                    </ul>
+                </section>
 
 				<section id="planificadores-disco">
 					<h2>Planificador de disco</h2>
@@ -561,47 +670,6 @@
 					<img src="img/class12/raid1.png" height="335" width="640" alt="RAID 0">
 				</section>
 
-				<section id="raid2">
- 					<h2>Gestión de volúmenes</h2>
-					<h3>Niveles de RAID</h3>
-					<ul>
-						<li>
-							<strong>RAID 2</strong>: Organización con código de 
-							corrección de errores ECC. Distribuye los bytes en 
-							discos distintos. Si uno de los discos falla, se 
-							puede reconstruir los datos a partir de su paridad
-						</li>	
-					</ul>
-					<img src="img/class12/raid2.png" height="335" width="640" alt="RAID 0">
-				</section>
-
-				<section id="raid3-1">
- 					<h2>Gestión de volúmenes</h2>
-					<h3>Niveles de RAID</h3>
-					<ul>
-						<li>
-							<strong>RAID 3</strong>: 
-							organización de paridad con entrelazados
-							de bits. Tiene las mismas características de RAID
-							2. Requiere un disco de paridad. Aumenta la tasa
-							de transferencia al leer un byte en N vías. El
-							arreglo completo soporta menos operaciones de
-							E/S por segundo, todos los discos participan en
-							cada lectura/escritura simultáneamente. También
-							tiene implicaciones de procesamiento al calcular la
-							paridad en cada lectura/escritura (todos los niveles
-							de RAID la tienen).
-						</li>
-					</ul>
-				</section>
-
-				<section id="raid3-2">
- 					<h2>Gestión de volúmenes</h2>
-					<h3>Niveles de RAID</h3>
-					<h4>RAID 3</h4>
-					<img src="img/class12/raid3.png" height="302" width="436" alt="RAID 3">
-				</section>
-
 				<section id="raid4-1">
  					<h2>Gestión de volúmenes</h2>
 					<h3>Niveles de RAID</h3>
@@ -840,6 +908,12 @@
           <h2>Funcionamiento de Discos SSD</h2>
           <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/r-SivgEpA1Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </section>
+
+        <section id="tweet-ssd">
+            <div class="center third">
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Your SSD runs a (light) operating system. It’s often more powerful than your home router.<br><br>Peek at any NVMe drive; chances are, it has 2-4 ARM Cortex Cores at ~1GHz.<br><br>Real-Time Operating Systems like ThreadX dominate the space, but some specialist drives boot Linux! <a href="https://t.co/zMkzwTGctg">pic.twitter.com/zMkzwTGctg</a></p>&mdash; LaurieWired (@lauriewired) <a href="https://twitter.com/lauriewired/status/1917332128234381647?ref_src=twsrc%5Etfw">April 29, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </section> 
 
 				<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
 					<h1 class="stroke">¿Preguntas?</h1>
