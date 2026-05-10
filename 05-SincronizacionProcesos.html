@@ -67,7 +67,7 @@
             <li>Problema del Productor - Consumidor</li>
             <li>Monitores</li>
             <li>Bloqueos mutuos</li>
-						<li>Problemas de clásicos de sincronización</li>
+						<li>Problemas clásicos de sincronización</li>
 					</ul>
 				</section>
 				<section id="introduccion">
@@ -232,7 +232,7 @@
 		            <h2>Exclusión Mutua con Espera ocupada</h2>
 		            <h3>Variables de Cerradura</h3>
 		            <p>
-		                En sistemas con múltiples procesadores o distribuidos, se presente
+		                En sistemas con múltiples procesadores o distribuidos, se presenta
 		                un problema: <strong> si dos procesos verifican al mismo tiempo </strong>
 		                el valor de la cerradura y está en 0, ambos ingresan a la región
 		                crítica.
@@ -361,7 +361,7 @@ void salirSC(int proceso) {
 			                    Esta instrucción <strong>lee el valor de un registro en memoria
 			                    y guarda un valor (distinto a 0)</strong>. Al ser una instrucción
 			                    por hardware, el procesador garantiza que la instrucción TSL
-			                    se realiza sin interrupciones de otros proceso.
+			                    se realiza sin interrupciones de otros procesos.
 			                </li>
 		            	</ul>
 		            </div>
@@ -707,7 +707,7 @@ int IN, OUT;</code>
 		            <div class="fragment">
 		                <h3>Problemas</h3>
 		                <ul>
-		                    <li>Son mas complejos de implementar.</li>
+		                    <li>Son más complejos de implementar.</li>
 		                    <li>Todos los mensajes son del mismo tamaño.</li>
 		                    <li>
 		                        Para evitar la pérdida de mensajes se deben implementar acuses
@@ -721,7 +721,7 @@ int IN, OUT;</code>
 		            </div>
 		        </section>
 		        <section id="lector-escritor">
-		            <h3>Problemas de clásicos de sincronización</h3>
+		            <h3>Problemas clásicos de sincronización</h3>
 		            <div class="half left">
 		                <ul>
 		                    <li>
@@ -742,7 +742,7 @@ int IN, OUT;</code>
 		            </div>
 		        </section>
 		        <section id="lector-escritor-2">
-		            <h2>Problemas de clásicos de sincronización</h2>
+		            <h2>Problemas clásicos de sincronización</h2>
 	                <h3>Lectores - escritores</h3>
 	                <p>La solución al problema utiliza:</p>
 	                <ul>
@@ -781,7 +781,7 @@ int IN, OUT;</code>
 		            </pre></div>
 		        </section>
 		        <section id="problemas-filosofos">
-		            <h3>Problemas de clásicos de sincronización</h3>
+		            <h3>Problemas clásicos de sincronización</h3>
 		            <h4>Problema de los Filósofos</h4>
 		            <div class="third right">
 		                <img src="img/class5/filosofos.png" alt="filosfos" />
@@ -804,7 +804,7 @@ int IN, OUT;</code>
 	            	</ul>
 	            </section>
 	            <section id="problemas-filosofos-2">
-		            <h3>Problemas de clásicos de sincronización</h3>
+		            <h3>Problemas clásicos de sincronización</h3>
 		            <h4>Problema de los Filósofos</h4>
 		            <div>
 		                <p>
