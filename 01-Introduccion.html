@@ -443,7 +443,7 @@
 					</ul>
 				</section>
 				<section id="historia-so-5">
-					<h2>Cuarta generación (1980 - 2019)</h2>
+					<h2>Cuarta generación (1980 - 2004)</h2>
 					<h3>La Computadora Personal</h3>
 					<div  class="half left">
 						<ul>
@@ -469,7 +469,7 @@
 					</ul>
 				</section>
 				<section id="historia-so-6">
-					<h2>Quinta generación<br>(2005 hasta ahora)</h2>
+					<h2>Quinta generación<br>(2005 - 2019)</h2>
 					<h3> Dispositivos móviles </h3>
 					<div class="half left">
 						<img style="margin-left:10px" src="img/intro/stevejobsiphone.png" alt="PC">
@@ -488,9 +488,9 @@
 					</div>
 				</section>
 				<section>
-					<h2>Quinta generación (2020 hasta ahora)</h2>
+					<h2>Sexta generación (2020 hasta ahora)</h2>
 					<ul>
-						<li>Diseñadas para funcionar en redes de telefonía celular e inalámbrica.</li>
+						<li>Diseñadas para funcionar en redes de telefonía celular e inalámbrica, con fuerte integración a servicios en la nube y tiendas de aplicaciones.</li>
 					</ul>
 					<img class="half" src="img/intro/mobile_devices.png" alt="dispositivos móviles" />
 				</section>
@@ -504,8 +504,8 @@
 					</div>
 					<ul>
             <li>Gran parte de los servicios en la nube.</li>
-            <li>Integración de tecnologías de I.A.</li>
-						<li>Unificación del S.O. en todos los dispositivos.</li>
+            <li>Integración de tecnologías de I.A. generativa y asistentes inteligentes en el sistema.</li>
+						<li>Convergencia entre escritorio, móvil, nube y edge (no necesariamente un único S.O.).</li>
 						<li>Enfoque hacia el Internet de las cosas.</li>
 					</ul>
 				</section>
@@ -719,9 +719,22 @@
 					<ul>
 						<li>Permite la ejecución de programas que requieren múltiples sistemas operativos.</li>
 						<li>Incrementa la seguridad al separar las instancias.</li>
+						<li>Base para nubes privadas/públicas mediante hipervisores tipo 1 y tipo 2.</li>
 					</ul>
 					<aside class="notes">
-						Hablar sobre Vagrant y Docker
+						Hablar sobre VirtualBox/VMware/KVM, y aclarar diferencias con contenedores.
+					</aside>
+				</section>
+				<section id="contenedores" class="fragment">
+					<h2>Contenedores (Docker)</h2>
+					<ul>
+						<li>Empaquetan aplicación + dependencias compartiendo el kernel del host.</li>
+						<li>No reemplazan a las VM: son complementarios según aislamiento, costo y portabilidad.</li>
+						<li>En Linux se implementan con <strong>namespaces</strong> (aislamiento) y <strong>cgroups</strong> (límites de CPU, RAM e I/O).</li>
+					</ul>
+					<aside class="notes">
+						Comparar VM vs contenedor con ejemplos cortos:
+						VM = aislamiento fuerte y más peso; contenedor = arranque rápido y alta densidad.
 					</aside>
 				</section>
 				<section id="tipo-so-servicios" class="fragment">

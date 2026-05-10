@@ -816,6 +816,20 @@
 						</li>
 					</ul>
 				</section>
+				<section id="memoria-multinucleo">
+					<h2>Memoria y concurrencia en multinúcleo</h2>
+					<ul>
+						<li>En CPU multinúcleo, varios hilos pueden leer/escribir memoria al mismo tiempo.</li>
+						<li>Problemas comunes: contención de caché, <em>false sharing</em> y acceso remoto a memoria (NUMA).</li>
+						<li>El S.O. mejora rendimiento con afinidad de CPU, balanceo de carga y políticas NUMA-aware.</li>
+					</ul>
+					<aside class="notes">
+						Resumen para clase:
+						(1) afinidad: mantener hilo en el mismo núcleo mejora caché;
+						(2) NUMA: preferir memoria local al socket;
+						(3) evitar false sharing con estructuras alineadas.
+					</aside>
+				</section>
 
 				<section id="anexos">
 					<h1>Anexos</h1>
