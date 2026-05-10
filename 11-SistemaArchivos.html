@@ -388,7 +388,7 @@
 
 				<section id="fs-modern">
 					<h2>Historia moderna</h2>
-					<h3>(principios de los 90)</h3>
+					<h3>(principios de los 90 y 2000)</h3>
 					<ul>
 						<li>Se maximizó la concurrencia de E/S.</li>
 						<li>Soporte para archivos mayores a 4GB.</li>
@@ -407,27 +407,41 @@
 
 				<section id="fs-recent">
 					<h2>Historia reciente</h2>
-					<h3>(finales de los 90)</h3>
+					<h3>(2000-2015)</h3>
 					<ul>
-						<li>Aparece soporte asíncrono de journaling.</li>
-						<li>Transformación de datos (compresión).</li>
-						<li>Actualización de software para implementar nuevas características.</li>
+						<li>Journaling robusto y recuperación más rápida ante fallos.</li>
+						<li>Compresión, deduplicación y snapshots en sistemas avanzados.</li>
+						<li>Mayor foco en integridad de datos, cifrado y mantenimiento en línea.</li>
 					</ul>
 				</section>
 
 				<section id="fs-actual">
 					<h2>Tecnologías actuales</h2>
-					<h3>(Desde el 2000)</h3>
+					<h3>(2015 hasta la actualidad)</h3>
 					<ul>
 						<li>Corrección transparente de errores.</li>
-						<li>Manejo directo de dispositivos.</li>
+						<li>Mejor integración con volúmenes lógicos, RAID por software y almacenamiento distribuido.</li>
 						<li>Árboles estructurados de registros.</li>
-						<li>Árboles balanceados de referencias de copy-write.</li>
+						<li>Copy-on-write con snapshots, checksums y soporte para SSD/NVMe.</li>
 					</ul>
 				</section>
 
 				<section id="ejemplos">
 					<h1>Ejemplos de<br>implementaciones</h1>
+				</section>
+
+				<section id="ejemplos-modernos">
+					<h2>Sistemas de archivos usados hoy</h2>
+					<ul>
+						<li><strong>Linux:</strong> ext4, XFS, Btrfs.</li>
+						<li><strong>Windows:</strong> NTFS y ReFS (entornos de servidor).</li>
+						<li><strong>Apple:</strong> APFS (iOS/macOS).</li>
+						<li><strong>Entornos empresariales:</strong> ZFS por integridad de datos y administración avanzada.</li>
+					</ul>
+					<aside class="notes">
+						Comparar escenarios de uso: escritorio, servidor, bases de datos, virtualización
+						y respaldo con snapshots para recuperación rápida.
+					</aside>
 				</section>
 
 
