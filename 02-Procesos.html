@@ -40,6 +40,257 @@
       border-radius: 16px;
       background: transparent;
     }
+
+    .multiprogramming-chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .multiprogramming-chart-header p {
+      margin: 0;
+      font-size: 0.58em;
+      color: #dce8ef;
+      text-align: left;
+      line-height: 1.35;
+      max-width: 540px;
+    }
+
+    .multiprogramming-formula {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff7d6;
+      font-size: 0.72em;
+      white-space: nowrap;
+    }
+
+    .multiprogramming-chart-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 250px;
+      gap: 28px;
+      align-items: end;
+    }
+
+    .multiprogramming-bars {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(88px, 1fr));
+      gap: 18px;
+      align-items: end;
+      min-height: 360px;
+      padding: 24px 12px 0;
+      border-radius: 18px;
+    }
+
+    .multiprogramming-bar-group {
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+    }
+
+    .multiprogramming-bar-value {
+      font-size: 0.48em;
+      color: #fff2bf;
+    }
+
+    .multiprogramming-bar-track {
+      position: relative;
+      width: 100%;
+      max-width: 112px;
+      height: 280px;
+      display: flex;
+      align-items: end;
+      padding: 8px;
+      border-radius: 18px 18px 10px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .multiprogramming-bar {
+      width: 100%;
+      height: var(--value);
+      min-height: 20px;
+      border-radius: 12px 12px 4px 4px;
+      background: linear-gradient(180deg, #ffd166, #ff8f1f);
+      box-shadow: 0 0 24px rgba(255, 176, 32, 0.22);
+    }
+
+    .multiprogramming-bar-group:nth-child(2) .multiprogramming-bar {
+      background: linear-gradient(180deg, #7bdff2, #31b1d8);
+      box-shadow: 0 0 24px rgba(75, 194, 231, 0.2);
+    }
+
+    .multiprogramming-bar-group:nth-child(3) .multiprogramming-bar {
+      background: linear-gradient(180deg, #63e6be, #17b890);
+      box-shadow: 0 0 24px rgba(37, 214, 157, 0.2);
+    }
+
+    .multiprogramming-bar-group:nth-child(4) .multiprogramming-bar {
+      background: linear-gradient(180deg, #c77dff, #8b5cf6);
+      box-shadow: 0 0 24px rgba(161, 110, 255, 0.18);
+    }
+
+    .multiprogramming-bar-label {
+      font-size: 0.48em;
+      color: #cfe1eb;
+      line-height: 1.25;
+    }
+
+    .multiprogramming-side-note {
+      padding: 18px 20px;
+      border-radius: 18px;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .multiprogramming-side-note h3 {
+      margin: 0 0 12px;
+      font-size: 0.72em;
+      color: #f8fbff;
+    }
+
+    .multiprogramming-side-note p {
+      margin: 0 0 10px;
+      font-size: 0.5em;
+      color: #d4e1ec;
+      line-height: 1.4;
+    }
+
+    .multiprogramming-side-note p:last-child {
+      margin-bottom: 0;
+    }
+
+    .multiprogramming-side-note strong {
+      color: #fff1b8;
+    }
+
+    .pcb-visual {
+      width: min(980px, 100%);
+      margin: 20px auto 0;
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .pcb-summary,
+    .pcb-table-wrap {
+      border-radius: 22px;
+      background: rgba(8, 20, 35, 0.78);
+      border: 1px solid rgba(160, 208, 255, 0.16);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
+    }
+
+    .pcb-summary {
+      padding: 22px 20px;
+      text-align: left;
+    }
+
+    .pcb-summary h3 {
+      margin: 0 0 12px;
+      font-size: 0.76em;
+      color: #fff3c4;
+      letter-spacing: 0.03em;
+    }
+
+    .pcb-summary p {
+      margin: 0 0 12px;
+      font-size: 0.5em;
+      color: #d7e7f3;
+      line-height: 1.45;
+    }
+
+    .pcb-summary p:last-child {
+      margin-bottom: 0;
+    }
+
+    .pcb-table-wrap {
+      padding: 18px 18px 14px;
+    }
+
+    .pcb-table-title {
+      margin: 0 0 14px;
+      text-align: left;
+      font-size: 0.58em;
+      color: #d9ebff;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pcb-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.48em;
+      color: #eff7ff;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .pcb-table thead th {
+      padding: 12px 14px;
+      text-align: left;
+      background: rgba(90, 170, 255, 0.18);
+      color: #fff7d6;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(160, 208, 255, 0.2);
+    }
+
+    .pcb-table tbody td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(160, 208, 255, 0.12);
+      vertical-align: top;
+    }
+
+    .pcb-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pcb-table tbody tr:nth-child(odd) td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .pcb-table tbody tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .pcb-table td:first-child {
+      width: 34%;
+      color: #9ed0ff;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+
+      .multiprogramming-chart-header,
+      .multiprogramming-chart-body {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .multiprogramming-formula {
+        justify-self: start;
+        white-space: normal;
+      }
+
+      .multiprogramming-bars {
+        grid-template-columns: repeat(5, minmax(64px, 1fr));
+        min-height: 320px;
+      }
+
+      .multiprogramming-bar-track {
+        height: 230px;
+      }
+
+      .pcb-visual {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -460,26 +711,53 @@
       </section>
       <section id="pcb-2">
         <h2>Bloque de control de proceso (PCB)</h2>
-        <div class="half left">
-          <ul>
-            <li>
-              <strong>Información contable:</strong> almacena la cantidad
-              de tiempo en el CPU, límite de tiempo asignado,
-              numero de proceso, entre otros.
-            </li>
-            <li><strong>Información de E/S:</strong> posee un
-              listado de los archivos y dispositivos de E/S
-              asignados al proceso.</li>
-          </ul>
-        </div>
-        <div class="center">
-          <p>
-            <img src="img/class2/pcb2.jpg" alt="bloque de control de proceso" />
-          </p>
+        <div class="pcb-visual">
+          <div class="pcb-summary">
+            <h3>PCB</h3>
+            <p>El sistema operativo mantiene una estructura por proceso para poder pausarlo, reanudarlo y planificarlo.</p>
+            <p>La tabla resume los campos que normalmente se guardan dentro del bloque de control de proceso.</p>
+          </div>
+          <div class="pcb-table-wrap">
+            <p class="pcb-table-title">Estructura conceptual del PCB</p>
+            <table class="pcb-table" aria-label="Campos típicos de un bloque de control de proceso">
+              <thead>
+                <tr>
+                  <th>Campo</th>
+                  <th>Contenido</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Identificación</td>
+                  <td>PID, PPID, usuario propietario y estado actual del proceso.</td>
+                </tr>
+                <tr>
+                  <td>Contexto de CPU</td>
+                  <td>Contador de programa, puntero de pila y registros que deben restaurarse.</td>
+                </tr>
+                <tr>
+                  <td>Planificación</td>
+                  <td>Prioridad, quantum, punteros de cola y criterios usados por el scheduler.</td>
+                </tr>
+                <tr>
+                  <td>Memoria</td>
+                  <td>Base, límite, tabla de páginas o segmentos y mapas de memoria asociados.</td>
+                </tr>
+                <tr>
+                  <td>Contabilidad</td>
+                  <td>Tiempo de CPU consumido, tiempos acumulados, cuotas y estadísticas.</td>
+                </tr>
+                <tr>
+                  <td>E/S y recursos</td>
+                  <td>Archivos abiertos, dispositivos asignados, señales y otros recursos del proceso.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
       <section id="modelo-multiprogramacion">
-        <h2>Modelación de la<br>multi-programación</h2>
+        <h2>Modelación de la multi-programación</h2>
         <ul>
           <li>
             Se supone que si un proceso consume 20% de CPU, entonces colocando 5,
@@ -496,22 +774,74 @@
         </ul>
       </section>
       <section id="modelo-multiprogramacion-2">
-        <h2>Modelación de la<br>multi-programación</h2>
-        <ul>
-          <li>Realmente es una función de probabilidad de la forma:</li>
-        </ul>
+        <h2>Modelación de la multi-programación</h2>
+        <p>
+          Realmente es una función de probabilidad de la forma:
+        </p>
         <p><strong>Uso de CPU = 1 - p<sup>n</sup></strong></p>
-        <ul>
-          <li>
-            El uso de memoria viene dado por la cantidad
-            necesaria para el sistema operativo y los procesos a ejecutar.
-            Ej : Un servidor Web.
-          </li>
-        </ul>
+        <p>
+          El uso de memoria viene dado por la cantidad
+          necesaria para el sistema operativo y los procesos a ejecutar.
+          Ej : Un servidor Web.
+        </p>
       </section>
       <section id="modelo-multiprogramacion-3">
-        <h2>Modelación de la<br>multi-programación</h2>
-        <img src="img/class2/multiprogramacion.png" alt="Multiprogramacion">
+        <h2>Modelación de la multi-programación</h2>
+        <div class="multiprogramming-chart">
+          <div class="multiprogramming-chart-header">
+            <p>
+              Ejemplo con <strong>p = 0.5</strong>, donde cada proceso pasa la mitad del tiempo esperando E/S.
+              A medida que aumenta <strong>n</strong>, baja la probabilidad de que <em>todos</em> estén esperando al
+              mismo tiempo.
+            </p>
+            <div class="multiprogramming-formula">Uso de CPU = 1 - p<sup>n</sup></div>
+          </div>
+          <div class="multiprogramming-chart-body">
+            <div class="multiprogramming-bars" aria-label="Grafico de uso del CPU segun numero de procesos">
+              <div class="multiprogramming-bar-group">
+                <div class="multiprogramming-bar-value">50%</div>
+                <div class="multiprogramming-bar-track">
+                  <div class="multiprogramming-bar" style="--value: 50%;"></div>
+                </div>
+                <div class="multiprogramming-bar-label">n = 1<br>1 - 0.5<sup>1</sup></div>
+              </div>
+              <div class="multiprogramming-bar-group">
+                <div class="multiprogramming-bar-value">75%</div>
+                <div class="multiprogramming-bar-track">
+                  <div class="multiprogramming-bar" style="--value: 75%;"></div>
+                </div>
+                <div class="multiprogramming-bar-label">n = 2<br>1 - 0.5<sup>2</sup></div>
+              </div>
+              <div class="multiprogramming-bar-group">
+                <div class="multiprogramming-bar-value">87.5%</div>
+                <div class="multiprogramming-bar-track">
+                  <div class="multiprogramming-bar" style="--value: 87.5%;"></div>
+                </div>
+                <div class="multiprogramming-bar-label">n = 3<br>1 - 0.5<sup>3</sup></div>
+              </div>
+              <div class="multiprogramming-bar-group">
+                <div class="multiprogramming-bar-value">93.75%</div>
+                <div class="multiprogramming-bar-track">
+                  <div class="multiprogramming-bar" style="--value: 93.75%;"></div>
+                </div>
+                <div class="multiprogramming-bar-label">n = 4<br>1 - 0.5<sup>4</sup></div>
+              </div>
+              <div class="multiprogramming-bar-group">
+                <div class="multiprogramming-bar-value">96.88%</div>
+                <div class="multiprogramming-bar-track">
+                  <div class="multiprogramming-bar" style="--value: 96.875%;"></div>
+                </div>
+                <div class="multiprogramming-bar-label">n = 5<br>1 - 0.5<sup>5</sup></div>
+              </div>
+            </div>
+            <div class="multiprogramming-side-note">
+              <h3>Lectura rápida</h3>
+              <p><strong>p</strong>: probabilidad de que un proceso esté esperando E/S.</p>
+              <p><strong>p<sup>n</sup></strong>: probabilidad de que todos los procesos estén esperando.</p>
+              <p><strong>1 - p<sup>n</sup></strong>: fracción esperada de tiempo en la que el CPU sí tiene trabajo.</p>
+            </div>
+          </div>
+        </div>
       </section>
       <section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
         <h1 class="stroke">¿Preguntas?</h1>
