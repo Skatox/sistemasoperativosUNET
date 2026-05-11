@@ -1,850 +1,882 @@
 <!doctype html>
 <html lang="es">
 
-	<head>
-		<meta charset="utf-8">
-		<title>Sistemas Operativos | UNET</title>
-		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
-		<meta name="author" content="Miguel Angel Useche Castro">
+<head>
+  <meta charset="utf-8">
+  <title>Sistemas Operativos | UNET</title>
+  <meta name="description"
+    content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
+  <meta name="author" content="Miguel Angel Useche Castro">
 
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/moon.css">
-		<link rel="stylesheet" href="dist/theme/unet.css" id="theme">
-		<link rel="stylesheet" href="css/lightbox.min.css">
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/moon.css">
+  <link rel="stylesheet" href="dist/theme/unet.css" id="theme">
+  <link rel="stylesheet" href="css/lightbox.min.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	</head>
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
 
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<div class="unet">
-						<div class="logo-wrapper left">
-							<img class="noborder" src="img/UNET.png" alt="UNET Logo">
-						</div>
-						<p id="definition-header" class="left">
-							Universidad Nacional Experimental Del Táchira<br />
-							Decanato De Docencia<br />
-							Dpto. Ingeniería en Informática
-						</p>
-					</div>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <div class="unet">
+          <div class="logo-wrapper left">
+            <img class="noborder" src="img/UNET.png" alt="UNET Logo">
+          </div>
+          <p id="definition-header" class="left">
+            Universidad Nacional Experimental Del Táchira<br />
+            Decanato De Docencia<br />
+            Dpto. Ingeniería en Informática
+          </p>
+        </div>
 
-					<h1 class="clear">
-						Introducción a los Sistemas Operativos
-					</h1>
-					<h2 id="subject-code">
-						Código 0435607T
-					</h2>
-					<div class="professor-info">
-						<p>
-							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
-							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
-							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
-						</p>
-					</div>
-				</section>
-				
-				<section id="objetivo">
-					<h2>Objetivo de la materia</h2>
-					<p>
-						Ofrecer una visión de los componentes más importantes 
-						de los sistemas operativos
-					</p>
-				</section>
-				<section id="por-que">
-					<h2>¿Por qué ver la materia? (1/2)</h2>
-					<div>
-						<ul>
-							<li class="fragment">Requisito para culminar la carrera.</li>
-							<li class="fragment">Cultura general en el área de informática.</li>
-							<li class="fragment">
-								Comprender el funcionamiento del sistema operativo, para
-								realizar aplicaciones integradas al mismo, realizar optimizaciones de
-								software para funcionar mejor, optimización de servicios (gestores de BD,
-								compartición de archivos, mejoras en las redes, etc)
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section id="por-que-2">
-					<h2>¿Por qué ver la materia? (2/2)</h2>
-					<div>
-						<ul>
-							<li class="fragment">
-								Provee los conocimientos básicos para desarrollo de Sistemas Distribuidos,
-								diseño de Sistemas Operativos, seguridad en dispositivos a nivel de S.O., entre otros.</li>
-							<li class="fragment">Desarrollo de aplicaciones multiplataforma.</li>
-							<li class="fragment">
-								Permite conocer como resolver problemas de programación
-								relacionados con los dispositivos de I/O. Manejo de multiprocesos, manejo de memoria.
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section id="primer-parcial">
-					<h2>
-						Primer parcial ( 35% )
-					</h2>
-					<ul>
-						<li>Introducción a los S.O: Estructura, Niveles, Objetivos, tipos.</li>
-						<li>Modelo de procesos, Algoritmos de Planificación y ejercicios</li>
-						<li>Hebras y Semáforos</li>
-						<li>Interbloqueo y ejercicios</li>
-					</ul>
+        <h1 class="clear">
+          Introducción a los Sistemas Operativos
+        </h1>
+        <h2 id="subject-code">
+          Código 0435607T
+        </h2>
+        <div class="professor-info">
+          <p>
+            <a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
+            <a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+            <a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+          </p>
+        </div>
+      </section>
 
-					<p>
-						<strong>Evaluación:</strong> 5ta semana del semestre
-					</p>
-				</section>
-				<section id="segundo-parcial">
-					<h2>
-						Segundo parcial ( 35% )
-					</h2>
-					<ul>
-						<li>Administración de memoria, introducción, Particiones fijas, dinámicas.</li>
-						<li>Paginación, un nivel, dos niveles</li>
-						<li>Algoritmos de Reemplazo de páginas, Registros TLB</li>
-						<li>Segmentación</li>
-					</ul>
-					<p>
-						<strong>Evaluación:</strong> 10ma semana del semestre
-					</p>
-				</section>
-				<section id="tercer-parcial">
-					<h2>Tercer parcial ( 30% )</h2>
-					<ul>
-						<li>Sistema de Archivos, estructura de directorios.</li>
-						<li>Gestión de E/S, planificación de disco</li>
-						<li>Protección y Seguridad</li>
-						<li>Práctica final</li>
-					</ul>
-					<p>
-						<strong>Evaluación:</strong> 15va semana del semestre
-					</p>
-				</section>
-				<section id="requisitos-de-la-materia">
-					<h2>Conocimientos requeridos</h2>
-					<ul>
-						<li class="fragment">Resolución de operaciones matemáticas básicas.</li>
-						<li class="fragment">Uso de una computadora, telefóno o cualquier dispositivo digital.</li>
-						<li class="fragment">
-							Conocer los componentes claves de un computador y
-							las partes que la comprenden. (Organización del computador)
-						</li>
-						<li class="fragment">Comprender la arquitectura Von Neumann.</li>
-					</ul>
-				</section>
-				<section id="quien-es-arquitectura-von-neuman" data-background="img/intro/doubt.png" data-background-repeat="none">
-					<h1 class="stroke">¿Von Neumann?</h1>
-					<aside class="notes">
-						Investigar quien fué y que hizo. Era una calculadora humana.
-					</aside>
-				</section>
-				<section id="arquitectura-von-neuman">
-					<h2>Arquitectura Von Neuman</h2>
-					<p>
-						Fue creada por John Von Neumann en 1949, para solucionar
-						el problema de recableado cada vez que era necesario 
-						ejecutar una nueva tarea de una computadora.
-					</p>
-				</section>
-				<section id="arquitectura-von-neuman-2">
-					<h2>Arquitectura Von Neuman</h2>
-					<div class="half left">
-						<p class="text-left">Está compuesta por:</p>
-						<ul>
-							<li>La unidad aritmético-lógica o ALU.</li>
-							<li>La unidad de control.</li>
-							<li>La memoria principal.</li>
-							<li>Un dispositivo de entrada/salida.</li> 
-							<li>El bus de datos.</li>
-						</ul>
-					</div>
-					<div class="half left">
-						<a href="img/intro/arquitectura_neuman.jpg" data-lightbox="Von-Neuman">
-							<img src="img/intro/arquitectura_neuman.jpg" alt="Arquitectura Von Neuman" />
-						</a>
-						<p>
-							<small>Basada en la imagen de 
-								<a href="http://es.wikipedia.org/wiki/Arquitectura_de_von_Neumann" target="_blank">
-									wikipedia.org
-								</a></small>
-						</p>
-					</div>
-				</section>
-				<section id="que-es-un-so-1">
-					<h2>¿Qué es un sistema operativo?</h2>
-					<p>Primero conozcamos estos conceptos:</p>
-					<ul>
-						<li>
-							<strong>Hardware: </strong>
-							todos los dispositivos de una computadora, todo lo que podemos tocar, entre otros.
-						</li>
-					</ul>
-					<p>
-						<img src="img/intro/hardware.png" alt="Hardware">
-					</p>
-				</section>
-				<section id="que-es-un-so-1-2">
-					<h2>¿Qué es un sistema operativo?</h2>
-					<p>El software lo podemos dividir en:</p>
-					<ul>
-						<li>
-							<strong>Programas del sistema: </strong>
-							aplicaciones integradas al S.O., 
-							operaciones a los procesos, configuración del sistema, entre otros.
-						</li>
-						<li>
-							<strong>Programas de aplicaciones: </strong>
-							ejecutadas por los usuarios para realizar sus tareas diarias:
-							trabajos, entretenimientos, entre otros.
-						</li>
-					</ul>
-				</section>
-				<section id="que-es-un-so-2">
-					<p>Y por último pero igual de importante:</p>
-					<h2>Usuarios</h2>
-					<div class="half left">
-						<img src="img/intro/usuarios.jpg" alt="Usuario"> 
-					</div>
-					<div class="half right">
-						<img src="img/intro/usuarios-2.jpg" alt="Como ven a los usuarios">
-					</div>
-					<aside class="notes">
-						Las personas o bots que ejecutan los programas de una computadora 
-						para realizar un trabajo o tarea.
-					</aside>
-				</section>
-				<section id="que-es-un-so-3">
-					<h2>¿Qué es un sistema operativo?</h2>
-					<div class="twothird left">
-						<blockquote style="width:60%">
-							"Conjunto de software de administración de recursos de hardware y provee 
-							servicios comunes a los programas"
-							<cite>Wikipedia.org</cite>
-						</blockquote>
-					</div>
-					<div class="left">
-						<a href="img/intro/so.png" data-lightbox="sistema-operativo">
-							<img  src="img/intro/so.png" class="noborder" alt="sistema operativo">
-						</a>
-					</div>
-					<aside class="notes">
-						No existe una definición totalmente adecuada, pero podemos definir a un 
-						sistema operativo como
-					</aside>
-				</section>
-				<section id="que-es-so-4">
-					<h2>
-						¿Qué es un sistema operativo?
-					</h2>
-					<blockquote>
-						<div class="left"><img src="img/intro/linus.jpg" alt="Linus Torvald"></div>
-						"Es un programa que se supone que nunca deberías ver, pues nadie usa un 
-						sistema operativo, sino los programas de una computadora. Y la única misión de
-						 un sistema operativo es ayudar a esos programas a ejecutarse".
-						<cite>Linus Torvalds</cite>
-					</blockquote>
-				</section>
-				<section id="lista-de-so">
-					<h2>Algunos sistemas operativos</h2>
-					<p> Entre los sistemas operativos más conocidos tenemos: </p>
-					<ul>
-						<li>Windows, Windows 10 Mobile (Microsoft)</li>
-						<li>Linux (código libre)</li>
-						<li>macOS, iOS, watchOs, tvOS (Apple)</li>
-						<li>BSD (código abierto)</li>
-						<li>Android, Chrome OS, Fuchsia (Google)</li>
-						<li>Solaris (Oracle)</li>
-						<li>z/OS (IBM)</li>
-					</ul>
-				</section>
-				<section id="funciones-de-so">
-					<h2>Funciones de los S.O.</h2>
-					<ul>
-						<li>Gestión de los recursos de hardware.</li>
-						<li>Administración de la memoria.</li>
-						<li>Permitir a las aplicaciones acceder a los dispositivos de E/S.</li>
-						<li>Controlar cuanto tiempo debe usar una aplicación el CPU.</li>
-						<li>Brindar seguridad de los recursos.</li>
-					</ul>
-				</section>
-				<section id="os-maquina-extendida-1">
-					<h2>El sistema operativo</h2>
-					<h3>Como una máquina extendida</h3>
-					<p>
-						Evita que cada programador tenga que conocer el
-						funcionamiento a bajo nivel de cada componente. Facilitando el acceso a 
-						recursos: pantalla, teclado, unidades de disco, tarjeta de 
-						red, entre otros.
-					</p>
-					<aside class="notes">
-						La arquitectura de una computadora, es complicada.
-						Para utilizar cada componente se requiere conocer su
-						funcionamiento a bajo nivel y las instrucciones para controlarlas. 
-						Cuando al ejecutar programas accedemos a una gran cantidad 
-						de recursos: pantalla, teclado, unidades de disco, tarjeta de 
-						red, entre otros. Sería muy difícil para los programadores 
-						desarrollar en cada una de sus aplicaciones, rutinas
-						para cada uno de esos componentes.
-					</aside>
-				</section>
-				<section id="os-maquina-extendida-2">
-					<h2>El sistema operativo</h2>
-					<h3>Como una máquina extendida</h3>
-					<p>
-						El sistema operativo, por <strong>motivos de simplicidad y 
-						seguridad oculta gran parte del hardware</strong>
-						y presenta al programador mediante una abstracción una vista 
-						sencilla para programar en ella. Así nos olvidamos de las 
-						interrupciones administración de la memoria a bajo nivel, 
-						los registros del CPU, entre otros.
-					</p>
-				</section>
-				<section id="os-maquina-extendida2">
-					<h2>El sistema operativo</h2>
-					<h3>Como un administrador de recursos</h3>
-					<p>
-						El S.O. administra todos los componentes de un sistema, 
-						se encarga de repartir de forma ordenada y controlada 
-						el acceso del uso de procesadores, memoria y dispositivos 
-						de E/S entre los diferentes programas que compiten por ellos.
-					</p>
-					<p>
-						En el caso de los sistemas multi-usuario 
-						gestiona el uso de los usuarios a las aplicaciones, 
-						permitiendo repartir el hardware a las aplicaciones 
-						de distintos usuarios.
-					</p>
-				</section>
-				<section id="historia-so-1">
-					<h2>Inicio de los sistemas operativos</h2>
-					<p>
-						La primera computadora digital fue creada por Charles Babbage, luego en 1842, Ada Lovelace, comprendió su potencial y empezó a crear software para esa máquina (un programa para calcular la secuencia de Bernoulli) conviertiéndose en la primera programadora de la historia.
-					</p>
-					<div style="width:848px;margin: 0 auto;">
-						<a href="http://es.wikipedia.org/wiki/Charles_Babbage" target="blank">
-							<img src="img/intro/babbage.jpg" alt="Charles Babbage"  /> 
-						</a>
-						<a href="http://es.wikipedia.org/wiki/Ada_Lovelace" target="_blank">
-							<img src="img/intro/ada.jpg" alt="Charles Babbage" /> 
-						</a>
-						<a href="http://es.wikipedia.org/wiki/M%C3%A1quina_anal%C3%ADtica" target="_blank">
-							<img src="img/intro/maquinababbage.jpg" alt="Maquina diferencial" />
-						</a>
-					</div>
-					<p>
-						<small>De izquierda a derecha: Charles Babbage, La máquina diferencial y Ada Lovelace.</small>
-					</p>
-				</section>
-				<section id="historia-so-2">
-					<h2>Primera generación (1945-1955)</h2>
-					<h3> Tubos de vacío y tableros de comutación </h3>
-					<ul class="half nomargin left">
-						<li>Máquinas calculadoras hechas con tubos al vacío.</li>
-						<li>Un grupo de personas se encarga de diseñar, construir, programar y operar cada máquina.</li>
-						<li>Se programaba mediante el alambrado de los componentes.</li>
-					</ul>
-					<div class="left half">
-						<img src="img/intro/tubosvacios.jpg" alt="Tubos vacio">
-					</div>
-					<ul class="nomargin">
-						
-						<li>Se usaban para cálculos matemáticos, cálculo de tablas de cosenos y seno, entre otros.</li>
-					</ul>
-				</section>
-				<section id="historia-so-3">
-					<h2>2da generación (1955-1965)</h2>
-					<h3> Transistores y sistemas por lote </h3>
-					<ul class="left half">
-						<li>
-							Los transistores abarataron los costos, aumentaron la potencia y permitieron
-						 	comercializar las computadoras.
-						 </li>
-						 <li>
-							Ahora las personas estaban separadas claramente entre diseñadores, constructores, 
-							programadores y operadores de cada máquina.
-						</li>
-					 </ul>
-					<div class="left">
-						<img src="img/intro/sistemalotes.jpg" alt="Sistema por lotes"/>
-					</div>
-					 <ul class="left">
-						<li>Sistemas monousuario, procesamiento por lotes.</li>
-					</ul>
-				</section>
-				<section>
-					<h2>2da generación (1955-1965)</h2>
-					<ul>
-						<li>Sin sistema operativo, se creaban programas en FORTRAN y luego se pasaba a tarjetas perforadas para ser usadas por los operadores de las computadoras.</li>
-						<li>Existe un programa <strong>"monitor"</strong> que controla los procesos.</li>
-					</ul>
-					<div class="left">
-						<a href="img/intro/lotes.png" data-lightbox="lotes">
-							<img src="img/intro/lotes.png" alt="Sistema por lotes" />
-						</a>
-					</div>
-					<div class="right">
-						<a href="img/intro/tarjeta.png" data-lightbox="lotes">
-							<img src="img/intro/tarjeta.png" alt="Tarjeta perforada" />
-						</a>
-					</div>
-				</section>
-				<section id="historia-so-4">
-					<h2>Tercera generación (1965-1980)</h2>
-					<h3> Circuitos integrados y multiprogramación </h3>
-					<ul class="half left">
-						<li>
-							Aparecen los primeros S.S.O.O. el OS/360 compuesto de millones de líneas 
-							hechas en ensamblador por miles de programadores.
-						</li>
-						<li>
-							Aparece la multi-programación, la segmentación de memoria y las aplicaciones 
-							la comparten, aparecen los primeros sistemas en tiempo real y planificador 
-							en MULTICS.
-						</li>
-					</ul>
-					<div class="right"> <img src="img/intro/IBM360.jpg" alt="IBM 360" /> </div>
-					<ul>
-						
-					</ul>
-					<aside class="notes">
-						MULTICS es el primer SO multitarea y donde se basó UNIX
-					</aside>
-				</section>
-				<section>
-					<h2>Tercera generación (1965-1980)</h2>
-					<ul class="twothird left">
-						<li>
-							Los programas comparten tiempo de CPU (tiempo compartido), el S.O. asigna 
-							espacios de tiempo a cada aplicación dando la ilusión de realizar varias 
-							tareas al mismo tiepo.
-						</li>
-						<li>
-							El sistema operativo carga las aplicaciones a ejecutar desde el disco 
-							(<strong><em>Spooling</em></strong>), 
-							permitiendo utilizar el CPU de manera más óptima.
-						</li>
-					</ul>
-					<div class="third right">
-						<img  src="img/intro/memoriasegmentada.png" alt="Sistema por lotes" >
-					</div>
-					<ul>
-						
-					</ul>
-				</section>
-				<section id="historia-so-5">
-					<h2>Cuarta generación (1980 - 2004)</h2>
-					<h3>La Computadora Personal</h3>
-					<div  class="half left">
-						<ul>
-							<li>
-								Sistemas más amigables con el usuario, maneja las operaciones y control
-								de usuarios localmente.
-							</li>
-							<li>
-								Primeras I.U. (GUI en inglés).
-						 	</li>
-						 	<li>Aparecen los Sistemas Distribuidos.</li>
-						</ul>
-					</div>
-					<div class="right">
-						<img  style="margin-left:10px" src="img/intro/PC.png" alt="PC">
-					</div>
-					<ul>
-						<li>
-							Aparecen capacidades para conectarse a Internet,
-						 	entrar a máquinas remotas y realizar tareas en ellas, compartir archivos, entre otros.
-					 	</li>
-						
-					</ul>
-				</section>
-				<section id="historia-so-6">
-					<h2>Quinta generación<br>(2005 - 2019)</h2>
-					<h3> Dispositivos móviles </h3>
-					<div class="half left">
-						<img style="margin-left:10px" src="img/intro/stevejobsiphone.png" alt="PC">
-					</div>
-					<div class="half left">
-						<ul>
-							<li>
-								Sistemas enfocados en una interfaz más sencilla y diseñada para
-							 	funcionar en pantallas muy pequeñas.
-							 </li>
-							<li>
-								Optimizados para funcionar con baterías, por ellos, son 
-								eficientes en el ahorro de energía.
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section>
-					<h2>Sexta generación (2020 hasta ahora)</h2>
-					<ul>
-						<li>Diseñadas para funcionar en redes de telefonía celular e inalámbrica, con fuerte integración a servicios en la nube y tiendas de aplicaciones.</li>
-					</ul>
-					<img class="half" src="img/intro/mobile_devices.png" alt="dispositivos móviles" />
-				</section>
-				<section>
-					<h2>¿Futuro?</h2>
-					<div class="half left">
-						<img src="img/intro/UnifiedWindows.jpg" alt="Unificacion de Windows">
-					</div>
-					<div class="half left">
-						<img src="img/intro/macos-devices.jpg" class=bordered" alt="Ubuntu OS">
-					</div>
-					<ul>
-            <li>Gran parte de los servicios en la nube.</li>
-            <li>Integración de tecnologías de I.A. generativa y asistentes inteligentes en el sistema.</li>
-						<li>Convergencia entre escritorio, móvil, nube y edge (no necesariamente un único S.O.).</li>
-						<li>Enfoque hacia el Internet de las cosas.</li>
-					</ul>
-				</section>
-				<section id="fundamentos-so" class="fragment">
-					<h2>Fundamentos<br>de los sistemas operativos</h2>
-					<ul>
-						<li>Procesos</li>
-						<li>Archivos</li>
-						<li>Llamadas al sistema</li>
-						<li>Interfaz de usuario</li>
- 					</ul>
-				</section>
-				<section id="proceso">
-					<h2>Proceso</h2>
-					<ul>
-						<li>Es un programa en ejecución.</li>
-						<li>Cada proceso tiene:
-							<ul>
-								<li>Las instrucciones a ser ejecutadas en el procesador.</li>
-								<li>
-									Un espacio de direcciones de memoria asignado, con inicio y tamaño máximo.
-								</li>
-								<li>
-									Este espacio contiene el programa ejecutable, sus datos y pila, 
-									variables, la siguiente instrucción a ejecutar, etc. (El estado 
-									de la aplicación)
-								</li>
-								<li>Otra información requerida por el S.O. para la planificación.</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-				<section id="proceso-2">
-					<h2>Proceso</h2>
-					<ul>
-						<li>
-							Se ejecutan <strong>por tiempos limitados en el CPU</strong>,
-							una vez finalizado este tiempo, el S.O. lo duerme, se guarda toda 
-							la información en memoria y se queda esperando para seguir 
-							en ejecución.</li>
-						<li>
-							Una vez reiniciado, se vuelve a cargar toda su información y se continúa la ejecución desde el momento donde se estaba ejecutando.</li>
-						<li>
-							Un proceso tiene un <strong>UID</strong> (usuario quien lo ejecutó) 
-							y un <strong>PID</strong> (número del proceso).</li>
-						<li>Un proceso puede crear uno o más procesos hijos.</li>
-					</ul>
-				</section>
-				<section id="archivos">
-					<h2>Archivos</h2>
-					<ul>
-						<li>Al igual que con otros dispositivos de entrada y salida, el S.O. presenta un modelo de una abstracto, limpio y bonito de los archivos en los dispositivos.</li>
-						<li>Se realizan operaciones sobre ellos a través de llamadas al sistema: abrir, cerrar, escribir, borrar datos, eliminar el archivo, entre otros.</li>
-						<li>Existe el concepto de directorio para agrupar varios archivos en él, en los S.O. modernos pueden incluirse archivos remotos.</li>
-					</ul>
-				</section>
-				<section id="archivos-2">
-					<h2>Archivos</h2>
-					<ul>
-						<li>A cada proceso se le asigna una ruta de inicio llamado <strong>directorio de trabajo</strong></li>
-						<li>El S.O. brinda mecanismos de seguridad para evitar acceso no autorizado por parte de programas o usuarios.</li>
-						<li>Se organizan en jerarquías usando directorios, poseen una <strong>ruta</strong> para identificar la ubicación del archivo en esa jerarquía:</li>
-					</ul>
-					<p>
-						<code class="Bash">C:\MyDocuments\Important.txt </code><br>
-						<code class="Bash">/home/ltorvalds/source.cpp</code>
-					</p>
-				</section>
-				<section id="llamadas-sistema" class="fragment">
-					<h2>
-						Llamadas al sistema
-					</h2>
-					<ul>
-						<li>Es el mecanismo usado por una aplicación para acceder a un servicio del sistema operativo.</li>
-						<li>Una vez ejecutada, el procesador interrumpe su operación actual (dependiendo del algoritmo), ejecuta la operación de alto privilegio y luego retorna de nuevo al trabajo que estaba realizando.</li>
-						<li>Todos los sistemas operativos ofrecen bibliotecas (generalmente en C o C++) para acceder a estas llamadas desde las aplicaciones, en Windows se usa <strong>runtime</strong> y en Linux <strong>glibc</strong>. Brindando portabilidad al desarrollar en el sistema operativo.</li>
-					</ul>
-				</section>
-				<section id="interfaz-usuario" class="fragment">
-					<h2>Interfaz de usuario</h2>
-					<p>
-						Existen dos métodos para interactuar con el sistema operativo
-					 	por parte de los usuarios:
-				 	</p>
-				 	<ul>
-				 		<li><h3>Intérprete de comandos: </h3> 
-				 			Permite al usuario escribir 
-				 			comandos para que el S.O. pueda ejecutarlos.</li>
-				 		<li>
-				 			<h3>Interfaz gráfica de usuario:</h3> 
-				 			Permite interactuar
-				 			a través de una interfaz gráfica, mejor conocida como GUI 
-				 			(Graphic User Interface).
-				 		</li>
-				 	</ul>
-				</section>
-				<section id="shell" class="fragment">
-					<h2>Interfaz de usuario</h2>
-					<h3>
-						Shell o Intérprete de comandos
-					</h3>
-					<ul>
-						<li>Provee una interfaz para que el usuario pueda realizar llamadas al sistema.</li>
-						<li>Permite ejecutar comandos del sistema operativo (si te tienen los permisos) para realizar tareas en el sistema operativo: acceder a archivos, ver procesos, estado de memoria, liberar memoria, entre otros.</li>
-						<li>Permite ejecutar aplicaciones.</li>
-						<li>Es el principal medio de acceso remoto a sistemas operativo con el modelo de UNIX.</li>
-					</ul>
-				</section>
-				<section>
-					<h3> Ejemplo de shell de Windows </h3>
-					<img src="img/intro/shell.jpg" class="text-center" alt="Consola de Windows"/>
-				</section>
-				<section id="tipo-so-estructura" class="fragment">
-					<h2>Tipos de S.O. por su estructura</h2>
-					<ul>
-						<li><h3> Sistemas operativos Monolíticos </h3></li>
-						<li><h3> Sistemas operativos en capas o anillos </h3></li>
-						<li><h3> Sistema operativo en de Máquina virtual </h3></li>
-						<li><h3> Sistema operativos Cliente - Servidor </h3> </li>
-					</ul>
-				</section>
-				<section id="sistemas-monoliticos" class="fragment">
-					<h2>Sistemas monolíticos</h2>
-					<div class="half right">
-						<a href="img/intro/somonolitico.png" data-lightbox="Sistema monoliticos">
-							<img  src="img/intro/somonolitico.png" alt="Sistemas monolíticos">
-						</a>
-					</div>
-					<div class="half">
-						<ul>
-							<li>Es un sistema con núcleo muy grande y complejo</li>
-							<li>Rendimiento mayor a los de micronúcleo.</li>
-							<li>Al realizar un cambio se debe recompilar todo núcleo y reiniciar el S.O.</li>
-						</ul>
-					</div>
-				</section>
-				<section id="sistemas-monoliticos-2" class="fragment">
-					<h2>Sistemas monolíticos</h2>
-					<ul>
-						<li>
-							Utiliza módulos para la carga de nuevas operaciones, estos pasan
-							a ser parte del todo y no necesita enviar mensajes al resto 
-							del núcleo, incrementando el rendimiento respecto a otros diseños.
-						</li>
-						<li>
-							Se escriben como un conjunto de procedimientos, donde cada uno puede 
-							llamar a los demás cada vez que lo requiera.
-						</li>
-					</ul>
-				</section>
-				<section id="sistemas-capas" class="fragment">
-					<h2>Sistemas por capas o en anillos</h2>
-					<div class="third right">
-						<a href="img/intro/system_architecture.png" data-lightbox="Sistema por capas">
-							<img src="img/intro/system_architecture.png" alt="Sistema por capas">
-							<p class="smaller">
-								<a href="https://developer.android.com/guide/platform/index.html" title="Ver diseño de Android">
-									+ Mas información del diseño de Android
-								</a>
-							</p>
-						</a>
-					</div>
-					<div class="twothird">
-						<ul>
-							<li>Desarrollador por primera vez en Holanda en 1968 por E. W. Dijkstra.</li>
-							<li>Cada capa utiliza servicios solo de la capa inferior.</li>
-							<li>Facilita la depuración y verificación del sistema.</li>
-							<li>Existen sobrecargas entre las distintas capas debido a las comunicaciones.</li>
-						</ul>
-					</div>
-					<ul>
-					</ul>
-				</section>
-				<section id="micro-kernels" class="fragment">
-					<h2>Sistemas con micronúcleo<br>(cliente -servidor)</h2>
-					<div class="right half">
-						<a href="img/intro/somicronucleo.png" data-lightbox="Micronucleo">
-							<img  src="img/intro/somicronucleo.png" alt="Micronucleo">
-						</a>
-					</div>
-					<div class="half">
-						<ul>
-							<li>Reduce la complejidad.</li>
-							<li>Descentraliza los fallos, es decir, un fallo no afecta a todo el sistema.</li>
-							<li>Posee menor rendimiento.</li>
-							<li>Problemas para sincronizar todos los módulos del sistema.</li>
-						</ul>
-						<aside class="notes">
-							Requiere un conjunto muy pequeño de funciones del núcleo, 
-							primitivas de sincronización, un planificador sencillo  y un mecanismo
-							IPC
-						</aside>
-					</div>
-				</section>
-				<section id="maquina-virtual" class="fragment">
-					<h2>Máquina Virtual</h2>
-					<div class="half right">
-						<a href="img/intro/vm.jpg" data-lightbox="virtual-machine">
-							<img src="img/intro/vm.jpg" alt="Maquina Virtual">
-						</a>
-					</div>
-					<div class="half">
-						<ul>
-							<li>
-								Abstrae todo el hardware, permitiendo crear múltiples instancias dando la 
-								ilusión de que cada entorno de ejecución tiene su propia computadora privada.
-							</li>
-							<li>Permite ejecutar aplicaciones que requieren más hardware del disponible.</li>
-						</ul>
-					</div>
-					<ul>
-						<li>Permite la ejecución de programas que requieren múltiples sistemas operativos.</li>
-						<li>Incrementa la seguridad al separar las instancias.</li>
-						<li>Base para nubes privadas/públicas mediante hipervisores tipo 1 y tipo 2.</li>
-					</ul>
-					<aside class="notes">
-						Hablar sobre VirtualBox/VMware/KVM, y aclarar diferencias con contenedores.
-					</aside>
-				</section>
-				<section id="contenedores" class="fragment">
-					<h2>Contenedores (Docker)</h2>
-					<ul>
-						<li>Empaquetan aplicación + dependencias compartiendo el kernel del host.</li>
-						<li>No reemplazan a las VM: son complementarios según aislamiento, costo y portabilidad.</li>
-						<li>En Linux se implementan con <strong>namespaces</strong> (aislamiento) y <strong>cgroups</strong> (límites de CPU, RAM e I/O).</li>
-					</ul>
-					<aside class="notes">
-						Comparar VM vs contenedor con ejemplos cortos:
-						VM = aislamiento fuerte y más peso; contenedor = arranque rápido y alta densidad.
-					</aside>
-				</section>
-				<section id="tipo-so-servicios" class="fragment">
-					<h2>Tipos de S.O. por servicios</h2>
-					<p>
-						Es la clasificación más conocida desde el punto de vista del usuario final, para
-						hacerla se toman en cuenta los siguientes criterios: 
-					</p>
-					<ul>
-						<li><h3>Por el número de usuarios</h3></li>
-						<li><h3>Por el número de tareas</h3></li>
-						<li><h3>Por el número de procesadores</h3></li>
-						<li><h3>Por la forma de ofrecer sus servicios</h3></li>
-					</ul>
-				</section>
-				<section id="tipo-so-usuario" class="fragment">
-					<h2>Por número de usuarios</h2>
-					<ul>
-						<li>
-							<h3>Monousuario: </h3>
-							Soportan solo un usuario a la vez, sin importar la cantidad de procesadores
-							que posea el equipo. Las computadoras personales se suelen
-							clasificar en esta categoría.
-						</li>
-						<li>
-							<h3>Multiusuario: </h3>
-							Dan servicios a muchos usuarios al mismo tiempo, bien sea a través
-							de terminales o conexiones de red.
-						</li>
-					</ul>
-				</section>
-				<section id="tipo-so-tareas" class="fragment">
-					<h2>Por número de tareas</h2>
-					<ul>
-						<li>
-							<h3>Monotarea:</h3>
-							Soportan solo un usuario y una única tarea a la vez. Puede darse
-							el caso de varios usuarios pero cada uno estaría ejecutando solo
-							una tarea.
-						</li>
-						<li>
-							<h3>Multitarea:</h3>
-							Permita ejecutar varios procesos al mismo tiempo, por ejemplo,
-							editar un documento de texto mientras se escucha música desde
-							el reproductor multimedia.
-						</li>
-					</ul>
-				</section>
-				<section id="tipo-so-procesadores" class="fragment">
-					<h2>Por núm. de procesadores</h2>
-					<ul>
-						<li>
-							<h3>Uniproceso: </h3>
-							Soportan solo un procesador, sin importar la cantidad de procesadores
-							existentes. 
-						</li>
-						<li>
-							<h3>Multiproceso: </h3>
-							Soportan varios procesadores, y puede trabajar de dos maneras: simétrica
-							donde se equilibra la carga entre los diversos procesadores; la otra es
-							asimétrica donde un procesador es el maestro y administra a los demás.
-						</li>
-					</ul>
-				</section>
-				<section id="tipo-so-red" class="fragment">
-					<h2>Por la forma de ofrecer sus servicios</h2>
-					<ul>
-						<li>
-							<h3>S.O. de red</h3>
-							Se acceden a través de conexiones remotas, posee sus archivos
-							compartidos por la red, se ejecutan comandos remotos, etc.
-						</li>
-						<li>
-							<h3>S.O. distribuidos</h3>
-							Crea una máquina virtual a partir de varias computadoras,
-							donde cada recurso es accedido sin importar su ubicación física y
-							de forma transparente para el usuario.
-						</li>
-					</ul>
-				</section>
-				<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
-					<h1 class="stroke">¿Preguntas?</h1>
-				</section>
-			</div>
-		</div>
+      <section id="objetivo">
+        <h2>Objetivo de la materia</h2>
+        <p>
+          Ofrecer una visión de los componentes más importantes
+          de los sistemas operativos
+        </p>
+      </section>
+      <section id="por-que">
+        <h2>¿Por qué ver la materia? (1/2)</h2>
+        <div>
+          <ul>
+            <li class="fragment">Requisito para culminar la carrera.</li>
+            <li class="fragment">Cultura general en el área de informática.</li>
+            <li class="fragment">
+              Comprender el funcionamiento del sistema operativo, para
+              realizar aplicaciones integradas al mismo, realizar optimizaciones de
+              software para funcionar mejor, optimización de servicios (gestores de BD,
+              compartición de archivos, mejoras en las redes, etc)
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="por-que-2">
+        <h2>¿Por qué ver la materia? (2/2)</h2>
+        <div>
+          <ul>
+            <li class="fragment">
+              Provee los conocimientos básicos para desarrollo de Sistemas Distribuidos,
+              diseño de Sistemas Operativos, seguridad en dispositivos a nivel de S.O., entre otros.</li>
+            <li class="fragment">Desarrollo de aplicaciones multiplataforma.</li>
+            <li class="fragment">
+              Permite conocer como resolver problemas de programación
+              relacionados con los dispositivos de I/O. Manejo de multiprocesos, manejo de memoria.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="primer-parcial">
+        <h2>
+          Primer parcial ( 35% )
+        </h2>
+        <ul>
+          <li>Introducción a los S.O: Estructura, Niveles, Objetivos, tipos.</li>
+          <li>Modelo de procesos, Algoritmos de Planificación y ejercicios</li>
+          <li>Hebras y Semáforos</li>
+          <li>Interbloqueo y ejercicios</li>
+        </ul>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/zoom/zoom.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/search/search.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script src="js/lightbox-plus-jquery.min.js"></script>
-		<script>
+        <p>
+          <strong>Evaluación:</strong> 5ta semana del semestre
+        </p>
+      </section>
+      <section id="segundo-parcial">
+        <h2>
+          Segundo parcial ( 35% )
+        </h2>
+        <ul>
+          <li>Administración de memoria, introducción, Particiones fijas, dinámicas.</li>
+          <li>Paginación, un nivel, dos niveles</li>
+          <li>Algoritmos de Reemplazo de páginas, Registros TLB</li>
+          <li>Segmentación</li>
+        </ul>
+        <p>
+          <strong>Evaluación:</strong> 10ma semana del semestre
+        </p>
+      </section>
+      <section id="tercer-parcial">
+        <h2>Tercer parcial ( 30% )</h2>
+        <ul>
+          <li>Sistema de Archivos, estructura de directorios.</li>
+          <li>Gestión de E/S, planificación de disco</li>
+          <li>Protección y Seguridad</li>
+          <li>Práctica final</li>
+        </ul>
+        <p>
+          <strong>Evaluación:</strong> 15va semana del semestre
+        </p>
+      </section>
+      <section id="requisitos-de-la-materia">
+        <h2>Conocimientos requeridos</h2>
+        <ul>
+          <li class="fragment">Resolución de operaciones matemáticas básicas.</li>
+          <li class="fragment">Uso de una computadora, telefóno o cualquier dispositivo digital.</li>
+          <li class="fragment">
+            Conocer los componentes claves de un computador y
+            las partes que la comprenden. (Organización del computador)
+          </li>
+          <li class="fragment">Comprender la arquitectura Von Neumann.</li>
+        </ul>
+      </section>
+      <section id="quien-es-arquitectura-von-neuman" data-background="img/intro/doubt.png"
+        data-background-repeat="none">
+        <h1 class="stroke">¿Von Neumann?</h1>
+        <aside class="notes">
+          Investigar quien fué y que hizo. Era una calculadora humana.
+        </aside>
+      </section>
+      <section id="arquitectura-von-neuman">
+        <h2>Arquitectura Von Neuman</h2>
+        <p>
+          Fue creada por John Von Neumann en 1949, para solucionar
+          el problema de recableado cada vez que era necesario
+          ejecutar una nueva tarea de una computadora.
+        </p>
+      </section>
+      <section id="arquitectura-von-neuman-2">
+        <h2>Arquitectura Von Neuman</h2>
+        <div class="half left">
+          <p class="text-left">Está compuesta por:</p>
+          <ul>
+            <li>La unidad aritmético-lógica o ALU.</li>
+            <li>La unidad de control.</li>
+            <li>La memoria principal.</li>
+            <li>Un dispositivo de entrada/salida.</li>
+            <li>El bus de datos.</li>
+          </ul>
+        </div>
+        <div class="half left">
+          <a href="img/intro/arquitectura_neuman.jpg" data-lightbox="Von-Neuman">
+            <img src="img/intro/arquitectura_neuman.jpg" alt="Arquitectura Von Neuman" />
+          </a>
+          <p>
+            <small>Basada en la imagen de
+              <a href="http://es.wikipedia.org/wiki/Arquitectura_de_von_Neumann" target="_blank">
+                wikipedia.org
+              </a></small>
+          </p>
+        </div>
+      </section>
+      <section id="que-es-un-so-1">
+        <h2>¿Qué es un sistema operativo?</h2>
+        <p>Primero conozcamos estos conceptos:</p>
+        <ul>
+          <li>
+            <strong>Hardware: </strong>
+            todos los dispositivos de una computadora, todo lo que podemos tocar, entre otros.
+          </li>
+        </ul>
+        <p>
+          <img src="img/intro/hardware.png" alt="Hardware">
+        </p>
+      </section>
+      <section id="que-es-un-so-1-2">
+        <h2>¿Qué es un sistema operativo?</h2>
+        <p>El software lo podemos dividir en:</p>
+        <ul>
+          <li>
+            <strong>Programas del sistema: </strong>
+            aplicaciones integradas al S.O.,
+            operaciones a los procesos, configuración del sistema, entre otros.
+          </li>
+          <li>
+            <strong>Programas de aplicaciones: </strong>
+            ejecutadas por los usuarios para realizar sus tareas diarias:
+            trabajos, entretenimientos, entre otros.
+          </li>
+        </ul>
+      </section>
+      <section id="que-es-un-so-2">
+        <p>Y por último pero igual de importante:</p>
+        <h2>Usuarios</h2>
+        <div class="half left">
+          <img src="img/intro/usuarios.jpg" alt="Usuario">
+        </div>
+        <div class="half right">
+          <img src="img/intro/usuarios-2.jpg" alt="Como ven a los usuarios">
+        </div>
+        <aside class="notes">
+          Las personas o bots que ejecutan los programas de una computadora
+          para realizar un trabajo o tarea.
+        </aside>
+      </section>
+      <section id="que-es-un-so-3">
+        <h2>¿Qué es un sistema operativo?</h2>
+        <div class="twothird left">
+          <blockquote style="width:60%">
+            "Conjunto de software de administración de recursos de hardware y provee
+            servicios comunes a los programas"
+            <cite>Wikipedia.org</cite>
+          </blockquote>
+        </div>
+        <div class="left">
+          <a href="img/intro/so.png" data-lightbox="sistema-operativo">
+            <img src="img/intro/so.png" class="noborder" alt="sistema operativo">
+          </a>
+        </div>
+        <aside class="notes">
+          No existe una definición totalmente adecuada, pero podemos definir a un
+          sistema operativo como
+        </aside>
+      </section>
+      <section id="que-es-so-4">
+        <h2>
+          ¿Qué es un sistema operativo?
+        </h2>
+        <blockquote>
+          <div class="left"><img src="img/intro/linus.jpg" alt="Linus Torvald"></div>
+          "Es un programa que se supone que nunca deberías ver, pues nadie usa un
+          sistema operativo, sino los programas de una computadora. Y la única misión de
+          un sistema operativo es ayudar a esos programas a ejecutarse".
+          <cite>Linus Torvalds</cite>
+        </blockquote>
+      </section>
+      <section id="lista-de-so">
+        <h2>Algunos sistemas operativos</h2>
+        <p> Entre los sistemas operativos más conocidos tenemos: </p>
+        <ul>
+          <li>Windows, Windows 10 Mobile (Microsoft)</li>
+          <li>Linux (código libre)</li>
+          <li>macOS, iOS, watchOs, tvOS (Apple)</li>
+          <li>BSD (código abierto)</li>
+          <li>Android, Chrome OS, Fuchsia (Google)</li>
+          <li>Solaris (Oracle)</li>
+          <li>z/OS (IBM)</li>
+        </ul>
+      </section>
+      <section id="funciones-de-so">
+        <h2>Funciones de los S.O.</h2>
+        <ul>
+          <li>Gestión de los recursos de hardware.</li>
+          <li>Administración de la memoria.</li>
+          <li>Permitir a las aplicaciones acceder a los dispositivos de E/S.</li>
+          <li>Controlar cuanto tiempo debe usar una aplicación el CPU.</li>
+          <li>Brindar seguridad de los recursos.</li>
+        </ul>
+      </section>
+      <section id="os-maquina-extendida-1">
+        <h2>El sistema operativo</h2>
+        <h3>Como una máquina extendida</h3>
+        <p>
+          Evita que cada programador tenga que conocer el
+          funcionamiento a bajo nivel de cada componente. Facilitando el acceso a
+          recursos: pantalla, teclado, unidades de disco, tarjeta de
+          red, entre otros.
+        </p>
+        <aside class="notes">
+          La arquitectura de una computadora, es complicada.
+          Para utilizar cada componente se requiere conocer su
+          funcionamiento a bajo nivel y las instrucciones para controlarlas.
+          Cuando al ejecutar programas accedemos a una gran cantidad
+          de recursos: pantalla, teclado, unidades de disco, tarjeta de
+          red, entre otros. Sería muy difícil para los programadores
+          desarrollar en cada una de sus aplicaciones, rutinas
+          para cada uno de esos componentes.
+        </aside>
+      </section>
+      <section id="os-maquina-extendida-2">
+        <h2>El sistema operativo</h2>
+        <h3>Como una máquina extendida</h3>
+        <p>
+          El sistema operativo, por <strong>motivos de simplicidad y
+            seguridad oculta gran parte del hardware</strong>
+          y presenta al programador mediante una abstracción una vista
+          sencilla para programar en ella. Así nos olvidamos de las
+          interrupciones administración de la memoria a bajo nivel,
+          los registros del CPU, entre otros.
+        </p>
+      </section>
+      <section id="os-maquina-extendida2">
+        <h2>El sistema operativo</h2>
+        <h3>Como un administrador de recursos</h3>
+        <p>
+          El S.O. administra todos los componentes de un sistema,
+          se encarga de repartir de forma ordenada y controlada
+          el acceso del uso de procesadores, memoria y dispositivos
+          de E/S entre los diferentes programas que compiten por ellos.
+        </p>
+        <p>
+          En el caso de los sistemas multi-usuario
+          gestiona el uso de los usuarios a las aplicaciones,
+          permitiendo repartir el hardware a las aplicaciones
+          de distintos usuarios.
+        </p>
+      </section>
+      <section id="historia-so-1">
+        <h2>Inicio de los sistemas operativos</h2>
+        <p>
+          La primera computadora digital fue creada por Charles Babbage, luego en 1842, Ada Lovelace, comprendió su
+          potencial y empezó a crear software para esa máquina (un programa para calcular la secuencia de Bernoulli)
+          conviertiéndose en la primera programadora de la historia.
+        </p>
+        <div style="width:848px;margin: 0 auto;">
+          <a href="http://es.wikipedia.org/wiki/Charles_Babbage" target="blank">
+            <img src="img/intro/babbage.jpg" alt="Charles Babbage" />
+          </a>
+          <a href="http://es.wikipedia.org/wiki/Ada_Lovelace" target="_blank">
+            <img src="img/intro/ada.jpg" alt="Charles Babbage" />
+          </a>
+          <a href="http://es.wikipedia.org/wiki/M%C3%A1quina_anal%C3%ADtica" target="_blank">
+            <img src="img/intro/maquinababbage.jpg" alt="Maquina diferencial" />
+          </a>
+        </div>
+        <p>
+          <small>De izquierda a derecha: Charles Babbage, La máquina diferencial y Ada Lovelace.</small>
+        </p>
+      </section>
+      <section id="historia-so-2">
+        <h2>Primera generación (1945-1955)</h2>
+        <h3> Tubos de vacío y tableros de comutación </h3>
+        <ul class="half nomargin left">
+          <li>Máquinas calculadoras hechas con tubos al vacío.</li>
+          <li>Un grupo de personas se encarga de diseñar, construir, programar y operar cada máquina.</li>
+          <li>Se programaba mediante el alambrado de los componentes.</li>
+        </ul>
+        <div class="left half">
+          <img src="img/intro/tubosvacios.jpg" alt="Tubos vacio">
+        </div>
+        <ul class="nomargin">
 
-			// Also available as an ES module, see:
-			// https://revealjs.com/initialization/
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				center: true,
-				hash: true,
-				history: true,
-				theme: 'unet',
-				transition: 'linear',
+          <li>Se usaban para cálculos matemáticos, cálculo de tablas de cosenos y seno, entre otros.</li>
+        </ul>
+      </section>
+      <section id="historia-so-3">
+        <h2>2da generación (1955-1965)</h2>
+        <h3> Transistores y sistemas por lote </h3>
+        <ul class="left half">
+          <li>
+            Los transistores abarataron los costos, aumentaron la potencia y permitieron
+            comercializar las computadoras.
+          </li>
+          <li>
+            Ahora las personas estaban separadas claramente entre diseñadores, constructores,
+            programadores y operadores de cada máquina.
+          </li>
+        </ul>
+        <div class="left">
+          <img src="img/intro/sistemalotes.jpg" alt="Sistema por lotes" />
+        </div>
+        <ul class="left">
+          <li>Sistemas monousuario, procesamiento por lotes.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>2da generación (1955-1965)</h2>
+        <ul>
+          <li>Sin sistema operativo, se creaban programas en FORTRAN y luego se pasaba a tarjetas perforadas para ser
+            usadas por los operadores de las computadoras.</li>
+          <li>Existe un programa <strong>"monitor"</strong> que controla los procesos.</li>
+        </ul>
+        <div class="left">
+          <a href="img/intro/lotes.png" data-lightbox="lotes">
+            <img src="img/intro/lotes.png" alt="Sistema por lotes" />
+          </a>
+        </div>
+        <div class="right">
+          <a href="img/intro/tarjeta.png" data-lightbox="lotes">
+            <img src="img/intro/tarjeta.png" alt="Tarjeta perforada" />
+          </a>
+        </div>
+      </section>
+      <section id="historia-so-4">
+        <h2>Tercera generación (1965-1980)</h2>
+        <h3> Circuitos integrados y multiprogramación </h3>
+        <ul class="half left">
+          <li>
+            Aparecen los primeros S.S.O.O. el OS/360 compuesto de millones de líneas
+            hechas en ensamblador por miles de programadores.
+          </li>
+          <li>
+            Aparece la multi-programación, la segmentación de memoria y las aplicaciones
+            la comparten, aparecen los primeros sistemas en tiempo real y planificador
+            en MULTICS.
+          </li>
+        </ul>
+        <div class="right"> <img src="img/intro/IBM360.jpg" alt="IBM 360" /> </div>
+        <ul>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
-			});
+        </ul>
+        <aside class="notes">
+          MULTICS es el primer SO multitarea y donde se basó UNIX
+        </aside>
+      </section>
+      <section>
+        <h2>Tercera generación (1965-1980)</h2>
+        <ul class="twothird left">
+          <li>
+            Los programas comparten tiempo de CPU (tiempo compartido), el S.O. asigna
+            espacios de tiempo a cada aplicación dando la ilusión de realizar varias
+            tareas al mismo tiepo.
+          </li>
+          <li>
+            El sistema operativo carga las aplicaciones a ejecutar desde el disco
+            (<strong><em>Spooling</em></strong>),
+            permitiendo utilizar el CPU de manera más óptima.
+          </li>
+        </ul>
+        <div class="third right">
+          <img src="img/intro/memoriasegmentada.png" alt="Sistema por lotes">
+        </div>
+        <ul>
 
-		</script>
-	</body>
+        </ul>
+      </section>
+      <section id="historia-so-5">
+        <h2>Cuarta generación (1980 - 2004)</h2>
+        <h3>La Computadora Personal</h3>
+        <div class="half left">
+          <ul>
+            <li>
+              Sistemas más amigables con el usuario, maneja las operaciones y control
+              de usuarios localmente.
+            </li>
+            <li>
+              Primeras I.U. (GUI en inglés).
+            </li>
+            <li>Aparecen los Sistemas Distribuidos.</li>
+          </ul>
+        </div>
+        <div class="right">
+          <img style="margin-left:10px" src="img/intro/PC.png" alt="PC">
+        </div>
+        <ul>
+          <li>
+            Aparecen capacidades para conectarse a Internet,
+            entrar a máquinas remotas y realizar tareas en ellas, compartir archivos, entre otros.
+          </li>
+
+        </ul>
+      </section>
+      <section id="historia-so-6">
+        <h2>Quinta generación<br>(2005 - 2019)</h2>
+        <h3> Dispositivos móviles </h3>
+        <div class="half left">
+          <img style="margin-left:10px" src="img/intro/stevejobsiphone.png" alt="PC">
+        </div>
+        <div class="half left">
+          <ul>
+            <li>
+              Sistemas enfocados en una interfaz más sencilla y diseñada para
+              funcionar en pantallas muy pequeñas.
+            </li>
+            <li>
+              Optimizados para funcionar con baterías, por ellos, son
+              eficientes en el ahorro de energía.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section>
+        <h2>Sexta generación (2020 hasta ahora)</h2>
+        <ul>
+          <li>Diseñadas para funcionar en redes de telefonía celular e inalámbrica, con fuerte integración a servicios
+            en la nube y tiendas de aplicaciones.</li>
+        </ul>
+        <img class="half" src="img/intro/mobile_devices.png" alt="dispositivos móviles" />
+      </section>
+      <section>
+        <h2>¿Futuro?</h2>
+        <div class="half left">
+          <img src="img/intro/UnifiedWindows.jpg" alt="Unificacion de Windows">
+        </div>
+        <div class="half left">
+          <img src="img/intro/macos-devices.jpg" class=bordered" alt="Ubuntu OS">
+        </div>
+        <ul>
+          <li>Gran parte de los servicios en la nube.</li>
+          <li>Integración de tecnologías de I.A. generativa y asistentes inteligentes en el sistema.</li>
+          <li>Convergencia entre escritorio, móvil, nube y edge (no necesariamente un único S.O.).</li>
+          <li>Enfoque hacia el Internet de las cosas.</li>
+        </ul>
+      </section>
+      <section id="fundamentos-so">
+        <h2>Fundamentos<br>de los sistemas operativos</h2>
+        <ul>
+          <li>Procesos</li>
+          <li>Archivos</li>
+          <li>Llamadas al sistema</li>
+          <li>Interfaz de usuario</li>
+        </ul>
+      </section>
+      <section id="proceso">
+        <h2>Proceso</h2>
+        <ul>
+          <li>Es un programa en ejecución.</li>
+          <li>Cada proceso tiene:
+            <ul>
+              <li>Las instrucciones a ser ejecutadas en el procesador.</li>
+              <li>
+                Un espacio de direcciones de memoria asignado, con inicio y tamaño máximo.
+              </li>
+              <li>
+                Este espacio contiene el programa ejecutable, sus datos y pila,
+                variables, la siguiente instrucción a ejecutar, etc. (El estado
+                de la aplicación)
+              </li>
+              <li>Otra información requerida por el S.O. para la planificación.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <section id="proceso-2">
+        <h2>Proceso</h2>
+        <ul>
+          <li>
+            Se ejecutan <strong>por tiempos limitados en el CPU</strong>,
+            una vez finalizado este tiempo, el S.O. lo duerme, se guarda toda
+            la información en memoria y se queda esperando para seguir
+            en ejecución.</li>
+          <li>
+            Una vez reiniciado, se vuelve a cargar toda su información y se continúa la ejecución desde el momento donde
+            se estaba ejecutando.</li>
+          <li>
+            Un proceso tiene un <strong>UID</strong> (usuario quien lo ejecutó)
+            y un <strong>PID</strong> (número del proceso).</li>
+          <li>Un proceso puede crear uno o más procesos hijos.</li>
+        </ul>
+      </section>
+      <section id="archivos">
+        <h2>Archivos</h2>
+        <ul>
+          <li>Al igual que con otros dispositivos de entrada y salida, el S.O. presenta un modelo de una abstracto,
+            limpio y bonito de los archivos en los dispositivos.</li>
+          <li>Se realizan operaciones sobre ellos a través de llamadas al sistema: abrir, cerrar, escribir, borrar
+            datos, eliminar el archivo, entre otros.</li>
+          <li>Existe el concepto de directorio para agrupar varios archivos en él, en los S.O. modernos pueden incluirse
+            archivos remotos.</li>
+        </ul>
+      </section>
+      <section id="archivos-2">
+        <h2>Archivos</h2>
+        <ul>
+          <li>A cada proceso se le asigna una ruta de inicio llamado <strong>directorio de trabajo</strong></li>
+          <li>El S.O. brinda mecanismos de seguridad para evitar acceso no autorizado por parte de programas o usuarios.
+          </li>
+          <li>Se organizan en jerarquías usando directorios, poseen una <strong>ruta</strong> para identificar la
+            ubicación del archivo en esa jerarquía:</li>
+        </ul>
+        <p>
+          <code class="Bash">C:\MyDocuments\Important.txt </code><br>
+          <code class="Bash">/home/ltorvalds/source.cpp</code>
+        </p>
+      </section>
+      <section id="llamadas-sistema">
+        <h2>
+          Llamadas al sistema
+        </h2>
+        <ul>
+          <li>Es el mecanismo usado por una aplicación para acceder a un servicio del sistema operativo.</li>
+          <li>Una vez ejecutada, el procesador interrumpe su operación actual (dependiendo del algoritmo), ejecuta la
+            operación de alto privilegio y luego retorna de nuevo al trabajo que estaba realizando.</li>
+          <li>Todos los sistemas operativos ofrecen bibliotecas (generalmente en C o C++) para acceder a estas llamadas
+            desde las aplicaciones, en Windows se usa <strong>runtime</strong> y en Linux <strong>glibc</strong>.
+            Brindando portabilidad al desarrollar en el sistema operativo.</li>
+        </ul>
+      </section>
+      <section id="interfaz-usuario">
+        <h2>Interfaz de usuario</h2>
+        <p>
+          Existen dos métodos para interactuar con el sistema operativo
+          por parte de los usuarios:
+        </p>
+        <ul>
+          <li>
+            <h3>Intérprete de comandos: </h3>
+            Permite al usuario escribir
+            comandos para que el S.O. pueda ejecutarlos.
+          </li>
+          <li>
+            <h3>Interfaz gráfica de usuario:</h3>
+            Permite interactuar
+            a través de una interfaz gráfica, mejor conocida como GUI
+            (Graphic User Interface).
+          </li>
+        </ul>
+      </section>
+      <section id="shell">
+        <h2>Interfaz de usuario</h2>
+        <h3>
+          Shell o Intérprete de comandos
+        </h3>
+        <ul>
+          <li>Provee una interfaz para que el usuario pueda realizar llamadas al sistema.</li>
+          <li>Permite ejecutar comandos del sistema operativo (si te tienen los permisos) para realizar tareas en el
+            sistema operativo: acceder a archivos, ver procesos, estado de memoria, liberar memoria, entre otros.</li>
+          <li>Permite ejecutar aplicaciones.</li>
+          <li>Es el principal medio de acceso remoto a sistemas operativo con el modelo de UNIX.</li>
+        </ul>
+      </section>
+      <section>
+        <h3> Ejemplo de shell de Windows </h3>
+        <img src="img/intro/shell.jpg" class="text-center" alt="Consola de Windows" />
+      </section>
+      <section id="tipo-so-estructura">
+        <h2>Tipos de S.O. por su estructura</h2>
+        <ul>
+          <li>
+            <h3> Sistemas operativos Monolíticos </h3>
+          </li>
+          <li>
+            <h3> Sistemas operativos en capas o anillos </h3>
+          </li>
+          <li>
+            <h3> Sistema operativo en de Máquina virtual </h3>
+          </li>
+          <li>
+            <h3> Sistema operativos Cliente - Servidor </h3>
+          </li>
+        </ul>
+      </section>
+      <section id="sistemas-monoliticos">
+        <h2>Sistemas monolíticos</h2>
+        <div class="half right">
+          <a href="img/intro/somonolitico.png" data-lightbox="Sistema monoliticos">
+            <img style="background-color: #FFF;padding: 1rem;" src="img/intro/somonolitico.png"
+              alt="Sistemas monolíticos">
+          </a>
+        </div>
+        <div class="half">
+          <ul>
+            <li>Es un sistema con núcleo muy grande y complejo</li>
+            <li>Rendimiento mayor a los de micronúcleo.</li>
+            <li>Al realizar un cambio se debe recompilar todo núcleo y reiniciar el S.O.</li>
+          </ul>
+        </div>
+      </section>
+      <section id="sistemas-monoliticos-2">
+        <h2>Sistemas monolíticos</h2>
+        <ul>
+          <li>
+            Utiliza módulos para la carga de nuevas operaciones, estos pasan
+            a ser parte del todo y no necesita enviar mensajes al resto
+            del núcleo, incrementando el rendimiento respecto a otros diseños.
+          </li>
+          <li>
+            Se escriben como un conjunto de procedimientos, donde cada uno puede
+            llamar a los demás cada vez que lo requiera.
+          </li>
+        </ul>
+      </section>
+      <section id="sistemas-capas">
+        <h2>Sistemas por capas o en anillos</h2>
+        <div class="third right">
+          <a href="img/intro/system_architecture.png" data-lightbox="Sistema por capas">
+            <img src="img/intro/system_architecture.png" alt="Sistema por capas">
+            <p class="smaller">
+              <a href="https://developer.android.com/guide/platform/index.html" title="Ver diseño de Android">
+                + Mas información del diseño de Android
+              </a>
+            </p>
+          </a>
+        </div>
+        <div class="twothird">
+          <ul>
+            <li>Desarrollador por primera vez en Holanda en 1968 por E. W. Dijkstra.</li>
+            <li>Cada capa utiliza servicios solo de la capa inferior.</li>
+            <li>Facilita la depuración y verificación del sistema.</li>
+            <li>Existen sobrecargas entre las distintas capas debido a las comunicaciones.</li>
+          </ul>
+        </div>
+        <ul>
+        </ul>
+      </section>
+      <section id="micro-kernels">
+        <h2>Sistemas con micronúcleo<br>(cliente -servidor)</h2>
+        <div class="right half">
+          <a href="img/intro/somicronucleo.png" data-lightbox="Micronucleo">
+            <img style="background-color: #FFF; padding:  1rem;" src="img/intro/somicronucleo.png" alt="Micronucleo">
+          </a>
+        </div>
+        <div class="half">
+          <ul>
+            <li>Reduce la complejidad.</li>
+            <li>Descentraliza los fallos, es decir, un fallo no afecta a todo el sistema.</li>
+            <li>Posee menor rendimiento.</li>
+            <li>Problemas para sincronizar todos los módulos del sistema.</li>
+          </ul>
+          <aside class="notes">
+            Requiere un conjunto muy pequeño de funciones del núcleo,
+            primitivas de sincronización, un planificador sencillo y un mecanismo
+            IPC
+          </aside>
+        </div>
+      </section>
+      <section id="maquina-virtual">
+        <h2>Máquina Virtual</h2>
+        <div class="half right">
+          <a href="img/intro/vm.jpg" data-lightbox="virtual-machine">
+            <img src="img/intro/vm.jpg" alt="Maquina Virtual">
+          </a>
+        </div>
+        <div class="half">
+          <ul>
+            <li>Abstrae el hardware del equipo.</li>
+            <li>Cada instancia parece una computadora propia.</li>
+            <li>Permite ejecutar varios sistemas operativos.</li>
+            <li>Aísla mejor los entornos y mejora la seguridad.</li>
+            <li>Es base de muchas infraestructuras en la nube.</li>
+          </ul>
+        </div>
+        <aside class="notes">
+          Hablar sobre VirtualBox/VMware/KVM, y aclarar diferencias con contenedores.
+        </aside>
+      </section>
+      <section id="contenedores">
+        <h2>Contenedores (Docker)</h2>
+        <ul>
+          <li>Empaquetan aplicación + dependencias compartiendo el kernel del host.</li>
+          <li>No reemplazan a las VM: son complementarios según aislamiento, costo y portabilidad.</li>
+          <li>En Linux se implementan con <strong>namespaces</strong> (aislamiento) y <strong>cgroups</strong> (límites
+            de CPU, RAM e I/O).</li>
+        </ul>
+        <aside class="notes">
+          Comparar VM vs contenedor con ejemplos cortos:
+          VM = aislamiento fuerte y más peso; contenedor = arranque rápido y alta densidad.
+        </aside>
+      </section>
+      <section id="tipo-so-servicios">
+        <h2>Tipos de S.O. por servicios</h2>
+        <p>
+          Es la clasificación más conocida desde el punto de vista del usuario final, para
+          hacerla se toman en cuenta los siguientes criterios:
+        </p>
+        <ul>
+          <li>
+            <h3>Por el número de usuarios</h3>
+          </li>
+          <li>
+            <h3>Por el número de tareas</h3>
+          </li>
+          <li>
+            <h3>Por el número de procesadores</h3>
+          </li>
+          <li>
+            <h3>Por la forma de ofrecer sus servicios</h3>
+          </li>
+        </ul>
+      </section>
+      <section id="tipo-so-usuario">
+        <h2>Por número de usuarios</h2>
+        <ul>
+          <li>
+            <h3>Monousuario: </h3>
+            Soportan solo un usuario a la vez, sin importar la cantidad de procesadores
+            que posea el equipo. Las computadoras personales se suelen
+            clasificar en esta categoría.
+          </li>
+          <li>
+            <h3>Multiusuario: </h3>
+            Dan servicios a muchos usuarios al mismo tiempo, bien sea a través
+            de terminales o conexiones de red.
+          </li>
+        </ul>
+      </section>
+      <section id="tipo-so-tareas">
+        <h2>Por número de tareas</h2>
+        <ul>
+          <li>
+            <h3>Monotarea:</h3>
+            Soportan solo un usuario y una única tarea a la vez. Puede darse
+            el caso de varios usuarios pero cada uno estaría ejecutando solo
+            una tarea.
+          </li>
+          <li>
+            <h3>Multitarea:</h3>
+            Permita ejecutar varios procesos al mismo tiempo, por ejemplo,
+            editar un documento de texto mientras se escucha música desde
+            el reproductor multimedia.
+          </li>
+        </ul>
+      </section>
+      <section id="tipo-so-procesadores">
+        <h2>Por núm. de procesadores</h2>
+        <ul>
+          <li>
+            <h3>Uniproceso: </h3>
+            Soportan solo un procesador, sin importar la cantidad de procesadores
+            existentes.
+          </li>
+          <li>
+            <h3>Multiproceso: </h3>
+            Soportan varios procesadores, y puede trabajar de dos maneras: simétrica
+            donde se equilibra la carga entre los diversos procesadores; la otra es
+            asimétrica donde un procesador es el maestro y administra a los demás.
+          </li>
+        </ul>
+      </section>
+      <section id="tipo-so-red">
+        <h2>Por la forma de ofrecer sus servicios</h2>
+        <ul>
+          <li>
+            <h3>S.O. de red</h3>
+            Se acceden a través de conexiones remotas, posee sus archivos
+            compartidos por la red, se ejecutan comandos remotos, etc.
+          </li>
+          <li>
+            <h3>S.O. distribuidos</h3>
+            Crea una máquina virtual a partir de varias computadoras,
+            donde cada recurso es accedido sin importar su ubicación física y
+            de forma transparente para el usuario.
+          </li>
+        </ul>
+      </section>
+      <section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
+        <h1 class="stroke">¿Preguntas?</h1>
+      </section>
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/zoom/zoom.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/search/search.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script src="js/lightbox-plus-jquery.min.js"></script>
+  <script>
+
+    // Also available as an ES module, see:
+    // https://revealjs.com/initialization/
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      center: true,
+      hash: true,
+      history: true,
+      theme: 'unet',
+      transition: 'linear',
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+    });
+
+  </script>
+</body>
+
 </html>

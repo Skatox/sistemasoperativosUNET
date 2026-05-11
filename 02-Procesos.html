@@ -1,521 +1,854 @@
 <!doctype html>
-<!doctype html>
 <html lang="es">
 
-	<head>
-		<meta charset="utf-8">
-		<title>Sistemas Operativos | UNET</title>
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<head>
+  <meta charset="utf-8">
+  <title>Sistemas Operativos | UNET</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/moon.css">
-		<link rel="stylesheet" href="dist/theme/unet.css" id="theme">
-		<link rel="stylesheet" href="css/lightbox.min.css">
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/moon.css">
+  <link rel="stylesheet" href="dist/theme/unet.css" id="theme">
+  <link rel="stylesheet" href="css/lightbox.min.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	</head>
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <style>
+    .process-canvas-wrap {
+      width: min(1100px, 96%);
+      margin: 0 auto;
+      padding: 0;
+      border-radius: 20px;
+    }
 
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<div class="unet">
-						<div class="logo-wrapper left">
-							<img class="noborder" src="img/UNET.png" alt="UNET Logo">
-						</div>
-						<p id="definition-header" class="left">
-							Universidad Nacional Experimental Del Táchira<br />
-							Decanato De Docencia<br />
-							Dpto. Ingeniería en Informática
-						</p>
-					</div>
+    .process-canvas-wrap p {
+      margin: 10px 0 0;
+      font-size: 0.62em;
+      color: #d4e1ec;
+      line-height: 1.35;
+    }
 
-					<h1 class="clear">
-						Procesos
-					</h1>
-					<h2 id="subject-code">
-						Código 0435607T
-					</h2>
-					<div class="professor-info">
-						<p>
-							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
-							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
-							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
-						</p>
-					</div>
-				</section>
+    #process-state-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      background: transparent;
+    }
+  </style>
+</head>
 
-				<section id="contenido">
-					<h2>Contenido</h2>
-					<ul>
-						<li>Sistemas mono-tarea y multi-tarea.</li>
-						<li>
-							Procesos:
-							<ul>
-								<li>Definición.</li>
-								<li>Estados.</li>
-							</ul>
-						</li>
-						<li>
-							Planificación de procesos:
-							<ul>
-								<li>Colas</li>
-								<li>Cambio de contexto</li>
-								<li>Bloque de proceso.</li>
-							</ul>
-						</li>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <div class="unet">
+          <div class="logo-wrapper left">
+            <img class="noborder" src="img/UNET.png" alt="UNET Logo">
+          </div>
+          <p id="definition-header" class="left">
+            Universidad Nacional Experimental Del Táchira<br />
+            Decanato De Docencia<br />
+            Dpto. Ingeniería en Informática
+          </p>
+        </div>
+
+        <h1 class="clear">
+          Procesos
+        </h1>
+        <h2 id="subject-code">
+          Código 0435607T
+        </h2>
+        <div class="professor-info">
+          <p>
+            <a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
+            <a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+            <a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+          </p>
+        </div>
+      </section>
+
+      <section id="contenido">
+        <h2>Contenido</h2>
+        <ul>
+          <li>Sistemas mono-tarea y multi-tarea.</li>
+          <li>
+            Procesos:
+            <ul>
+              <li>Definición.</li>
+              <li>Estados.</li>
+            </ul>
+          </li>
+          <li>
+            Planificación de procesos:
+            <ul>
+              <li>Colas</li>
+              <li>Cambio de contexto</li>
+              <li>Bloque de proceso.</li>
+            </ul>
+          </li>
+          <li>
+            Modelado de la multi-programación
+          </li>
+        </ul>
+      </section>
+
+      <section id="monotarea">
+        <h2>Sistemas monotarea</h2>
+        <ul>
+          <li>Al principio las computadoras solo podían ejecutar 1 programa al mismo tiempo.</li>
+          <li>Todos los recursos del sistema estaban disponibles sólo para ese proceso.</li>
+          <li>
+            Si fallaba o el programa estaba mal escrito se alteraba el
+            funcionamiento de todo el sistema.
+          </li>
+        </ul>
+      </section>
+      <section id="multitarea">
+        <h2>Sistemas multitarea</h2>
+        <ul>
+          <li>
+            Permite la ejecución de varias tareas al mismo tiempo,
+            <strong>multiplexando</strong> el CPU e incrementando la productividad.
+          </li>
+          <li>
+            Estos sistemas están formados por un conjunto de procesos:
+            <ul>
+              <li>Procesos del sistema.</li>
+              <li>Procesos de usuario.</li>
+            </ul>
+          </li>
+        </ul>
+        <aside class="notes">
+          Los procesos del sistema operativo que ejecutan código del sistema
+          (tareas no incluidas en el núcleo) y los de usuario ejecutan
+          código del usuario.
+        </aside>
+      </section>
+
+      <section id="proceso-iso">
+        <h2>Proceso</h2>
+        <p>
+          Según la norma internacional
+          <a href="http://www.iso.org/iso/iso_9000" target="_blank">ISO-9001</a>
+          un proceso es:
+        </p>
+        <blockquote>
+          "Una actividad que utiliza recursos, y se gestiona con el fin
+          de permitir que los elementos de entrada se transformen
+          en resultados"
+        </blockquote>
+      </section>
+      <section id="proceso-definicion">
+        <h2>Proceso</h2>
+        <ul>
+          <li>
+            Un proceso no es más que una instancia de un programa en ejecución,
+            incluyendo los valores actuales del contador de programa, los
+            registros y las variables.
+          </li>
+          <li>Esta compuesto por:</li>
+        </ul>
+        <table class="memoria">
+          <tr>
+            <td>Código</td>
+            <td>Registros</td>
+            <td>Pila</td>
+            <td>Datos</td>
+          </tr>
+        </table>
+        <aside class="notes">
+          Código del programa, el contenido de los registros
+          del procesador, la Pila del proceso es: variables
+          remotas, parámetros de funciones, dirección a
+          retornar, variables locales. Sección de datos son las
+          variables globales.
+        </aside>
+      </section>
+      <section id="proceso-definicion-2">
+        <h2>Procesos</h2>
+        <ul>
+          <li>
+            Todo el software ejecutable del computador es organizado en
+            varios procesos secuenciales.
+          </li>
+          <li>
+            Los procesos se conmutan rápidamente con la CPU, dando la
+            impresión de que varios de ellos están ejecutándose al mismo tiempo
+            (Multiprogramación).
+          </li>
+        </ul>
+      </section>
+      <section id="procesos-aclaratorias">
+        <h2>Procesos</h2>
+        <ul>
+          <li>
+            La velocidad a la que un proceso ejecuta sus
+            cálculos no es uniforme. Intervienen muchos
+            factores.
+          </li>
+          <li>
+            No se pueden estimar eventos ni situaciones de
+            los procesos en función del tiempo de ejecución.
+          </li>
+          <li>
+            Hay situaciones donde el CPU no debería
+            conmutarse, por ejemplo, espera de datos de E/S.
+          </li>
+        </ul>
+      </section>
+      <section id="definicion-proceso">
+        <h2>Procesos</h2>
+        <ul>
+          <li>
+            Un proceso <strong>NO</strong> es un programa,
+            es un <em>programa en ejecución</em>
+          </li>
+          <li>
+            Un ejemplo es una receta de cocina y un
+            cocinero... en mitad de receta su hijo llega con
+            una picada de abeja...
+          </li>
+          <li>
+            Iniciar dos veces un programa no quiere decir
+            que se tengan dos procesos iguales
+          </li>
+        </ul>
+      </section>
+
+      <section id="definicion-proceso-2">
+        <h2>Procesos</h2>
+        <blockquote>
+          "Los procesos son como un ser humano: son generados, tienen
+          más o menos una vida significativa, opcionalmente generan
+          uno o más procesos hijos, y eventualmente mueren. Una
+          pequeña diferencia es el que la reproducción no es común
+          entre los procesos - cada proceso tienen un solo padre."
+          <cite>Understanding the Linux Kernel<br>(2nd edition)</cite>
+        </blockquote>
+      </section>
+
+      <section id="creacion-procesos">
+        <h2>Creación de procesos</h2>
+        <ul>
+          <li>El arranque del sistema.</li>
+          <li>Ejecución de una llamada al sistema para la creación de procesos.</li>
+          <li>Una petición de usuario para la creación de procesos.</li>
+          <li>El inicio de un trabajo por lotes.</li>
+        </ul>
+      </section>
+
+      <section id="terminacion-procesos">
+        <h2>Terminación de procesos</h2>
+        <ul>
+          <li>
+            <strong>Salida normal</strong>: Se ha terminado el de ejecutar o
+            sencillamente el usuario lo termina. Salida voluntaria.
+          </li>
+          <li>
+            <strong>Salida por error</strong>: El proceso no se completa
+            alguna situación excepcional. Ej: falta algún parámetro en
+            el comando. Salida voluntaria.
+          </li>
+        </ul>
+      </section>
+
+      <section id="terminacion-procesos-2">
+        <h2>Terminación de procesos</h2>
+        <ul>
+          <li>
+            <strong>Error fatal</strong>: Producido por el proceso. Producido por un
+            error en el programa. Salida Involuntaria.
+          </li>
+          <li>
+            <strong>Eliminado por otro proceso:</strong> Se ejecuta otro
+            proceso con suficientes privilegios para realizar otra llamada
+            al sistema indicándole que debe eliminar el proceso. Salida
+            involuntaria. Ej : En Linux el comando <em>kill</em>
+          </li>
+        </ul>
+      </section>
+
+      <section id="jerarquia-procesos">
+        <h2>Jerarquía de procesos</h2>
+        <ul class="twothird left">
+          <li>
+            Un proceso puede tener cero, uno o más hijos, y estos
+            a su vez también podrían tenerlos.
+          </li>
+          <li>
+            Un grupo de procesos esta compuesto por un
+            proceso padre y sus procesos hijos.
+          </li>
+          <li>Un ejemplo es el inicio de un sistema Linux.</li>
+        </ul>
+        <div class="third right">
+          <a href="img/class2/jerarquia.jpg" data-lightbox="Jerarquia de procesos">
+            <img src="img/class2/jerarquia.jpg" alt="Jerarquia de procesos en UNIX">
+          </a>
+        </div>
+      </section>
+
+      <section id="estados">
+        <h2>Estados del proceso</h2>
+        <ul>
+          <li>Durante el tiempo de vida en el sistema un proceso toma varios estados.</li>
+          <li>
+            Algunos de ellos son propios de la naturaleza
+            del proceso y otros son debido a otros factores
+            del sistema operativo y su planificador.
+          </li>
+        </ul>
+      </section>
+
+      <section id="estados-animados">
+        <h2>Estados del proceso</h2>
+        <div class="process-canvas-wrap">
+          <canvas id="process-state-canvas"
+            aria-label="Animación del proceso P1 moviéndose entre las colas y estados del sistema operativo">
+          </canvas>
+          <p>
+            La animación muestra a <strong>P1</strong> entrando al sistema, esperando en la cola de listos,
+            usando el CPU, bloqueándose por E/S, regresando a la cola y finalmente terminando.
+          </p>
+        </div>
+      </section>
+      <section id="estados-3">
+        <h2>Estados del proceso</h2>
+        <ul>
+          <li><strong>Nuevo: </strong> está siendo creado.</li>
+          <li><strong>Listo o Preparado:</strong> en espera por el CPU.</li>
+          <li>
+            <strong>Ejecución: </strong> se encuentra en el procesador
+            realizando sus operaciones.
+          </li>
+          <li>
+            <strong>Espera/Bloqueado: </strong> no está en el CPU y está
+            en espera de un evento (operación con un dispositivo de E/S
+            o por una señal).
+          </li>
+          <li> <strong>Suspendido:</strong> pasa de la memoria al disco para liberar espacio.
+          </li>
+          <li><strong>Terminado:</strong> ha terminado su ejecución.</li>
+        </ul>
+      </section>
+
+      <section id="planificacion-procesos">
+        <h2>Planificación de procesos</h2>
+        <ul>
+          <li>
+            El objetivo de la multiprogramación es ejecutar
+            varios procesos al mismo tiempo con el fin de <strong>maximizar</strong>
+            el uso del CPU.
+          </li>
+          <li>
+            Para cumplir este objetivo, el <strong>planificador de procesos
+            </strong> selecciona un proceso disponible para ejecutarlo.
+            En el caso de sistemas de un procesador, nunca habrá más
+            de un proceso en ejecución, por ello, deben esperar hasta
+            que el CPU quede libre y se asigne un nuevo proceso.
+          </li>
+        </ul>
+      </section>
+
+      <section id="cola-planificacion">
+        <h2>Colas de<br>Planificación de procesos</h2>
+        <p>
+          <a href="img/class2/colas.png" data-lightbox="colas-planificacion">
+            <img src="img/class2/colas.png" alt="colas de planificacion" />
+          </a>
+        </p>
+        <aside class="notes">
+          A medida que se van creando y ejecutando procesos en el sistema,
+          al cambiar de estado se coloca
+          en su respectiva cola para ser procesado de acuerdo al planificador.
+        </aside>
+      </section>
+
+      <section id="cambio-programa">
+        <h2>Cambio de contexto</h2>
+        <div class="half right">
+          <a href="img/class2/cambioProceso.jpg" data-lightbox="Cambio-proceso">
+            <img src="img/class2/cambioProceso.jpg" alt="Cambio de Proceso" />
+          </a>
+          <a href="img/class2/cambio_contexto.gif" data-lightbox="Cambio-contexto">
+            <img src="img/class2/cambio_contexto.gif" alt="Cambio de contexto">
+          </a>
+        </div>
+        <div class="half">
+          <ul>
+            <li>Realizado por el planificador del S.O.</li>
             <li>
-              Modelado de la multi-programación
+              Se origina con una interrupción del procesador, que puede ser por
+              suceso externo (culminación de un proceso de E/S), por una excepción,
+              el proceso culminó, etc.
             </li>
-					</ul>
-				</section>
+          </ul>
+        </div>
+      </section>
+      <section id="cambio-contexto">
+        <h2>Cambio de contexto</h2>
+        <ul>
+          <li>Se ejecuta una rutina llamada <strong>Cambio de contexto</strong>:
+            <ol>
+              <li>
+                Se salva el estado del programa en ejecución del
+                microprocesador a la memoria principal.
+              </li>
+              <li>Selecciona otro programa a ejecutar según un algoritmo equitativo.</li>
+              <li>
+                Restaura el estado del programa seleccionado desde la memoria principal
+                a los registros del microprocesador.
+              </li>
+              <li>
+                Ejecuta el programa saltando a la instrucción que estaba
+                pendiente de ejecutar.
+              </li>
+            </ol>
+          </li>
+        </ul>
+        <p class="note">
+          Este proceso consume tiempo extra de procesador,
+          que no se usa para otros procesos.
+        </p>
+      </section>
 
-				<section id="monotarea">
-					<h2>Sistemas monotarea</h2>
-					<ul>
-						<li>Al principio las computadoras solo podían ejecutar 1 programa al mismo tiempo.</li>
-						<li>Todos los recursos del sistema estaban disponibles sólo para ese proceso.</li>
-						<li>
-							Si fallaba o el programa estaba mal escrito se alteraba el
-							funcionamiento de todo el sistema.
-						</li>
-					</ul>
-				</section>
-				<section id="multitarea">
-					<h2>Sistemas multitarea</h2>
-					<ul>
-						<li>
-							Permite la ejecución de varias tareas al mismo tiempo,
-							<strong>multiplexando</strong> el CPU e incrementando la productividad.
-						</li>
-						<li>
-							Estos sistemas están formados por un conjunto de procesos:
-							<ul>
-								<li>Procesos del sistema.</li>
-								<li>Procesos de usuario.</li>
-							</ul>
-						</li>
-					</ul>
-					<aside class="notes">
-						Los procesos del sistema operativo que ejecutan código del sistema
-						(tareas no incluidas en el núcleo) y los de usuario ejecutan
-						código del usuario.
-					</aside>
-				</section>
+      <section id="implementacion">
+        <h2>Implementación</h2>
+        <ul>
+          <li>
+            Para controlar todos los procesos, el sistema operativo requiere
+            de un registro para mantener la información de todos ellos. Tabla de
+            procesos o Bloques de control de procesos.
+          </li>
+          <li>
+            Mantiene elementos como: Estado, contador del programa,
+            registros del CPU, información de planificación de la CPU,
+            información contable, información de E/S.
+          </li>
+        </ul>
+      </section>
 
-				<section id="proceso-iso">
-					<h2>Proceso</h2>
-					<p>
-						Según la norma internacional 
-						<a href="http://www.iso.org/iso/iso_9000" target="_blank">ISO-9001</a>
-						un proceso es:
-					</p>
-					<blockquote>
-						"Una actividad que utiliza recursos, y se gestiona con el fin
-						de permitir que los elementos de entrada se transformen
-						en resultados"
-					</blockquote>
-				</section>
-				<section id="proceso-definicion">
-					<h2>Proceso</h2>
-					<ul>
-						<li>
-							Un proceso no es más que una instancia de un programa en ejecución,
-							incluyendo los valores actuales del contador de programa, los
-							registros y las variables.
-						</li>
-						<li>Esta compuesto por:</li>
-					</ul>
-					<table class="memoria">
-						<tr>
-							<td>Código</td>
-							<td>Registros</td>
-							<td>Pila</td>
-							<td>Datos</td>
-						</tr>
-					</table>
-					<aside class="notes">
-						Código del programa, el contenido de los registros
-						del procesador, la Pila del proceso es: variables
-						remotas, parámetros de funciones, dirección a
-						retornar, variables locales. Sección de datos son las
-						variables globales.
-					</aside>
-				</section>
-				<section id="proceso-definicion-2">
-					<h2>Procesos</h2>
-					<ul>
-						<li>
-							Todo el software ejecutable del computador es organizado en
-							varios procesos secuenciales.
-						</li>
-						<li>
-							Los procesos se conmutan rápidamente con la CPU, dando la
-							impresión de que varios de ellos están ejecutándose al mismo tiempo
-							(Multiprogramación).
-						</li>
-					</ul>
-				</section>
-				<section id="procesos-aclaratorias">
-					<h2>Procesos</h2>
-					<ul>
-						<li>
-							La velocidad a la que un proceso ejecuta sus
-							cálculos no es uniforme. Intervienen muchos
-							factores.
-						</li>
-						<li>
-							No se pueden estimar eventos ni situaciones de
-							los procesos en función del tiempo de ejecución.
-						</li>
-						<li>
-							Hay situaciones donde el CPU no debería
-							conmutarse, por ejemplo, espera de datos de E/S.
-						</li>
-					</ul>
-				</section>
-				<section id="definicion-proceso">
-					<h2>Procesos</h2>
-					<ul>
-						<li >
-							Un proceso <strong>NO</strong> es un programa,
-							es un <em>programa en ejecución</em>
-						</li>
-						<li>
-							Un ejemplo es una receta de cocina y un
-							cocinero... en mitad de receta su hijo llega con
-							una picada de abeja...
-						</li>
-						<li>
-							Iniciar dos veces un programa no quiere decir
-							que se tengan dos procesos iguales
-						</li>
-					</ul>
-				</section>
+      <section id="pcb">
+        <h2>Bloque de control de proceso (PCB)</h2>
+        <p>
+          Es una estructura de datos en el núcleo del S.O con
+          información requerida para administrar un proceso en particular,
+          esta compuesto por:
+        </p>
+        <ul>
+          <li>
+            <strong>Estado: </strong> el estado actual del proceso.
+          </li>
+          <li><strong>Contador de programa:</strong>
+            dirección de la siguiente instrucción a realizar.
+          </li>
+          <li><strong>Registros del CPU: </strong> depende de la arquitectura
+            de la computadora, guarda punteros de pila, registros de
+            propósito general, acumuladores, entre otros.
+          </li>
+          <li><strong>Información de planificación de la CPU: </strong>
+            la prioridad del proceso y demás valores
+            para el algoritmo de planificación.
+          </li>
+        </ul>
+      </section>
+      <section id="pcb-2">
+        <h2>Bloque de control de proceso (PCB)</h2>
+        <div class="half left">
+          <ul>
+            <li>
+              <strong>Información contable:</strong> almacena la cantidad
+              de tiempo en el CPU, límite de tiempo asignado,
+              numero de proceso, entre otros.
+            </li>
+            <li><strong>Información de E/S:</strong> posee un
+              listado de los archivos y dispositivos de E/S
+              asignados al proceso.</li>
+          </ul>
+        </div>
+        <div class="center">
+          <p>
+            <img src="img/class2/pcb2.jpg" alt="bloque de control de proceso" />
+          </p>
+        </div>
+      </section>
+      <section id="modelo-multiprogramacion">
+        <h2>Modelación de la<br>multi-programación</h2>
+        <ul>
+          <li>
+            Se supone que si un proceso consume 20% de CPU, entonces colocando 5,
+            el CPU siempre estará ocupado.
+          </li>
+          <li>
+            Sin embargo esto no es del todo cierto, todos los procesos
+            no esperan lo mismo por E/S.
+          </li>
+          <li>
+            Recordemos que estimar tiempos en un
+            sistema computacional es muy complicado
+          </li>
+        </ul>
+      </section>
+      <section id="modelo-multiprogramacion-2">
+        <h2>Modelación de la<br>multi-programación</h2>
+        <ul>
+          <li>Realmente es una función de probabilidad de la forma:</li>
+        </ul>
+        <p><strong>Uso de CPU = 1 - p<sup>n</sup></strong></p>
+        <ul>
+          <li>
+            El uso de memoria viene dado por la cantidad
+            necesaria para el sistema operativo y los procesos a ejecutar.
+            Ej : Un servidor Web.
+          </li>
+        </ul>
+      </section>
+      <section id="modelo-multiprogramacion-3">
+        <h2>Modelación de la<br>multi-programación</h2>
+        <img src="img/class2/multiprogramacion.png" alt="Multiprogramacion">
+      </section>
+      <section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
+        <h1 class="stroke">¿Preguntas?</h1>
+      </section>
+    </div>
+  </div>
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/zoom/zoom.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/search/search.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script src="js/lightbox-plus-jquery.min.js"></script>
+  <script>
+    const processStateCanvas = (() => {
+      const canvas = document.getElementById('process-state-canvas');
+      if (!canvas) return null;
 
-				<section id="definicion-proceso-2">
-					<h2>Procesos</h2>
-					<blockquote>
-						"Los procesos son como un ser humano: son generados, tienen
-						más o menos una vida significativa, opcionalmente generan
-						uno o más procesos hijos, y eventualmente mueren. Una
-						pequeña diferencia es el que la reproducción no es común
-						entre los procesos - cada proceso tienen un solo padre."
-						<cite>Understanding the Linux Kernel<br>(2nd edition)</cite>
-					</blockquote>
-				</section>
+      const ctx = canvas.getContext('2d');
+      const baseWidth = 1100;
+      const baseHeight = 520;
+      let scale = 1;
+      let animationFrame = null;
+      let active = false;
+      let start = 0;
 
-				<section id="creacion-procesos">
-					<h2>Creación de procesos</h2>
-					<ul>
-						<li>El arranque del sistema.</li>
-						<li>Ejecución de una llamada al sistema para la creación de procesos.</li>
-						<li>Una petición de usuario para la creación de procesos.</li>
-						<li>El inicio de un trabajo por lotes.</li>
-					</ul>
-				</section>
+      const sequence = [
+        {label: 'Nuevo', duration: 1200, pos: 'newQueue1', state: 'Creación del proceso', queue: 'Creando PCB y recursos'},
+        {label: 'Admisión', duration: 1100, from: 'newQueue1', to: 'readyQueue1', state: 'Admitido por el SO', queue: 'Entra a la cola de listos'},
+        {label: 'Listo', duration: 1200, pos: 'readyQueue1', state: 'Esperando CPU', queue: 'Cola de listos'},
+        {label: 'Despacho', duration: 1100, from: 'readyQueue1', to: 'cpu', state: 'Despachado al procesador', queue: 'Cambio de cola'},
+        {label: 'Ejecución', duration: 1400, pos: 'cpu', state: 'Ejecutando instrucciones', queue: 'Usando el CPU'},
+        {label: 'Espera E/S', duration: 1200, from: 'cpu', to: 'waitQueue1', state: 'Bloqueado por E/S', queue: 'Cola de espera'},
+        {label: 'Bloqueado', duration: 1200, pos: 'waitQueue1', state: 'Esperando dispositivo', queue: 'Espera E/S'},
+        {label: 'Evento completado', duration: 1100, from: 'waitQueue1', to: 'readyQueue2', state: 'E/S finalizada', queue: 'Regresa a listos'},
+        {label: 'Listo otra vez', duration: 1200, pos: 'readyQueue2', state: 'Esperando otra vez', queue: 'Cola de listos'},
+        {label: 'Segundo despacho', duration: 1100, from: 'readyQueue2', to: 'cpu', state: 'Toma el CPU', queue: 'Cambio de cola'},
+        {label: 'Ejecución final', duration: 1300, pos: 'cpu', state: 'Última ráfaga de CPU', queue: 'CPU'},
+        {label: 'Terminación', duration: 1300, from: 'cpu', to: 'done', state: 'Proceso finalizado', queue: 'Sale del sistema'},
+        {label: 'Finalizado', duration: 1600, pos: 'done', state: 'Liberando recursos', queue: 'Fin del ciclo'}
+      ];
 
-				<section id="terminacion-procesos">
-					<h2>Terminación de procesos</h2>
-					<ul>
-						<li>
-							<strong>Salida normal</strong>: Se ha terminado el de ejecutar o
-							sencillamente el usuario lo termina. Salida voluntaria.
-						</li>
-						<li>
-							<strong>Salida por error</strong>: El proceso no se completa
-							alguna situación excepcional. Ej: falta algún parámetro en
-							el comando. Salida voluntaria.
-						</li>
-					</ul>
-				</section>
+      const totalDuration = sequence.reduce((sum, step) => sum + step.duration, 0);
 
-				<section id="terminacion-procesos-2">
-					<h2>Terminación de procesos</h2>
-					<ul>
-						<li>
-							<strong>Error fatal</strong>: Producido por el proceso. Producido por un
-							error en el programa. Salida Involuntaria.
-						</li>
-						<li>
-							<strong>Eliminado por otro proceso:</strong> Se ejecuta otro
-							proceso con suficientes privilegios para realizar otra llamada
-							al sistema indicándole que debe eliminar el proceso. Salida
-							involuntaria. Ej : En Linux el comando <em>kill</em>
-						</li>
-					</ul>
-				</section>
+      function resizeCanvas() {
+        const parentWidth = canvas.parentElement.clientWidth;
+        scale = Math.min(1, parentWidth / baseWidth);
+        canvas.width = Math.round(baseWidth * scale);
+        canvas.height = Math.round(baseHeight * scale);
+      }
 
-				<section id="jerarquia-procesos">
-					<h2>Jerarquía de procesos</h2>
-					<ul class="twothird left">
-						<li>
-							Un proceso puede tener cero, uno o más hijos, y estos
-							a su vez también podrían tenerlos.
-						</li>
-						<li>
-							Un grupo de procesos esta compuesto por un
-							proceso padre y sus procesos hijos.
-						</li>
-						<li>Un ejemplo es el inicio de un sistema Linux.</li>
-					</ul>
-					<div class="third right">
-						<a href="img/class2/jerarquia.jpg" data-lightbox="Jerarquia de procesos">
-							<img src="img/class2/jerarquia.jpg"  alt="Jerarquia de procesos en UNIX">
-						</a>
-					</div>
-				</section>
+      function roundedRect(x, y, w, h, radius, fill, stroke) {
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.arcTo(x + w, y, x + w, y + h, radius);
+        ctx.arcTo(x + w, y + h, x, y + h, radius);
+        ctx.arcTo(x, y + h, x, y, radius);
+        ctx.arcTo(x, y, x + w, y, radius);
+        ctx.closePath();
+        if (fill) {
+          ctx.fillStyle = fill;
+          ctx.fill();
+        }
+        if (stroke) {
+          ctx.strokeStyle = stroke;
+          ctx.stroke();
+        }
+      }
 
-				<section id="estados" >
-					<h2>Estados del proceso</h2>
-					<ul>
-						<li>Durante el tiempo de vida en el sistema un proceso toma varios estados.</li>
-						<li>
-							Algunos de ellos son propios de la naturaleza
-							del proceso y otros son debido a otros factores
-							del sistema operativo y su planificador.
-						</li>
-					</ul>
-				</section>
+      function arrow(from, to, color, width = 4, dashed = false) {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        if (dashed) ctx.setLineDash([10 * scale, 10 * scale]);
+        ctx.beginPath();
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(to.x, to.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        const angle = Math.atan2(to.y - from.y, to.x - from.x);
+        const head = 14 * scale;
+        ctx.beginPath();
+        ctx.moveTo(to.x, to.y);
+        ctx.lineTo(to.x - head * Math.cos(angle - Math.PI / 8), to.y - head * Math.sin(angle - Math.PI / 8));
+        ctx.lineTo(to.x - head * Math.cos(angle + Math.PI / 8), to.y - head * Math.sin(angle + Math.PI / 8));
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.restore();
+      }
 
-				<section id="estados-2" >
-					<h2>Estados del proceso</h2>
-					<p>
-						<a href="img/class2/estados_proceso.gif" data-lightbox="estados">
-							<img src="img/class2/estados_proceso.gif" alt="" style="width: 90%">
-						</a>
-					</p>
-				</section>
-				<section id="estados-3" >
-					<h2>Estados del proceso</h2>
-					<ul>
-						<li><strong>Nuevo: </strong> está siendo creado.</li>
-						<li><strong>Listo o Preparado:</strong> en espera por el CPU.</li>
-						<li>
-							<strong>Ejecución: </strong> se encuentra en el procesador
-							realizando sus operaciones.
-						 </li>
-						<li>
-							<strong>Espera/Bloqueado: </strong> no está en el CPU y está
-							en espera de un evento (operación con un dispositivo de E/S
-							o por una señal).
-						</li>
-						<li> <strong>Suspendido:</strong> pasa de la memoria al disco para liberar espacio.
-						</li>
-						<li><strong>Terminado:</strong> ha terminado su ejecución.</li>
-					</ul>
-				</section>
+      function dotPath(points, color) {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2 * scale;
+        ctx.setLineDash([6 * scale, 8 * scale]);
+        ctx.beginPath();
+        points.forEach((point, index) => {
+          if (index === 0) ctx.moveTo(point.x, point.y);
+          else ctx.lineTo(point.x, point.y);
+        });
+        ctx.stroke();
+        ctx.restore();
+      }
 
-				<section id="planificacion-procesos" >
-					<h2>Planificación de procesos</h2>
-					<ul>
-						<li>
-							El objetivo de la multiprogramación es ejecutar
-							varios procesos al mismo tiempo con el fin de <strong>maximizar</strong>
-							el uso del CPU.
-						</li>
-						<li>
-							Para cumplir este objetivo, el <strong>planificador de procesos
-							</strong> selecciona un proceso disponible para ejecutarlo.
-							En el caso de sistemas de un procesador, nunca habrá más
-							de un proceso en ejecución, por ello, deben esperar hasta
-							que el CPU quede libre y se asigne un nuevo proceso.
-						</li>
-					</ul>
-				</section>
+      function getLayout() {
+        const s = scale;
+        return {
+          newBox: {x: 55 * s, y: 110 * s, w: 200 * s, h: 150 * s},
+          readyBox: {x: 310 * s, y: 75 * s, w: 250 * s, h: 255 * s},
+          cpuBox: {x: 630 * s, y: 125 * s, w: 195 * s, h: 150 * s},
+          waitBox: {x: 310 * s, y: 375 * s, w: 250 * s, h: 150 * s},
+          doneBox: {x: 865 * s, y: 125 * s, w: 190 * s, h: 150 * s},
+          legendBox: {x: 605 * s, y: 360 * s, w: 450 * s, h: 200 * s},
+          slots: {
+            newQueue1: {x: 155 * s, y: 210 * s},
+            readyQueue1: {x: 435 * s, y: 175 * s},
+            readyQueue2: {x: 435 * s, y: 230 * s},
+            readyQueue3: {x: 435 * s, y: 285 * s},
+            waitQueue1: {x: 435 * s, y: 477 * s},
+            cpu: {x: 735 * s, y: 225 * s},
+            done: {x: 955 * s, y: 225 * s}
+          }
+        };
+      }
 
-				<section id="cola-planificacion">
-					<h2>Colas de<br>Planificación de procesos</h2>
-					<p>
-						<a href="img/class2/colas.png" data-lightbox="colas-planificacion">
-							<img src="img/class2/colas.png" alt="colas de planificacion" />
-						</a>
-					</p>
-					<aside class="notes">
-						A medida que se van creando y ejecutando procesos en el sistema,
-						al cambiar de estado se coloca
-						en su respectiva cola para ser procesado de acuerdo al planificador.
-					</aside>
-				</section>
+      function drawQueueBox(box, title, subtitle, color) {
+        roundedRect(box.x, box.y, box.w, box.h, 18 * scale, 'rgba(10, 20, 32, 0.72)', color);
+        ctx.fillStyle = '#f6fbff';
+        ctx.font = `${26 * scale}px sans-serif`;
+        ctx.fillText(title, box.x + 18 * scale, box.y + 38 * scale);
+        ctx.fillStyle = '#9dc4db';
+        ctx.font = `${16 * scale}px sans-serif`;
+        ctx.fillText(subtitle, box.x + 18 * scale, box.y + 65 * scale);
+      }
 
-				<section id="cambio-programa">
-					<h2>Cambio de contexto</h2>
-					<div class="half right">
-						<a href="img/class2/cambioProceso.jpg" data-lightbox="Cambio-proceso">
-							<img src="img/class2/cambioProceso.jpg" alt="Cambio de Proceso" />
-						</a>
-						<a href="img/class2/cambio_contexto.gif" data-lightbox="Cambio-contexto">
-							<img src="img/class2/cambio_contexto.gif" alt="Cambio de contexto">
-						</a>
-					</div>
-					<div class="half">
-						<ul>
-							<li>Realizado por el planificador del S.O.</li>
-							<li>
-								Se origina con una interrupción del procesador, que puede ser por
-								suceso externo (culminación de un proceso de E/S), por una excepción,
-								el proceso culminó, etc.
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section id="cambio-contexto">
-					<h2>Cambio de contexto</h2>
-						<ul>
-							<li>Se ejecuta una rutina llamada <strong>Cambio de contexto</strong>:
-								<ol>
-									<li>
-										Se salva el estado del programa en ejecución del
-										microprocesador a la memoria principal.
-									</li>
-									<li>Selecciona otro programa a ejecutar según un algoritmo equitativo.</li>
-									<li>
-										Restaura el estado del programa seleccionado desde la memoria principal
-										a los registros del microprocesador.
-									</li>
-				    				<li>
-				    					Ejecuta el programa saltando a la instrucción que estaba
-				    					pendiente de ejecutar.
-				    				</li>
-				    			</ol>
-							</li>
-						</ul>
-						<p class="note">
-							Este proceso consume tiempo extra de procesador,
-							que no se usa para otros procesos.
-						</p>
-				</section>
+      function drawSlot(x, y, slotId, label, activeSlot, accent) {
+        const width = 126 * scale;
+        const height = 42 * scale;
+        const isActive = activeSlot === slotId;
+        roundedRect(
+          x - width / 2,
+          y - height / 2,
+          width,
+          height,
+          12 * scale,
+          isActive ? 'rgba(255, 202, 40, 0.24)' : 'rgba(255, 255, 255, 0.05)',
+          isActive ? accent : 'rgba(255,255,255,0.10)'
+        );
+        ctx.fillStyle = isActive ? '#fff8d2' : '#dce8ef';
+        ctx.font = `${17 * scale}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillText(label, x, y + 6 * scale);
+        ctx.textAlign = 'start';
+      }
 
-				<section id="implementacion">
-					<h2>Implementación</h2>
-					<ul>
-						<li>
-							Para controlar todos los procesos, el sistema operativo requiere
-							de un registro para mantener la información de todos ellos. Tabla de
-							procesos o Bloques de control de procesos.
-						</li>
-						<li>
-							Mantiene elementos como: Estado, contador del programa,
-							registros del CPU, información de planificación de la CPU,
-							información contable, información de E/S.
-						</li>
-					</ul>
-				</section>
+      function positionFor(timeMs) {
+        let elapsed = ((timeMs % totalDuration) + totalDuration) % totalDuration;
+        const layout = getLayout();
 
-				<section id="pcb" >
-					<h2>Bloque de control de proceso (PCB)</h2>
-					<p>
-						Es una estructura de datos en el núcleo del S.O con
-						información requerida para administrar un proceso en particular,
-						esta compuesto por:
-					</p>
-					<ul>
-						<li>
-							<strong>Estado: </strong> el estado actual del proceso.
-						</li>
-						<li><strong>Contador de programa:</strong>
-							dirección de la siguiente instrucción a realizar.
-						</li>
-						<li><strong>Registros del CPU: </strong> depende de la arquitectura
-							de la computadora, guarda punteros de pila, registros de
-							propósito general, acumuladores, entre otros.
-						</li>
-						<li><strong>Información de planificación de la CPU: </strong>
-							la prioridad del proceso y demás valores
-							para el algoritmo de planificación.
-						</li>
-					</ul>
-				</section>
-				<section id="pcb-2">
-					<h2>Bloque de control de proceso (PCB)</h2>
-					<div class="half left">
-						<ul>
-							<li>
-								<strong>Información contable:</strong> almacena la cantidad
-								de tiempo en el CPU,  límite de tiempo asignado,
-								numero de proceso, entre otros.
-							</li>
-							<li><strong>Información de E/S:</strong> posee un
-								listado de los archivos y dispositivos de E/S
-								asignados al proceso.</li>
-						</ul>
-					</div>
-					<div class="center">
-						<p>
-							<img src="img/class2/pcb2.jpg" alt="bloque de control de proceso" />
-						</p>
-					</div>
-				</section>
-				<section id="modelo-multiprogramacion">
-					<h2>Modelación de la<br>multi-programación</h2>
-					<ul>
-						<li>
-							Se supone que si un proceso consume 20% de CPU, entonces colocando 5,
-							el CPU siempre estará ocupado.
-						</li>
-						<li>
-							Sin embargo esto no es del todo cierto, todos los procesos
-							no esperan lo mismo por E/S.
-						</li>
-						<li>
-							Recordemos que estimar tiempos en un
-							sistema computacional es muy complicado
-						</li>
-					</ul>
-				</section>
-				<section id="modelo-multiprogramacion-2">
-					<h2>Modelación de la<br>multi-programación</h2>
-					<ul>
-						<li>Realmente es una función de probabilidad de la forma:</li>
-					</ul>
-					<p><strong>Uso de CPU = 1 - p<sup>n</sup></strong></p>
-					<ul>
-						<li>
-							El uso de memoria viene dado por la cantidad
-							necesaria para el sistema operativo y los procesos a ejecutar.
-							Ej : Un servidor Web.
-						</li>
-					</ul>
-				</section>
-				<section id="modelo-multiprogramacion-3">
-					<h2>Modelación de la<br>multi-programación</h2>
-					<img src="img/class2/multiprogramacion.png" alt="Multiprogramacion">
-				</section>
-				<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
-					<h1 class="stroke">¿Preguntas?</h1>
-				</section>
-			</div>
-		</div>
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/zoom/zoom.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/search/search.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script src="js/lightbox-plus-jquery.min.js"></script>
-		<script>
+        for (const step of sequence) {
+          if (elapsed <= step.duration) {
+            const progress = Math.max(0, Math.min(1, elapsed / step.duration));
+            if (step.pos) {
+              return {
+                step,
+                point: layout.slots[step.pos],
+                activeSlot: step.pos
+              };
+            }
 
-			// Also available as an ES module, see:
-			// https://revealjs.com/initialization/
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				center: true,
-				hash: true,
-				history: true,
-				theme: 'unet',
-				transition: 'linear',
+            const from = layout.slots[step.from];
+            const to = layout.slots[step.to];
+            const eased = 0.5 - Math.cos(progress * Math.PI) / 2;
+            return {
+              step,
+              point: {
+                x: from.x + (to.x - from.x) * eased,
+                y: from.y + (to.y - from.y) * eased
+              },
+              activeSlot: step.to
+            };
+          }
+          elapsed -= step.duration;
+        }
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
-			});
+        return {
+          step: sequence[sequence.length - 1],
+          point: layout.slots.done,
+          activeSlot: 'done'
+        };
+      }
 
-		</script>
-	</body>
+      function drawProcessToken(point) {
+        const radius = 26 * scale;
+        const glow = ctx.createRadialGradient(point.x - 8 * scale, point.y - 8 * scale, 4 * scale, point.x, point.y, radius * 1.7);
+        glow.addColorStop(0, '#ffd86b');
+        glow.addColorStop(1, '#ff8f1f');
+        ctx.save();
+        ctx.shadowColor = 'rgba(255, 171, 37, 0.55)';
+        ctx.shadowBlur = 22 * scale;
+        ctx.beginPath();
+        ctx.fillStyle = glow;
+        ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        ctx.fillStyle = '#1e2730';
+        ctx.font = `bold ${18 * scale}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillText('P1', point.x, point.y + 6 * scale);
+        ctx.textAlign = 'start';
+      }
+
+      function draw(time) {
+        if (!active) return;
+        if (!start) start = time;
+        const elapsed = time - start;
+        const layout = getLayout();
+        const frame = positionFor(elapsed);
+        const accent = '#ffcc4d';
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.translate(0, -50 * scale);
+
+        ctx.fillStyle = 'rgba(255,255,255,0.03)';
+        for (let i = 0; i < 18; i += 1) {
+          ctx.beginPath();
+          ctx.arc((50 + i * 60) * scale, (40 + (i % 5) * 110) * scale, 2.2 * scale, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        drawQueueBox(layout.newBox, 'Nuevo', 'Proceso recién creado', '#4fc3f7');
+        drawQueueBox(layout.readyBox, 'Cola de listos', 'Procesos esperando CPU', '#63e6be');
+        drawQueueBox(layout.cpuBox, 'CPU', 'Proceso en ejecución', '#ffd166');
+        drawQueueBox(layout.waitBox, 'Espera / E/S', 'Procesos bloqueados', '#ff8fab');
+        drawQueueBox(layout.doneBox, 'Finalizado', 'Proceso completado', '#c77dff');
+
+        ctx.fillStyle = '#bed3e2';
+        ctx.font = `${18 * scale}px sans-serif`;
+        ctx.fillText('admisión', 220 * scale, 100 * scale);
+        ctx.fillText('despacho', 575 * scale, 112 * scale);
+        ctx.fillText('bloqueo por E/S', 596 * scale, 318 * scale);
+        ctx.fillText('evento de E/S', 438 * scale, 355 * scale);
+        ctx.fillText('salida', 845 * scale, 110 * scale);
+
+        arrow({x: 255 * scale, y: 205 * scale}, {x: 370 * scale, y: 170 * scale}, '#4fc3f7');
+        arrow({x: 560 * scale, y: 145 * scale}, {x: 665 * scale, y: 210 * scale}, '#63e6be');
+        arrow({x: 735 * scale, y: 275 * scale}, {x: 500 * scale, y: 468 * scale}, '#ff8fab');
+        arrow({x: 515 * scale, y: 375 * scale}, {x: 440 * scale, y: 310 * scale}, '#7bdff2');
+        arrow({x: 825 * scale, y: 200 * scale}, {x: 865 * scale, y: 200 * scale}, '#c77dff');
+
+        dotPath([
+          {x: 560 * scale, y: 275 * scale},
+          {x: 600 * scale, y: 315 * scale},
+          {x: 610 * scale, y: 355 * scale}
+        ], 'rgba(255,255,255,0.25)');
+
+        drawSlot(layout.slots.newQueue1.x, layout.slots.newQueue1.y, 'newQueue1', 'Creación', frame.activeSlot, accent);
+        drawSlot(layout.slots.readyQueue1.x, layout.slots.readyQueue1.y, 'readyQueue1', 'Listo 1', frame.activeSlot, accent);
+        drawSlot(layout.slots.readyQueue2.x, layout.slots.readyQueue2.y, 'readyQueue2', 'Listo 2', frame.activeSlot, accent);
+        drawSlot(layout.slots.readyQueue3.x, layout.slots.readyQueue3.y, 'readyQueue3', 'Listo 3', frame.activeSlot, accent);
+        drawSlot(layout.slots.waitQueue1.x, layout.slots.waitQueue1.y, 'waitQueue1', 'E/S', frame.activeSlot, accent);
+        drawSlot(layout.slots.cpu.x, layout.slots.cpu.y, 'cpu', 'Ejecutando', frame.activeSlot, accent);
+        drawSlot(layout.slots.done.x, layout.slots.done.y, 'done', 'Salida', frame.activeSlot, accent);
+
+        roundedRect(
+          layout.legendBox.x,
+          layout.legendBox.y,
+          layout.legendBox.w,
+          layout.legendBox.h,
+          18 * scale,
+          'rgba(255,255,255,0.04)',
+          'rgba(255,255,255,0.08)'
+        );
+
+        ctx.fillStyle = '#f8fbff';
+        ctx.font = `bold ${24 * scale}px sans-serif`;
+        ctx.fillText(`Estado actual: ${frame.step.label}`, layout.legendBox.x + 24 * scale, layout.legendBox.y + 40 * scale);
+        ctx.font = `${18 * scale}px sans-serif`;
+        ctx.fillStyle = '#d5e5f1';
+        ctx.fillText(`P1: ${frame.step.state}`, layout.legendBox.x + 24 * scale, layout.legendBox.y + 80 * scale);
+        ctx.fillText(`Transición: ${frame.step.queue}`, layout.legendBox.x + 24 * scale, layout.legendBox.y + 112 * scale);
+        ctx.fillStyle = '#9dc4db';
+        ctx.fillText('La esfera naranja representa el PCB del proceso', layout.legendBox.x + 24 * scale, layout.legendBox.y + 150 * scale);
+        ctx.fillText('moviéndose entre las colas.', layout.legendBox.x + 24 * scale, layout.legendBox.y + 175 * scale);
+
+        drawProcessToken(frame.point);
+        ctx.restore();
+        animationFrame = window.requestAnimationFrame(draw);
+      }
+
+      function setActive(nextActive) {
+        if (active === nextActive) return;
+        active = nextActive;
+        if (active) {
+          start = 0;
+          animationFrame = window.requestAnimationFrame(draw);
+        } else if (animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = null;
+        }
+      }
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      return {setActive, resizeCanvas};
+    })();
+
+    // Also available as an ES module, see:
+    // https://revealjs.com/initialization/
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      center: true,
+      hash: true,
+      history: true,
+      theme: 'unet',
+      transition: 'linear',
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+    });
+
+    function syncProcessCanvasState() {
+      if (!processStateCanvas) return;
+      const current = Reveal.getCurrentSlide();
+      processStateCanvas.resizeCanvas();
+      processStateCanvas.setActive(current && current.id === 'estados-animados');
+    }
+
+    Reveal.on('ready', syncProcessCanvasState);
+    Reveal.on('slidechanged', syncProcessCanvasState);
+
+  </script>
+</body>
+
 </html>
