@@ -1,314 +1,684 @@
 <!doctype html>
 <html lang="es">
 
-	<head>
-		<meta charset="utf-8">
-		<title>Sistemas Operativos | UNET</title>
-		<meta name="description" content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
-		<meta name="author" content="Miguel Angel Useche Castro">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<head>
+  <meta charset="utf-8">
+  <title>Sistemas Operativos | UNET</title>
+  <meta name="description"
+    content="Láminas de la materia de Sistemas Operativos de la Universidad Nacional Experimental del Táchira">
+  <meta name="author" content="Miguel Angel Useche Castro">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/moon.css">
-		<link rel="stylesheet" href="dist/theme/unet.css" id="theme">
-		<link rel="stylesheet" href="css/lightbox.min.css">
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/moon.css">
+  <link rel="stylesheet" href="dist/theme/unet.css" id="theme">
+  <link rel="stylesheet" href="css/lightbox.min.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	</head>
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <style>
+    #hebras-grafico .thread-layout {
+      display: flex;
+      gap: 2rem;
+      align-items: stretch;
+      justify-content: center;
+      margin: 1.5rem auto 1rem;
+    }
 
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<div class="unet">
-						<div class="logo-wrapper left">
-							<img class="noborder" src="img/UNET.png" alt="UNET Logo">
-						</div>
-						<p id="definition-header" class="left">
-							Universidad Nacional Experimental Del Táchira<br />
-							Decanato De Docencia<br />
-							Dpto. Ingeniería en Informática
-						</p>
-					</div>
+    #hebras-grafico .process-card {
+      flex: 1 1 0;
+      max-width: 500px;
+      padding: 1.2rem 1.4rem 1.4rem;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(6, 20, 37, 0.95), rgba(11, 54, 68, 0.85));
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.3);
+    }
 
-					<h1 class="clear">
-						Hilos de ejecución
-					</h1>
-					<h2 id="subject-code">
-						Código 0435607T
-					</h2>
-					<div class="professor-info">
-						<p>
-							<a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
-							<a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
-							<a href="http://twitter.com/skatox" target="_blank">@skatox</a>
-						</p>
-					</div>
-				</section>
+    #hebras-grafico .process-card h3 {
+      margin: 0 0 0.6rem;
+      font-size: 2.2rem;
+      text-decoration: none;
+      color: #fff3b0;
+    }
 
-				<section id="contenido">
-					<h2>Contenido</h2>
-					<ul>
-						<li>Concepto.</li>
-						<li>Uso de hilos.</li>
-						<li>Modelo de hilos.</li>
-						<li>Bibliotecas o Librerías.</li>
-            <li>Anexos</li>
-					</ul>
-				</section>
+    #hebras-grafico .process-subtitle {
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      color: #d9f7ff;
+      text-align: center;
+    }
 
-				<section id="hilos">
-					<h2>Hebras o Hilos de ejecución</h2>
-					<ul class="half nomargin left">
-						<li>
-							Son pequeños procesos ejecutados dentro de
-							un mismo espacio de direcciones, con un padre
-							común.
-						</li>
-						<li>
-							Es diferente un proceso hijo (se ejecuta en
-							espacio de direcciones separadas) a un hilo (se
-							ejecuta en el mismo espacio de direcciones)
-						</li>
-					</ul>
-					<div class="half right">
-						<img src="img/class2/hebras.jpg" alt="Hebras" />
-					</div>
-				</section>
+    #hebras-grafico .memory-block {
+      border: 2px solid rgba(189, 255, 210, 0.45);
+      border-radius: 16px;
+      padding: 0.9rem;
+      background: rgba(114, 201, 144, 0.12);
+    }
 
-				<section id="hebras">
-					<h2>Hebras o Hilos de ejecución</h2>
-					<ul>
-						<li>Posee un contador de programa, un conjunto de registros y una pila.</li>
-						<li>
-							Es creada por un proceso y comparte la sección de código,
-							sección de datos y recursos del sistema operativo.
-						</li>
-						<li>Una tarea <strong>(proceso pesado)</strong> posee una o muchas hebras.
-							(procesos ligeros) </li>
-					</ul>
-				</section>
+    #hebras-grafico .memory-title {
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(153, 255, 153, 0.18);
+      color: #ccffcc;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
 
-				<section id="hebras-grafico">
-					<h2>Monohilo y multihilo</h2>
-					<div class="center">
-						<img src="img/class2/hebras_grafico.png" alt="Hebras" class="noborder"/>
-					</div>
-					<p>
-						<strong>Nota: </strong>
-						Observe como las hebras comparten la sección de código, archivo y datos
-						del proceso al que pertenecen. Pero cada una tiene su propia sección de pila y registros.
-					</p>
-				</section>
+    #hebras-grafico .memory-sections {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+    }
 
-				<section id="uso-hilos">
-					<h2>Uso de hilos</h2>
-					<ul>
+    #hebras-grafico .memory-sections span,
+    #hebras-grafico .thread-stack span,
+    #hebras-grafico .thread-registers span {
+      display: block;
+      padding: 0.65rem 0.45rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: center;
+      color: #001018;
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.12);
+    }
 
-						<li>No producen un aumento de rendimiento.</li>
-						<li>
-							Muy eficientes cuando hay muchos cálculos y
-							operaciones de E/S.
-						</li>
-						<li>
-							Útiles en equipos con varios CPU. Se aprovecha
-							realmente el procesamiento en paralelo.
-						</li>
-						<li>
-							Un ejemplo: procesador de texto, servidor web,
-							servidor de base de datos
-						</li>
-					</ul>
-				</section>
+    #hebras-grafico .memory-code {
+      background: #6dd3fb;
+    }
 
-				<section id="hebras-ventajas">
-					<h2>Ventajas de utilizar <br />hebras sobre procesos</h2>
-					<ul>
-						<li>
-							Permite la ejecución de un programa aunque parte de él
-							esté bloqueado.
-							(generalmente por acceso a dispositivos de E/S)
-						</li>
-						<li>Son más rápidas de crear, hasta 10 veces más que un proceso.</li>
-						<li>Es más económico realizar el cambio de contexto.</li>
-						<li>
-							Más rápido de eliminar pues solo es necesario
-							vaciar su pila y registros, en un proceso toca eliminar todo el PCB.
-						</li>
-					</ul>
-				</section>
-				<section id="hebras-ventajas-2">
-					<h2>Ventajas de utilizar <br />hebras sobre procesos</h2>
-					<ul>
-						<li>
-							Permite mayor control de la comunicación permitiendo
-							crear rutinas propias,	pues en el caso de procesos,
-							es necesario usar rutinas del sistema operativo para
-							la comunicación.
-						</li>
-						<li>
-							Permite incrementar el grado de concurrencia al aprovechar
-							el hardware con multiprocesadores.
-						</li>
-					</ul>
-				</section>
-				<section id="ejemplo-hilos" >
-					<h2>Ejemplo de uso de Hilos</h2>
-					<div class="half left">
-						<p>El programa utiliza hilos para:</p>
-						<ul>
-							<li>Inteligencia artificial de los enemigos</li>
-							<li>Luces y sombras</li>
-							<li>Física del ambiente: gravedad, polvo, deformaciones.</li>
-							<li>Efectos de sonido</li>
-							<li>Trayectoria de proyectiles.</li>
-							<li>Y otros mas...</li>
-						</ul>
-					</div>
-					<div class="half right center">
-						<a href="img/class2/GameThreads.jpg" data-lightbox="Killzone">
-							<img src="img/class2/GameThreads.jpg" alt="Imagen de Killzone 2" />
-						</a>
-						<br>
-						<small>Ejemplo de hilos/hebras en un juego</small>
-							<iframe src="https://www.youtube.com/embed/EXtMjxC0M4U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-					</div>
-				</section>
-				<section id="modelo-hebras" >
-					<h2>Modelo de hebras</h2>
-					<a href="img/class2/modelo_hilos.png" data-lightbox="shadowbox">
-						<img src="img/class2/modelo_hilos.png" alt="modelo de hebras" />
-					</a>
-				</section>
-				<section id="modelo-hilos" >
-					<h2>Modelo de hebras</h2>
-					<ul>
-						<li>
-							Al compartir espacio de direcciones, un hilo puede modificar
-							los datos de otro hilo. No existe protección entre ellos.
-						</li>
-						<li>
-							Los hilos son tratados como procesos desde el punto de
-							vista de estados dentro del procesador. Pasan por los
-							mismos estados de un proceso: Listo, Ejecución, Bloqueado o
-							terminado.
-						</li>
-					</ul>
-				</section>
-				<section id="modelo-hilos-2" >
-					<h2>Modelo de hebras</h2>
-					<ul>
-						<li>Cada hilo tiene su propia pila.</li>
-						<li>
-							Se debe considerar la sincronización y competencia de
-							los recursos de un proceso. Un hilo podría bloquear a
-							otro mientras espera un dispositivo de E/S.
-						</li>
-					</ul>
-				</section>
-				<section id="biblioteca-hebras" >
-					<h2>Biblioteca de Hebras</h2>
-					<ul>
-						<li>
-							Permite al programador una API para crear y gestionar
-							hebras.
-						</li>
-						<li>Una de las formas principales es ejecutar todo desde el
-							área de usuario como si fuese una llamada normal.</li>
-						<li>Otro es gestionado desde el sistema operativo, el código
-							se encuentra desde el espacio del núcleo.</li>
-						<li>Para los sistemas POSIX utiliza el API <strong>Pthreads</strong>.</li>
-						<li>En los sistemas Windows se usa el <strong>WinAPI</strong>.</li>
-					</ul>
-				</section>
-				<section id="biblioteca-hebras-posix">
-					<h2>Biblioteca de Hebras</h2>
-					<h3>POSIX</h3>
-					<ul>
-						<li>Estándar definido por la IEEE conocido como 1003.1c</li>
-						<li>Define más de 60 llamadas a funciones para gestionar hilos.</li>
-						<li>Aceptado por la mayoría de sistemas UNIX.</li>
-					</ul>
-				</section>
-				<section id="biblioteca-hebras-winapi">
-					<h2>Biblioteca de Hebras</h2>
-					<h3>WinAPI</h3>
-					<ul>
-						<li>Implementación hecha para los sistemas Windows (Microsoft).</li>
-						<li>Define su interfaz de llamadas para la gestión de los hilos.</li>
-						<li>
-							Se define una estructura para el manejo de los
-							hilos llamada Win32 Thread Information Block
-						</li>
-					</ul>
-				</section>
-        <section id="anexos">
-          <h2>Anexos</h2>
-        </section>
-				<section id="comentario" >
-					<h2>Opinión sobre Hebras</h2>
-					<blockquote>
-						<p>
-							<img src="img/class2/bascule.jpg" alt="Tony Arcieri" class="left"/>
-					 		Cuando se enfrenta a un problema, alguna gente dice: "Ya sé, usaré
-					 		hilos." Ahora ellos tieAhora ellnen 2 problproblememasas 2 problemas.
-					 		<cite>
-					 			Tony Arcieri - <a href="http://twitter.com/bascule" target="_blank">@bascule</a>
-					 		</cite>
-					 	</p>
-					</blockquote>
-				</section>
+    #hebras-grafico .memory-data {
+      background: #7ce7ac;
+    }
 
-				<section id="comic">
-					<h2>Threads/Hebras/Hilos</h2>
-					<a href="img/class2/threads.png" data-lightbox="scheduling">
-						<img class="half" src="img/class2/threads.png">
-					</a>
-					<p class="center">
-						Fuente: <a href="https://drawings.jvns.ca/threads/" title="Ver imagen original">
-							Julia Evans
-						</a>
-					</p>
-				</section>
-        <section id="video-hilos">
-					<h2>Video sobre Hilos</h2>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/M9HHWFp84f0?si=uxS-1lkzTZ-GOGRh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-				</section>
-				<section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
-					<h1 class="stroke">¿Preguntas?</h1>
-				</section>
-			</div>
-		</div>
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/zoom/zoom.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/search/search.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script src="js/lightbox-plus-jquery.min.js"></script>
-		<script>
+    #hebras-grafico .memory-files {
+      background: #ffe08a;
+    }
 
-			// Also available as an ES module, see:
-			// https://revealjs.com/initialization/
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				center: true,
-				hash: true,
-				history: true,
-				theme: 'unet',
-				transition: 'linear',
+    #hebras-grafico .thread-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
-			});
+    #hebras-grafico .thread-box {
+      flex: 1 1 0;
+      padding: 0.9rem;
+      border: 2px solid rgba(255, 255, 255, 0.16);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+    }
 
-		</script>
-	</body>
+    #hebras-grafico .thread-name {
+      margin-bottom: 0.7rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    #hebras-grafico .thread-stack,
+    #hebras-grafico .thread-registers {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    #hebras-grafico .thread-stack span {
+      background: #ffb26b;
+    }
+
+    #hebras-grafico .thread-registers span {
+      background: #d4b5ff;
+    }
+
+    #hebras-grafico .diagram-note {
+      margin: 1rem auto 0;
+      max-width: 1100px;
+      font-size: 1.05rem;
+      line-height: 1.35;
+      color: #eefcff;
+    }
+
+    #modelo-hebras .thread-models {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      margin: 1.5rem auto 0.8rem;
+    }
+
+    #modelo-hebras .thread-model-card {
+      padding: 1rem;
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(10, 26, 45, 0.96), rgba(14, 51, 74, 0.86));
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.28);
+    }
+
+    #modelo-hebras .thread-model-card h3 {
+      margin: 0 0 0.8rem;
+      font-size: 1.9rem;
+      text-decoration: none;
+      color: #fff2b8;
+    }
+
+    #modelo-hebras .model-band {
+      margin: 0.8rem 0 0.5rem;
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    #modelo-hebras .user-band {
+      background: rgba(114, 213, 255, 0.18);
+      color: #d8f6ff;
+    }
+
+    #modelo-hebras .kernel-band {
+      background: rgba(255, 196, 113, 0.18);
+      color: #ffe7bf;
+    }
+
+    #modelo-hebras .entity-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    #modelo-hebras .entity-stack span {
+      display: block;
+      padding: 0.55rem 0.45rem;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #0c1220;
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    #modelo-hebras .user-thread {
+      background: #7fdcff;
+    }
+
+    #modelo-hebras .kernel-thread {
+      background: #ffcb84;
+    }
+
+    #modelo-hebras .model-arrow {
+      margin: 0.45rem 0;
+      font-size: 1.6rem;
+      color: #dff8ff;
+      text-align: center;
+    }
+
+    #modelo-hebras .model-caption {
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      line-height: 1.3;
+      color: #eefcff;
+      text-align: left;
+    }
+
+    #modelo-hebras .models-note {
+      margin: 0.7rem auto 0;
+      max-width: 1150px;
+      font-size: 1rem;
+      line-height: 1.35;
+      color: #eefcff;
+    }
+
+    @media (max-width: 1100px) {
+      #hebras-grafico .thread-layout {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #hebras-grafico .process-card {
+        max-width: 900px;
+      }
+
+      #modelo-hebras .thread-models {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <div class="unet">
+          <div class="logo-wrapper left">
+            <img class="noborder" src="img/UNET.png" alt="UNET Logo">
+          </div>
+          <p id="definition-header" class="left">
+            Universidad Nacional Experimental Del Táchira<br />
+            Decanato De Docencia<br />
+            Dpto. Ingeniería en Informática
+          </p>
+        </div>
+
+        <h1 class="clear">
+          Hilos de ejecución
+        </h1>
+        <h2 id="subject-code">
+          Código 0435607T
+        </h2>
+        <div class="professor-info">
+          <p>
+            <a href="http://skatox.com/" target="_blank">Prof. Miguel Useche</a> -
+            <a href="mailto:miguel.useche@unet.edu.ve" target="_blank">migueluseche@unet.edu.ve</a> -
+            <a href="http://twitter.com/skatox" target="_blank">@skatox</a>
+          </p>
+        </div>
+      </section>
+
+      <section id="contenido">
+        <h2>Contenido</h2>
+        <ul>
+          <li>Concepto.</li>
+          <li>Uso de hilos.</li>
+          <li>Modelo de hilos.</li>
+          <li>Bibliotecas o Librerías.</li>
+          <li>Anexos</li>
+        </ul>
+      </section>
+
+      <section id="hilos">
+        <h2>Hebras o Hilos de ejecución</h2>
+        <ul class="half nomargin left">
+          <li>
+            Son pequeños procesos ejecutados dentro de
+            un mismo espacio de direcciones, con un padre
+            común.
+          </li>
+          <li>
+            Es diferente un proceso hijo (se ejecuta en
+            espacio de direcciones separadas) a un hilo (se
+            ejecuta en el mismo espacio de direcciones)
+          </li>
+        </ul>
+        <div class="half right">
+          <img src="img/class2/hebras.jpg" alt="Hebras" />
+        </div>
+      </section>
+
+      <section id="hebras">
+        <h2>Hebras o Hilos de ejecución</h2>
+        <ul>
+          <li>Posee un contador de programa, un conjunto de registros y una pila.</li>
+          <li>
+            Es creada por un proceso y comparte la sección de código,
+            sección de datos y recursos del sistema operativo.
+          </li>
+          <li>Una tarea <strong>(proceso pesado)</strong> posee una o muchas hebras.
+            (procesos ligeros) </li>
+        </ul>
+      </section>
+
+      <section id="hebras-grafico">
+        <h2>Monohilo y multihilo</h2>
+        <div class="thread-layout">
+          <div class="process-card">
+            <h3>Proceso monohilo</h3>
+            <p class="process-subtitle">Una sola secuencia de ejecución usa todo el contexto del proceso.</p>
+            <div class="memory-block">
+              <div class="memory-title">Memoria física asignada al proceso</div>
+              <div class="memory-sections">
+                <span class="memory-code">Código</span>
+                <span class="memory-data">Datos</span>
+                <span class="memory-files">Archivos / recursos</span>
+              </div>
+            </div>
+            <div class="thread-row">
+              <div class="thread-box">
+                <div class="thread-name">Hilo 1</div>
+                <div class="thread-stack">
+                  <span>Pila propia</span>
+                </div>
+                <div class="thread-registers">
+                  <span>Registros + PC</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="process-card">
+            <h3>Proceso multihilo</h3>
+            <p class="process-subtitle">Varias hebras comparten memoria y recursos, pero conservan su estado de
+              ejecución.</p>
+            <div class="memory-block">
+              <div class="memory-title">Memoria física compartida del proceso</div>
+              <div class="memory-sections">
+                <span class="memory-code">Código</span>
+                <span class="memory-data">Datos</span>
+                <span class="memory-files">Archivos / recursos</span>
+              </div>
+            </div>
+            <div class="thread-row">
+              <div class="thread-box">
+                <div class="thread-name">Hilo 1</div>
+                <div class="thread-stack">
+                  <span>Pila propia</span>
+                </div>
+                <div class="thread-registers">
+                  <span>Registros + PC</span>
+                </div>
+              </div>
+              <div class="thread-box">
+                <div class="thread-name">Hilo 2</div>
+                <div class="thread-stack">
+                  <span>Pila propia</span>
+                </div>
+                <div class="thread-registers">
+                  <span>Registros + PC</span>
+                </div>
+              </div>
+              <div class="thread-box">
+                <div class="thread-name">Hilo 3</div>
+                <div class="thread-stack">
+                  <span>Pila propia</span>
+                </div>
+                <div class="thread-registers">
+                  <span>Registros + PC</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="diagram-note">
+          <strong>Nota: </strong>
+          En ambos casos el proceso ocupa memoria física para su código, datos y recursos; la diferencia es que en el
+          modelo multihilo varias hebras comparten ese espacio, mientras cada una mantiene su propia pila, registros y
+          contador de programa.
+        </p>
+      </section>
+
+      <section id="uso-hilos">
+        <h2>Uso de hilos</h2>
+        <ul>
+
+          <li>No producen un aumento de rendimiento.</li>
+          <li>
+            Muy eficientes cuando hay muchos cálculos y
+            operaciones de E/S.
+          </li>
+          <li>
+            Útiles en equipos con varios CPU. Se aprovecha
+            realmente el procesamiento en paralelo.
+          </li>
+          <li>
+            Un ejemplo: procesador de texto, servidor web,
+            servidor de base de datos
+          </li>
+        </ul>
+      </section>
+
+      <section id="hebras-ventajas">
+        <h2>Ventajas de utilizar <br />hebras sobre procesos</h2>
+        <ul>
+          <li>
+            Permite la ejecución de un programa aunque parte de él
+            esté bloqueado.
+            (generalmente por acceso a dispositivos de E/S)
+          </li>
+          <li>Son más rápidas de crear, hasta 10 veces más que un proceso.</li>
+          <li>Es más económico realizar el cambio de contexto.</li>
+          <li>
+            Más rápido de eliminar pues solo es necesario
+            vaciar su pila y registros, en un proceso toca eliminar todo el PCB.
+          </li>
+        </ul>
+      </section>
+      <section id="hebras-ventajas-2">
+        <h2>Ventajas de utilizar <br />hebras sobre procesos</h2>
+        <ul>
+          <li>
+            Permite mayor control de la comunicación permitiendo
+            crear rutinas propias, pues en el caso de procesos,
+            es necesario usar rutinas del sistema operativo para
+            la comunicación.
+          </li>
+          <li>
+            Permite incrementar el grado de concurrencia al aprovechar
+            el hardware con multiprocesadores.
+          </li>
+        </ul>
+      </section>
+      <section id="ejemplo-hilos">
+        <h2>Ejemplo de uso de Hilos</h2>
+        <div class="half left">
+          <p>El programa utiliza hilos para:</p>
+          <ul>
+            <li>Inteligencia artificial de los enemigos</li>
+            <li>Luces y sombras</li>
+            <li>Física del ambiente: gravedad, polvo, deformaciones.</li>
+            <li>Efectos de sonido</li>
+            <li>Trayectoria de proyectiles.</li>
+            <li>Y otros mas...</li>
+          </ul>
+        </div>
+        <div class="half right center">
+          <a href="img/class2/GameThreads.jpg" data-lightbox="Killzone">
+            <img src="img/class2/GameThreads.jpg" alt="Imagen de Killzone 2" />
+          </a>
+          <br>
+          <small>Ejemplo de hilos/hebras en un juego</small>
+          <iframe src="https://www.youtube.com/embed/EXtMjxC0M4U" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </section>
+      <section id="modelo-hebras">
+        <h2>Modelo de hebras</h2>
+        <div class="thread-models">
+          <div class="thread-model-card">
+            <h3>Modelo de usuario</h3>
+            <div class="model-band user-band">Hebras de usuario</div>
+            <div class="entity-stack">
+              <span class="user-thread">U1</span>
+              <span class="user-thread">U2</span>
+              <span class="user-thread">U3</span>
+            </div>
+            <div class="model-arrow">muchos → uno</div>
+            <div class="model-band kernel-band">Hebras del Kernel</div>
+            <div class="entity-stack">
+              <span class="kernel-thread">K1</span>
+            </div>
+            <p class="model-caption">
+              Gestión rápida en espacio de usuario, pero una llamada bloqueante puede detener todas las hebras del
+              proceso.
+            </p>
+          </div>
+
+          <div class="thread-model-card">
+            <h3>Modelo de kernel</h3>
+            <div class="model-band user-band">Hebras de usuario</div>
+            <div class="entity-stack">
+              <span class="user-thread">U1</span>
+              <span class="user-thread">U2</span>
+              <span class="user-thread">U3</span>
+            </div>
+            <div class="model-arrow">uno → uno</div>
+            <div class="model-band kernel-band">Hebras del Kernel</div>
+            <div class="entity-stack">
+              <span class="kernel-thread">K1</span>
+              <span class="kernel-thread">K2</span>
+              <span class="kernel-thread">K3</span>
+            </div>
+            <p class="model-caption">
+              Cada hebra es visible al sistema operativo; mejora la planificación y el paralelismo, con mayor costo de
+              gestión.
+            </p>
+          </div>
+
+          <div class="thread-model-card">
+            <h3>Modelo híbrido</h3>
+            <div class="model-band user-band">Hebras de usuario</div>
+            <div class="entity-stack">
+              <span class="user-thread">U1</span>
+              <span class="user-thread">U2</span>
+              <span class="user-thread">U3</span>
+              <span class="user-thread">U4</span>
+            </div>
+            <div class="model-arrow">muchos → muchos</div>
+            <div class="model-band kernel-band">Hebras del Kernel</div>
+            <div class="entity-stack">
+              <span class="kernel-thread">K1</span>
+              <span class="kernel-thread">K2</span>
+            </div>
+            <p class="model-caption">
+              Combina flexibilidad en usuario con soporte del kernel, asignando varias hebras de usuario sobre un
+              conjunto menor de hebras del kernel.
+            </p>
+          </div>
+        </div>
+        <p class="models-note">
+          <strong>Idea clave:</strong>
+          la diferencia entre modelos está en cómo se mapean las hebras visibles para la aplicación con las entidades
+          que el sistema operativo realmente planifica.
+        </p>
+      </section>
+      <section id="modelo-hilos">
+        <h2>Modelo de hebras</h2>
+        <ul>
+          <li>
+            Al compartir espacio de direcciones, un hilo puede modificar
+            los datos de otro hilo. No existe protección entre ellos.
+          </li>
+          <li>
+            Los hilos son tratados como procesos desde el punto de
+            vista de estados dentro del procesador. Pasan por los
+            mismos estados de un proceso: Listo, Ejecución, Bloqueado o
+            terminado.
+          </li>
+        </ul>
+      </section>
+      <section id="modelo-hilos-2">
+        <h2>Modelo de hebras</h2>
+        <ul>
+          <li>Cada hilo tiene su propia pila.</li>
+          <li>
+            Se debe considerar la sincronización y competencia de
+            los recursos de un proceso. Un hilo podría bloquear a
+            otro mientras espera un dispositivo de E/S.
+          </li>
+        </ul>
+      </section>
+      <section id="biblioteca-hebras">
+        <h2>Biblioteca de Hebras</h2>
+        <ul>
+          <li>
+            Permite al programador una API para crear y gestionar
+            hebras.
+          </li>
+          <li>Una de las formas principales es ejecutar todo desde el
+            área de usuario como si fuese una llamada normal.</li>
+          <li>Otro es gestionado desde el sistema operativo, el código
+            se encuentra desde el espacio del núcleo.</li>
+          <li>Para los sistemas POSIX utiliza el API <strong>Pthreads</strong>.</li>
+          <li>En los sistemas Windows se usa el <strong>WinAPI</strong>.</li>
+        </ul>
+      </section>
+      <section id="biblioteca-hebras-posix">
+        <h2>Biblioteca de Hebras</h2>
+        <h3>POSIX</h3>
+        <ul>
+          <li>Estándar definido por la IEEE conocido como 1003.1c</li>
+          <li>Define más de 60 llamadas a funciones para gestionar hilos.</li>
+          <li>Aceptado por la mayoría de sistemas UNIX.</li>
+        </ul>
+      </section>
+      <section id="biblioteca-hebras-winapi">
+        <h2>Biblioteca de Hebras</h2>
+        <h3>WinAPI</h3>
+        <ul>
+          <li>Implementación hecha para los sistemas Windows (Microsoft).</li>
+          <li>Define su interfaz de llamadas para la gestión de los hilos.</li>
+          <li>
+            Se define una estructura para el manejo de los
+            hilos llamada Win32 Thread Information Block
+          </li>
+        </ul>
+      </section>
+      <section id="anexos">
+        <h2>Anexos</h2>
+      </section>
+      <section id="comentario">
+        <h2>Opinión sobre Hebras</h2>
+        <blockquote>
+          <p>
+            <img src="img/class2/bascule.jpg" alt="Tony Arcieri" class="left" />
+            Cuando se enfrenta a un problema, alguna gente dice: "Ya sé, usaré
+            hilos." Ahora ellos tieAhora ellnen 2 problproblememasas 2 problemas.
+            <cite>
+              Tony Arcieri - <a href="http://twitter.com/bascule" target="_blank">@bascule</a>
+            </cite>
+          </p>
+        </blockquote>
+      </section>
+
+      <section id="comic">
+        <h2>Threads/Hebras/Hilos</h2>
+        <a href="img/class2/threads.png" data-lightbox="scheduling">
+          <img class="half" src="img/class2/threads.png">
+        </a>
+        <p class="center">
+          Fuente: <a href="https://drawings.jvns.ca/threads/" title="Ver imagen original">
+            Julia Evans
+          </a>
+        </p>
+      </section>
+      <section id="video-hilos">
+        <h2>Video sobre Hilos</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/M9HHWFp84f0?si=uxS-1lkzTZ-GOGRh"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </section>
+      <section id="preguntas" data-background="img/questions.gif" data-background-repeat="none">
+        <h1 class="stroke">¿Preguntas?</h1>
+      </section>
+    </div>
+  </div>
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/zoom/zoom.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/search/search.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script src="js/lightbox-plus-jquery.min.js"></script>
+  <script>
+
+    // Also available as an ES module, see:
+    // https://revealjs.com/initialization/
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      center: true,
+      hash: true,
+      history: true,
+      theme: 'unet',
+      transition: 'linear',
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+    });
+
+  </script>
+</body>
+
 </html>
