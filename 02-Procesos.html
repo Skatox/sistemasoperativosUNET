@@ -24,13 +24,7 @@
       margin: 0 auto;
       padding: 0;
       border-radius: 20px;
-    }
-
-    .process-canvas-wrap p {
-      margin: 10px 0 0;
-      font-size: 0.62em;
-      color: #d4e1ec;
-      line-height: 1.35;
+      margin-top: -40px;
     }
 
     #process-state-canvas {
@@ -42,6 +36,14 @@
     }
 
     #scheduler-queue-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      background: transparent;
+    }
+
+    #context-switch-canvas {
       display: block;
       width: 100%;
       height: auto;
@@ -651,12 +653,10 @@
       <section id="cambio-programa">
         <h2>Cambio de contexto</h2>
         <div class="half right">
-          <a href="img/class2/cambioProceso.jpg" data-lightbox="Cambio-proceso">
-            <img src="img/class2/cambioProceso.jpg" alt="Cambio de Proceso" />
-          </a>
-          <a href="img/class2/cambio_contexto.gif" data-lightbox="Cambio-contexto">
-            <img src="img/class2/cambio_contexto.gif" alt="Cambio de contexto">
-          </a>
+          <div class="process-canvas-wrap">
+            <canvas id="context-switch-canvas" aria-label="Animación del cambio de contexto entre dos procesos">
+            </canvas>
+          </div>
         </div>
         <div class="half">
           <ul>
@@ -668,6 +668,13 @@
             </li>
           </ul>
         </div>
+        <p>
+          <small>
+            La animación muestra cómo el sistema <strong>guarda</strong> el estado de <strong>P1</strong>,
+            el planificador <strong>selecciona</strong> a <strong>P2</strong> y luego el CPU
+            <strong>restaura</strong> su contexto para continuar la ejecución.
+          </small>
+        </p>
       </section>
       <section id="cambio-contexto">
         <h2>Cambio de contexto</h2>
@@ -717,7 +724,7 @@
         <p>
           Es una estructura de datos en el núcleo del S.O con
           información requerida para administrar un proceso en particular,
-          esta compuesto por:
+          compuesto por:
         </p>
         <ul>
           <li>
@@ -1578,6 +1585,375 @@
       return {setActive, resizeCanvas};
     })();
 
+    const contextSwitchCanvas = (() => {
+      const canvas = document.getElementById('context-switch-canvas');
+      if (!canvas) return null;
+
+      const ctx = canvas.getContext('2d');
+      const baseWidth = 700;
+      const baseHeight = 650;
+      let scale = 1;
+      let animationFrame = null;
+      let active = false;
+      let start = 0;
+
+      const sequence = [
+        {label: 'P1 en CPU', duration: 1400, phase: 'hold', focus: 'cpu', process: 'P1', detail: 'P1 está ejecutando y sus registros viven en el CPU.'},
+        {label: 'Interrupción', duration: 1100, phase: 'hold', focus: 'interrupt', process: 'P1', detail: 'Un reloj, una excepción o una E/S obliga al sistema a intervenir.'},
+        {label: 'Guardar contexto', duration: 1300, phase: 'move', from: 'cpu', to: 'pcb1', process: 'P1', detail: 'El kernel copia PC, SP y registros de P1 hacia su PCB.'},
+        {label: 'P1 listo', duration: 1000, phase: 'hold', focus: 'pcb1', process: 'P1', detail: 'P1 queda pausado; su estado completo ya está guardado en memoria.'},
+        {label: 'Planificador decide', duration: 1200, phase: 'hold', focus: 'scheduler', process: 'P2', detail: 'El scheduler revisa la cola de listos y elige a P2.'},
+        {label: 'Restaurar contexto', duration: 1300, phase: 'move', from: 'pcb2', to: 'cpu', process: 'P2', detail: 'El kernel carga al CPU el contexto guardado previamente de P2.'},
+        {label: 'P2 en CPU', duration: 1600, phase: 'hold', focus: 'cpu', process: 'P2', detail: 'La ejecución continúa exactamente donde P2 había sido interrumpido.'}
+      ];
+
+      const totalDuration = sequence.reduce((sum, step) => sum + step.duration, 0);
+
+      function resizeCanvas() {
+        const parentWidth = canvas.parentElement.clientWidth;
+        scale = Math.min(1, parentWidth / baseWidth);
+        canvas.width = Math.round(baseWidth * scale);
+        canvas.height = Math.round(baseHeight * scale);
+      }
+
+      function roundedRect(x, y, w, h, radius, fill, stroke) {
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.arcTo(x + w, y, x + w, y + h, radius);
+        ctx.arcTo(x + w, y + h, x, y + h, radius);
+        ctx.arcTo(x, y + h, x, y, radius);
+        ctx.arcTo(x, y, x + w, y, radius);
+        ctx.closePath();
+        if (fill) {
+          ctx.fillStyle = fill;
+          ctx.fill();
+        }
+        if (stroke) {
+          ctx.strokeStyle = stroke;
+          ctx.stroke();
+        }
+      }
+
+      function arrow(from, to, color, width = 4, dashed = false) {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        if (dashed) ctx.setLineDash([10 * scale, 10 * scale]);
+        ctx.beginPath();
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(to.x, to.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        const angle = Math.atan2(to.y - from.y, to.x - from.x);
+        const head = 14 * scale;
+        ctx.beginPath();
+        ctx.moveTo(to.x, to.y);
+        ctx.lineTo(to.x - head * Math.cos(angle - Math.PI / 8), to.y - head * Math.sin(angle - Math.PI / 8));
+        ctx.lineTo(to.x - head * Math.cos(angle + Math.PI / 8), to.y - head * Math.sin(angle + Math.PI / 8));
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function fillWrappedText(text, x, y, maxWidth, lineHeight) {
+        const words = text.split(/\s+/);
+        const lines = [];
+        let currentLine = '';
+
+        words.forEach((word) => {
+          const nextLine = currentLine ? `${currentLine} ${word}` : word;
+          if (ctx.measureText(nextLine).width <= maxWidth || !currentLine) {
+            currentLine = nextLine;
+          } else {
+            lines.push(currentLine);
+            currentLine = word;
+          }
+        });
+
+        if (currentLine) lines.push(currentLine);
+        lines.forEach((line, index) => {
+          ctx.fillText(line, x, y + index * lineHeight);
+        });
+      }
+
+      function getLayout() {
+        const s = scale;
+        return {
+          cpuBox: {x: 235 * s, y: 55 * s, w: 230 * s, h: 145 * s},
+          pcb1Box: {x: 58 * s, y: 240 * s, w: 250 * s, h: 215 * s},
+          pcb2Box: {x: 392 * s, y: 240 * s, w: 250 * s, h: 215 * s},
+          schedulerBox: {x: 165 * s, y: 465 * s, w: 370 * s, h: 90 * s},
+          legendBox: {x: 58 * s, y: 575 * s, w: 584 * s, h: 60 * s},
+          slots: {
+            cpu: {x: 350 * s, y: 138 * s},
+            pcb1: {x: 183 * s, y: 332 * s},
+            pcb2: {x: 517 * s, y: 332 * s},
+            scheduler: {x: 350 * s, y: 480 * s}
+          }
+        };
+      }
+
+      function processPalette(process) {
+        if (process === 'P1') return {a: '#ffd166', b: '#ff8f1f', text: '#2a2110', border: '#ffd166'};
+        return {a: '#7bdff2', b: '#229ec9', text: '#14303d', border: '#7bdff2'};
+      }
+
+      function stateForStep(index) {
+        if (index <= 1) return {cpu: 'P1', pcb1Stored: false, pcb2Stored: true, active: 'P1'};
+        if (index <= 3) return {cpu: null, pcb1Stored: true, pcb2Stored: true, active: 'P1'};
+        if (index === 4) return {cpu: null, pcb1Stored: true, pcb2Stored: true, active: 'P2'};
+        return {cpu: 'P2', pcb1Stored: true, pcb2Stored: false, active: 'P2'};
+      }
+
+      function positionFor(timeMs) {
+        let elapsed = ((timeMs % totalDuration) + totalDuration) % totalDuration;
+        const layout = getLayout();
+
+        for (let index = 0; index < sequence.length; index += 1) {
+          const step = sequence[index];
+          if (elapsed <= step.duration) {
+            const progress = Math.max(0, Math.min(1, elapsed / step.duration));
+            const state = stateForStep(index);
+
+            if (step.phase === 'move') {
+              const from = layout.slots[step.from];
+              const to = layout.slots[step.to];
+              const eased = 0.5 - Math.cos(progress * Math.PI) / 2;
+              return {
+                step,
+                state,
+                moving: true,
+                point: {
+                  x: from.x + (to.x - from.x) * eased,
+                  y: from.y + (to.y - from.y) * eased
+                }
+              };
+            }
+
+            return {
+              step,
+              state,
+              moving: false,
+              point: layout.slots[step.focus === 'interrupt' ? 'cpu' : step.focus]
+            };
+          }
+          elapsed -= step.duration;
+        }
+
+        return {
+          step: sequence[sequence.length - 1],
+          state: stateForStep(sequence.length - 1),
+          moving: false,
+          point: layout.slots.cpu
+        };
+      }
+
+      function drawToken(point, process, small = false) {
+        const palette = processPalette(process);
+        const radius = (small ? 18 : 25) * scale;
+        const glow = ctx.createRadialGradient(point.x - 6 * scale, point.y - 6 * scale, 3 * scale, point.x, point.y, radius * 1.7);
+        glow.addColorStop(0, palette.a);
+        glow.addColorStop(1, palette.b);
+        ctx.save();
+        ctx.shadowColor = 'rgba(255,255,255,0.16)';
+        ctx.shadowBlur = 18 * scale;
+        ctx.beginPath();
+        ctx.fillStyle = glow;
+        ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+        ctx.fillStyle = palette.text;
+        ctx.font = `bold ${(small ? 12 : 18) * scale}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillText(process, point.x, point.y + (small ? 4 : 6) * scale);
+        ctx.textAlign = 'start';
+      }
+
+      function drawCPU(box, occupant, focus) {
+        const active = focus === 'cpu' || focus === 'interrupt';
+        roundedRect(
+          box.x,
+          box.y,
+          box.w,
+          box.h,
+          20 * scale,
+          active ? 'rgba(255, 209, 102, 0.13)' : 'rgba(10, 20, 32, 0.72)',
+          active ? '#ffd166' : 'rgba(255,255,255,0.10)'
+        );
+        ctx.fillStyle = '#f6fbff';
+        ctx.font = `${28 * scale}px sans-serif`;
+        ctx.fillText('CPU', box.x + 20 * scale, box.y + 40 * scale);
+        ctx.fillStyle = '#9dc4db';
+        ctx.font = `${16 * scale}px sans-serif`;
+        fillWrappedText('Registros activos: PC, SP, R1...', box.x + 20 * scale, box.y + 68 * scale, box.w - 40 * scale, 18 * scale);
+
+        const registerX = box.x + 20 * scale;
+        const registerY = box.y + 98 * scale;
+        ['PC', 'SP', 'R1', 'R2'].forEach((label, index) => {
+          roundedRect(
+            registerX + index * 46 * scale,
+            registerY,
+            38 * scale,
+            24 * scale,
+            8 * scale,
+            'rgba(255,255,255,0.07)',
+            'rgba(255,255,255,0.10)'
+          );
+          ctx.fillStyle = '#dce8ef';
+          ctx.font = `${12 * scale}px sans-serif`;
+          ctx.fillText(label, registerX + 10 * scale + index * 46 * scale, registerY + 16 * scale);
+        });
+
+        if (occupant) drawToken({x: box.x + box.w - 42 * scale, y: box.y + 42 * scale}, occupant, true);
+
+        if (focus === 'interrupt') {
+          roundedRect(
+            box.x + box.w - 118 * scale,
+            box.y + 76 * scale,
+            98 * scale,
+            28 * scale,
+            9 * scale,
+            'rgba(255, 143, 143, 0.20)',
+            '#ff8f8f'
+          );
+          ctx.fillStyle = '#ffe2e2';
+          ctx.font = `${13 * scale}px sans-serif`;
+          ctx.fillText('Interrupción', box.x + box.w - 104 * scale, box.y + 95 * scale);
+        }
+      }
+
+      function drawPCB(box, process, stored, active) {
+        const palette = processPalette(process);
+        roundedRect(
+          box.x,
+          box.y,
+          box.w,
+          box.h,
+          18 * scale,
+          active ? 'rgba(255,255,255,0.06)' : 'rgba(10, 20, 32, 0.72)',
+          active ? palette.border : 'rgba(255,255,255,0.10)'
+        );
+        ctx.fillStyle = '#f6fbff';
+        ctx.font = `${22 * scale}px sans-serif`;
+        ctx.fillText(`PCB ${process}`, box.x + 18 * scale, box.y + 34 * scale);
+        ctx.fillStyle = '#9dc4db';
+        ctx.font = `${14 * scale}px sans-serif`;
+        fillWrappedText('Proceso, estado y contexto guardado', box.x + 18 * scale, box.y + 58 * scale, box.w - 36 * scale, 16 * scale);
+
+        const rows = [
+          ['Estado', stored ? 'listo / espera' : 'ejecutando'],
+          ['PC', stored ? '0x8048' : '--'],
+          ['SP', stored ? '0x7ffe' : '--'],
+          ['Regs', stored ? 'R1..Rn' : '--']
+        ];
+
+        rows.forEach(([label, value], index) => {
+          const y = box.y + 96 * scale + index * 24 * scale;
+          roundedRect(
+            box.x + 16 * scale,
+            y,
+            box.w - 32 * scale,
+            18 * scale,
+            7 * scale,
+            'rgba(255,255,255,0.04)',
+            'rgba(255,255,255,0.08)'
+          );
+          ctx.fillStyle = '#cde1ee';
+          ctx.font = `${12 * scale}px sans-serif`;
+          ctx.fillText(label, box.x + 24 * scale, y + 13 * scale);
+          ctx.fillStyle = stored ? '#fff3c4' : '#89a8bc';
+          ctx.fillText(value, box.x + box.w - 84 * scale, y + 13 * scale);
+        });
+
+        drawToken({x: box.x + box.w - 34 * scale, y: box.y + 34 * scale}, process, true);
+      }
+
+      function drawScheduler(box, active) {
+        roundedRect(
+          box.x,
+          box.y,
+          box.w,
+          box.h,
+          18 * scale,
+          active ? 'rgba(123, 223, 242, 0.12)' : 'rgba(10, 20, 32, 0.72)',
+          active ? '#7bdff2' : 'rgba(255,255,255,0.10)'
+        );
+        ctx.fillStyle = '#f6fbff';
+        ctx.font = `${22 * scale}px sans-serif`;
+        ctx.fillText('Scheduler / Kernel', box.x + 18 * scale, box.y + 28 * scale);
+        ctx.fillStyle = '#9dc4db';
+        ctx.font = `${15 * scale}px sans-serif`;
+        fillWrappedText('Decide qué proceso entra al CPU y coordina el cambio de contexto.', box.x + 18 * scale, box.y + 52 * scale, box.w - 36 * scale, 17 * scale);
+      }
+
+      function draw(time) {
+        if (!active) return;
+        if (!start) start = time;
+        const elapsed = time - start;
+        const layout = getLayout();
+        const frame = positionFor(elapsed);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(255,255,255,0.03)';
+        for (let i = 0; i < 12; i += 1) {
+          ctx.beginPath();
+          ctx.arc((40 + i * 55) * scale, (25 + (i % 4) * 120) * scale, 2 * scale, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        arrow({x: 350 * scale, y: 200 * scale}, {x: 183 * scale, y: 240 * scale}, '#ffd166', 3);
+        arrow({x: 517 * scale, y: 240 * scale}, {x: 350 * scale, y: 200 * scale}, '#7bdff2', 3);
+        arrow({x: 350 * scale, y: 445 * scale}, {x: 350 * scale, y: 200 * scale}, 'rgba(255,255,255,0.18)', 2, true);
+
+        ctx.fillStyle = '#bed3e2';
+        ctx.font = `${15 * scale}px sans-serif`;
+        ctx.fillText('guardar', 218 * scale, 210 * scale);
+        ctx.fillText('restaurar', 470 * scale, 210 * scale);
+
+        drawCPU(layout.cpuBox, frame.state.cpu, frame.step.focus);
+        drawPCB(layout.pcb1Box, 'P1', frame.state.pcb1Stored, frame.step.focus === 'pcb1');
+        drawPCB(layout.pcb2Box, 'P2', frame.state.pcb2Stored, frame.step.focus === 'pcb2');
+        drawScheduler(layout.schedulerBox, frame.step.focus === 'scheduler');
+
+        roundedRect(
+          layout.legendBox.x,
+          layout.legendBox.y,
+          layout.legendBox.w,
+          layout.legendBox.h,
+          10 * scale,
+          'rgba(255,255,255,0.04)',
+          'rgba(255,255,255,0.08)'
+        );
+        ctx.fillStyle = '#f8fbff';
+        ctx.font = `bold ${18 * scale}px sans-serif`;
+        ctx.fillText(frame.step.label, layout.legendBox.x + 16 * scale, layout.legendBox.y + 22 * scale);
+        ctx.fillStyle = '#d5e5f1';
+        ctx.font = `${14 * scale}px sans-serif`;
+        fillWrappedText(frame.step.detail, layout.legendBox.x + 16 * scale, layout.legendBox.y + 44 * scale, layout.legendBox.w - 32 * scale, 16 * scale);
+
+        if (frame.moving) drawToken(frame.point, frame.step.process);
+        animationFrame = window.requestAnimationFrame(draw);
+      }
+
+      function setActive(nextActive) {
+        if (active === nextActive) return;
+        active = nextActive;
+        if (active) {
+          start = 0;
+          animationFrame = window.requestAnimationFrame(draw);
+        } else if (animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = null;
+        }
+      }
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      return {setActive, resizeCanvas};
+    })();
+
     // Also available as an ES module, see:
     // https://revealjs.com/initialization/
     Reveal.initialize({
@@ -1607,10 +1983,19 @@
       schedulerQueueCanvas.setActive(current && current.id === 'cola-planificacion');
     }
 
+    function syncContextSwitchCanvasState() {
+      if (!contextSwitchCanvas) return;
+      const current = Reveal.getCurrentSlide();
+      contextSwitchCanvas.resizeCanvas();
+      contextSwitchCanvas.setActive(current && current.id === 'cambio-programa');
+    }
+
     Reveal.on('ready', syncProcessCanvasState);
     Reveal.on('ready', syncSchedulerQueueCanvasState);
+    Reveal.on('ready', syncContextSwitchCanvasState);
     Reveal.on('slidechanged', syncProcessCanvasState);
     Reveal.on('slidechanged', syncSchedulerQueueCanvasState);
+    Reveal.on('slidechanged', syncContextSwitchCanvasState);
 
   </script>
 </body>
