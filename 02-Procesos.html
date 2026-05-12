@@ -41,6 +41,28 @@
       background: transparent;
     }
 
+    #scheduler-queue-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      background: transparent;
+    }
+
+
+    #cola-planificacion h2 {
+      margin-bottom: 0.08em;
+    }
+
+    #cola-planificacion .process-canvas-wrap {
+      margin-top: 0;
+      width: min(1080px, 98%);
+    }
+
+    #cola-planificacion .process-canvas-wrap p {
+      margin-top: 4px;
+    }
+
     .multiprogramming-chart-header {
       display: flex;
       justify-content: space-between;
@@ -608,12 +630,17 @@
       </section>
 
       <section id="cola-planificacion">
-        <h2>Colas de<br>Planificación de procesos</h2>
-        <p>
-          <a href="img/class2/colas.png" data-lightbox="colas-planificacion">
-            <img src="img/class2/colas.png" alt="colas de planificacion" />
-          </a>
-        </p>
+        <h2>Colas de Planificación de procesos</h2>
+        <div class="process-canvas-wrap">
+          <canvas id="scheduler-queue-canvas"
+            aria-label="Animación de las colas de planificación de procesos del sistema operativo">
+          </canvas>
+          <p>
+            La animación muestra cómo varios procesos pasan de la <strong>cola de trabajos</strong> a
+            <strong>listos</strong>, uno es elegido por el planificador para usar el <strong>CPU</strong>,
+            luego puede <strong>bloquearse por E/S</strong> y finalmente regresar a <strong>listos</strong>.
+          </p>
+        </div>
         <aside class="notes">
           A medida que se van creando y ejecutando procesos en el sistema,
           al cambiar de estado se coloca
@@ -714,7 +741,8 @@
         <div class="pcb-visual">
           <div class="pcb-summary">
             <h3>PCB</h3>
-            <p>El sistema operativo mantiene una estructura por proceso para poder pausarlo, reanudarlo y planificarlo.</p>
+            <p>El sistema operativo mantiene una estructura por proceso para poder pausarlo, reanudarlo y planificarlo.
+            </p>
             <p>La tabla resume los campos que normalmente se guardan dentro del bloque de control de proceso.</p>
           </div>
           <div class="pcb-table-wrap">
@@ -947,6 +975,27 @@
         ctx.restore();
       }
 
+      function fillWrappedText(text, x, y, maxWidth, lineHeight) {
+        const words = text.split(/\s+/);
+        const lines = [];
+        let currentLine = '';
+
+        words.forEach((word) => {
+          const nextLine = currentLine ? `${currentLine} ${word}` : word;
+          if (ctx.measureText(nextLine).width <= maxWidth || !currentLine) {
+            currentLine = nextLine;
+          } else {
+            lines.push(currentLine);
+            currentLine = word;
+          }
+        });
+
+        if (currentLine) lines.push(currentLine);
+        lines.forEach((line, index) => {
+          ctx.fillText(line, x, y + index * lineHeight);
+        });
+      }
+
       function getLayout() {
         const s = scale;
         return {
@@ -975,7 +1024,7 @@
         ctx.fillText(title, box.x + 18 * scale, box.y + 38 * scale);
         ctx.fillStyle = '#9dc4db';
         ctx.font = `${16 * scale}px sans-serif`;
-        ctx.fillText(subtitle, box.x + 18 * scale, box.y + 65 * scale);
+        fillWrappedText(subtitle, box.x + 18 * scale, box.y + 65 * scale, box.w - 36 * scale, 20 * scale);
       }
 
       function drawSlot(x, y, slotId, label, activeSlot, accent) {
@@ -1153,6 +1202,382 @@
       return {setActive, resizeCanvas};
     })();
 
+    const schedulerQueueCanvas = (() => {
+      const canvas = document.getElementById('scheduler-queue-canvas');
+      if (!canvas) return null;
+
+      const ctx = canvas.getContext('2d');
+      const baseWidth = 1100;
+      const baseHeight = 560;
+      let scale = 1;
+      let animationFrame = null;
+      let active = false;
+      let start = 0;
+
+      const sequence = [
+        {label: 'Trabajos', duration: 1300, process: 'P1', pos: 'job1', status: 'P1 espera admisión en la cola de trabajos.', event: 'Todavía no compite por CPU.'},
+        {label: 'Admisión', duration: 1100, process: 'P1', from: 'job1', to: 'ready3', status: 'El SO crea el PCB y mueve P1 a listos.', event: 'Ingresa a la memoria principal.'},
+        {label: 'Listos', duration: 1200, process: 'P1', pos: 'ready3', status: 'P1 espera su turno junto a otros procesos.', event: 'La cola de listos alimenta al planificador.'},
+        {label: 'Despacho', duration: 1100, process: 'P2', from: 'ready1', to: 'cpu', status: 'El planificador elige P2 para ejecutar.', event: 'Se hace cambio de contexto.'},
+        {label: 'CPU ocupado', duration: 1300, process: 'P2', pos: 'cpu', status: 'P2 usa el procesador.', event: 'P1 y P3 siguen esperando en listos.'},
+        {label: 'Bloqueo', duration: 1200, process: 'P2', from: 'cpu', to: 'blocked2', status: 'P2 solicita E/S y queda bloqueado.', event: 'Sale temporalmente del CPU.'},
+        {label: 'Nuevo despacho', duration: 1100, process: 'P1', from: 'ready3', to: 'cpu', status: 'Como P2 se bloqueó, P1 entra al CPU.', event: 'Listos vuelve a despachar.'},
+        {label: 'Evento externo', duration: 1200, process: 'P2', from: 'blocked2', to: 'ready1', status: 'La E/S termina y P2 retorna a listos.', event: 'Queda de nuevo elegible.'},
+        {label: 'Quantum agotado', duration: 1200, process: 'P1', from: 'cpu', to: 'ready2', status: 'P1 cede el CPU y regresa al final de listos.', event: 'Ejemplo de round robin.'},
+        {label: 'Nueva selección', duration: 1100, process: 'P2', from: 'ready1', to: 'cpu', status: 'El planificador vuelve a seleccionar P2.', event: 'Siempre toma uno de la cola de listos.'},
+        {label: 'Ejecución', duration: 1400, process: 'P2', pos: 'cpu', status: 'El ciclo continúa mientras existan procesos.', event: 'Las colas organizan quién espera y quién ejecuta.'}
+      ];
+
+      const totalDuration = sequence.reduce((sum, step) => sum + step.duration, 0);
+
+      function resizeCanvas() {
+        const parentWidth = canvas.parentElement.clientWidth;
+        scale = Math.min(1, parentWidth / baseWidth);
+        canvas.width = Math.round(baseWidth * scale);
+        canvas.height = Math.round(baseHeight * scale);
+      }
+
+      function roundedRect(x, y, w, h, radius, fill, stroke) {
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.arcTo(x + w, y, x + w, y + h, radius);
+        ctx.arcTo(x + w, y + h, x, y + h, radius);
+        ctx.arcTo(x, y + h, x, y, radius);
+        ctx.arcTo(x, y, x + w, y, radius);
+        ctx.closePath();
+        if (fill) {
+          ctx.fillStyle = fill;
+          ctx.fill();
+        }
+        if (stroke) {
+          ctx.strokeStyle = stroke;
+          ctx.stroke();
+        }
+      }
+
+      function arrow(from, to, color, width = 4, dashed = false) {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        if (dashed) ctx.setLineDash([10 * scale, 10 * scale]);
+        ctx.beginPath();
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(to.x, to.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        const angle = Math.atan2(to.y - from.y, to.x - from.x);
+        const head = 14 * scale;
+        ctx.beginPath();
+        ctx.moveTo(to.x, to.y);
+        ctx.lineTo(to.x - head * Math.cos(angle - Math.PI / 8), to.y - head * Math.sin(angle - Math.PI / 8));
+        ctx.lineTo(to.x - head * Math.cos(angle + Math.PI / 8), to.y - head * Math.sin(angle + Math.PI / 8));
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function fillWrappedText(text, x, y, maxWidth, lineHeight) {
+        const words = text.split(/\s+/);
+        const lines = [];
+        let currentLine = '';
+
+        words.forEach((word) => {
+          const nextLine = currentLine ? `${currentLine} ${word}` : word;
+          if (ctx.measureText(nextLine).width <= maxWidth || !currentLine) {
+            currentLine = nextLine;
+          } else {
+            lines.push(currentLine);
+            currentLine = word;
+          }
+        });
+
+        if (currentLine) lines.push(currentLine);
+        lines.forEach((line, index) => {
+          ctx.fillText(line, x, y + index * lineHeight);
+        });
+      }
+
+      function getLayout() {
+        const s = scale;
+        return {
+          jobsBox: {x: 20 * s, y: 95 * s, w: 240 * s, h: 240 * s},
+          readyBox: {x: 340 * s, y: 95 * s, w: 260 * s, h: 270 * s},
+          cpuBox: {x: 705 * s, y: 95 * s, w: 230 * s, h: 160 * s},
+          blockedBox: {x: 705 * s, y: 320 * s, w: 280 * s, h: 210 * s},
+          legendBox: {x: 40 * s, y: 375 * s, w: 620 * s, h: 190 * s},
+          slots: {
+            job1: {x: 130 * s, y: 225 * s},
+            job2: {x: 130 * s, y: 285 * s},
+            ready1: {x: 470 * s, y: 220 * s},
+            ready2: {x: 470 * s, y: 272 * s},
+            ready3: {x: 470 * s, y: 325 * s},
+            cpu: {x: 815 * s, y: 215 * s},
+            blocked1: {x: 830 * s, y: 435 * s},
+            blocked2: {x: 830 * s, y: 485 * s}
+          }
+        };
+      }
+
+      function drawQueueBox(box, title, subtitle, color) {
+        roundedRect(box.x, box.y, box.w, box.h, 18 * scale, 'rgba(10, 20, 32, 0.72)', color);
+        ctx.fillStyle = '#f6fbff';
+        ctx.font = `${26 * scale}px sans-serif`;
+        ctx.fillText(title, box.x + 18 * scale, box.y + 38 * scale);
+        ctx.fillStyle = '#9dc4db';
+        ctx.font = `${16 * scale}px sans-serif`;
+        fillWrappedText(subtitle, box.x + 18 * scale, box.y + 65 * scale, box.w - 36 * scale, 20 * scale);
+      }
+
+      function processPalette(process) {
+        if (process === 'P1') return {fillA: '#ffd166', fillB: '#ff8f1f', text: '#1e2730'};
+        if (process === 'P2') return {fillA: '#7bdff2', fillB: '#229ec9', text: '#163042'};
+        return {fillA: '#63e6be', fillB: '#17b890', text: '#10352b'};
+      }
+
+      function drawSlot(x, y, slotId, label, state, activeProcess) {
+        const width = 126 * scale;
+        const height = 42 * scale;
+        const occupant = state[slotId];
+        const isActive = occupant && occupant === activeProcess;
+        roundedRect(
+          x - width / 2,
+          y - height / 2,
+          width,
+          height,
+          12 * scale,
+          isActive ? 'rgba(255, 202, 40, 0.22)' : 'rgba(255, 255, 255, 0.05)',
+          isActive ? '#ffcc4d' : 'rgba(255,255,255,0.10)'
+        );
+        ctx.fillStyle = '#9dc4db';
+        ctx.font = `${12 * scale}px sans-serif`;
+        ctx.textAlign = 'left';
+        ctx.fillText(label, x - width / 2 + 10 * scale, y - 10 * scale);
+
+        if (occupant) {
+          const palette = processPalette(occupant);
+          const tokenRadius = 14 * scale;
+          const tokenX = x + width / 2 - 26 * scale;
+          const tokenY = y;
+          const glow = ctx.createRadialGradient(tokenX - 4 * scale, tokenY - 4 * scale, 2 * scale, tokenX, tokenY, tokenRadius * 1.6);
+          glow.addColorStop(0, palette.fillA);
+          glow.addColorStop(1, palette.fillB);
+          ctx.save();
+          ctx.shadowColor = 'rgba(255,255,255,0.12)';
+          ctx.shadowBlur = 14 * scale;
+          ctx.beginPath();
+          ctx.fillStyle = glow;
+          ctx.arc(tokenX, tokenY, tokenRadius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+
+          ctx.fillStyle = palette.text;
+          ctx.font = `bold ${11 * scale}px sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.fillText(occupant, tokenX, tokenY + 4 * scale);
+        } else {
+          ctx.fillStyle = '#dce8ef';
+          ctx.font = `${16 * scale}px sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.fillText('vacía', x + 10 * scale, y + 6 * scale);
+        }
+
+        ctx.textAlign = 'start';
+      }
+
+      function stateForStep(step) {
+        const state = {
+          job1: 'P1',
+          job2: 'P3',
+          ready1: 'P2',
+          ready2: null,
+          ready3: null,
+          cpu: null,
+          blocked1: null,
+          blocked2: null
+        };
+
+        if (step >= 1) {
+          state.job1 = null;
+          state.ready3 = 'P1';
+        }
+        if (step >= 3) {
+          state.ready1 = null;
+          state.cpu = 'P2';
+        }
+        if (step >= 5) {
+          state.cpu = null;
+          state.blocked2 = 'P2';
+        }
+        if (step >= 6) {
+          state.ready3 = null;
+          state.cpu = 'P1';
+        }
+        if (step >= 7) {
+          state.blocked2 = null;
+          state.ready1 = 'P2';
+        }
+        if (step >= 8) {
+          state.cpu = null;
+          state.ready2 = 'P1';
+        }
+        if (step >= 9) {
+          state.ready1 = null;
+          state.cpu = 'P2';
+        }
+
+        return state;
+      }
+
+      function positionFor(timeMs) {
+        let elapsed = ((timeMs % totalDuration) + totalDuration) % totalDuration;
+        const layout = getLayout();
+
+        for (let index = 0; index < sequence.length; index += 1) {
+          const step = sequence[index];
+          if (elapsed <= step.duration) {
+            const progress = Math.max(0, Math.min(1, elapsed / step.duration));
+            const state = stateForStep(index);
+            if (step.pos) {
+              return {
+                step,
+                state,
+                point: layout.slots[step.pos],
+                moving: false
+              };
+            }
+
+            const from = layout.slots[step.from];
+            const to = layout.slots[step.to];
+            const eased = 0.5 - Math.cos(progress * Math.PI) / 2;
+            return {
+              step,
+              state,
+              moving: true,
+              point: {
+                x: from.x + (to.x - from.x) * eased,
+                y: from.y + (to.y - from.y) * eased
+              }
+            };
+          }
+          elapsed -= step.duration;
+        }
+
+        return {
+          step: sequence[sequence.length - 1],
+          state: stateForStep(sequence.length - 1),
+          moving: false,
+          point: layout.slots.cpu
+        };
+      }
+
+      function drawMovingToken(point, process) {
+        const palette = processPalette(process);
+        const radius = 26 * scale;
+        const glow = ctx.createRadialGradient(point.x - 8 * scale, point.y - 8 * scale, 4 * scale, point.x, point.y, radius * 1.7);
+        glow.addColorStop(0, palette.fillA);
+        glow.addColorStop(1, palette.fillB);
+        ctx.save();
+        ctx.shadowColor = 'rgba(255, 171, 37, 0.35)';
+        ctx.shadowBlur = 22 * scale;
+        ctx.beginPath();
+        ctx.fillStyle = glow;
+        ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        ctx.fillStyle = palette.text;
+        ctx.font = `bold ${18 * scale}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillText(process, point.x, point.y + 6 * scale);
+        ctx.textAlign = 'start';
+      }
+
+      function draw(time) {
+        if (!active) return;
+        if (!start) start = time;
+        const elapsed = time - start;
+        const layout = getLayout();
+        const frame = positionFor(elapsed);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = 'rgba(255,255,255,0.03)';
+        for (let i = 0; i < 18; i += 1) {
+          ctx.beginPath();
+          ctx.arc((50 + i * 60) * scale, (35 + (i % 5) * 105) * scale, 2.2 * scale, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        drawQueueBox(layout.jobsBox, 'Cola de trabajos', 'Procesos creados que esperan admisión', '#b8f572');
+        drawQueueBox(layout.readyBox, 'Cola de listos', 'Procesos en memoria esperando CPU', '#74c0fc');
+        drawQueueBox(layout.cpuBox, 'CPU / ejecución', 'Proceso elegido por el planificador', '#ffd166');
+        drawQueueBox(layout.blockedBox, 'Cola de bloqueados', 'Procesos esperando un evento o E/S', '#ff8fab');
+
+        ctx.fillStyle = '#bed3e2';
+        ctx.font = `${18 * scale}px sans-serif`;
+        ctx.fillText('admisión', 270 * scale, 80 * scale);
+        ctx.fillText('selección del scheduler', 555 * scale, 80 * scale);
+        ctx.fillText('espera de evento', 920 * scale, 275 * scale);
+        ctx.fillText('evento completado', 565 * scale, 395 * scale);
+
+        arrow({x: 260 * scale, y: 195 * scale}, {x: 340 * scale, y: 195 * scale}, '#b8f572');
+        arrow({x: 600 * scale, y: 170 * scale}, {x: 705 * scale, y: 170 * scale}, '#74c0fc');
+        arrow({x: 860 * scale, y: 255 * scale}, {x: 860 * scale, y: 320 * scale}, '#ff8fab');
+        arrow({x: 705 * scale, y: 405 * scale}, {x: 600 * scale, y: 405 * scale}, '#7bdff2');
+        arrow({x: 600 * scale, y: 405 * scale}, {x: 600 * scale, y: 280 * scale}, '#7bdff2');
+
+        drawSlot(layout.slots.job1.x, layout.slots.job1.y, 'job1', 'Trabajo 1', frame.state, frame.step.process);
+        drawSlot(layout.slots.job2.x, layout.slots.job2.y, 'job2', 'Trabajo 2', frame.state, frame.step.process);
+        drawSlot(layout.slots.ready1.x, layout.slots.ready1.y, 'ready1', 'Listo 1', frame.state, frame.step.process);
+        drawSlot(layout.slots.ready2.x, layout.slots.ready2.y, 'ready2', 'Listo 2', frame.state, frame.step.process);
+        drawSlot(layout.slots.ready3.x, layout.slots.ready3.y, 'ready3', 'Listo 3', frame.state, frame.step.process);
+        drawSlot(layout.slots.cpu.x, layout.slots.cpu.y, 'cpu', 'En CPU', frame.state, frame.step.process);
+        drawSlot(layout.slots.blocked1.x, layout.slots.blocked1.y, 'blocked1', 'Bloq. 1', frame.state, frame.step.process);
+        drawSlot(layout.slots.blocked2.x, layout.slots.blocked2.y, 'blocked2', 'Bloq. 2', frame.state, frame.step.process);
+
+        roundedRect(
+          layout.legendBox.x,
+          layout.legendBox.y,
+          layout.legendBox.w,
+          layout.legendBox.h,
+          18 * scale,
+          'rgba(255,255,255,0.04)',
+          'rgba(255,255,255,0.08)'
+        );
+
+        ctx.fillStyle = '#f8fbff';
+        ctx.font = `bold ${24 * scale}px sans-serif`;
+        ctx.fillText(`Paso actual: ${frame.step.label}`, layout.legendBox.x + 24 * scale, layout.legendBox.y + 40 * scale);
+        ctx.font = `${18 * scale}px sans-serif`;
+        ctx.fillStyle = '#d5e5f1';
+        ctx.fillText(frame.step.status, layout.legendBox.x + 24 * scale, layout.legendBox.y + 82 * scale);
+        ctx.fillText(frame.step.event, layout.legendBox.x + 24 * scale, layout.legendBox.y + 114 * scale);
+        ctx.fillStyle = '#9dc4db';
+        ctx.fillText('Cada esfera es el PCB de un proceso en una cola del planificador.', layout.legendBox.x + 24 * scale, layout.legendBox.y + 146 * scale);
+
+        if (frame.moving) drawMovingToken(frame.point, frame.step.process);
+        animationFrame = window.requestAnimationFrame(draw);
+      }
+
+      function setActive(nextActive) {
+        if (active === nextActive) return;
+        active = nextActive;
+        if (active) {
+          start = 0;
+          animationFrame = window.requestAnimationFrame(draw);
+        } else if (animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = null;
+        }
+      }
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      return {setActive, resizeCanvas};
+    })();
+
     // Also available as an ES module, see:
     // https://revealjs.com/initialization/
     Reveal.initialize({
@@ -1175,8 +1600,17 @@
       processStateCanvas.setActive(current && current.id === 'estados-animados');
     }
 
+    function syncSchedulerQueueCanvasState() {
+      if (!schedulerQueueCanvas) return;
+      const current = Reveal.getCurrentSlide();
+      schedulerQueueCanvas.resizeCanvas();
+      schedulerQueueCanvas.setActive(current && current.id === 'cola-planificacion');
+    }
+
     Reveal.on('ready', syncProcessCanvasState);
+    Reveal.on('ready', syncSchedulerQueueCanvasState);
     Reveal.on('slidechanged', syncProcessCanvasState);
+    Reveal.on('slidechanged', syncSchedulerQueueCanvasState);
 
   </script>
 </body>
