@@ -1,8 +1,6 @@
 /*********************************
 * CUSTOM CLASESS
 *********************************/
-@import url(./fonts/league-gothic/league-gothic.css);
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
 body {
   background: #000011;
   /* Old Browsers */
@@ -132,6 +130,67 @@ strong {
 .reveal p.caption {
   margin: 2px;
   font-size: 1.5rem;
+}
+.reveal .rt-formula {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem auto 0;
+  color: #fff;
+  font-family: "Times New Roman", Times, serif;
+  line-height: 1;
+}
+.reveal .rt-formula__sum-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 7rem;
+  height: 12rem;
+}
+.reveal .rt-formula__sum {
+  font-size: 6rem;
+  font-weight: normal;
+}
+.reveal .rt-formula__limit {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 2.7rem;
+  font-style: italic;
+}
+.reveal .rt-formula__limit--top {
+  top: -0.6rem;
+}
+.reveal .rt-formula__limit--bottom {
+  bottom: -0.2rem;
+}
+.reveal .rt-formula__fraction {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 6rem;
+  font-size: 5.5rem;
+}
+.reveal .rt-formula__fraction sub {
+  font-size: 50%;
+  vertical-align: -0.35em;
+}
+.reveal .rt-formula__numerator, .reveal .rt-formula__denominator {
+  display: block;
+  padding: 0 0.7rem;
+}
+.reveal .rt-formula__numerator {
+  border-bottom: 0.28rem solid #fff;
+  padding-bottom: 0.45rem;
+}
+.reveal .rt-formula__denominator {
+  padding-top: 0.45rem;
+}
+.reveal .rt-formula__operator, .reveal .rt-formula__value {
+  font-size: 6rem;
 }
 .reveal .stroke {
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -297,7 +356,8 @@ table.procesos {
   margin: 10px;
 }
 
-table.banquero th, table.banquero td {
+table.banquero th,
+table.banquero td {
   padding: 10px;
 }
 table#bloque-archivo {
@@ -314,7 +374,8 @@ table.comparacion {
 table.memoria-compartida {
   margin-top: 1rem;
 }
-table.memoria-compartida th, table.memoria-compartida td {
+table.memoria-compartida th,
+table.memoria-compartida td {
   font-size: 1.2rem;
   text-transform: uppercase;
 }

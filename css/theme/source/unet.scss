@@ -2,24 +2,31 @@
 * CUSTOM CLASESS
 *********************************/
 
-$gradientTopColor:#000011;
-$gradientBottomColor:#30AA90;
+$gradientTopColor: #000011;
+$gradientBottomColor: #30AA90;
 
 body {
-  background: $gradientTopColor; /* Old Browsers */
-  background: -webkit-linear-gradient(top left,$gradientTopColor,$gradientBottomColor); /*Safari 5.1-6*/
-  background: -o-linear-gradient(top left,$gradientTopColor,$gradientBottomColor); /*Opera 11.1-12*/
-  background: -moz-linear-gradient(top left,$gradientTopColor,$gradientBottomColor); /*Fx 3.6-15*/
-  background: linear-gradient(top left, $gradientTopColor, $gradientBottomColor); /*Standard*/
+  background: $gradientTopColor;
+  /* Old Browsers */
+  background: -webkit-linear-gradient(top left, $gradientTopColor, $gradientBottomColor);
+  /*Safari 5.1-6*/
+  background: -o-linear-gradient(top left, $gradientTopColor, $gradientBottomColor);
+  /*Opera 11.1-12*/
+  background: -moz-linear-gradient(top left, $gradientTopColor, $gradientBottomColor);
+  /*Fx 3.6-15*/
+  background: linear-gradient(top left, $gradientTopColor, $gradientBottomColor);
+  /*Standard*/
 }
 
 .slides {
   .half {
     width: 50%;
   }
+
   .twothird {
     width: 64%;
   }
+
   .third {
     width: 30%;
   }
@@ -35,6 +42,7 @@ body {
 
 .reveal section img {
   max-width: 80%;
+
   &.noborder {
     border: 0;
     box-shadow: none;
@@ -53,19 +61,22 @@ strong {
 
 $linkColor: #99ff99;
 $linkColorHover: #33aa33;
+
 .reveal {
   color: #eee;
   font-size: 2rem;
 
   .dark {
-    background: rgba(0,0,0,.60);
+    background: rgba(0, 0, 0, .60);
     padding: 1rem;
   }
 
   a {
     color: $linkColor;
 
-    &:hover { color: $linkColorHover; }
+    &:hover {
+      color: $linkColorHover;
+    }
   }
 
   sup {
@@ -75,49 +86,65 @@ $linkColorHover: #33aa33;
   .center {
     margin: 0 auto;
   }
+
   .nomargin {
     margin: 0;
   }
+
   .slides section {
-    .text-left { text-align: left }
-    .text-right { text-align: right }
+    .text-left {
+      text-align: left
+    }
+
+    .text-right {
+      text-align: right
+    }
   }
-  
+
   cite {
     clear: both;
     display: block;
     text-align: right;
     margin-top: 15px;
   }
+
   section {
     .smaller {
       font-size: 28px;
       font-size: 15px;
     }
+
     padding-bottom: 10px;
+
     .center {
       text-align: center;
     }
+
     h1 {
       font-size: 6rem;
     }
+
     h2 {
       font-size: 5rem;
       text-shadow: 1px 2px 2px #333;
     }
+
     h3 {
       font-size: 3rem;
       text-shadow: 1px 2px 2px #333;
       text-decoration: underline;
     }
   }
+
   li h3 {
     margin-top: 40px;
   }
+
   ul {
     text-align: left;
     margin: 15px 0 15px 50px;
   }
+
   ol {
     text-align: left;
   }
@@ -138,12 +165,87 @@ $linkColorHover: #33aa33;
     font-size: 1.5rem;
   }
 
+  .rt-formula {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2rem auto 0;
+    color: #fff;
+    font-family: "Times New Roman", Times, serif;
+    line-height: 1;
+
+    &__sum-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 7rem;
+      height: 12rem;
+    }
+
+    &__sum {
+      font-size: 6rem;
+      font-weight: normal;
+    }
+
+    &__limit {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 2.7rem;
+      font-style: italic;
+
+      &--top {
+        top: -0.6rem;
+      }
+
+      &--bottom {
+        bottom: -0.2rem;
+      }
+    }
+
+    &__fraction {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 6rem;
+      font-size: 5.5rem;
+
+      sub {
+        font-size: 50%;
+        vertical-align: -0.35em;
+      }
+    }
+
+    &__numerator,
+    &__denominator {
+      display: block;
+      padding: 0 0.7rem;
+    }
+
+    &__numerator {
+      border-bottom: 0.28rem solid #fff;
+      padding-bottom: 0.45rem;
+    }
+
+    &__denominator {
+      padding-top: 0.45rem;
+    }
+
+    &__operator,
+    &__value {
+      font-size: 6rem;
+    }
+  }
+
   .stroke {
     text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;  
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
   }
 }
 
@@ -159,6 +261,7 @@ $linkColorHover: #33aa33;
   img {
     float: left;
   }
+
   h3 {
     float: left;
     margin-top: 3.5rem;
@@ -174,9 +277,10 @@ $linkColorHover: #33aa33;
   margin-bottom: 100px;
 }
 
-.reveal .slides > section {
+.reveal .slides>section {
   padding: 0;
-  > section {
+
+  >section {
     padding: 0;
   }
 }
@@ -192,6 +296,7 @@ table {
 .slides {
   table {
     margin: 0 auto;
+
     th {
       padding: 20px;
     }
@@ -211,6 +316,7 @@ p.nota {
 .reveal section pre {
   box-shadow: none;
   width: 100%;
+
   code {
     box-shadow: 0 0 6px #000010;
   }
@@ -222,7 +328,7 @@ p.nota {
     font-size: 2rem;
 
   }
-  
+
 }
 
 table {
@@ -232,19 +338,23 @@ table {
     margin: 0 auto;
     padding: 5px;
     border-spacing: 0;
+
     td {
       border: 4px solid green;
       padding: 5px 15px;
       background: #aaddaa;
+
       &.libre {
         background: #51722a;
         color: #fff;
       }
     }
   }
+
   &.comparacion {
     padding: 0;
   }
+
   th {
     background: #0090FF;
     color: #FFF;
@@ -256,6 +366,7 @@ table {
   table.memoria th {
     padding: 5px;
   }
+
   section {
     .memoria-fisica {
       border: 2px solid green;
@@ -264,20 +375,25 @@ table {
       margin: 0 auto;
       padding: 15px;
     }
+
     .pcb {
       margin-top: 15px;
       padding-right: 10px;
     }
+
     div.pcb div {
       border: 2px solid #643977;
       background: #DBBBEA;
     }
   }
+
   table {
     margin: 0 auto;
+
     th {
       padding: 20px;
     }
+
     &.timeline td {
       padding: 10px 25px;
     }
@@ -316,12 +432,14 @@ table.procesos {
     clear: both;
     height: 40px;
     padding: 30px 0;
+
     div:nth-child(2) {
       padding: 10px;
       text-align: center;
       margin-right: 20px;
     }
   }
+
   .syntaxhighlighter {
     margin: 10px;
   }
@@ -329,17 +447,22 @@ table.procesos {
 
 table {
   &.banquero {
-    th, td {
+
+    th,
+    td {
       padding: 10px;
     }
   }
+
   &#bloque-archivo {
     box-shadow: 4px 4px 6px #333;
+
     td {
       padding: 15px;
       border: 2px solid #dd8000;
     }
   }
+
   &.comparacion {
     padding: 0;
     font-size: 0.7em;
@@ -347,10 +470,12 @@ table {
 
   &.memoria-compartida {
     margin-top: 1rem;
-    th, td {
+
+    th,
+    td {
       font-size: 1.2rem;
       text-transform: uppercase;
-      
+
     }
   }
 }
