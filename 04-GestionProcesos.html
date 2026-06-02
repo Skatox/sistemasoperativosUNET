@@ -20,6 +20,7 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="stylesheet" href="css/04-gestion-procesos.css">
 	</head>
 
 	<body>
@@ -122,9 +123,45 @@
 
 				<section id="introduccion-4">
 					<h2>Introducción</h2>
-					<a href="img/class4/vida_proceso.jpg" data-lightbox="Comportamiento-proceso">
-						<img src="img/class4/vida_proceso.jpg"  alt="Comportamiento de un proceso">
-					</a>
+					<div class="cpu-io-frame" aria-label="Línea de tiempo de ráfagas de CPU y espera por E/S">
+						<div class="cpu-io-legend">
+							<span class="cpu">Ejecutando en CPU</span>
+							<span class="io">Esperando E/S</span>
+						</div>
+						<div class="cpu-io-track">
+							<div class="cpu-io-label">Proceso limitado por E/S</div>
+							<div class="cpu-io-timeline">
+								<div class="cpu-io-segment cpu" style="grid-column: span 2;">CPU</div>
+								<div class="cpu-io-segment io" style="grid-column: span 4;">E/S</div>
+								<div class="cpu-io-segment cpu" style="grid-column: span 2;">CPU</div>
+								<div class="cpu-io-segment io" style="grid-column: span 5;">E/S</div>
+								<div class="cpu-io-segment cpu" style="grid-column: span 1;">CPU</div>
+								<div class="cpu-io-segment io" style="grid-column: span 2;">E/S</div>
+							</div>
+						</div>
+						<div class="cpu-io-track">
+							<div class="cpu-io-label">Proceso limitado por CPU</div>
+							<div class="cpu-io-timeline">
+								<div class="cpu-io-segment cpu" style="grid-column: span 5;">CPU</div>
+								<div class="cpu-io-segment io" style="grid-column: span 2;">E/S</div>
+								<div class="cpu-io-segment cpu" style="grid-column: span 6;">CPU</div>
+								<div class="cpu-io-segment io" style="grid-column: span 1;">E/S</div>
+								<div class="cpu-io-segment cpu" style="grid-column: span 2;">CPU</div>
+							</div>
+						</div>
+						<div class="cpu-io-axis" aria-hidden="true">
+							<span></span>
+							<span>0 ms</span>
+							<span>4 ms</span>
+							<span>8 ms</span>
+							<span>12 ms</span>
+							<span>16 ms</span>
+						</div>
+						<div class="cpu-io-summary">
+							<span>Ráfagas de <strong>CPU cortas</strong> → más espera por E/S</span>
+							<span>Ráfagas de <strong>CPU largas</strong> → más cómputo</span>
+						</div>
+					</div>
 					<aside class="notes">
 						La ejecución de un proceso consiste en una alternancia entre,
 						ráfagas de CPU y ráfagas de E/S. Un proceso limitado por E/S
@@ -206,6 +243,55 @@
 						<li>El despachador debe ser muy rápido, pues se invoca cada que vez que se conmuta un proceso.</li>
 						<li>El tiempo perdido por este proceso se llama <strong>latencia de despacho</strong>.</li>
 					</ul>
+				</section>
+				<section id="despachador-nucleos">
+					<h2>Despachador del kernel</h2>
+					<div class="dispatcher-animation" aria-label="Animación del despachador enviando procesos a núcleos de CPU">
+						<p class="dispatcher-label">
+							El despachador toma procesos listos, cambia el contexto y entrega cada hilo a un núcleo disponible.
+						</p>
+						<div class="ready-queue">
+							<h3>Cola de listos</h3>
+							<span class="queue-process q1">P1</span>
+							<span class="queue-process q2">P2</span>
+							<span class="queue-process q3">P3</span>
+							<span class="queue-process q4">P4</span>
+						</div>
+						<div class="dispatch-line to-dispatcher"></div>
+						<div class="dispatch-line to-core-1"></div>
+						<div class="dispatch-line to-core-2"></div>
+						<div class="dispatch-line to-core-3"></div>
+						<div class="dispatch-line to-core-4"></div>
+						<div class="dispatcher-kernel">
+							<h3>Despachador</h3>
+							<p>cambio de contexto</p>
+							<p>modo usuario</p>
+						</div>
+						<div class="cpu-chip">
+							<h3>CPU multinúcleo</h3>
+							<div class="core-grid">
+								<div class="cpu-core">Núcleo 1</div>
+								<div class="cpu-core">Núcleo 2</div>
+								<div class="cpu-core">Núcleo 3</div>
+								<div class="cpu-core">Núcleo 4</div>
+							</div>
+						</div>
+						<div class="dispatch-packet p1">P1</div>
+						<div class="dispatch-packet p2">P2</div>
+						<div class="dispatch-packet p3">P3</div>
+						<div class="dispatch-packet p4">P4</div>
+						<div class="dispatch-step">
+							<span>1. Selecciona</span>
+							<span>2. Despacha</span>
+							<span>3. Ejecuta</span>
+						</div>
+					</div>
+					<aside class="notes">
+						El planificador decide qué proceso sigue. El despachador ejecuta la decisión:
+						carga el contexto correcto, entrega el control del procesador y permite que
+						cada núcleo ejecute un hilo o proceso listo. Si un núcleo queda libre, se repite
+						el despacho para mantener alta la utilización de la CPU.
+					</aside>
 				</section>
 				<section id="scheduler">
 					<h2>Despachador</h2>
@@ -487,7 +573,36 @@
 				</section>
 				<section>
 					<h3>Round Robin (Algoritmo por turnos)</h3>
-					<img src="img/class4/roundRobin.jpg" alt="Algoritmo de Round Robin">
+					<div class="rr-demo" aria-label="Animación de Round Robin por turnos">
+						<div class="rr-quantum">
+							<strong>Quantum fijo:</strong> cada proceso recibe la CPU por un tiempo máximo.
+						</div>
+						<div class="rr-steps">
+							<span>1. Se toma el primer proceso de la cola.</span>
+							<span>2. Ejecuta hasta terminar o agotar su quantum.</span>
+							<span>3. Si no termina, vuelve al final de la cola.</span>
+						</div>
+						<div class="rr-queue-ring" aria-hidden="true"></div>
+						<div class="rr-arrow" aria-hidden="true"></div>
+						<div class="rr-cpu">
+							<strong>CPU</strong>
+							<span>atiende un turno</span>
+						</div>
+						<div class="rr-process rr-p1">P1</div>
+						<div class="rr-process rr-p2">P2</div>
+						<div class="rr-process rr-p3">P3</div>
+						<div class="rr-process rr-p4">P4</div>
+						<div class="rr-token">turno</div>
+						<div class="rr-result">
+							La cola gira de forma circular: todos los procesos reciben oportunidad de ejecutar.
+						</div>
+					</div>
+					<aside class="notes">
+						Round Robin es apropiativo. El planificador asigna la CPU al primer proceso
+						de la cola durante un quantum. Si el proceso termina, sale del sistema. Si se
+						bloquea por E/S, espera el evento. Si agota el quantum sin terminar, vuelve al
+						final de la cola para esperar otro turno.
+					</aside>
 				</section>
 				<section id="algoritmo-planificacion-prioridades">
 					<h2>Sistemas interactivos</h2>
@@ -594,54 +709,90 @@
 						</ul>
 					</div>
 				</section>
-				<section>
-					<div class="center">
-						<h3>Ejemplo de cola multinivel</h3>
-						<div class="cola-multi center">
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
+				<section id="ejemplo-cola-multinivel">
+					<h3>Ejemplo de cola multinivel</h3>
+					<div class="mlq-demo" aria-label="Ejemplo visual de cola multinivel">
+						<div class="mlq-incoming">
+							<h4>Procesos nuevos</h4>
+							<span class="mlq-chip">Kernel</span>
+							<span class="mlq-chip">Editor</span>
+							<span class="mlq-chip">Backup</span>
+							<span class="mlq-chip">Shell</span>
+						</div>
+						<div class="mlq-classifier">
+							Clasificador<br>
+							por tipo
+						</div>
+						<div class="mlq-line in-classifier"></div>
+						<div class="mlq-line to-system"></div>
+						<div class="mlq-line to-interactive"></div>
+						<div class="mlq-line to-batch"></div>
+						<div class="mlq-line to-user"></div>
+						<div class="mlq-queue mlq-system">
+							<div class="mlq-queue-title">
+								<strong>Sistema</strong>
+								<span>prioridad máxima</span>
 							</div>
-							<div class="third left p5">
-								Sistema
-							</div>
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
+							<div class="mlq-queue-body">
+								<span class="mlq-queued-process">K1</span>
+								<span class="mlq-queued-process">K2</span>
 							</div>
 						</div>
-						<div class="cola-multi">
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
+						<div class="mlq-queue mlq-interactive">
+							<div class="mlq-queue-title">
+								<strong>Interactivos</strong>
+								<span>Round Robin</span>
 							</div>
-							<div class="third left p4">
-								Interactivos
-							</div>
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-							</div>
-						</div>
-						<div class="cola-multi">
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-							</div>
-							<div class="third left p2">
-								Por lotes
-							</div>
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
+							<div class="mlq-queue-body">
+								<span class="mlq-queued-process">P1</span>
+								<span class="mlq-queued-process">P2</span>
 							</div>
 						</div>
-						<div class="cola-multi">
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
+						<div class="mlq-queue mlq-batch">
+							<div class="mlq-queue-title">
+								<strong>Por lotes</strong>
+								<span>FCFS / SJF</span>
 							</div>
-							<div class="third left p3">
-								Usuario
+							<div class="mlq-queue-body">
+								<span class="mlq-queued-process">B1</span>
+								<span class="mlq-queued-process">B2</span>
 							</div>
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
+						</div>
+						<div class="mlq-queue mlq-user">
+							<div class="mlq-queue-title">
+								<strong>Usuario</strong>
+								<span>prioridad baja</span>
 							</div>
+							<div class="mlq-queue-body">
+								<span class="mlq-queued-process">U1</span>
+								<span class="mlq-queued-process">U2</span>
+							</div>
+						</div>
+						<div class="mlq-line queue-cpu system"></div>
+						<div class="mlq-line queue-cpu interactive"></div>
+						<div class="mlq-line queue-cpu batch"></div>
+						<div class="mlq-line queue-cpu user"></div>
+						<div class="mlq-cpu">
+							<strong>CPU</strong>
+							<span>elige una cola según la política global</span>
+						</div>
+						<div class="mlq-moving">Editor</div>
+						<div class="mlq-priority">
+							Las colas son fijas: un proceso no cambia de cola durante su ejecución.
+						</div>
+						<div class="mlq-rule">
+							<span>1. El sistema clasifica el proceso al entrar.</span>
+							<span>2. Cada cola puede usar un algoritmo distinto.</span>
+							<span>3. La CPU atiende colas por prioridad o por porción de tiempo.</span>
 						</div>
 					</div>
+					<aside class="notes">
+						En las colas multinivel, cada proceso pertenece a una clase fija:
+						sistema, interactivo, por lotes, usuario, etc. La planificación ocurre
+						en dos niveles: primero se decide qué cola atender; luego se aplica el
+						algoritmo interno de esa cola. A diferencia de la cola multinivel con
+						retroalimentación, aquí los procesos no migran entre colas.
+					</aside>
 				</section>
 
 				<section id="algoritmo-planificacion-multinivel-retroalimentacion">
@@ -673,38 +824,71 @@
 						</ul>
 					</div>
 				</section>
-				<section>
+				<section id="ejemplo-cola-multinivel-retroalimentacion">
 					<h3>Ejemplo de cola multinivel con retroalimentación</h3>
-					<div class="cola-multi">
-						<div class="third left" style="text-align: right">
-							<img src="img/class4/flecha.png" class="noborder" alt="-->" />
+					<div class="mlfq-demo" aria-label="Animación de colas multinivel con retroalimentación">
+						<div class="mlfq-queue mlfq-q0">
+							<div class="mlfq-title">
+								<strong>Q0</strong>
+								<span>prioridad alta<br>RR, quantum 8</span>
+							</div>
+							<div class="mlfq-slots" aria-hidden="true">
+								<span class="mlfq-slot"></span>
+								<span class="mlfq-slot"></span>
+								<span class="mlfq-slot"></span>
+								<span class="mlfq-slot"></span>
+							</div>
 						</div>
-						<div class="third left p5">
-							quantum = 8
+						<div class="mlfq-queue mlfq-q1">
+							<div class="mlfq-title">
+								<strong>Q1</strong>
+								<span>prioridad media<br>RR, quantum 16</span>
+							</div>
+							<div class="mlfq-slots" aria-hidden="true">
+								<span class="mlfq-slot"></span>
+								<span class="mlfq-slot"></span>
+								<span class="mlfq-slot"></span>
+								<span class="mlfq-slot"></span>
+							</div>
 						</div>
-						<div class="third left" style="text-align: left">
-							<img src="img/class4/flecha_abajo.png" class="noborder" alt="-->" />
+						<div class="mlfq-queue mlfq-q2">
+							<div class="mlfq-title">
+								<strong>Q2</strong>
+								<span>prioridad baja<br>FCFS</span>
+							</div>
+							<div class="mlfq-slots" aria-hidden="true">
+								<span class="mlfq-slot"></span>
+								<span class="mlfq-slot"></span>
+								<span class="mlfq-slot"></span>
+								<span class="mlfq-slot"></span>
+							</div>
+						</div>
+						<div class="mlfq-arrow q0-cpu"></div>
+						<div class="mlfq-arrow q1-cpu"></div>
+						<div class="mlfq-arrow q2-cpu"></div>
+						<div class="mlfq-status">
+							La CPU siempre toma el primer proceso de la cola no vacía con mayor prioridad.
+						</div>
+						<div class="mlfq-cpu">
+							<strong>CPU</strong>
+							<span>ejecuta la cola más prioritaria disponible</span>
+						</div>
+						<div class="mlfq-io">Bloqueo / espera por E/S</div>
+						<div class="mlfq-process cpu-bound">P1</div>
+						<div class="mlfq-process interactive">P2</div>
+						<div class="mlfq-rule">
+							<span><strong>P1</strong> consume todo el quantum → baja de prioridad.</span>
+							<span><strong>P2</strong> se bloquea por E/S → conserva o recupera prioridad.</span>
+							<span>Si Q0 tiene procesos, Q1 y Q2 esperan.</span>
 						</div>
 					</div>
-					<div class="cola-multi">
-						<div class="third left" style="text-align: right">
-							<img src="img/class4/flecha_abajo.png" class="noborder" alt="-->" />
-						</div>
-						<div class="third left p4">
-							quatum = 16
-						</div>
-						<div class="third left" style="text-align: left">
-							<img src="img/class4/flecha_izq.png" class="noborder" alt="-->" />
-						</div>
-					</div>
-					<div class="cola-multi">
-						<div class="third left" style="text-align: right">
-							<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-						</div>
-						<div class="third left p2">
-							FCFS
-						</div>
-					</div>
+					<aside class="notes">
+						En una cola multinivel con retroalimentación, los procesos no quedan fijos
+						en una sola cola. Un proceso que usa completamente su quantum parece más
+						limitado por CPU, por eso baja a una cola con menor prioridad y quantum mayor.
+						Un proceso interactivo suele bloquearse antes de agotar el quantum esperando E/S;
+						por eso se mantiene en colas altas para responder rápido al usuario.
+					</aside>
 				</section>
 
 				<section id="planificacion-garantizada">
