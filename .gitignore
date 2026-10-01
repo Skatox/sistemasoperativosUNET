@@ -8,4 +8,6 @@ out/
 log/*.log
 tmp/**
 node_modules/
+.build-cache/
+build/
 .sass-cache

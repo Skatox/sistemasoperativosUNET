@@ -46,3 +46,23 @@ Con las fuentes podrás añadir mejoras, solucionar errores, reportar mejoras o 
 * Adjuntar contenido sin permiso legal del autor.
 
 **Nota:** espero su colaboración para mejorar la calidad del contenido y ayudar a futuros estudiantes de la materia.
+
+## Servir y compilar las láminas
+
+Requiere Node.js 20.19 o posterior.
+
+```sh
+npm install
+npm run start
+```
+
+Vite sirve las láminas y refleja los cambios al guardar los archivos HTML. Abre la URL local que muestra Vite (normalmente `http://localhost:5173/`); usa esa misma dirección para navegar a las clases. Evita abrir una copia dentro de `public/` o `build/` directamente.
+
+Para generar el sitio estático:
+
+```sh
+npm run build
+npm run preview
+```
+
+El resultado se genera en `build/`, incluyendo el índice y las catorce clases. `dist/` contiene los archivos de Reveal.js que las láminas necesitan para ejecutarse; no es una carpeta de salida generada por Vite.
