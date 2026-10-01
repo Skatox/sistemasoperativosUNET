@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/moon.css">
-		<link rel="stylesheet" href="dist/theme/unet.css" id="theme">
+		<link rel="stylesheet" href="css/theme/source/unet.scss" id="theme">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="dist/plugin/highlight/monokai.css">
@@ -257,67 +257,66 @@
 					</p>
 				</section>
 				<section id="fcfs-ejemplo">
-					<h3>FIFO - FCFS</h3>
-					<div>
-						<div class="half left">
-							<table class="procesos center">
-								<tr>
-									<th>Procesos</th><th>Llegada</th><th>Tiempo CPU (ms)</th>
-								</tr>
-								<tr>
-									<td class="p1">P1</td><td>0</td><td>6</td>
-								</tr>
-								<tr>
-									<td class="p2">P2</td><td>4</td><td>3</td>
-								</tr>
-								<tr>
-									<td class="p3">P3</td><td>6</td><td>4</td>
-								</tr>
-								<tr>
-									<td class="p4">P4</td><td>7</td><td>1</td>
-								</tr>
-							</table>
-						</div>
-						<div class="half right fragment">
-							<table class="procesos center ">
-								<tr>
-									<th>Proceso</th><th>Operación</th><th>Total</th>
-								</tr>
-								<tr>
-									<td>P1</td><td>0</td><td>0</td>
-								</tr>
-								<tr>
-									<td>P2</td><td>6 - 4</td><td>2</td>
-								</tr>
-								<tr>
-									<td>P3</td><td>9 - 6</td><td>3</td>
-								</tr>
-								<tr>
-									<td >P4</td><td>13 - 7</td><td>6</td>
-								</tr>
-								<tr>
-								<td colspan="3">
-										Tiempo de espera promedio: <strong>2.75</strong>
-									</td>
-								</tr>
-							</table>
-						</div>
-						<div class="clear"><br /></div>
-						<div>
-							<table class="procesos timeline center ">
-								<tr>
-									<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td>
-									<td class="p1">3</td><td class="p1">4</td><td class="p1">5</td>
-									<td class="p2">6</td>
-								</tr>
-								<tr>
-									<td class="p2">7</td><td class="p2">8</td>
-									<td class="p3">9</td><td class="p3">10</td><td class="p3">11</td>
-									<td class="p3">12</td><td class="p4" >13</td>
-								</tr>
-							</table>
-						</div>
-					</div>
+					<section id="fcfs-ejemplo-llegadas">
+						<h3>FIFO - FCFS: datos de llegada</h3>
+						<p>La CPU atiende en orden de llegada y cada proceso ejecuta hasta terminar.</p>
+						<table class="procesos center">
+							<tr><th>Proceso</th><th>Llegada</th><th>Tiempo CPU (ms)</th></tr>
+							<tr><td class="p1">P1</td><td>0</td><td>6</td></tr>
+							<tr><td class="p2">P2</td><td>4</td><td>3</td></tr>
+							<tr><td class="p3">P3</td><td>6</td><td>4</td></tr>
+							<tr><td class="p4">P4</td><td>7</td><td>1</td></tr>
+						</table>
+						<p class="note">Presiona ↓ para ver cómo cada proceso entra al CPU.</p>
+					</section>
+					<section id="fcfs-ejecuta-p1">
+						<h3>Tiempo 0: P1 entra al CPU</h3>
+						<p>P1 ejecuta de 0 a 6.</p>
+						<table class="procesos timeline center"><tr>
+							<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td>
+							<td class="p1">3</td><td class="p1">4</td><td class="p1">5</td>
+						</tr></table>
+					</section>
+					<section id="fcfs-ejecuta-p2">
+						<h3>Tiempo 6: P2 entra al CPU</h3>
+						<p>P1 termina y P2, que llegó antes que P3 y P4, ejecuta de 6 a 9.</p>
+						<table class="procesos timeline center"><tr>
+							<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td>
+							<td class="p1">3</td><td class="p1">4</td><td class="p1">5</td>
+							<td class="p2">6</td><td class="p2">7</td><td class="p2">8</td>
+						</tr></table>
+					</section>
+					<section id="fcfs-ejecuta-p3">
+						<h3>Tiempo 9: P3 entra al CPU</h3>
+						<p>P2 termina y P3 ejecuta de 9 a 13.</p>
+						<table class="procesos timeline center"><tr>
+							<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td>
+							<td class="p1">3</td><td class="p1">4</td><td class="p1">5</td>
+							<td class="p2">6</td><td class="p2">7</td><td class="p2">8</td>
+							<td class="p3">9</td><td class="p3">10</td><td class="p3">11</td>
+							<td class="p3">12</td>
+						</tr></table>
+					</section>
+					<section id="fcfs-ejecuta-p4">
+						<h3>Tiempo 13: P4 entra al CPU</h3>
+						<p>P3 termina y P4 ejecuta de 13 a 14. La planificación FCFS ha completado todos los procesos.</p>
+						<table class="procesos timeline center"><tr>
+							<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td>
+							<td class="p1">3</td><td class="p1">4</td><td class="p1">5</td>
+							<td class="p2">6</td><td class="p2">7</td><td class="p2">8</td>
+							<td class="p3">9</td><td class="p3">10</td><td class="p3">11</td>
+							<td class="p3">12</td><td class="p4">13</td>
+						</tr></table>
+            <br />
+						<table class="procesos center">
+							<tr><th>Proceso</th><th>Inicio − llegada</th><th>Espera (ms)</th></tr>
+							<tr><td class="p1">P1</td><td>0 − 0</td><td>0</td></tr>
+							<tr><td class="p2">P2</td><td>6 − 4</td><td>2</td></tr>
+							<tr><td class="p3">P3</td><td>9 − 6</td><td>3</td></tr>
+							<tr><td class="p4">P4</td><td>13 − 7</td><td>6</td></tr>
+							<tr><td colspan="3">Espera promedio: <strong>2.75 ms</strong></td></tr>
+						</table>
+					</section>
 				</section>
 				<section id="algoritmo-planificacion-tiempo-corto">
 					<h2>Procesamiento por lotes</h2>

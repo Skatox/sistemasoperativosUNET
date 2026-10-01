@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="dist/reset.css">
   <link rel="stylesheet" href="dist/reveal.css">
   <link rel="stylesheet" href="dist/theme/moon.css">
-  <link rel="stylesheet" href="dist/theme/unet.css" id="theme">
+  <link rel="stylesheet" href="css/theme/source/unet.scss" id="theme">
 
   <!-- Theme used for syntax highlighting of code -->
   <link rel="stylesheet" href="dist/plugin/highlight/monokai.css">
@@ -23,7 +23,7 @@
       margin: 0 auto;
       padding: 0;
       border-radius: 20px;
-      margin-top: -40px;
+      margin-top: -10px;
     }
 
     #process-state-canvas {
@@ -586,9 +586,10 @@
           <canvas id="process-state-canvas"
             aria-label="Animación del proceso P1 moviéndose entre las colas y estados del sistema operativo">
           </canvas>
-          <p>
+          <p><small>
             La animación muestra a <strong>P1</strong> entrando al sistema, esperando en la cola de listos,
             usando el CPU, bloqueándose por E/S, regresando a la cola y finalmente terminando.
+          </small>
           </p>
         </div>
       </section>
@@ -636,10 +637,11 @@
           <canvas id="scheduler-queue-canvas"
             aria-label="Animación de las colas de planificación de procesos del sistema operativo">
           </canvas>
-          <p>
+          <p><small>
             La animación muestra cómo varios procesos pasan de la <strong>cola de trabajos</strong> a
             <strong>listos</strong>, uno es elegido por el planificador para usar el <strong>CPU</strong>,
             luego puede <strong>bloquearse por E/S</strong> y finalmente regresar a <strong>listos</strong>.
+          </small>
           </p>
         </div>
         <aside class="notes">

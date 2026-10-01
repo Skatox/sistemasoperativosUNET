@@ -8,15 +8,8 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "exports": {
-    "./plugin/highlight": "./dist/plugin/highlight.js",
-    "./plugin/highlight/monokai.css": "./dist/plugin/highlight/monokai.css",
-    "./plugin/markdown": "./dist/plugin/markdown.js",
-    "./plugin/notes": "./dist/plugin/notes.js",
-    "./plugin/search": "./dist/plugin/search.js",
-    "./plugin/zoom": "./dist/plugin/zoom.js"
-  },
   "devDependencies": {
+    "sass-embedded": "^1.105.1",
     "vite": "^8.0.3"
   }
 }

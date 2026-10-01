@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
-import { cpSync, rmSync } from 'node:fs';
+import { cpSync, readdirSync, rmSync } from 'node:fs';
+import { relative } from 'node:path';
 
 const slidePages = [
   '01-Introduccion.html',
@@ -46,12 +47,8 @@ export default defineConfig({
       closeBundle() {
         // Keep the classic HTML asset URLs (dist/ and img/) working in the
         // production output without maintaining a second source tree.
-        rmSync(new URL('./build/dist', import.meta.url), { recursive: true, force: true });
-        for (const directory of ['dist', 'img']) {
-          const source = new URL(`./${directory}`, import.meta.url);
-          const destination = new URL(`./build/${directory}`, import.meta.url);
-          copyDirectory(source, destination);
-        }
+        copyDirectory(new URL('./dist', import.meta.url), new URL('./build/dist', import.meta.url), false);
+        copyDirectory(new URL('./img', import.meta.url), new URL('./build/img', import.meta.url));
         for (const page of slidePages) {
           rmSync(new URL(`./build/dist/${page}`, import.meta.url), { force: true });
         }
@@ -72,6 +69,11 @@ export default defineConfig({
   },
 });
 
-function copyDirectory(source, destination) {
-  cpSync(source, destination, { recursive: true });
+function copyDirectory(source, destination, omitSlidePages = false) {
+  const sourcePath = source.pathname;
+  rmSync(destination, { recursive: true, force: true });
+  cpSync(sourcePath, destination.pathname, {
+    recursive: true,
+    filter: (path) => !omitSlidePages || !slidePageNames.has(relative(sourcePath, path)),
+  });
 }
