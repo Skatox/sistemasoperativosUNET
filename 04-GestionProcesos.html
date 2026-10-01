@@ -121,7 +121,7 @@
 
 				<section id="introduccion-4">
 					<h2>Introducción</h2>
-					<a href="img/class4/vida_proceso.jpg" data-lightbox="Comportamiento-proceso">
+					<a href="img/class4/vida_proceso.jpg" data-preview-image="Comportamiento-proceso">
 						<img src="img/class4/vida_proceso.jpg"  alt="Comportamiento de un proceso">
 					</a>
 					<aside class="notes">
@@ -338,8 +338,8 @@
 					</p>
 				</section>
 				<section id="algoritmo-planificacion-tiempo-corto-ejemplo">
+					<section id="sjf-spn-datos">
 					<h3>SJF/SPN</h3>
-					<div class="half left">
 						<table class="procesos center ">
 							<tr>
 								<th>Procesos</th><th>Llegada</th><th>Tiempo CPU (ms)</th>
@@ -357,8 +357,45 @@
 								<td class="p4">P4</td><td>5</td><td>4</td>
 							</tr>
 						</table>
-					</div>
-					<div class="half right fragment">
+						<p class="note">Presiona ↓ para ver cómo se asigna la CPU.</p>
+					</section>
+					<section id="sjf-spn-p1">
+						<h3>Tiempo 0: P1 entra al CPU</h3>
+						<p>P1 es el único proceso disponible y ejecuta de 0 a 7 sin interrupciones.</p>
+						<table class="timeline procesos"><tr>
+							<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td><td class="p1">3</td>
+							<td class="p1">4</td><td class="p1">5</td><td class="p1">6</td>
+						</tr></table>
+					</section>
+					<section id="sjf-spn-p3">
+						<h3>Tiempo 7: P3 entra al CPU</h3>
+						<p>P1 termina. Entre los procesos listos, P3 tiene el menor tiempo de CPU y ejecuta de 7 a 8.</p>
+						<table class="timeline procesos"><tr>
+							<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td><td class="p1">3</td>
+							<td class="p1">4</td><td class="p1">5</td><td class="p1">6</td><td class="p3">7</td>
+						</tr></table>
+					</section>
+					<section id="sjf-spn-p2">
+						<h3>Tiempo 8: P2 entra al CPU</h3>
+						<p>P3 termina. P2 y P4 tienen 4 ms de CPU; P2 llegó primero y ejecuta de 8 a 12.</p>
+						<table class="timeline procesos"><tr>
+							<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td><td class="p1">3</td>
+							<td class="p1">4</td><td class="p1">5</td><td class="p1">6</td><td class="p3">7</td>
+							<td class="p2">8</td><td class="p2">9</td><td class="p2">10</td><td class="p2">11</td>
+						</tr></table>
+					</section>
+					<section id="sjf-spn-p4">
+						<h3>Tiempo 12: P4 entra al CPU</h3>
+						<p>P2 termina y P4 ejecuta de 12 a 16. Todos los procesos han terminado.</p>
+						<table class="timeline procesos"><tr>
+							<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td><td class="p1">3</td>
+							<td class="p1">4</td><td class="p1">5</td><td class="p1">6</td><td class="p3">7</td>
+							<td class="p2">8</td><td class="p2">9</td><td class="p2">10</td>
+              </tr>
+              <tr><td class="p2">11</td>
+							<td class="p4">12</td><td class="p4">13</td><td class="p4">14</td><td class="p4">15</td>
+						</tr></table>
+            <br />
 						<table class="procesos center ">
 							<tr>
 								<th>Proceso</th><th>Operación</th><th>Total</th>
@@ -370,7 +407,7 @@
 								<td>P2</td><td>12 - 4 - 2</td><td>6</td>
 							</tr>
 							<tr>
-								<td>P3</td><td>8 - 4 - 1</td><td>3</td>
+								<td>P3</td><td>8 - 1 - 4</td><td>3</td>
 							</tr>
 							<tr>
 								<td >P4</td><td>16 - 4 - 5</td><td>7</td>
@@ -381,23 +418,7 @@
 								</td>
 							</tr>
 						</table>
-					</div>
-					<div class="clear"><br /></div>
-					<div>
-						<table class="timeline procesos">
-							<tr>
-								<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td>
-								<td class="p1">3</td><td class="p1">4</td><td class="p1">5</td>
-								<td class="p1">6</td><td class="p3">7</td>
-							</tr>
-							<tr>
-								<td class="p2">8</td>
-								<td class="p2">9</td><td class="p2">10</td><td class="p2">11</td>
-								<td class="p4">12</td><td class="p4">13</td><td class="p4">14</td>
-								<td class="p4">15</td>
-							</tr>
-						</table>
-					</div>
+					</section>
 				</section>
 				<section id="algoritmo-planificacion-roundrobin">
 					<h2>Sistemas interactivos</h2>
@@ -420,10 +441,10 @@
 						
 					</ul>
 				</section>
-				<section>
+				<section id="round-robin-ejemplo">
+					<section id="round-robin-datos">
 					<h3>Round Robin (Algoritmo por turnos)</h3>
 					<p>Con un <strong>quantum</strong> de 3: </p>
-					<div class="half left">
 						<table class="procesos">
 							<tr>
 								<th>Procesos</th><th>Llegada</th><th>Tiempo CPU (ms)</th>
@@ -441,47 +462,39 @@
 								<td class="p4">P4</td><td>5</td><td>4</td>
 							</tr>
 						</table>
-					</div>
-					<div class="half right fragment">
-						<table class="procesos">
-							<tr>
-								<th>Proceso</th><th>Operación</th><th>Total</th>
-							</tr>
-							<tr>
-								<td>P1</td><td>15 - 7 - 0</td><td>8</td>
-							</tr>
-							<tr>
-								<td>P2</td><td>14 - 4 - 2</td><td>8</td>
-							</tr>
-							<tr>
-								<td>P3</td><td>10 - 4 - 1</td><td>5</td>
-							</tr>
-							<tr>
-								<td >P4</td><td>16 - 4 - 5</td><td>7</td>
-							</tr>
-							<tr>
-								<td colspan="3">
-									Tiempo de espera promedio: <strong>7</strong>
-								</td>
-							</tr>
-						</table>
-					</div>
-					<div class="clear"><br /></div>
-					<div>
-						<table class="timeline procesos">
-							<tr>
-								<td class="p1">0</td><td class="p1">1</td><td class="p1">2</td>
-								<td class="p2">3</td><td class="p2">4</td><td class="p2">5</td>
-								<td class="p1">6</td><td class="p1">7</td>
-							</tr>
-							<tr>
-								<td class="p1">8</td>
-								<td class="p3">9</td><td class="p4">10</td><td class="p4">11</td>
-								<td class="p4">12</td><td class="p2">13</td><td class="p1">14</td>
-								<td class="p4">15</td>
-							</tr>
-						</table>
-					</div>
+						<p class="note">Presiona ↓ para ver cada turno de CPU.</p>
+					</section>
+					<section id="rr-turno-p1-1">
+						<h3>Tiempo 0: P1 usa su primer turno</h3><p>P1 ejecuta durante 3 ms; le quedan 4 ms.</p>
+						<table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p1">2</td></tr></table>
+					</section>
+					<section id="rr-turno-p2-1">
+						<h3>Tiempo 3: P2 usa su primer turno</h3><p>P2 ejecuta de 3 a 6; le queda 1 ms.</p>
+						<table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p1">2</td><td class="p2">3</td><td class="p2">4</td><td class="p2">5</td></tr></table>
+					</section>
+					<section id="rr-turno-p1-2">
+						<h3>Tiempo 6: P1 vuelve al CPU</h3><p>P1 ejecuta otros 3 ms; le queda 1 ms.</p>
+						<table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p1">2</td><td class="p2">3</td><td class="p2">4</td><td class="p2">5</td><td class="p1">6</td><td class="p1">7</td><td class="p1">8</td></tr></table>
+					</section>
+					<section id="rr-turno-p3">
+						<h3>Tiempo 9: P3 usa su turno</h3><p>P3 necesita solo 1 ms y termina en el tiempo 10.</p>
+						<table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p1">2</td><td class="p2">3</td><td class="p2">4</td><td class="p2">5</td><td class="p1">6</td><td class="p1">7</td><td class="p1">8</td><td class="p3">9</td></tr></table>
+					</section>
+					<section id="rr-turno-p4-1">
+						<h3>Tiempo 10: P4 usa su primer turno</h3><p>P4 ejecuta durante 3 ms; le queda 1 ms.</p>
+						<table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p1">2</td><td class="p2">3</td><td class="p2">4</td><td class="p2">5</td><td class="p1">6</td><td class="p1">7</td><td class="p1">8</td><td class="p3">9</td><td class="p4">10</td><td class="p4">11</td><td class="p4">12</td></tr></table>
+					</section>
+					<section id="rr-turno-p2-2">
+						<h3>Tiempo 13: P1 termina</h3><p>P1 ejecuta su 1 ms restante y completa su trabajo.</p>
+						<table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p1">2</td><td class="p2">3</td><td class="p2">4</td><td class="p2">5</td><td class="p1">6</td><td class="p1">7</td><td class="p1">8</td><td class="p3">9</td><td class="p4">10</td><td class="p4">11</td><td class="p4">12</td><td class="p1">13</td></tr></table>
+					</section>
+					<section id="rr-finaliza">
+						<h3>Tiempo 14: P2 termina</h3>
+						<p>P2 ejecuta su 1 ms restante y termina en 15; P4 usa su último milisegundo y termina en 16.</p>
+            <table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p1">2</td><td class="p2">3</td><td class="p2">4</td><td class="p2">5</td><td class="p1">6</td><td class="p1">7</td><td class="p1">8</td><td class="p3">9</td><td class="p4">10</td></tr><tr><td class="p4">11</td><td class="p4">12</td><td class="p1">13</td><td class="p2">14</td><td class="p4">15</td></tr></table>
+            <br />
+						<table class="procesos"><tr><th>Proceso</th><th>Fin − CPU − llegada</th><th>Espera (ms)</th></tr><tr><td>P1</td><td>14 − 7 − 0</td><td>7</td></tr><tr><td>P2</td><td>15 − 4 − 2</td><td>9</td></tr><tr><td>P3</td><td>10 − 1 − 4</td><td>5</td></tr><tr><td>P4</td><td>16 − 4 − 5</td><td>7</td></tr><tr><td colspan="3">Tiempo de espera promedio: <strong>7</strong></td></tr></table>
+					</section>
 				</section>
 				<section>
 					<h3>Round Robin (Algoritmo por turnos)</h3>
@@ -502,9 +515,9 @@
 						un estándar para declarar esto como una afirmación para todos los S.O.
 					</p>
 				</section>
-				<section>
+				<section id="prioridades-ejemplo">
+					<section id="prioridades-datos">
 					<h3>Por prioridades</h3>
-					<div class="half left">
 						<table class="procesos">
 							<tr>
 								<th>Pro.</th><th>Lleg.</th><th>Tiempo CPU (ms)</th><th>Prioridad</th>
@@ -522,47 +535,30 @@
 								<td class="p4">P4</td><td>5</td><td>4</td><td>2</td>
 							</tr>
 						</table>
-					</div>
-					<div class="half right fragment">
-						<table class="procesos">
-							<tr>
-								<th>Pro.</th><th>Operación</th><th>Total</th>
-							</tr>
-							<tr>
-								<td>P1</td><td>15 - 7 - 0</td><td>8</td>
-							</tr>
-							<tr>
-								<td>P2</td><td>6 - 4 - 2</td><td>0</td>
-							</tr>
-							<tr>
-								<td>P3</td><td>16 - 4 - 1</td><td>11</td>
-							</tr>
-							<tr>
-								<td >P4</td><td>10 - 4 - 5</td><td>1</td>
-							</tr>
-							<tr>
-								<td colspan="3">
-									Tiempo de espera promedio: <strong>5</strong>
-								</td>
-							</tr>
-						</table>
-					</div>
-					<div class="clear"><br /></div>
-					<div>
-						<table class="timeline procesos">
-							<tr>
-								<td class="p1">0</td><td class="p1">1</td><td class="p2">2</td>
-								<td class="p2">3</td><td class="p2">4</td><td class="p2">5</td>
-								<td class="p4">6</td><td class="p4">7</td>
-							</tr>
-							<tr>
-								<td class="p4">8</td>
-								<td class="p4">9</td><td class="p1">10</td><td class="p1">11</td>
-								<td class="p1">12</td><td class="p1">13</td><td class="p1">14</td>
-								<td class="p3">15</td>
-							</tr>
-						</table>
-					</div>
+						<p class="note">Presiona ↓ para ver cómo la prioridad decide quién entra al CPU.</p>
+					</section>
+					<section id="prioridad-p1-1">
+						<h3>Tiempo 0: P1 entra al CPU</h3><p>P1 es el único proceso disponible y ejecuta hasta que llega P2.</p>
+						<table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td></tr></table>
+					</section>
+					<section id="prioridad-p2">
+						<h3>Tiempo 2: P2 toma el CPU</h3><p>P2 tiene prioridad 1, superior a la de P1, y ejecuta hasta terminar en 6.</p>
+						<table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p2">2</td><td class="p2">3</td><td class="p2">4</td><td class="p2">5</td></tr></table>
+					</section>
+					<section id="prioridad-p4">
+						<h3>Tiempo 6: P4 toma el CPU</h3><p>Entre P1, P3 y P4, P4 tiene la prioridad más alta (2) y ejecuta hasta 10.</p>
+						<table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p2">2</td><td class="p2">3</td><td class="p2">4</td><td class="p2">5</td><td class="p4">6</td><td class="p4">7</td><td class="p4">8</td><td class="p4">9</td></tr></table>
+					</section>
+					<section id="prioridad-p1-2">
+						<h3>Tiempo 10: P1 vuelve al CPU</h3><p>P1 tiene prioridad 3, mayor que la de P3, y completa su ejecución en 15.</p>
+						<table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p2">2</td><td class="p2">3</td><td class="p2">4</td><td class="p2">5</td><td class="p4">6</td><td class="p4">7</td><td class="p4">8</td><td class="p4">9</td><td class="p1">10</td><td class="p1">11</td><td class="p1">12</td><td class="p1">13</td><td class="p1">14</td></tr></table>
+					</section>
+					<section id="prioridad-p3">
+						<h3>Tiempo 15: P3 entra al CPU</h3><p>P3 es el último proceso listo y finaliza en 16.</p>
+            <table class="timeline procesos"><tr><td class="p1">0</td><td class="p1">1</td><td class="p2">2</td><td class="p2">3</td><td class="p2">4</td><td class="p2">5</td><td class="p4">6</td><td class="p4">7</td><td class="p4">8</td><td class="p4">9</td><td class="p1">10</td></tr><tr><td class="p1">11</td><td class="p1">12</td><td class="p1">13</td><td class="p1">14</td><td class="p3">15</td></tr></table>
+            <br />
+						<table class="procesos"><tr><th>Pro.</th><th>Operación</th><th>Total</th></tr><tr><td>P1</td><td>15 - 7 - 0</td><td>8</td></tr><tr><td>P2</td><td>6 - 4 - 2</td><td>0</td></tr><tr><td>P3</td><td>16 - 4 - 1</td><td>11</td></tr><tr><td>P4</td><td>10 - 4 - 5</td><td>1</td></tr><tr><td colspan="3">Tiempo de espera promedio: <strong>5</strong></td></tr></table>
+					</section>
 				</section>
 
 
@@ -595,50 +591,13 @@
 				<section>
 					<div class="center">
 						<h3>Ejemplo de cola multinivel</h3>
-						<div class="cola-multi center">
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-							</div>
-							<div class="third left p5">
-								Sistema
-							</div>
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-							</div>
-						</div>
-						<div class="cola-multi">
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-							</div>
-							<div class="third left p4">
-								Interactivos
-							</div>
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-							</div>
-						</div>
-						<div class="cola-multi">
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-							</div>
-							<div class="third left p2">
-								Por lotes
-							</div>
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-							</div>
-						</div>
-						<div class="cola-multi">
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-							</div>
-							<div class="third left p3">
-								Usuario
-							</div>
-							<div class="third left">
-								<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-							</div>
-						</div>
+						<canvas class="queue-canvas" width="1000" height="500" role="img"
+							aria-label="Colas multinivel de prioridad fija: sistema, interactivos, por lotes y usuario. Cada grupo de procesos permanece en su propia cola.">
+							Colas multinivel de prioridad fija: sistema, interactivos, por lotes y usuario. Cada grupo de procesos permanece en su propia cola.
+						</canvas>
+						<style>
+							.queue-canvas { width: min(1000px, 92vw); height: min(500px, 46vw); display: block; margin: 0 auto; }
+						</style>
 					</div>
 				</section>
 
@@ -673,36 +632,13 @@
 				</section>
 				<section>
 					<h3>Ejemplo de cola multinivel con retroalimentación</h3>
-					<div class="cola-multi">
-						<div class="third left" style="text-align: right">
-							<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-						</div>
-						<div class="third left p5">
-							quantum = 8
-						</div>
-						<div class="third left" style="text-align: left">
-							<img src="img/class4/flecha_abajo.png" class="noborder" alt="-->" />
-						</div>
-					</div>
-					<div class="cola-multi">
-						<div class="third left" style="text-align: right">
-							<img src="img/class4/flecha_abajo.png" class="noborder" alt="-->" />
-						</div>
-						<div class="third left p4">
-							quatum = 16
-						</div>
-						<div class="third left" style="text-align: left">
-							<img src="img/class4/flecha_izq.png" class="noborder" alt="-->" />
-						</div>
-					</div>
-					<div class="cola-multi">
-						<div class="third left" style="text-align: right">
-							<img src="img/class4/flecha.png" class="noborder" alt="-->" />
-						</div>
-						<div class="third left p2">
-							FCFS
-						</div>
-					</div>
+						<canvas class="feedback-queue-canvas" width="1000" height="360" role="img"
+						aria-label="Cola con retroalimentación: quantum 8 en la cola superior, quantum 16 en la segunda y FCFS en la última. Las flechas muestran el descenso de prioridad y el retorno al inicio.">
+						Quantum 8, quantum 16 y FCFS en colas de prioridad descendente, con flechas de retroalimentación.
+					</canvas>
+					<style>
+						.feedback-queue-canvas { width: min(1000px, 86vw); height: min(360px, 31vw); display: block; margin: 0 auto; }
+					</style>
 				</section>
 
 				<section id="planificacion-garantizada">
@@ -825,12 +761,12 @@
 					</div>
 					<div class="half left">
 						<div class="center">
-								<a href="img/class4/apple-m2.jpg" data-lightbox="CPU">
-									<img src="img/class4/apple-m2.jpg" alt="procesador" />
+								<a href="img/class4/apple-m6.jpg" data-preview-image="">
+									<img src="img/class4/apple-m6.png" alt="procesador" />
                 </a>
 								<small>Diseño de un procesador con 8 núcleos.</small>
                 <br />
-								<a href="img/class4/Apple-m2-Details.jpg" data-lightbox="CPU">
+								<a href="img/class4/Apple-m2-Details.jpg" data-preview-image="">
 									<img src="img/class4/Apple-m2-Details.jpg" alt="procesador" class="third" />
 								</a>
 						</div>
@@ -839,7 +775,7 @@
 
 				<section id="comic">
 					<h2>Planificador</h2>
-					<a href="img/class4/scheduling.png" data-lightbox="scheduling">
+					<a href="img/class4/scheduling.png" data-preview-image="">
 						<img class="half" src="img/class4/scheduling.png">
 					</a>
 					<p class="center">
@@ -856,50 +792,56 @@
 				<section id="windows" data-background="img/class4/windows_10.jpg" data-background-repeat="none">
 					<h2>Windows</h2>
 					<p class="dark">
-						Según el libro <em>Windows Internals, Part 1: Covering Windows Server 2008 R2 and Windows 7</em>
-						(2012), Windows utiliza un sistema de colas multinivel <strong>basado en prioridades</strong> 
-						donde existen varias colas.
+						Windows planifica <strong>hilos</strong> por prioridad y ejecuta primero uno listo del nivel
+						más alto. Los de igual prioridad comparten el CPU por turnos; uno de mayor prioridad puede
+						interrumpir al que corre. Los ajustes dinámicos ayudan a mantener la respuesta del sistema.
 					</p>
 					<p  class="dark">
-						Siempre un proceso de la cola de la mayor prioridad se encuentra en ejecución, 
-						con la limitación de que ciertos hilos de prioridad alta pueden ser ejecutados
-						en el procesador que se les permita o prefieran ejecutarse, un fenómeno llamado
-						<em>Afinidad del procesador</em>.
+						La afinidad restringe los procesadores elegibles para un hilo; el planificador también
+						considera prioridad y disponibilidad.
+					</p>
+					<p class="dark">
+						Fuentes: documentación de
+						<a href="https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling" target="_blank" rel="noopener noreferrer">planificación</a>,
+						<a href="https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities" target="_blank" rel="noopener noreferrer">prioridades</a> y
+						<a href="https://learn.microsoft.com/en-us/windows/win32/procthread/multiple-processors" target="_blank" rel="noopener noreferrer">multiprocesadores</a> de Microsoft.
 					</p>
 				</section>
 
 				<section id="macos" data-background="img/class4/osx.jpg" data-background-repeat="none">
 					<h2 class="dark">macOS</h2>
 					<p class="dark">
-						Utiliza una colas de retroalimentación con 4 prioridades: normal, sistema, kernel y
-						tiempo real. 
+						macOS (kernel XNU) planifica <strong>hilos</strong> con políticas y prioridades. Las clases
+						<em>Quality of Service</em> (QoS) —user-interactive, user-initiated, utility y background—
+						indican la importancia del trabajo y guían el uso de recursos; no son cuatro colas fijas.
 					</p>
-					<aside class="notes">
-						Mac OS utiliza tiempo real porque está diseñado para computadoras
-						de escritorio y necesita responder lo más rápido las peticiones
-						de entrada de usuarios
-					</aside>
+					<p class="dark">
+						Existen políticas de tiempo real para tareas específicas; macOS no es un sistema de tiempo real.
+						Fuentes: Apple sobre
+						<a href="https://developer.apple.com/documentation/xcode/configuring-background-execution-modes" target="_blank" rel="noopener noreferrer">QoS</a> y
+						<a href="https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/scheduler/scheduler.html" target="_blank" rel="noopener noreferrer">políticas de planificación Mach</a>.
+					</p>
 				</section>
 
 				<section id="linux" data-background="img/class4/linux_tux.jpg" data-background-repeat="none">
 					<div class="dark">
 						<h2>Linux</h2>
-						<h3>CFS - Complete Fair Schedule</h3>
+						<h3>Planificador justo de Linux: CFS y EEVDF</h3>
 					</div>
 					<p class="dark">
-						Desde la versión 2.6.23 utiliza una variante cola justa (utilizada en los paquetes
-						de red). Es un algoritmo similar al <em>Round Robin</em> donde al momento que un proceso
-						regresa a la cola, ésta se coloca en una posición en base al tiempo que duró en el procesador.
+						<strong>CFS</strong> significa <em>Completely Fair Scheduler</em> y se incorporó en Linux 2.6.23.
+						Reparte el CPU entre tareas ejecutables según su peso (relacionado con <em>nice</em>), usando
+						el tiempo de ejecución virtual (<em>vruntime</em>) para compensar cuánto CPU recibió cada tarea.
 					</p>
-          <p class="dark">
-            Para más información visita la 
-            <a href="https://www.kernel.org/doc/html/latest/scheduler/sched-design-CFS.html" target="_blank">
-              documentación oficial.
-            </a>
-          </p>
+					<p class="dark">
+						En kernels modernos, el planificador justo está migrando de CFS a <strong>EEVDF</strong>
+						(<em>Earliest Eligible Virtual Deadline First</em>; transición iniciada en Linux 6.6).
+						EEVDF considera cuánto CPU se le debe a cada tarea y elige la tarea elegible con la fecha
+						virtual más próxima. 
+					</p>
           <aside class="notes">
-						Tomar en cuenta que si salió un proceso por espera de E/S entonces
-						duró poco tiempo en el CPU.
+						Linux 6.6 inició la transición a EEVDF. La implementación evoluciona entre versiones
+						del kernel; presentar CFS como el único algoritmo actual es una simplificación desactualizada.
 					</aside>
 				</section>
 
@@ -915,6 +857,97 @@
 		<script src="dist/plugin/markdown.js"></script>
 		<script src="dist/plugin/highlight.js"></script>
 		<script>
+			function drawQueueCanvases() {
+				const drawScaled = (canvas, draw) => {
+					const rect = canvas.getBoundingClientRect();
+					if (!rect.width || !rect.height) return;
+					const scale = window.devicePixelRatio || 1;
+					canvas.width = rect.width * scale;
+					canvas.height = rect.height * scale;
+					const ctx = canvas.getContext('2d');
+					const coordinateScale = rect.width * scale / 1000;
+					ctx.scale(coordinateScale, coordinateScale);
+					draw(ctx, 1000, rect.height * 1000 / rect.width);
+				};
+
+				const queueCanvas = document.querySelector('.queue-canvas');
+				if (queueCanvas) {
+					drawScaled(queueCanvas, (ctx, width, height) => {
+						const queues = [
+							{ label: 'Sistema', color: '#90ff00', text: '#17200d', processes: ['S1', 'S2'] },
+							{ label: 'Interactivos', color: '#9000ff', text: '#fff', processes: ['I1', 'I2', 'I3'] },
+							{ label: 'Por lotes', color: '#ff0090', text: '#fff', processes: ['L1', 'L2'] },
+							{ label: 'Usuario', color: '#0090ff', text: '#fff', processes: ['U1', 'U2', 'U3'] }
+						];
+						const left = 250, right = 950, top = 36, laneHeight = Math.min(96, (height - 72) / queues.length);
+						ctx.font = 'bold 30px sans-serif';
+						ctx.textBaseline = 'middle';
+						queues.forEach((queue, index) => {
+							const y = top + index * laneHeight;
+							ctx.fillStyle = '#ffffff';
+							ctx.textAlign = 'right';
+							ctx.fillText(queue.label, left - 24, y + laneHeight / 2);
+							ctx.fillStyle = 'rgba(255,255,255,0.08)';
+							ctx.fillRect(left, y + 8, right - left, laneHeight - 16);
+							ctx.strokeStyle = 'rgba(255,255,255,0.65)';
+							ctx.lineWidth = 3;
+							ctx.strokeRect(left, y + 8, right - left, laneHeight - 16);
+							queue.processes.forEach((process, processIndex) => {
+								const x = left + 20 + processIndex * 126;
+								ctx.fillStyle = queue.color;
+								ctx.fillRect(x, y + 19, 106, laneHeight - 38);
+								ctx.fillStyle = queue.text;
+								ctx.textAlign = 'center';
+								ctx.fillText(process, x + 53, y + laneHeight / 2);
+							});
+						});
+					});
+				}
+
+				const feedbackCanvas = document.querySelector('.feedback-queue-canvas');
+				if (feedbackCanvas) {
+					drawScaled(feedbackCanvas, (ctx) => {
+						const lanes = [
+							{ y: 34, label: 'quantum = 8', color: '#90ff00', text: '#17200d' },
+							{ y: 140, label: 'quantum = 16', color: '#9000ff', text: '#fff' },
+							{ y: 246, label: 'FCFS', color: '#ff0090', text: '#fff' }
+						];
+						const arrow = (points) => {
+							ctx.beginPath();
+							ctx.moveTo(points[0][0], points[0][1]);
+							points.slice(1).forEach(([x, y]) => ctx.lineTo(x, y));
+							ctx.stroke();
+							const [x1, y1] = points[points.length - 2], [x2, y2] = points[points.length - 1];
+							const angle = Math.atan2(y2 - y1, x2 - x1), size = 14;
+							ctx.beginPath();
+							ctx.moveTo(x2, y2);
+							ctx.lineTo(x2 - size * Math.cos(angle - Math.PI / 6), y2 - size * Math.sin(angle - Math.PI / 6));
+							ctx.lineTo(x2 - size * Math.cos(angle + Math.PI / 6), y2 - size * Math.sin(angle + Math.PI / 6));
+							ctx.closePath();
+							ctx.fill();
+						};
+						ctx.font = 'bold 32px sans-serif';
+						ctx.textAlign = 'center';
+						ctx.textBaseline = 'middle';
+						lanes.forEach(({ y, label, color, text }) => {
+							ctx.fillStyle = color;
+							ctx.fillRect(300, y, 390, 78);
+							ctx.fillStyle = text;
+							ctx.fillText(label, 495, y + 39);
+						});
+						ctx.strokeStyle = '#fff';
+						ctx.fillStyle = '#fff';
+						ctx.lineWidth = 5;
+						arrow([[115, 73], [260, 73]]);
+						arrow([[710, 73], [770, 73], [770, 179], [710, 179]]);
+						arrow([[280, 179], [230, 179], [230, 285], [280, 285]]);
+						arrow([[710, 285], [855, 285]]);
+					});
+				}
+			}
+
+			window.addEventListener('load', drawQueueCanvases);
+			window.addEventListener('resize', drawQueueCanvases);
 
 			// Also available as an ES module, see:
 			// https://revealjs.com/initialization/
