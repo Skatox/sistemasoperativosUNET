@@ -19,6 +19,126 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="dist/plugin/highlight/monokai.css">
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<style>
+			#ejemplo-interbloqueo .deadlock-demo {
+				width: min(100%, 920px);
+				margin: 0 auto;
+				color: #202020;
+			}
+			#ejemplo-interbloqueo #deadlock-canvas {
+				display: block;
+				width: 100%;
+				height: clamp(250px, 46vh, 380px);
+				background: #eaf2e8;
+				border: 1px solid rgba(32, 32, 32, .2);
+				border-radius: 8px;
+			}
+			#ejemplo-interbloqueo .deadlock-controls {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: .5rem;
+				margin-top: .45rem;
+			}
+			#ejemplo-interbloqueo .deadlock-controls button {
+				display: inline-grid;
+				width: 2.4rem;
+				height: 2.4rem;
+				place-items: center;
+				padding: .35rem;
+				border: 1px solid #315d32;
+				border-radius: 4px;
+				background: #496f31;
+				color: #fff;
+				font: inherit;
+				font-size: .5em;
+				cursor: pointer;
+			}
+			#ejemplo-interbloqueo .deadlock-controls button svg {
+				display: block;
+				width: 1.25rem;
+				height: 1.25rem;
+				fill: none;
+				stroke: currentColor;
+				stroke-width: 2;
+				stroke-linecap: round;
+				stroke-linejoin: round;
+			}
+			#ejemplo-interbloqueo .deadlock-controls button:disabled { opacity: .45; cursor: default; }
+			#ejemplo-interbloqueo .deadlock-controls button:focus-visible {
+				outline: 3px solid #e5ad35;
+				outline-offset: 2px;
+			}
+			#ejemplo-interbloqueo .deadlock-step {
+				min-height: 1.2em;
+				margin: .25rem 0 0;
+				font-size: .5em;
+				line-height: 1.2;
+			}
+			table.banquero th {
+				background: #51722a !important;
+				color: #fff !important;
+			}
+			table.banquero td {
+				background: #eaf2e8;
+				color: #202020;
+			}
+			.banker-walkthrough {
+				max-width: 1100px;
+				margin: .5rem auto;
+				padding: .6rem 1rem;
+				color: #eee;
+				font-size: .66em;
+				line-height: 1.35;
+			}
+			.banker-work {
+				display: block;
+				margin: .35rem 0 .65rem;
+				color: #aaddaa;
+				font-weight: 700;
+			}
+			.banker-state-table {
+				width: auto !important;
+				margin: .3rem auto !important;
+				border-collapse: collapse !important;
+				font-size: .72em !important;
+			}
+			.banker-state-table th,
+			.banker-state-table td {
+				min-width: 2.1em;
+				padding: .24em .4em !important;
+				border: 1px solid rgba(170, 221, 170, .55) !important;
+				background: #eaf2e8 !important;
+				color: #202020 !important;
+				text-align: center !important;
+			}
+			.banker-state-table thead th {
+				background: #51722a !important;
+				color: #fff !important;
+			}
+			.banker-state-table tbody th { background: #dce8d6 !important; color: #202020 !important; }
+			.banker-state-table tr.is-current td,
+			.banker-state-table tr.is-current th { background: #fff0c2 !important; color: #202020 !important; }
+			.banker-state-table tr.is-current td { background: #fff0c2 !important; color: #202020 !important; }
+			.banker-state-table tr.is-finished td,
+			.banker-state-table tr.is-finished th { background: #dce8d6 !important; color: #202020 !important; }
+			.banker-state-table tr.is-finished td { background: #dce8d6 !important; color: #202020 !important; }
+			.banker-state-caption {
+				margin: .1rem 0;
+				font-size: .85em;
+				font-weight: 700;
+			}
+			.banker-result {
+				margin-top: .6rem;
+				color: #99ff99;
+				font-weight: 700;
+			}
+			@media (max-height: 700px) {
+				#ejemplo-interbloqueo #deadlock-canvas { height: 36vh; min-height: 220px; }
+				.banker-walkthrough { margin: .2rem auto; padding: .25rem .45rem; font-size: .58em; }
+				.banker-state-table { font-size: .62em !important; }
+			}
+		</style>
 	</head>
 
 	<body>
@@ -231,8 +351,23 @@
 
 				<section id="ejemplo-interbloqueo">
 					<h2>Ejemplo de un interbloqueo</h2>
-					<div class="center">
-						<img src="img/class6/ejemplo-interbloqueo2.png" alt="grafo" />
+					<div class="deadlock-demo" aria-label="Animación paso a paso de un grafo de asignación de recursos">
+						<canvas id="deadlock-canvas" role="img" aria-label="Grafo de asignación con procesos A, B y C y recursos R, S y T. Usa los controles para recorrer los estados hasta el interbloqueo."></canvas>
+						<div class="deadlock-controls" aria-label="Controles de la secuencia">
+							<button id="deadlock-previous" type="button" aria-label="Paso anterior" title="Paso anterior">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/><path d="M20 12H9"/></svg>
+							</button>
+							<button id="deadlock-play" type="button" aria-label="Reproducir" title="Reproducir" aria-pressed="false">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 12 7-12 7z"/></svg>
+							</button>
+							<button id="deadlock-next" type="button" aria-label="Paso siguiente" title="Paso siguiente">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/><path d="M4 12h11"/></svg>
+							</button>
+							<button id="deadlock-restart" type="button" aria-label="Reiniciar animación" title="Reiniciar animación">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3v5h5"/></svg>
+							</button>
+						</div>
+						<p id="deadlock-step" class="deadlock-step" aria-live="polite"></p>
 					</div>
 				</section>
 
@@ -361,7 +496,7 @@
 					</ul>
 				</section>
 				<section>
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Prevención del Interbloqueo - No expropiación</h3>
 					<ul>
 						<li>Un proceso bloqueado debe esperar por todos los recursos.</li>
@@ -369,7 +504,7 @@
 					</ul>
 				</section>
 				<section>
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Prevención del Interbloqueo - Espera circular</h3>
 					<p>
 						A cada recurso se le asigna un orden, y el proceso solo puede solicitar
@@ -383,7 +518,7 @@
 					</p>
 				</section>
 				<section>
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Predicción del Interbloqueo</h3>
 					<p>
 						Consiste en asignar los recursos solamente cuando <strong>no presentan
@@ -394,7 +529,7 @@
 					</p>
 				</section>
 				<section>
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Predicción del Interbloqueo</h3>
 					<p>
 						Existen dos enfoques para la predicción de interbloqueo:
@@ -411,7 +546,7 @@
 					</ul>
 				</section>
 				<section>
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Concepto de estado seguro</h3>
 					<p>
 						El estado del sistema viene dado por la asignación actual de los
@@ -431,7 +566,7 @@
 					</ul>
 				</section>
 				<section>
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Algoritmo del banquero</h3>
 					<div class="left twothird">
 						Propuesto por Dijkstra basado en la <strong>negativa
@@ -445,7 +580,7 @@
 					</div>
 				</section>
 				<section>
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Funcionamiento del algoritmo del banquero</h3>
 					<ul>
 						<li>
@@ -462,7 +597,7 @@
 					</ul>
 				</section>
 				<section>
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Algoritmo del banquero</h3>
 					<ul>
 						<li>
@@ -481,7 +616,8 @@
 				</section>
 
 				<section id="algoritmo-banquero-ejemplo">
-					<h3>Estrategias para<br>enfrentar los bloqueos</h3>
+				<section>
+					<h3>Estrategias para enfrentar los bloqueos</h3>
 					<h4>Algoritmo del banquero</h4>
 					<div class="half left center">
 						<p>
@@ -574,8 +710,41 @@
 						</div>
 					</div>
 				</section>
+				<section>
+					<h3>Algoritmo del banquero: caso de cuatro recursos</h3>
+					<p>El vector disponible es el total existente menos lo asignado. La tabla «Recursos necesarios» ya muestra la necesidad.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="four" data-step="0"></div>
+				</section>
+				<section>
+					<h3>Paso 1 de 5: termina D</h3>
+					<p class="banker-walkthrough">La necesidad de D {0, 0, 1, 0} puede cubrirse. D termina y libera su asignación.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="four" data-step="1"></div>
+				</section>
+				<section>
+					<h3>Paso 2 de 5: termina A</h3>
+					<p class="banker-walkthrough">La necesidad de A {1, 1, 0, 0} puede cubrirse con los recursos disponibles.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="four" data-step="2"></div>
+				</section>
+				<section>
+					<h3>Paso 3 de 5: termina B</h3>
+					<p class="banker-walkthrough">La necesidad de B {0, 1, 1, 2} puede cubrirse con los recursos disponibles.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="four" data-step="3"></div>
+				</section>
+				<section>
+					<h3>Paso 4 de 5: termina C</h3>
+					<p class="banker-walkthrough">La necesidad de C {3, 1, 0, 0} puede cubrirse con los recursos disponibles.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="four" data-step="4"></div>
+				</section>
+				<section>
+					<h3>Paso 5 de 5: termina E</h3>
+					<p class="banker-walkthrough">La necesidad de E {2, 1, 1, 0} puede cubrirse. E termina sin devolver recursos porque no tenía ninguno asignado.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="four" data-step="5"></div>
+					<p class="banker-result">Secuencia segura: D → A → B → C → E. No hay interbloqueo.</p>
+				</section>
+				</section>
 				<section id="algoritmo-banquero-ejemplo-2">
-					<h3>Estrategias para<br>enfrentar los bloqueos</h3>
+				<section>
+					<h3>Estrategias para enfrentar los bloqueos</h3>
 					<h4>Algoritmo del banquero</h4>
 					<div class="half left center">
 						<p>
@@ -669,10 +838,42 @@
 							<h3>Necesidades máximas</h3>
 						</div>
 					</div>
-					<p class="note">P2 necesita 1 instacia del recurso A y 2 instancias del recurso C</p>
+					<p class="note">La necesidad de P2 es {1, 2, 2}: 1 instancia de A, 2 de B y 2 de C.</p>
+				</section>
+				<section>
+					<h3>Calculamos la matriz de necesidad</h3>
+					<p class="banker-walkthrough">Para cada proceso: Necesidad = Máximo − Asignado. Iniciamos con Work = Disponibles.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="five" data-step="0"></div>
+				</section>
+				<section>
+					<h3>Paso 1 de 5: termina P2</h3>
+					<p class="banker-walkthrough">Necesidad de P2 {1, 2, 2} ≤ Work. P2 termina y devuelve su asignación.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="five" data-step="1"></div>
+				</section>
+				<section>
+					<h3>Paso 2 de 5: termina P4</h3>
+					<p class="banker-walkthrough">Necesidad de P4 {0, 1, 1} ≤ Work. P4 termina y devuelve su asignación.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="five" data-step="2"></div>
+				</section>
+				<section>
+					<h3>Paso 3 de 5: termina P5</h3>
+					<p class="banker-walkthrough">Necesidad de P5 {4, 3, 1} ≤ Work. P5 termina y devuelve su asignación.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="five" data-step="3"></div>
+				</section>
+				<section>
+					<h3>Paso 4 de 5: termina P1</h3>
+					<p class="banker-walkthrough">Necesidad de P1 {7, 4, 3} ≤ Work. P1 termina y devuelve su asignación.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="five" data-step="4"></div>
+				</section>
+				<section>
+					<h3>Paso 5 de 5: termina P3</h3>
+					<p class="banker-walkthrough">Necesidad de P3 {6, 0, 0} ≤ Work. P3 termina y devuelve su asignación.</p>
+					<div class="banker-walkthrough banker-state-host" data-banker-case="five" data-step="5"></div>
+					<p class="banker-result">Secuencia segura: P2 → P4 → P5 → P1 → P3. No hay interbloqueo.</p>
+				</section>
 				</section>
 				<section id="algoritmo-avestruz">
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Ignorar todo el problema<br> (Algoritmo del Avestruz)</h3>
 					<ul>
 						<li>
@@ -686,7 +887,7 @@
 				</section>
 
 				<section id="deteccion-recuperacion">
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Detección y recuperación</h3>
 					<ul>
 						<li>
@@ -705,7 +906,7 @@
 				</section>
 
 				<section id="deteccion-recuperacion-1">
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Detección y recuperación de Interbloqueo</h3>
 					<h4>Detección</h4>
 					<ul>
@@ -721,7 +922,7 @@
 				</section>
 
 				<section id="deteccion-recuperacion-2">
-					<h2>Estrategias para<br>enfrentar los bloqueos</h2>
+					<h2>Estrategias para enfrentar los bloqueos</h2>
 					<h3>Detección: Una sola instancia de recurso para cada tipo</h3>
 					<div class="half left">
 						<p>
@@ -739,7 +940,7 @@
 				</section>
 
 				<section id="varias-instancias">
-					<h3>Estrategias para <br>enfrentar los bloqueos</h3>
+					<h3>Estrategias para enfrentar los bloqueos</h3>
 					<h4>Varias instancias de cada tipo de recursos</h4>
 					<p>
 						Se aplica el algoritmo del banquero, pero se utilizan
@@ -763,7 +964,7 @@
 				</section>
 
 				<section id="recuperacion-interbloqueo">
-					<h2>Detección y recuperación<br> de los interbloqueos</h2>
+					<h2>Detección y recuperación de los interbloqueos</h2>
 					<h3>Recuperación de los interbloqueo</h3>
 					<p>
 						Para recuperarse, el sistema debe llamar a un algoritmo de
@@ -781,7 +982,7 @@
 				</section>
 
 				<section id="recuperacion-interbloqueo-2">
-					<h2>Detección y recuperación<br> de los interbloqueos</h2>
+					<h2>Detección y recuperación de los interbloqueos</h2>
 					<h3>Recuperación de los interbloqueo</h3>
 					<ul>
 						<li>
@@ -799,7 +1000,7 @@
 				</section>
 
 				<section id="terminacion-procesos">
-					<h2>Detección y recuperación<br> de los interbloqueos</h2>
+					<h2>Detección y recuperación de los interbloqueos</h2>
 					<h3>Recuperación de los interbloqueo</h3>
 					<h4>Terminación de procesos</h4>
 					<ul>
@@ -850,6 +1051,267 @@
 		<script src="dist/plugin/markdown.js"></script>
 		<script src="dist/plugin/highlight.js"></script>
 		<script>
+			(() => {
+				const canvas = document.getElementById('deadlock-canvas');
+				if (!canvas) return;
+
+				const context = canvas.getContext('2d');
+				const stageLabel = document.getElementById('deadlock-step');
+				const previousButton = document.getElementById('deadlock-previous');
+				const playButton = document.getElementById('deadlock-play');
+				const nextButton = document.getElementById('deadlock-next');
+				const restartButton = document.getElementById('deadlock-restart');
+				const processes = ['A', 'B', 'C'];
+				const resources = ['R', 'S', 'T'];
+				const edges = [
+					{ from: 'R', to: 'A', kind: 'assignment' },
+					{ from: 'S', to: 'B', kind: 'assignment' },
+					{ from: 'T', to: 'C', kind: 'assignment' },
+					{ from: 'A', to: 'S', kind: 'request' },
+					{ from: 'B', to: 'T', kind: 'request' },
+					{ from: 'C', to: 'R', kind: 'request' }
+				];
+				const stages = [
+					{ edgeCount: 0, message: 'Estado inicial: los procesos y recursos están disponibles.' },
+					{ edgeCount: 1, message: 'R se asigna al proceso A.' },
+					{ edgeCount: 2, message: 'S se asigna al proceso B.' },
+					{ edgeCount: 3, message: 'T se asigna al proceso C.' },
+					{ edgeCount: 4, message: 'A solicita S, que ya está asignado a B.' },
+					{ edgeCount: 5, message: 'B solicita T, que ya está asignado a C.' },
+					{ edgeCount: 6, message: 'C solicita R, que ya está asignado a A: se cierra el ciclo.' },
+					{ edgeCount: 6, highlight: true, message: 'Interbloqueo: A espera S, B espera T y C espera R. El ciclo A → S → B → T → C → R → A impide que avancen.' }
+				];
+				let stage = 0;
+				let playing = false;
+				let timer = null;
+
+				function fitCanvas() {
+					const rect = canvas.getBoundingClientRect();
+					const ratio = window.devicePixelRatio || 1;
+					canvas.width = Math.round(rect.width * ratio);
+					canvas.height = Math.round(rect.height * ratio);
+					context.setTransform(ratio, 0, 0, ratio, 0, 0);
+					draw();
+				}
+
+				function arrow(fromX, fromY, toX, toY, color, width) {
+					const angle = Math.atan2(toY - fromY, toX - fromX);
+					const startInset = 25;
+					const endInset = 26;
+					const x1 = fromX + Math.cos(angle) * startInset;
+					const y1 = fromY + Math.sin(angle) * startInset;
+					const x2 = toX - Math.cos(angle) * endInset;
+					const y2 = toY - Math.sin(angle) * endInset;
+					context.beginPath();
+					context.strokeStyle = color;
+					context.fillStyle = color;
+					context.lineWidth = width;
+					context.moveTo(x1, y1);
+					context.lineTo(x2, y2);
+					context.stroke();
+					context.beginPath();
+					context.moveTo(x2, y2);
+					context.lineTo(x2 - 9 * Math.cos(angle - Math.PI / 6), y2 - 9 * Math.sin(angle - Math.PI / 6));
+					context.lineTo(x2 - 9 * Math.cos(angle + Math.PI / 6), y2 - 9 * Math.sin(angle + Math.PI / 6));
+					context.closePath();
+					context.fill();
+				}
+
+				function label(value, x, y, size, color = '#202020', weight = 'normal') {
+					context.fillStyle = color;
+					context.font = `${weight} ${size}px Arial, sans-serif`;
+					context.textAlign = 'center';
+					context.textBaseline = 'middle';
+					context.fillText(value, x, y);
+				}
+
+				function draw() {
+					const width = canvas.clientWidth;
+					const height = canvas.clientHeight;
+					if (!width || !height) return;
+					context.clearRect(0, 0, width, height);
+					context.fillStyle = '#eaf2e8';
+					context.fillRect(0, 0, width, height);
+					const scale = Math.min(width / 700, height / 300, 1.15);
+					const graphBounds = { left: 95, right: 605 };
+					const graphCenterX = (graphBounds.left + graphBounds.right) / 2;
+					const offsetX = width / 2 - graphCenterX * scale + 100 * scale;
+					const offsetY = (height - 300 * scale) / 2;
+					context.save();
+					context.translate(offsetX, offsetY);
+					context.scale(scale, scale);
+					const state = stages[stage];
+					const processPoints = { A: [120, 70], B: [350, 70], C: [580, 70] };
+					const resourcePoints = { R: [120, 230], S: [350, 230], T: [580, 230] };
+					const cycleColor = state.highlight ? '#d54432' : '#202020';
+
+					for (let i = 0; i < state.edgeCount; i++) {
+						const edge = edges[i];
+						const from = processPoints[edge.from] || resourcePoints[edge.from];
+						const to = processPoints[edge.to] || resourcePoints[edge.to];
+						const isCycleEdge = state.highlight;
+						const color = isCycleEdge ? cycleColor : '#202020';
+						arrow(from[0], from[1], to[0], to[1], color, isCycleEdge ? 3 : 2);
+					}
+
+					processes.forEach((name) => {
+						const [x, y] = processPoints[name];
+						const focused = state.focus === name;
+						context.beginPath();
+						context.arc(x, y, 25, 0, Math.PI * 2);
+						context.fillStyle = focused ? '#ffe08a' : '#fff';
+						context.fill();
+						context.strokeStyle = state.highlight ? '#9f2d25' : '#202020';
+						context.lineWidth = state.highlight ? 2 : 1.4;
+						context.stroke();
+						label(name, x, y, 17);
+					});
+					resources.forEach((name) => {
+						const [x, y] = resourcePoints[name];
+						context.fillStyle = '#fff';
+						context.fillRect(x - 25, y - 25, 50, 50);
+						context.strokeStyle = state.highlight ? '#9f2d25' : '#202020';
+						context.lineWidth = state.highlight ? 2 : 1.4;
+						context.strokeRect(x - 25, y - 25, 50, 50);
+						label(name, x, y, 17);
+					});
+
+					if (state.highlight) {
+						context.fillStyle = 'rgba(255,255,255,.85)';
+						context.fillRect(180, 270, 340, 25);
+						label('CICLO DE ESPERA: A → S → B → T → C → R → A', 350, 282, 12, '#a52f28', 'bold');
+					}
+					context.restore();
+					stageLabel.textContent = `Paso ${stage + 1} de ${stages.length}: ${state.message}`;
+					previousButton.disabled = stage === 0;
+					nextButton.disabled = stage === stages.length - 1;
+				}
+
+				function setStage(nextStage) {
+					stage = Math.max(0, Math.min(stages.length - 1, nextStage));
+					draw();
+					if (stage === stages.length - 1) stop();
+				}
+
+				function stop() {
+					playing = false;
+					window.clearInterval(timer);
+					timer = null;
+					playButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 12 7-12 7z"/></svg>';
+					playButton.setAttribute('aria-label', 'Reproducir');
+					playButton.title = 'Reproducir';
+					playButton.setAttribute('aria-pressed', 'false');
+				}
+
+				function play() {
+					if (playing) {
+						stop();
+						return;
+					}
+					if (stage === stages.length - 1) setStage(0);
+					playing = true;
+					playButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14"/><path d="M16 5v14"/></svg>';
+					playButton.setAttribute('aria-label', 'Pausar');
+					playButton.title = 'Pausar';
+					playButton.setAttribute('aria-pressed', 'true');
+					timer = window.setInterval(() => setStage(stage + 1), 1100);
+				}
+
+				previousButton.addEventListener('click', () => setStage(stage - 1));
+				nextButton.addEventListener('click', () => setStage(stage + 1));
+				playButton.addEventListener('click', play);
+				restartButton.addEventListener('click', () => {
+					stop();
+					setStage(0);
+				});
+				window.addEventListener('resize', fitCanvas);
+				if ('ResizeObserver' in window) new ResizeObserver(fitCanvas).observe(canvas);
+				fitCanvas();
+			})();
+
+			(() => {
+				const cases = {
+					four: {
+						processes: ['A', 'B', 'C', 'D', 'E'],
+						resources: ['A', 'B', 'C', 'D'],
+						available: [1, 0, 2, 0],
+						allocation: [[3, 0, 1, 1], [0, 1, 0, 0], [1, 1, 1, 0], [1, 1, 0, 1], [0, 0, 0, 0]],
+						need: [[1, 1, 0, 0], [0, 1, 1, 2], [3, 1, 0, 0], [0, 0, 1, 0], [2, 1, 1, 0]],
+						sequence: ['D', 'A', 'B', 'C', 'E']
+					},
+					five: {
+						processes: ['P1', 'P2', 'P3', 'P4', 'P5'],
+						resources: ['A', 'B', 'C'],
+						available: [3, 3, 2],
+						allocation: [[0, 1, 0], [2, 0, 0], [3, 0, 2], [2, 1, 1], [0, 0, 2]],
+						maximum: [[7, 5, 3], [3, 2, 2], [9, 0, 2], [2, 2, 2], [4, 3, 3]],
+						sequence: ['P2', 'P4', 'P5', 'P1', 'P3']
+					}
+				};
+
+				const formatVector = (values) => `{${values.join(', ')}}`;
+				function appendCell(row, textContent, tag = 'td', attributes = {}) {
+					const cell = document.createElement(tag);
+					cell.textContent = textContent;
+					Object.entries(attributes).forEach(([name, value]) => cell.setAttribute(name, value));
+					row.appendChild(cell);
+					return cell;
+				}
+
+				function renderState(host) {
+					const data = cases[host.dataset.bankerCase];
+					if (!data) return;
+					const completedCount = Number(host.dataset.step) || 0;
+					const completed = data.sequence.slice(0, completedCount);
+					const available = data.available.slice();
+					completed.forEach((process) => {
+						const index = data.processes.indexOf(process);
+						available.forEach((amount, resource) => { available[resource] = amount + data.allocation[index][resource]; });
+					});
+
+					const workLabel = document.createElement('p');
+					workLabel.className = 'banker-work';
+					workLabel.textContent = `Work / Disponibles${completedCount ? ` después de ${completed[completedCount - 1]}` : ' iniciales'} = ${formatVector(available)}`;
+					host.appendChild(workLabel);
+
+					const table = document.createElement('table');
+					table.className = 'banker-state-table';
+					const caption = document.createElement('caption');
+					caption.className = 'banker-state-caption';
+					caption.textContent = 'Estado completo de asignación y necesidad';
+					table.appendChild(caption);
+					const head = document.createElement('thead');
+					const groupRow = document.createElement('tr');
+					appendCell(groupRow, 'Proceso', 'th', { rowspan: '2' });
+					appendCell(groupRow, 'Asignado', 'th', { colspan: String(data.resources.length) });
+					if (data.maximum) appendCell(groupRow, 'Máximo', 'th', { colspan: String(data.resources.length) });
+					appendCell(groupRow, 'Necesidad', 'th', { colspan: String(data.resources.length) });
+					appendCell(groupRow, 'Estado', 'th', { rowspan: '2' });
+					head.appendChild(groupRow);
+					const resourceRow = document.createElement('tr');
+					[data.resources, data.maximum ? data.resources : null, data.resources].filter(Boolean).flat().forEach((resource) => appendCell(resourceRow, resource, 'th'));
+					head.appendChild(resourceRow);
+					table.appendChild(head);
+
+					const body = document.createElement('tbody');
+					data.processes.forEach((process, index) => {
+						const row = document.createElement('tr');
+						const wasCompleted = completed.includes(process);
+						if (wasCompleted) row.className = process === completed[completed.length - 1] ? 'is-current' : 'is-finished';
+						appendCell(row, process, 'th', { scope: 'row' });
+						data.allocation[index].forEach((value) => appendCell(row, String(value)));
+						if (data.maximum) data.maximum[index].forEach((value) => appendCell(row, String(value)));
+						const need = data.maximum ? data.maximum[index].map((value, resource) => value - data.allocation[index][resource]) : data.need[index];
+						need.forEach((value) => appendCell(row, String(value)));
+						appendCell(row, wasCompleted ? 'Finalizado ✓' : 'Pendiente');
+						body.appendChild(row);
+					});
+					table.appendChild(body);
+					host.appendChild(table);
+				}
+
+				document.querySelectorAll('.banker-state-host').forEach(renderState);
+			})();
 
 			// Also available as an ES module, see:
 			// https://revealjs.com/initialization/
