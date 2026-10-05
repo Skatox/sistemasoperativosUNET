@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite';
-import { cpSync, readdirSync, rmSync } from 'node:fs';
+import { cpSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { relative } from 'node:path';
+import * as sass from 'sass-embedded';
+
+const siteBase = '/sistemasoperativosUNET/';
 
 const slidePages = [
   '01-Introduccion.html',
@@ -22,7 +25,7 @@ const slidePages = [
 const slidePageNames = new Set(slidePages);
 
 export default defineConfig({
-  base: '/sistemasoperativosUNET/',
+  base: siteBase,
   // Static slide assets live alongside the root HTML sources, outside public/.
   publicDir: false,
   plugins: [
@@ -49,8 +52,23 @@ export default defineConfig({
         // production output without maintaining a second source tree.
         copyDirectory(new URL('./dist', import.meta.url), new URL('./build/dist', import.meta.url), false);
         copyDirectory(new URL('./img', import.meta.url), new URL('./build/img', import.meta.url));
+
+        const customTheme = sass.compile(new URL('./css/theme/source/unet.scss', import.meta.url).pathname).css;
+        writeFileSync(new URL('./build/dist/theme/unet-custom.css', import.meta.url), customTheme);
+
         for (const page of slidePages) {
+          const outputPath = new URL(`./build/${page}`, import.meta.url);
           rmSync(new URL(`./build/dist/${page}`, import.meta.url), { force: true });
+
+          const html = readFileSync(outputPath, 'utf8');
+          const stylesheets = [
+            'dist/reset.css',
+            'dist/reveal.css',
+            'dist/theme/moon.css',
+            'dist/theme/unet-custom.css',
+          ].map((path) => `<link rel="stylesheet" href="${siteBase}${path}">`).join('\n\t\t');
+
+          writeFileSync(outputPath, html.replace('<!-- Theme used for syntax highlighting of code -->', `${stylesheets}\n\t\t<!-- Theme used for syntax highlighting of code -->`));
         }
       },
     },
