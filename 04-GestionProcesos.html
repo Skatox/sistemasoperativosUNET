@@ -122,9 +122,6 @@
 
 				<section id="introduccion-4">
 					<h2>Introducción</h2>
-					<a href="img/class4/vida_proceso.jpg" data-preview-image="Comportamiento-proceso">
-						<img src="img/class4/vida_proceso.jpg"  alt="Comportamiento de un proceso">
-					</a>
 					<div class="cpu-io-frame" aria-label="Línea de tiempo de ráfagas de CPU y espera por E/S">
 						<div class="cpu-io-legend">
 							<span class="cpu">Ejecutando en CPU</span>
@@ -253,24 +250,21 @@
 							El despachador toma procesos listos, cambia el contexto y entrega cada hilo a un núcleo disponible.
 						</p>
 						<div class="ready-queue">
-							<h3>Cola de listos</h3>
+							<h6>Cola de listos</h6>
 							<span class="queue-process q1">P1</span>
 							<span class="queue-process q2">P2</span>
 							<span class="queue-process q3">P3</span>
 							<span class="queue-process q4">P4</span>
 						</div>
 						<div class="dispatch-line to-dispatcher"></div>
-						<div class="dispatch-line to-core-1"></div>
-						<div class="dispatch-line to-core-2"></div>
-						<div class="dispatch-line to-core-3"></div>
-						<div class="dispatch-line to-core-4"></div>
+						<div class="dispatch-line to-cpu"></div>
 						<div class="dispatcher-kernel">
-							<h3>Despachador</h3>
+							<h6>Despachador</h6>
 							<p>cambio de contexto</p>
 							<p>modo usuario</p>
 						</div>
 						<div class="cpu-chip">
-							<h3>CPU multinúcleo</h3>
+							<h6>CPU multinúcleo</h6>
 							<div class="core-grid">
 								<div class="cpu-core">Núcleo 1</div>
 								<div class="cpu-core">Núcleo 2</div>
@@ -791,19 +785,6 @@
 						retroalimentación, aquí los procesos no migran entre colas.
 					</aside>
 				</section>
-				<section>
-					<h3>Animación de cola multinivel</h3>
-					<div class="center">
-						<canvas class="queue-canvas" width="1000" height="500" role="img"
-							aria-label="Colas multinivel de prioridad fija: sistema, interactivos, por lotes y usuario. Cada grupo de procesos permanece en su propia cola.">
-							Colas multinivel de prioridad fija: sistema, interactivos, por lotes y usuario. Cada grupo de procesos permanece en su propia cola.
-						</canvas>
-						<style>
-							.queue-canvas { width: min(1000px, 92vw); height: min(500px, 46vw); display: block; margin: 0 auto; }
-						</style>
-					</div>
-				</section>
-
 				<section id="algoritmo-planificacion-multinivel-retroalimentacion">
 					<h2>Colas multinivel con retroalimentación</h2>
 					<div>
@@ -899,17 +880,6 @@
 						por eso se mantiene en colas altas para responder rápido al usuario.
 					</aside>
 				</section>
-				<section>
-					<h3>Animación de cola multinivel con retroalimentación</h3>
-					<canvas class="feedback-queue-canvas" width="1000" height="360" role="img"
-						aria-label="Cola con retroalimentación: quantum 8 en la cola superior, quantum 16 en la segunda y FCFS en la última. Las flechas muestran el descenso de prioridad y el retorno al inicio.">
-						Quantum 8, quantum 16 y FCFS en colas de prioridad descendente, con flechas de retroalimentación.
-					</canvas>
-					<style>
-						.feedback-queue-canvas { width: min(1000px, 86vw); height: min(360px, 31vw); display: block; margin: 0 auto; }
-					</style>
-				</section>
-
 				<section id="planificacion-garantizada">
 					<h2>Sistemas interactivos</h2>
 					<h3>Planificación garantizada</h3>

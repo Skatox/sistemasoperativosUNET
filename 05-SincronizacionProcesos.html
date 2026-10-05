@@ -19,6 +19,50 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="dist/plugin/highlight/monokai.css">
 		<link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<style>
+			#productor-consumidor-3 .pc-demo {
+				width: min(100%, 700px);
+				margin: 0 auto;
+				color: #202020;
+			}
+			#productor-consumidor-3 #producer-consumer-canvas {
+				display: block;
+				width: 100%;
+				height: clamp(180px, 24vh, 220px);
+				background: #fff;
+				border: 1px solid rgba(32, 32, 32, .2);
+				border-radius: 8px;
+			}
+			#productor-consumidor-3 .pc-demo-controls {
+				display: flex;
+				justify-content: center;
+				gap: .6rem;
+				margin-top: .45rem;
+			}
+			#productor-consumidor-3 .pc-demo-controls button {
+				padding: .3rem .8rem;
+				border: 1px solid #315d32;
+				border-radius: 4px;
+				background: #496f31;
+				color: #fff;
+				font: inherit;
+				font-size: .55em;
+				cursor: pointer;
+			}
+			#productor-consumidor-3 .pc-demo-controls button:focus-visible {
+				outline: 3px solid #e5ad35;
+				outline-offset: 2px;
+			}
+			#productor-consumidor-3 .pc-event {
+				min-height: 1.4em;
+				margin: .3rem 0 0;
+				font-size: .55em;
+				line-height: 1.25;
+			}
+			@media (max-height: 700px) {
+				#productor-consumidor-3 #producer-consumer-canvas { height: 22vh; min-height: 170px; }
+			}
+		</style>
 	</head>
 
 	<body>
@@ -424,9 +468,16 @@ void salirSC(int proceso) {
 		                </li>
 		            </ul>
 		        </section>
-		        <section id="productor-consumidor-3">
+			        <section id="productor-consumidor-3">
 		        	<h2>El problema del<br>Productor - Consumidor</h2>
-	                <img src="img/class5/producto-consumidor.png" alt="pc" />
+	                <div class="pc-demo" aria-label="Animación del problema productor consumidor">
+	                    <canvas id="producer-consumer-canvas" role="img" aria-label="El productor agrega elementos a un buffer de siete posiciones y el consumidor los retira. Las pausas y despertares se muestran durante el ciclo."></canvas>
+	                    <div class="pc-demo-controls" aria-label="Controles de animación">
+	                        <button id="pc-play-toggle" type="button" aria-pressed="true">Pausar</button>
+	                        <button id="pc-restart" type="button">Reiniciar</button>
+	                    </div>
+	                    <p id="pc-event" class="pc-event" aria-live="polite">El productor prepara un elemento.</p>
+	                </div>
 		        </section>
 		        <section id="productor-consumidor-4">
 		            <h2>El problema del Productor - Consumidor</h2>
@@ -858,6 +909,266 @@ while (true) {
 		<script src="dist/plugin/markdown.js"></script>
 		<script src="dist/plugin/highlight.js"></script>
 		<script>
+			(() => {
+				const canvas = document.getElementById('producer-consumer-canvas');
+				if (!canvas) return;
+
+				const context = canvas.getContext('2d');
+				const section = canvas.closest('section');
+				const eventLabel = document.getElementById('pc-event');
+				const playButton = document.getElementById('pc-play-toggle');
+				const restartButton = document.getElementById('pc-restart');
+				const capacity = 7;
+				const cycle = [
+					{ action: 'produce', message: 'El productor prepara un elemento.' },
+					{ action: 'produce', message: 'El productor inserta el elemento en el buffer.' },
+					{ action: 'consume', message: 'El consumidor retira el elemento más antiguo.' },
+					{ action: 'consume', message: 'El consumidor procesa el elemento.' },
+					{ action: 'produce', message: 'El productor prepara otro elemento.' },
+					{ action: 'produce', message: 'El productor inserta un elemento.' },
+					{ action: 'produce', message: 'El productor inserta otro elemento.' },
+					{ action: 'produce', message: 'El productor inserta otro elemento.' },
+					{ action: 'produce', message: 'El productor inserta otro elemento.' },
+					{ action: 'produce', message: 'El productor inserta otro elemento.' },
+					{ action: 'produce', message: 'El productor inserta otro elemento.' },
+					{ action: 'sleepProducer', message: 'Buffer lleno: el productor ejecuta sleep(productor) y queda bloqueado.' },
+					{ action: 'consume', message: 'El consumidor retira un elemento y libera una posición.' },
+					{ action: 'wakeupProducer', message: 'El núcleo ejecuta wakeup(productor): el productor puede continuar.' },
+					{ action: 'produce', message: 'El productor inserta un elemento en la posición libre.' },
+					{ action: 'consume', message: 'El consumidor retira los elementos restantes.' },
+					{ action: 'consume', message: 'El consumidor procesa el elemento.' },
+					{ action: 'consume', message: 'El consumidor procesa el elemento.' },
+					{ action: 'consume', message: 'El consumidor procesa el elemento.' },
+					{ action: 'consume', message: 'El consumidor procesa el elemento.' },
+					{ action: 'consume', message: 'El consumidor procesa el elemento.' },
+					{ action: 'consume', message: 'El consumidor procesa el último elemento.' },
+					{ action: 'sleepConsumer', message: 'Buffer vacío: el consumidor ejecuta sleep(consumidor) y queda bloqueado.' },
+					{ action: 'produce', message: 'El productor inserta el primer elemento en el buffer.' },
+					{ action: 'wakeupConsumer', message: 'El núcleo ejecuta wakeup(consumidor): el consumidor puede continuar.' },
+					{ action: 'consume', message: 'El consumidor retira el elemento y el ciclo vuelve a empezar.' }
+				];
+				let items = [];
+				let step = 0;
+				let lastStepAt = 0;
+				let lastTime = 0;
+				let frame = 0;
+				let paused = false;
+				let producerSleeping = false;
+				let consumerSleeping = true;
+				let pulse = null;
+
+				function resizeCanvas() {
+					const bounds = canvas.getBoundingClientRect();
+					const ratio = window.devicePixelRatio || 1;
+					canvas.width = Math.round(bounds.width * ratio);
+					canvas.height = Math.round(bounds.height * ratio);
+					context.setTransform(ratio, 0, 0, ratio, 0, 0);
+					draw();
+				}
+
+				function line(x1, y1, x2, y2, color = '#202020', width = 1.5, dash = []) {
+					context.beginPath();
+					context.setLineDash(dash);
+					context.strokeStyle = color;
+					context.lineWidth = width;
+					context.moveTo(x1, y1);
+					context.lineTo(x2, y2);
+					context.stroke();
+					context.setLineDash([]);
+				}
+
+				function arrow(x1, y1, x2, y2, color = '#202020', width = 1.5) {
+					line(x1, y1, x2, y2, color, width);
+					const angle = Math.atan2(y2 - y1, x2 - x1);
+					const size = 8;
+					context.beginPath();
+					context.fillStyle = color;
+					context.moveTo(x2, y2);
+					context.lineTo(x2 - size * Math.cos(angle - Math.PI / 6), y2 - size * Math.sin(angle - Math.PI / 6));
+					context.lineTo(x2 - size * Math.cos(angle + Math.PI / 6), y2 - size * Math.sin(angle + Math.PI / 6));
+					context.closePath();
+					context.fill();
+				}
+
+				function text(value, x, y, size = 13, align = 'center', color = '#202020', weight = 'normal') {
+					context.fillStyle = color;
+					context.font = `${weight} ${size}px Arial, sans-serif`;
+					context.textAlign = align;
+					context.textBaseline = 'middle';
+					context.fillText(value, x, y);
+				}
+
+				function drawProcess(x, y, label, sleeping) {
+					context.beginPath();
+					context.ellipse(x, y, 48, 20, 0, 0, Math.PI * 2);
+					context.fillStyle = sleeping ? '#dedede' : '#bde8f1';
+					context.fill();
+					context.lineWidth = 1.3;
+					context.strokeStyle = sleeping ? '#777' : '#202020';
+					context.stroke();
+					text(label, x, y, 14);
+					if (sleeping) text('DURMIENDO', x, y + 29, 10, 'center', '#555', 'bold');
+				}
+
+				function drawDecision(x, y, condition, available, yesLeft) {
+				const size = 31;
+					context.beginPath();
+					context.moveTo(x, y - size);
+					context.lineTo(x + size, y);
+					context.lineTo(x, y + size);
+					context.lineTo(x - size, y);
+					context.closePath();
+					context.fillStyle = available ? '#fff36a' : '#e0e0e0';
+					context.fill();
+					context.strokeStyle = '#202020';
+					context.lineWidth = 1.2;
+					context.stroke();
+					text(condition, x, y, 10, 'center', '#202020', 'bold');
+					text('sí', x + (yesLeft ? size + 11 : -size - 11), y, 9);
+					text('no', x + (yesLeft ? -size - 11 : size + 11), y, 9);
+				}
+
+				function draw() {
+					const width = canvas.clientWidth;
+					const height = canvas.clientHeight;
+					if (!width || !height) return;
+					context.clearRect(0, 0, width, height);
+					context.fillStyle = '#fff';
+					context.fillRect(0, 0, width, height);
+
+					const compact = width < 540;
+					const scale = Math.min(width / 700, height / 220, 1);
+					const offsetX = (width - 700 * scale) / 2 + 90 * scale;
+					const offsetY = Math.max(0, (height - 220 * scale) / 2);
+					context.save();
+					context.translate(offsetX, offsetY);
+					context.scale(scale, scale);
+					const leftX = 54;
+					const rightX = 646;
+					const decisionY = 43;
+					const processY = 117;
+					const bufferY = 89;
+					const bufferLeft = 112;
+					const bufferRight = 588;
+					const slotWidth = (bufferRight - bufferLeft) / capacity;
+					const activeColor = '#e27a2b';
+					const producerActive = pulse === 'produce' || pulse === 'wakeupProducer';
+					const consumerActive = pulse === 'consume' || pulse === 'wakeupConsumer';
+
+					text('Sleep', 6, decisionY + 4, 10, 'left', producerSleeping ? activeColor : '#333');
+					drawDecision(leftX, decisionY, 'cont < N', items.length < capacity, true);
+					drawProcess(leftX, processY, 'Productor', producerSleeping);
+					line(leftX, decisionY + 31, leftX, processY - 20, '#333');
+					arrow(leftX + 31, decisionY, bufferLeft - 6, bufferY, producerActive ? activeColor : '#333', producerActive ? 2.5 : 1.5);
+					text('cont++', (leftX + bufferLeft) / 2, decisionY - 4, 10);
+
+					text('Frente', bufferRight - slotWidth / 2, bufferY - 44, 11);
+					arrow(bufferRight - slotWidth / 2, bufferY - 35, bufferRight - slotWidth / 2, bufferY - 14, '#333', 1.2);
+					text('Buffer', (bufferLeft + bufferRight) / 2, bufferY - 37, 13);
+					for (let i = 0; i < capacity; i++) {
+						const x = bufferLeft + i * slotWidth;
+						context.fillStyle = i < items.length ? '#4f742f' : '#f7f7f7';
+						context.fillRect(x, bufferY, slotWidth, 27);
+						context.strokeStyle = '#202020';
+						context.lineWidth = 1;
+						context.strokeRect(x, bufferY, slotWidth, 27);
+						text(String(capacity - i), x + slotWidth / 2, bufferY - 9, 9);
+						if (i < items.length) {
+							context.beginPath();
+							context.arc(x + slotWidth / 2, bufferY + 13, 5, 0, Math.PI * 2);
+							context.fillStyle = '#f5ce65';
+							context.fill();
+							context.strokeStyle = '#513a0d';
+							context.stroke();
+						}
+					}
+					text(`contador = ${items.length} / ${capacity}`, (bufferLeft + bufferRight) / 2, bufferY + 42, 11, 'center', '#333', 'bold');
+
+					arrow(bufferRight + 6, bufferY, rightX - 31, decisionY, consumerActive ? activeColor : '#333', consumerActive ? 2.5 : 1.5);
+					text('cont--', (bufferRight + rightX) / 2, decisionY - 4, 10);
+					drawDecision(rightX, decisionY, 'cont > 0', items.length > 0, false);
+					line(rightX, decisionY + 31, rightX, processY - 20, '#333');
+					drawProcess(rightX, processY, 'Consumidor', consumerSleeping);
+					text('Sleep', 694, decisionY + 4, 10, 'right', consumerSleeping ? activeColor : '#333');
+
+					const kernelY = 194;
+					const kernelW = 150;
+					const kernelX = (700 - kernelW) / 2;
+					context.fillStyle = '#dce7e9';
+					context.fillRect(kernelX, kernelY - 17, kernelW, 34);
+					context.strokeStyle = '#202020';
+					context.strokeRect(kernelX, kernelY - 17, kernelW, 34);
+					text('Núcleo del S. O.', 350, kernelY, 11);
+					const producerWake = pulse === 'wakeupProducer';
+					const consumerWake = pulse === 'wakeupConsumer';
+					line(kernelX, kernelY, 16, kernelY, producerWake ? activeColor : '#555', producerWake ? 2.5 : 1.2);
+					line(16, kernelY, 16, processY + 1, producerWake ? activeColor : '#555', producerWake ? 2.5 : 1.2);
+					arrow(16, processY + 1, leftX - 48, processY + 1, producerWake ? activeColor : '#555', producerWake ? 2.5 : 1.2);
+					text('wakeup(productor)', (kernelX + leftX) / 2, kernelY - 11, 9, 'center', producerWake ? activeColor : '#333');
+					line(kernelX + kernelW, kernelY, 684, kernelY, consumerWake ? activeColor : '#555', consumerWake ? 2.5 : 1.2);
+					line(684, kernelY, 684, processY + 1, consumerWake ? activeColor : '#555', consumerWake ? 2.5 : 1.2);
+					arrow(684, processY + 1, rightX + 48, processY + 1, consumerWake ? activeColor : '#555', consumerWake ? 2.5 : 1.2);
+					text('wakeup(consumidor)', (kernelX + kernelW + rightX) / 2, kernelY - 11, 9, 'center', consumerWake ? activeColor : '#333');
+					context.restore();
+				}
+
+				function advance() {
+					const event = cycle[step % cycle.length];
+					pulse = event.action;
+					if (event.action === 'produce') {
+						if (items.length < capacity) items.push({ id: step });
+						consumerSleeping = false;
+					} else if (event.action === 'consume') {
+						if (items.length) items.shift();
+						producerSleeping = false;
+					} else if (event.action === 'sleepProducer') {
+						producerSleeping = true;
+					} else if (event.action === 'sleepConsumer') {
+						consumerSleeping = true;
+					} else if (event.action === 'wakeupProducer') {
+						producerSleeping = false;
+					} else if (event.action === 'wakeupConsumer') {
+						consumerSleeping = false;
+					}
+					eventLabel.textContent = event.message;
+					step++;
+					lastStepAt = lastTime;
+					draw();
+				}
+
+				function animate(now) {
+					lastTime = now;
+					if (!paused && section.classList.contains('present')) {
+						if (now - lastStepAt > 1150) advance();
+					}
+					frame = window.requestAnimationFrame(animate);
+				}
+
+				playButton.addEventListener('click', () => {
+					paused = !paused;
+					playButton.textContent = paused ? 'Continuar' : 'Pausar';
+					playButton.setAttribute('aria-pressed', String(!paused));
+					if (!paused) lastStepAt = lastTime;
+				});
+				restartButton.addEventListener('click', () => {
+					items = [];
+					step = 0;
+					producerSleeping = false;
+					consumerSleeping = true;
+					pulse = null;
+					paused = false;
+					playButton.textContent = 'Pausar';
+					playButton.setAttribute('aria-pressed', 'true');
+					eventLabel.textContent = cycle[0].message;
+					lastStepAt = lastTime;
+					draw();
+				});
+				window.addEventListener('resize', resizeCanvas);
+				if ('ResizeObserver' in window) new ResizeObserver(resizeCanvas).observe(canvas);
+				resizeCanvas();
+				frame = window.requestAnimationFrame(animate);
+				window.addEventListener('beforeunload', () => window.cancelAnimationFrame(frame), { once: true });
+			})();
 
 			// Also available as an ES module, see:
 			// https://revealjs.com/initialization/
